@@ -3,6 +3,7 @@ module.exports = {
   singleQuote: false,
   trailingComma: "es5",
   tabWidth: 2,
-  printWidth: 100,
+  printWidth: 80,
   endOfLine: "auto",
+  plugins: ["prettier-plugin-astro"],
 };
