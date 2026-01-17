@@ -1,24 +1,24 @@
 import { defineConfig } from "eslint/config";
-import js from "@eslint/js";
 import globals from "globals";
+import js from "@eslint/js";
 import prettierPlugin from "eslint-plugin-prettier";
 import astroPlugin from "eslint-plugin-astro";
 
 export default defineConfig([
   js.configs.recommended,
   {
-    files: ["**/*.{js,ts}"],
-    ignores: ["node_modules", "dist"],
+    files: ["**/*.js"],
+    ignores: ["node_modules", "build", "dist"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
       globals: {
         ...globals.browser,
-        ...globals.node,
       },
     },
     plugins: {
       prettier: prettierPlugin,
+      astro: astroPlugin,
     },
     rules: {
       semi: ["error", "always"],
@@ -28,15 +28,14 @@ export default defineConfig([
   },
   {
     files: ["**/*.astro"],
-    plugins: {
-      astro: astroPlugin,
-    },
     languageOptions: {
       parser: astroPlugin.parser,
     },
+    plugins: {
+      astro: astroPlugin,
+    },
     rules: {
-      "astro/no-set-html-directive": "warn",
-      "astro/no-unused-css-selector": "warn",
+      ...astroPlugin.configs.recommended.rules,
     },
   },
 ]);
