@@ -33,7 +33,11 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      "prettier/prettier": "off", 
+      ...astroPlugin.configs.recommended.rules,
+      "prettier/prettier": "off",
+      "astro/jsx-a11y/alt-text": "error",
+      "astro/no-unused-css-selector": "warn",
+      "no-unused-vars": "warn", 
     },
   },
   {
