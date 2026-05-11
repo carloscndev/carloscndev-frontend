@@ -1,0 +1,22 @@
+{
+  "project": "Carlos CN Portfolio",
+  "version": "1.0.0",
+  "tasks": [
+    {
+      "id": "CORE-001",
+      "name": "Design System & Global Layout",
+      "status": "pending",
+      "acceptance": [
+        "Tailwind config dark mode",
+        "Local fonts registered",
+        "Scroll snap container"
+      ]
+    },
+    {
+      "id": "HOME-001",
+      "name": "Hero Section - Main & Hobbies",
+      "status": "pending",
+      "acceptance": ["4 variants implemented", "5s timer logic", "Figma match"]
+    }
+  ]
+}
