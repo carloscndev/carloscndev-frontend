@@ -1,0 +1,48 @@
+{
+  "es": {
+    "posts": [
+      {
+        "id": "static-architecture",
+        "title": "Arquitectura de un blog estático moderno.",
+        "date": "Marzo 7 2026",
+        "author": "carloscn-dev",
+        "header_image": "blog-detail-header.png",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae elementum augue. Sed rutrum tempor neque in tempus. Etiam eu sodales sapien. Aliquam non augue enim."
+          },
+          {
+            "type": "paragraph",
+            "text": "Vivamus eu pharetra felis, vel malesuada ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam eu nisi vel risus mollis ultricies. Donec condimentum id ipsum quis eleifend. Nulla porttitor arcu ut ipsum dapibus scelerisque. Quisque tortor massa, fringilla sed felis luctus, maximus lacinia leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent aliquam ut sapien id dictum. Phasellus tempor dictum leo, auctor suscipit nisi venenatis eget. Donec vitae nunc luctus, finibus mauris dapibus, vestibulum urna. Suspendisse aliquet orci id velit sollicitudin suscipit."
+          },
+          {
+            "type": "paragraph",
+            "text": "Sed faucibus nisi at justo laoreet dignissim. Vivamus consequat gravida purus, id accumsan ipsum semper vel. Nullam dolor orci, viverra vel neque eget, posuere luctus urna. Sed vitae est nulla. Donec velit justo, pellentesque quis diam quis, fringilla accumsan odio. Curabitur consectetur mauris mollis."
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "posts": [
+      {
+        "id": "static-architecture",
+        "title": "Modern static blog architecture.",
+        "date": "March 7 2026",
+        "author": "carloscn-dev",
+        "header_image": "blog-detail-header.png",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae elementum augue. Sed rutrum tempor neque in tempus. Etiam eu sodales sapien. Aliquam non augue enim."
+          },
+          {
+            "type": "paragraph",
+            "text": "Vivamus eu pharetra felis, vel malesuada ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam eu nisi vel risus mollis ultricies. Donec condimentum id ipsum quis eleifend. Nulla porttitor arcu ut ipsum dapibus scelerisque. Quisque tortor massa, fringilla sed felis luctus, maximus lacinia leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent aliquam ut sapien id dictum. Phasellus tempor dictum leo, auctor suscipit nisi venenatis eget. Donec vitae nunc luctus, finibus mauris dapibus, vestibulum urna. Suspendisse aliquet orci id velit sollicitudin suscipit."
+          }
+        ]
+      }
+    ]
+  }
+}

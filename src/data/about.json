@@ -1,0 +1,38 @@
+{
+  "es": {
+    "about": {
+      "title": "Un poco sobre mi",
+      "subtitle": "Un poco sobre mi",
+      "description_p1": "Soy un ingeniero de software con más de ocho años de experiencia. Mi trabajo se ha centrado principalmente en el desarrollo frontend, aunque también poseo experiencia en sistemas backend y en el desarrollo de pipelines de CI/CD.",
+      "description_p2": "En los últimos años, me he centrado en sistemas de inteligencia artificial generativa y aprendizaje automático, específicamente en lo que respecta a la integración de modelos de lenguaje grande (LLMs) en flujos de trabajo de productos del mundo real.",
+      "tech_intro": "Algunas de las tecnologías con las que he trabajado recientemente incluyen:",
+      "technologies": [
+        { "name": "Ecosistema de React", "icon": "react-icon" },
+        { "name": "TypeScript", "icon": "typescript-icon" },
+        { "name": "Node.js", "icon": "node-icon" },
+        { "name": "LLMs", "icon": "llm-icon" },
+        { "name": "Astro", "icon": "astro-icon" },
+        { "name": "Python", "icon": "python-icon" }
+      ],
+      "image": "working.png"
+    }
+  },
+  "en": {
+    "about": {
+      "title": "A bit about me",
+      "subtitle": "A bit about me",
+      "description_p1": "I am a software engineer with over eight years of experience. My work has been primarily focused on frontend development, although I also possess experience in backend systems and the development of CI/CD pipelines.",
+      "description_p2": "In recent years, I have been focusing on generative AI and machine learning systems, specifically regarding the integration of Large Language Models (LLMs) into real-world product workflows.",
+      "tech_intro": "Some of the technologies with which I have recently worked include:",
+      "technologies": [
+        { "name": "React Ecosystem", "icon": "react-icon" },
+        { "name": "TypeScript", "icon": "typescript-icon" },
+        { "name": "Node.js", "icon": "node-icon" },
+        { "name": "LLMs", "icon": "llm-icon" },
+        { "name": "Astro", "icon": "astro-icon" },
+        { "name": "Python", "icon": "python-icon" }
+      ],
+      "image": "working.png"
+    }
+  }
+}

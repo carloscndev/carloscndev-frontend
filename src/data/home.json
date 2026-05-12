@@ -1,0 +1,58 @@
+{
+  "es": {
+    "hero": {
+      "greeting": "Hola, soy",
+      "name": "Carlos Castañeda",
+      "domain": "carloscn",
+      "extension": "dev",
+      "intro_text": "Este es mi sitio. Aquí puedes conocer un poco más sobre mí, ver algunos de mis proyectos, en qué estoy trabajando actualmente y, si te interesa, leer algo en el blog.",
+      "main_description": "Soy ingeniero de software. En mi tiempo libre me gusta {hobby}. He completado varios maratones y casi siempre estoy preparando el siguiente reto.",
+      "extra_interests": "También me interesa el diseño, {hobby2} y los {hobby3}.",
+      "hobbies": {
+        "running": {
+          "label": "correr",
+          "image": "running.png"
+        },
+        "reading": {
+          "label": "leer",
+          "image": "reading.png"
+        },
+        "gaming": {
+          "label": "videojuegos",
+          "image": "playing.png"
+        },
+        "default": {
+          "image": "hello.png"
+        }
+      }
+    }
+  },
+  "en": {
+    "hero": {
+      "greeting": "Hi, I am",
+      "name": "Carlos Castañeda",
+      "domain": "carloscn",
+      "extension": "dev",
+      "intro_text": "This is my space. Here you can learn a bit more about me, see some of my projects, what I'm currently working on, and, if you're interested, read something on the blog.",
+      "main_description": "I am a Software Engineer. In my leisure time, I enjoy {hobby}. I have completed several marathons and I am usually preparing for the next challenge.",
+      "extra_interests": "I am also interested in design, {hobby2}, and {hobby3}.",
+      "hobbies": {
+        "running": {
+          "label": "running",
+          "image": "running.png"
+        },
+        "reading": {
+          "label": "reading",
+          "image": "reading.png"
+        },
+        "gaming": {
+          "label": "video games",
+          "image": "playing.png"
+        },
+        "default": {
+          "image": "hello.png"
+        }
+      }
+    }
+  }
+}

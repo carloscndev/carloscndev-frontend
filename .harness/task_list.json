@@ -1,22 +1,126 @@
 {
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
+  "status": {
+    "total_tasks": 12,
+    "completed": 0,
+    "current_sprint": "Phase 1: Zero-State & Foundation"
+  },
   "tasks": [
     {
-      "id": "CORE-001",
-      "name": "Design System & Global Layout",
+      "id": "BOOT-001",
+      "name": "Project Cleanup",
       "status": "pending",
+      "description": "Remove default Astro boilerplate (pages/index.astro, components/Card.astro, etc.) and prepare a clean directory structure.",
       "acceptance": [
-        "Tailwind config dark mode",
-        "Local fonts registered",
-        "Scroll snap container"
+        "Clean src/pages",
+        "Clean src/components",
+        "No unused default assets"
       ]
     },
     {
-      "id": "HOME-001",
-      "name": "Hero Section - Main & Hobbies",
+      "id": "BOOT-002",
+      "name": "CSS Design Tokens",
       "status": "pending",
-      "acceptance": ["4 variants implemented", "5s timer logic", "Figma match"]
+      "description": "Create the global CSS file with variables for colors, typography scales, and weights defined in design-system.md.",
+      "acceptance": [
+        "Variables for Dark/Light modes",
+        "Tailwind extended with CSS vars",
+        "Font-face registration"
+      ]
+    },
+    {
+      "id": "BOOT-003",
+      "name": "Main Layout Infrastructure",
+      "status": "pending",
+      "description": "Build the persistent MainLayout including the scroll-snap container and the social sidebar.",
+      "acceptance": [
+        "Vertical social sidebar implemented",
+        "Scroll-snap ready",
+        "Sticky layout elements"
+      ]
+    },
+    {
+      "id": "BOOT-004",
+      "name": "Reading/Blog Layout",
+      "status": "pending",
+      "description": "Create the specialized layout for the blog/reading section as seen in the 'Blog Detail' screenshot.",
+      "acceptance": [
+        "Typography optimized for long-form",
+        "Back button logic",
+        "Dynamic header image support"
+      ]
+    },
+    {
+      "id": "BOOT-005",
+      "name": "Global Header",
+      "status": "pending",
+      "description": "Implement the navigation header with logo and placeholder for toggles.",
+      "acceptance": [
+        "Logo implemented",
+        "Navigation links mapping",
+        "Figma design alignment"
+      ]
+    },
+    {
+      "id": "BOOT-006",
+      "name": "Theme Switching Logic",
+      "status": "pending",
+      "description": "Implement the Dark/Light theme toggle logic and persist it in local storage.",
+      "acceptance": [
+        "Smooth color transitions",
+        "Local storage persistence",
+        "Zero flash of unstyled theme"
+      ]
+    },
+    {
+      "id": "BOOT-007",
+      "name": "I18n Language Logic",
+      "status": "pending",
+      "description": "Implement the language switcher (EN/ES) and the logic to consume the correct JSON keys.",
+      "acceptance": [
+        "Route or state based language toggle",
+        "Successful data fetching from src/data/"
+      ]
+    },
+    {
+      "id": "FEAT-001",
+      "name": "Section: Hero & Hobbies",
+      "status": "pending",
+      "description": "Desktop implementation of the Hero section.",
+      "acceptance": ["5s timer logic", "Asset variants implemented"]
+    },
+    {
+      "id": "FEAT-002",
+      "name": "Section: About & Experience",
+      "status": "pending",
+      "description": "Desktop implementation of About and Experience timeline.",
+      "acceptance": ["Interactive sidebar", "Refined spacing"]
+    },
+    {
+      "id": "FEAT-003",
+      "name": "Section: Portfolio & Blog Grid",
+      "status": "pending",
+      "description": "Desktop implementation of the works and posts grids.",
+      "acceptance": ["Card hover effects", "Grid-breaking layout"]
+    },
+    {
+      "id": "FEAT-004",
+      "name": "Section: Contact",
+      "status": "pending",
+      "description": "Desktop implementation of the 'Let's Talk' section.",
+      "acceptance": ["Mail-to integration", "Footer implemented"]
+    },
+    {
+      "id": "RESP-001",
+      "name": "Mobile Optimization Pass",
+      "status": "pending",
+      "description": "Final pass to ensure all components follow the Mobile visual-specs.",
+      "acceptance": [
+        "Responsive grids",
+        "Mobile menu",
+        "Touch-friendly interactions"
+      ]
     }
   ]
 }
