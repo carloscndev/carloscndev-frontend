@@ -7,3 +7,13 @@
 - **Closure**: Task [BOOT-001] marked as `done`.
 
 ---
+
+### 2026-05-11 — [BOOT-002: CSS Design Tokens]
+
+- **Agent**: Coder #1
+- **Plan**: Create global CSS file with design tokens (colors, typography) as defined in design-system.md, configure Tailwind CSS with CSS variables, and register font-faces for Space Grotesk and Inter fonts.
+- **Changes**: [Created `src/styles/global.css` with CSS variables for Dark/Light themes, typography scale, semantic colors for Running/Tech categories, and font-face declarations. Created `tailwind.config.mjs` extending Tailwind with CSS vars. Updated `astro.config.mjs` to include Tailwind Vite plugin. Updated `src/layouts/Layout.astro` to import global.css and set `dark` class on html element.]
+- **Verification**: Build completed successfully (`npm run build`). Dark mode variables defined under `.dark` selector, Light mode under `:root`. All 6 font-faces registered (3 Space Grotesk + 3 Inter).
+- **Closure**: Task [BOOT-002] marked as `done`.
+
+---

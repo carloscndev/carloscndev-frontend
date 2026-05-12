@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 12,
-    "completed": 1,
+    "completed": 2,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -21,7 +21,7 @@
     {
       "id": "BOOT-002",
       "name": "CSS Design Tokens",
-      "status": "pending",
+      "status": "done",
       "description": "Create the global CSS file with variables for colors, typography scales, and weights defined in design-system.md.",
       "acceptance": [
         "Variables for Dark/Light modes",

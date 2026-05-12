@@ -1,0 +1,164 @@
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --bg-primary: #d6def5;
+  --text-base: #080d29;
+  --color-accent: #331fe8;
+  --color-word: #2f42a0;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --font-size-h1-desktop: 4rem;
+  --font-size-h1-tablet: 3rem;
+  --font-size-h1-mobile: 2.25rem;
+
+  --font-size-h2-desktop: 2.5rem;
+  --font-size-h2-tablet: 2rem;
+  --font-size-h2-mobile: 1.75rem;
+
+  --font-size-h3-desktop: 1.5rem;
+  --font-size-h3-tablet: 1.375rem;
+  --font-size-h3-mobile: 1.25rem;
+
+  --font-size-body-desktop: 1.125rem;
+  --font-size-body-tablet: 1rem;
+  --font-size-body-mobile: 0.875rem;
+
+  --color-running-primary-dark: #001221;
+  --color-running-secondary-dark: #0092da;
+  --color-running-primary-light: #0092da;
+  --color-running-secondary-light: #001221;
+
+  --color-tech-primary-dark: #070341;
+  --color-tech-secondary-dark: #8c88f7;
+  --color-tech-primary-light: #8c88f7;
+  --color-tech-secondary-light: #070341;
+
+  --transition-theme: transition-all duration-300 ease-in-out;
+}
+
+.dark {
+  --bg-primary: #080d29;
+  --text-base: #d6def5;
+  --color-accent: #331fe8;
+  --color-word: #7f8be4;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  color: var(--text-base);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-mobile);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: var(--font-size-body-desktop);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1-mobile);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--font-size-h2-mobile);
+  font-weight: 500;
+}
+
+h3 {
+  font-size: var(--font-size-h3-mobile);
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: var(--font-size-h1-desktop);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2-desktop);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3-desktop);
+  }
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition-theme);
+}
+
+a:hover {
+  opacity: 0.8;
+}
