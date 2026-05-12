@@ -47,3 +47,13 @@
 - **Closure**: Task [BOOT-005] marked as `done`.
 
 ---
+
+### 2026-05-11 — [BOOT-006: Theme Switching Logic]
+
+- **Agent**: Coder #1
+- **Plan**: Implement Dark/Light theme toggle logic with localStorage persistence and zero flash of unstyled theme on page load.
+- **Changes**: [Updated `src/components/ui/header.astro` with theme toggle button (id="theme-toggle") and full theme switching logic in inline script. Updated `src/components/sections/main-layout.astro` to include an inline script in `<head>` that applies the stored theme BEFORE page renders (prevents FOUC). Theme is stored in localStorage key "carloscn-theme" and defaults to system preference if not set.]
+- **Verification**: Build completed successfully. Zero flash achieved via inline script that runs before page paint. Theme persists across page reloads via localStorage. Toggle button updates document class and localStorage on click.
+- **Closure**: Task [BOOT-006] marked as `done`.
+
+---

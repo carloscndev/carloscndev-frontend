@@ -29,24 +29,19 @@ export default [
         sourceType: "module",
       },
     },
-    plugins: {
-      prettier: prettierPlugin,
-    },
-    rules: {
-      ...astroPlugin.configs.recommended.rules,
-      "prettier/prettier": "off",
-      "astro/jsx-a11y/alt-text": "error",
-      "astro/no-unused-css-selector": "warn",
-      "no-unused-vars": "warn", 
-    },
   },
   {
     files: ["**/*.{js,ts,jsx,tsx}"],
+    languageOptions: {
+      parser: tsParser,
+      sourceType: "module",
+    },
     plugins: {
       prettier: prettierPlugin,
     },
     rules: {
       "prettier/prettier": "error",
+      "no-unused-vars": "warn",
     },
   },
   prettierConfig, 

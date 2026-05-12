@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 12,
-    "completed": 5,
+    "total_tasks": 17,
+    "completed": 6,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -65,12 +65,65 @@
     {
       "id": "BOOT-006",
       "name": "Theme Switching Logic",
-      "status": "pending",
+      "status": "done",
       "description": "Implement the Dark/Light theme toggle logic and persist it in local storage.",
       "acceptance": [
         "Smooth color transitions",
         "Local storage persistence",
         "Zero flash of unstyled theme"
+      ]
+    },
+    {
+      "id": "FIX-001",
+      "name": "Social Sidebar Visibility",
+      "status": "pending",
+      "description": "Fix the social sidebar visibility to disappear on mobile devices.",
+      "acceptance": [
+        "Sidebar hidden on screens < 768px",
+        "Sidebar footer context removed on mobile"
+      ]
+    },
+    {
+      "id": "FIX-002",
+      "name": "Sidebar Icon Styling & Hover",
+      "status": "pending",
+      "description": "Adjust icon colors and add hover animations to the sidebar.",
+      "acceptance": [
+        "Base color #7f8be4 in Dark Theme",
+        "Hover color #331fe8",
+        "Smooth upward displacement animation on hover"
+      ]
+    },
+    {
+      "id": "FIX-003",
+      "name": "Theme Transition Sync",
+      "status": "pending",
+      "description": "Fix the desynchronized theme animation between Main and Reader layouts.",
+      "acceptance": [
+        "Unified theme transition without 'double jump' effect",
+        "Sync between global and contextual theme wrappers"
+      ]
+    },
+    {
+      "id": "FIX-004",
+      "name": "I18n Visual Sync (Header & Reader)",
+      "status": "pending",
+      "description": "Ensure the language toggle reflects changes in the Header and updates the logo in the Reader layout.",
+      "acceptance": [
+        "Language switch updates navigation labels in Header",
+        "Language logo/indicator in Reader layout updates accordingly",
+        "Visual confirmation of active locale"
+      ]
+    },
+    {
+      "id": "UI-001",
+      "name": "Mobile Menu Logic",
+      "status": "pending",
+      "description": "Implement mobile menu functionality with full-screen overlay and scroll lock.",
+      "acceptance": [
+        "Full-screen menu appearance",
+        "Body scroll lock (overflow-hidden) active when open",
+        "Functional close button"
       ]
     },
     {
@@ -88,7 +141,7 @@
       "name": "Section: Hero & Hobbies",
       "status": "pending",
       "description": "Desktop implementation of the Hero section.",
-      "acceptance": ["5s timer logic", "Asset variants implemented"]
+      "acceptance": ["4 variants implemented", "5s timer logic", "Figma match"]
     },
     {
       "id": "FEAT-002",

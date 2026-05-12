@@ -63,6 +63,7 @@ const currentPath = Astro.url.pathname;
         class="header__toggle header__toggle--theme"
         aria-label="Toggle theme"
         type="button"
+        id="theme-toggle"
       >
         <span class="header__toggle-icon">◐</span>
       </button>
@@ -85,6 +86,59 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
+<script>
+  const STORAGE_KEY = "carloscn-theme";
+  const DARK = "dark";
+  const LIGHT = "light";
+
+  function getStoredTheme() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === DARK || stored === LIGHT) {
+      return stored;
+    }
+    return null;
+  }
+
+  function setStoredTheme(theme) {
+    localStorage.setItem(STORAGE_KEY, theme);
+  }
+
+  function getPreferredTheme() {
+    const stored = getStoredTheme();
+    if (stored) return stored;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? DARK
+      : LIGHT;
+  }
+
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    if (theme === DARK) {
+      html.classList.add(DARK);
+    } else {
+      html.classList.remove(DARK);
+    }
+    setStoredTheme(theme);
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.classList.contains(DARK)
+      ? DARK
+      : LIGHT;
+    const next = current === DARK ? LIGHT : DARK;
+    applyTheme(next);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    applyTheme(getPreferredTheme());
+
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", toggleTheme);
+    }
+  });
+</script>
+
 <style>
   .header {
     position: fixed;
@@ -95,6 +149,7 @@ const currentPath = Astro.url.pathname;
     background-color: var(--bg-primary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease-in-out;
   }
 
   .header__container {
