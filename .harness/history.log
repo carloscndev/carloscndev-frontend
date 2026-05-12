@@ -37,3 +37,13 @@
 - **Closure**: Task [BOOT-004] marked as `done`.
 
 ---
+
+### 2026-05-11 — [BOOT-005: Global Header]
+
+- **Agent**: Coder #1
+- **Plan**: Implement navigation header with logo (dark/light variants) and placeholders for theme/language toggles.
+- **Changes**: [Created `src/components/ui/header.astro` with logo (IconDark.svg / IconLight.svg for theme switching), navigation links (Home, About, Portfolio, Blog, Contact), and toggle placeholders for theme and language. Integrated into `main-layout.astro`. Added padding-top to body to account for fixed header height.]
+- **Verification**: Build completed successfully. Header is sticky with backdrop blur. Navigation hidden on mobile, visible on desktop (768px+). Theme-aware logo switching implemented.
+- **Closure**: Task [BOOT-005] marked as `done`.
+
+---

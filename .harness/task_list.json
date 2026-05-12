@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 12,
-    "completed": 4,
+    "completed": 5,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -54,7 +54,7 @@
     {
       "id": "BOOT-005",
       "name": "Global Header",
-      "status": "pending",
+      "status": "done",
       "description": "Implement the navigation header with logo and placeholder for toggles.",
       "acceptance": [
         "Logo implemented",

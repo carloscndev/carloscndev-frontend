@@ -1,5 +1,6 @@
 ---
 import SocialSidebar from "../ui/social-sidebar.astro";
+import Header from "../ui/header.astro";
 import "../../styles/global.css";
 
 interface Props {
@@ -24,6 +25,7 @@ const { title, lang = "es" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <Header lang={lang} />
     <SocialSidebar variant="mobile" />
     <SocialSidebar variant="desktop" />
     <main class="main-layout">
@@ -39,6 +41,13 @@ const { title, lang = "es" } = Astro.props;
 
   body {
     overflow-x: hidden;
+    padding-top: 4rem;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      padding-top: 5rem;
+    }
   }
 
   .main-layout {
