@@ -1,0 +1,9 @@
+### 2026-05-11 — [BOOT-001: Project Cleanup]
+
+- **Agent**: Coder #1
+- **Plan**: Remove default Astro boilerplate files and prepare a clean directory structure for the portfolio project.
+- **Changes**: [Deleted `src/pages/index.astro`, `src/pages/about.astro`, `src/pages/contact.astro`, `src/pages/post.astro`, `src/components/Welcome.astro`. Created `src/layouts/Layout.astro` (minimal HTML shell) and `src/pages/index.astro` (clean entry point).]
+- **Verification**: Verified `src/pages/` contains only `index.astro`, `src/components/` is empty, `src/layouts/` contains the new `Layout.astro`. All project assets (`src/assets/fonts/`, `src/assets/images/`, `src/assets/logos/`) and data (`src/data/`) remain intact.
+- **Closure**: Task [BOOT-001] marked as `done`.
+
+---

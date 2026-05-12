@@ -1,5 +1,4 @@
-import * as astroPlugin from "prettier-plugin-astro";
-
+/** @type {import("prettier").Config} */
 export default {
   semi: true,
   singleQuote: false,
@@ -7,5 +6,13 @@ export default {
   tabWidth: 2,
   printWidth: 80,
   endOfLine: "auto",
-  plugins: [astroPlugin],
+  plugins: ["prettier-plugin-astro"],
+  overrides: [
+    {
+      files: "*.astro",
+      options: {
+        parser: "astro",
+      },
+    },
+  ],
 };

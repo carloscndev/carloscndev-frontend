@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 12,
-    "completed": 0,
+    "completed": 1,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
     {
       "id": "BOOT-001",
       "name": "Project Cleanup",
-      "status": "pending",
+      "status": "done",
       "description": "Remove default Astro boilerplate (pages/index.astro, components/Card.astro, etc.) and prepare a clean directory structure.",
       "acceptance": [
         "Clean src/pages",

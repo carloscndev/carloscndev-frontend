@@ -36,7 +36,7 @@
   "lint-staged": {
     "*.astro": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write --plugin prettier-plugin-astro"
     ],
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
