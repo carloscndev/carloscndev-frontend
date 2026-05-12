@@ -27,3 +27,13 @@
 - **Closure**: Task [BOOT-003] marked as `done`.
 
 ---
+
+### 2026-05-11 — [BOOT-004: Reading/Blog Layout]
+
+- **Agent**: Coder #1
+- **Plan**: Create specialized layout for blog/reading section with typography optimized for long-form reading, back button navigation, and dynamic header image support (placeholder).
+- **Changes**: [Created `src/layouts/post-layout.astro` with back button, header image slot, and optimized typography for reading (line-height 1.8, appropriate font sizes). Created `src/pages/blog/[slug].astro` with dynamic routing for blog posts, consuming `src/data/blog-post.json`. Header image uses placeholder gradient until real images are provided.]
+- **Verification**: Build completed successfully (`npm run build`). Generates `/blog/static-architecture` route for both ES and EN languages. Back button uses `window.history.back()` with fallback to home.
+- **Closure**: Task [BOOT-004] marked as `done`.
+
+---

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 12,
-    "completed": 3,
+    "completed": 4,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -43,7 +43,7 @@
     {
       "id": "BOOT-004",
       "name": "Reading/Blog Layout",
-      "status": "pending",
+      "status": "done",
       "description": "Create the specialized layout for the blog/reading section as seen in the 'Blog Detail' screenshot.",
       "acceptance": [
         "Typography optimized for long-form",

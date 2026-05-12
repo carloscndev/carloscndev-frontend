@@ -1,0 +1,166 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  lang?: "es" | "en";
+}
+
+const { title, lang = "es" } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Blog post" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="post-body">
+    <article class="post-layout">
+      <header class="post-header">
+        <button class="back-button" aria-label="Go back" type="button">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 12H5M12 19L5 12L12 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          <span class="back-button__text">Back</span>
+        </button>
+        <div class="post-header__image">
+          <slot name="header-image" />
+        </div>
+      </header>
+
+      <div class="post-content">
+        <slot />
+      </div>
+    </article>
+  </body>
+</html>
+
+<style>
+  .post-body {
+    background-color: var(--bg-primary);
+    color: var(--text-base);
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-layout {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .post-layout {
+      padding: 2rem;
+    }
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-base);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .back-button:hover {
+    opacity: 1;
+  }
+
+  .back-button__text {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+
+  .post-header__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(
+      135deg,
+      var(--color-tech-primary-dark) 0%,
+      var(--color-tech-secondary-dark) 100%
+    );
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  :global(.dark) .post-header__image {
+    background: linear-gradient(
+      135deg,
+      var(--color-tech-primary-dark) 0%,
+      var(--color-tech-secondary-dark) 100%
+    );
+  }
+
+  :global(:not(.dark)) .post-header__image {
+    background: linear-gradient(
+      135deg,
+      var(--color-tech-primary-light) 0%,
+      var(--color-tech-secondary-light) 100%
+    );
+  }
+
+  .post-content {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  @media (min-width: 768px) {
+    .post-content {
+      font-size: 1.125rem;
+    }
+  }
+
+  .post-content :global(h1) {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-base);
+  }
+
+  @media (min-width: 768px) {
+    .post-content :global(h1) {
+      font-size: 3rem;
+    }
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+    color: var(--text-base);
+  }
+
+  .post-content :global(meta) {
+    font-size: 0.875rem;
+    color: var(--color-word);
+    margin-bottom: 2rem;
+  }
+</style>
