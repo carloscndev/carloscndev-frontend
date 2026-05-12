@@ -22,7 +22,7 @@
 
 - **Agent**: Coder #1
 - **Plan**: Build the persistent MainLayout including scroll-snap container and vertical social sidebar as per visual specs.
-- **Changes**: [Created `src/components/ui/social-sidebar.astro` with GitHub, Instagram, LinkedIn icons. Created `src/components/sections/main-layout.astro` with scroll-snap container and sticky social sidebars (desktop left side, mobile bottom). Updated `src/pages/index.astro` to use MainLayout.]
+- **Changes**: [Created `src/components/ui/SocialSidebar.astro` with GitHub, Instagram, LinkedIn icons. Created `src/components/sections/MainLayout.astro` with scroll-snap container and sticky social sidebars (desktop left side, mobile bottom). Updated `src/pages/index.astro` to use MainLayout.]
 - **Verification**: Build completed successfully. Social sidebar shows desktop variant (left side, hidden on mobile) and mobile variant (bottom bar, hidden on desktop). Scroll-snap configured with `scroll-snap-type: y mandatory`.
 - **Closure**: Task [BOOT-003] marked as `done`.
 
@@ -32,7 +32,7 @@
 
 - **Agent**: Coder #1
 - **Plan**: Create specialized layout for blog/reading section with typography optimized for long-form reading, back button navigation, and dynamic header image support (placeholder).
-- **Changes**: [Created `src/layouts/post-layout.astro` with back button, header image slot, and optimized typography for reading (line-height 1.8, appropriate font sizes). Created `src/pages/blog/[slug].astro` with dynamic routing for blog posts, consuming `src/data/blog-post.json`. Header image uses placeholder gradient until real images are provided.]
+- **Changes**: [Created `src/layouts/PostLayout.astro` with back button, header image slot, and optimized typography for reading (line-height 1.8, appropriate font sizes). Created `src/pages/blog/[slug].astro` with dynamic routing for blog posts, consuming `src/data/blog-post.json`. Header image uses placeholder gradient until real images are provided.]
 - **Verification**: Build completed successfully (`npm run build`). Generates `/blog/static-architecture` route for both ES and EN languages. Back button uses `window.history.back()` with fallback to home.
 - **Closure**: Task [BOOT-004] marked as `done`.
 
@@ -42,7 +42,7 @@
 
 - **Agent**: Coder #1
 - **Plan**: Implement navigation header with logo (dark/light variants) and placeholders for theme/language toggles.
-- **Changes**: [Created `src/components/ui/header.astro` with logo (IconDark.svg / IconLight.svg for theme switching), navigation links (Home, About, Portfolio, Blog, Contact), and toggle placeholders for theme and language. Integrated into `main-layout.astro`. Added padding-top to body to account for fixed header height.]
+- **Changes**: [Created `src/components/ui/Header.astro` with logo (IconDark.svg / IconLight.svg for theme switching), navigation links (Home, About, Portfolio, Blog, Contact), and toggle placeholders for theme and language. Integrated into `MainLayout.astro`. Added padding-top to body to account for fixed header height.]
 - **Verification**: Build completed successfully. Header is sticky with backdrop blur. Navigation hidden on mobile, visible on desktop (768px+). Theme-aware logo switching implemented.
 - **Closure**: Task [BOOT-005] marked as `done`.
 
@@ -52,7 +52,7 @@
 
 - **Agent**: Coder #1
 - **Plan**: Implement Dark/Light theme toggle logic with localStorage persistence and zero flash of unstyled theme on page load.
-- **Changes**: [Updated `src/components/ui/header.astro` with theme toggle button (id="theme-toggle") and full theme switching logic in inline script. Updated `src/components/sections/main-layout.astro` to include an inline script in `<head>` that applies the stored theme BEFORE page renders (prevents FOUC). Theme is stored in localStorage key "carloscn-theme" and defaults to system preference if not set.]
+- **Changes**: [Updated `src/components/ui/Header.astro` with theme toggle button (id="theme-toggle") and full theme switching logic in inline script. Updated `src/components/sections/MainLayout.astro` to include an inline script in `<head>` that applies the stored theme BEFORE page renders (prevents FOUC). Theme is stored in localStorage key "carloscndev-theme" and defaults to system preference if not set.]
 - **Verification**: Build completed successfully. Zero flash achieved via inline script that runs before page paint. Theme persists across page reloads via localStorage. Toggle button updates document class and localStorage on click.
 - **Closure**: Task [BOOT-006] marked as `done`.
 
@@ -62,7 +62,7 @@
 
 - **Agent**: Coder #1
 - **Plan**: Fix social sidebar visibility so it properly hides on mobile and shows only on desktop.
-- **Changes**: [Updated `src/components/ui/social-sidebar.astro` to add `display: none` to `.social-sidebar--mobile` when viewport is >= 768px. This ensures the mobile sidebar (bottom bar) only appears on screens smaller than 768px, while the desktop sidebar (left side) only appears on screens 768px and wider.]
+- **Changes**: [Updated `src/components/ui/SocialSidebar.astro` to add `display: none` to `.social-sidebar--mobile` when viewport is >= 768px. This ensures the mobile sidebar (bottom bar) only appears on screens smaller than 768px, while the desktop sidebar (left side) only appears on screens 768px and wider.]
 - **Verification**: Build completed successfully. Media queries now properly hide mobile variant on desktop and desktop variant on mobile.
 - **Closure**: Task [FIX-001] marked as `done`.
 

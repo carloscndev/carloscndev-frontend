@@ -96,6 +96,8 @@
   --spacing-lg: 2rem;
   --border-radius: 5px;
 
+  --max-width: 1200px;
+
   --transition-theme: transition-all duration-300 ease-in-out;
 }
 

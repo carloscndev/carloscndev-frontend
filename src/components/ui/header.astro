@@ -10,7 +10,7 @@ const { lang = "es" } = Astro.props;
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/#about" },
   { label: "Portfolio", href: "/#portfolio" },
   { label: "Blog", href: "/#blog" },
   { label: "Contact", href: "/#contact" },
@@ -87,7 +87,7 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-  const STORAGE_KEY = "carloscn-theme";
+  const STORAGE_KEY = "carloscndev-theme";
   const DARK = "dark";
   const LIGHT = "light";
 

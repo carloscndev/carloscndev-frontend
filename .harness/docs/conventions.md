@@ -42,7 +42,7 @@ We follow a modified **Atomic Design** system to organize the UI:
 
 ## 6. Naming & Syntax
 
-- **Files**: Use `kebab-case` for all files (e.g., `experience-card.astro`, `main-layout.astro`).
+- **Files**: Use `kebab-case` for all files (e.g., `experience-card.astro`, `MainLayout.astro`).
 - **Variables**: Use `camelCase` for JavaScript/TypeScript logic.
 - **Props**: Destructure props at the top of the component with explicit TypeScript interfaces.
 

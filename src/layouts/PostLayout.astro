@@ -20,7 +20,7 @@ const { title, lang = "es" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="post-body">
-    <article class="post-layout">
+    <article class="PostLayout">
       <header class="post-header">
         <button class="back-button" aria-label="Go back" type="button">
           <svg
@@ -60,14 +60,14 @@ const { title, lang = "es" } = Astro.props;
     margin: 0;
   }
 
-  .post-layout {
+  .PostLayout {
     max-width: 48rem;
     margin: 0 auto;
     padding: 1rem;
   }
 
   @media (min-width: 768px) {
-    .post-layout {
+    .PostLayout {
       padding: 2rem;
     }
   }
