@@ -3,12 +3,6 @@ import githubIcon from "../../assets/logos/github.svg";
 import instagramIcon from "../../assets/logos/instagram.svg";
 import linkedinIcon from "../../assets/logos/linkedln.svg";
 
-interface Props {
-  variant?: "desktop" | "mobile";
-}
-
-const { variant = "desktop" } = Astro.props;
-
 const socials = [
   { name: "GitHub", href: "https://github.com/carloscndev", icon: githubIcon },
   {
@@ -24,12 +18,7 @@ const socials = [
 ];
 ---
 
-<aside
-  class:list={[
-    "social-sidebar",
-    variant === "mobile" ? "social-sidebar--mobile" : "social-sidebar--desktop",
-  ]}
->
+<aside class="social-sidebar">
   <ul class="social-sidebar__list" role="list">
     {
       socials.map((social) => (
@@ -62,23 +51,7 @@ const socials = [
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .social-sidebar--desktop {
-    top: 50%;
-    left: 2rem;
-    transform: translateY(-50%);
-  }
-
-  .social-sidebar--mobile {
     bottom: 0;
-    left: 0;
-    right: 0;
-    top: auto;
-    transform: none;
-    background-color: var(--bg-primary);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem 0;
   }
 
   .social-sidebar__list {

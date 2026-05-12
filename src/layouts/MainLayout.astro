@@ -1,81 +1,64 @@
 ---
+import BaseLayout from "./BaseLayout.astro";
 import Header from "../components/ui/Header.astro";
 import SocialSidebar from "../components/ui/SocialSidebar.astro";
-import "../styles/global.css";
 
-interface Props {
-  title: string;
-  lang?: "es" | "en";
-}
-
-const { title, lang = "es" } = Astro.props;
+const { title, lang } = Astro.props;
 ---
 
-<!doctype html>
-<html lang={lang} class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portfolio profesional de Carlos Castañeda"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem("carloscndev-theme");
-        const preferred = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
-        const theme = stored || preferred;
-        if (theme === "light") {
-          document.documentElement.classList.remove("dark");
-        } else {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
-  </head>
-  <body>
-    <Header lang={lang} />
-    <SocialSidebar variant="mobile" />
-    <SocialSidebar variant="desktop" />
-    <main class="main-layout">
+<BaseLayout title={title} lang={lang}>
+  <Header lang={lang} />
+  <main class="main-content">
+    <SocialSidebar />
+    <article>
       <slot />
-    </main>
-  </body>
-</html>
+    </article>
+  </main>
+</BaseLayout>
 
 <style>
-  html {
+  .main-content {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-  }
+    scrollbar-width: none;
+    scroll-padding-top: 4rem;
+    width: 100%;
+    -ms-overflow-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: auto;
+    grid-template-areas:
+      "main-section"
+      "social-sidebar";
 
-  body {
-    overflow-x: hidden;
-    padding-top: 4rem;
-  }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    article {
+      grid-area: main-section;
+    }
 
-  @media (min-width: 768px) {
-    body {
-      padding-top: 5rem;
+    section {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      width: 100%;
+    }
+    aside {
+      grid-area: social-sidebar;
     }
   }
 
-  .main-layout {
-    width: 100%;
-    min-height: 100vh;
-    scroll-snap-type: y mandatory;
-    overflow-y: auto;
-    scroll-snap-points-y: repeat(100vh);
-  }
-
-  section {
-    scroll-snap-align: start;
-    min-height: 100vh;
-    width: 100%;
+  @media (min-width: 768px) {
+    .main-content {
+      scroll-padding-top: 5rem;
+      grid-template-areas: "social-sidebar main-section";
+    }
   }
 </style>

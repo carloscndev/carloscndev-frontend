@@ -1,20 +1,16 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import Home from "../components/sections/Home.astro";
+import About from "../components/sections/About.astro";
+import Experience from "@components/sections/Experience.astro";
+import Portfolio from "@components/sections/Portfolio.astro";
+import Contact from "@components/sections/Contact.astro";
 ---
 
 <MainLayout title="carloscndev">
-  <section class="hero-section">
-    <h1>Hero Section - Coming Soon</h1>
-  </section>
+  <Home />
+  <About />
+  <Experience />
+  <Portfolio />
+  <Contact />
 </MainLayout>
-
-<style>
-  .hero-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: var(--bg-primary);
-    color: var(--text-base);
-  }
-</style>

@@ -1,0 +1,52 @@
+---
+// src/layouts/BaseLayout.astro
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  lang?: "es" | "en";
+  description?: string;
+}
+
+const {
+  title,
+  lang = "es",
+  description = "carloscndev's blog and portfolio",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("carloscndev-theme");
+        const preferred = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        const theme = stored || preferred;
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  body {
+    max-width: var(--max-width);
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+</style>
