@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 17,
-    "completed": 6,
+    "completed": 7,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -76,7 +76,7 @@
     {
       "id": "FIX-001",
       "name": "Social Sidebar Visibility",
-      "status": "pending",
+      "status": "done",
       "description": "Fix the social sidebar visibility to disappear on mobile devices.",
       "acceptance": [
         "Sidebar hidden on screens < 768px",

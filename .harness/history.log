@@ -57,3 +57,13 @@
 - **Closure**: Task [BOOT-006] marked as `done`.
 
 ---
+
+### 2026-05-11 — [FIX-001: Social Sidebar Visibility]
+
+- **Agent**: Coder #1
+- **Plan**: Fix social sidebar visibility so it properly hides on mobile and shows only on desktop.
+- **Changes**: [Updated `src/components/ui/social-sidebar.astro` to add `display: none` to `.social-sidebar--mobile` when viewport is >= 768px. This ensures the mobile sidebar (bottom bar) only appears on screens smaller than 768px, while the desktop sidebar (left side) only appears on screens 768px and wider.]
+- **Verification**: Build completed successfully. Media queries now properly hide mobile variant on desktop and desktop variant on mobile.
+- **Closure**: Task [FIX-001] marked as `done`.
+
+---
