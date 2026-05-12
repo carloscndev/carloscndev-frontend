@@ -17,3 +17,13 @@
 - **Closure**: Task [BOOT-002] marked as `done`.
 
 ---
+
+### 2026-05-11 — [BOOT-003: Main Layout Infrastructure]
+
+- **Agent**: Coder #1
+- **Plan**: Build the persistent MainLayout including scroll-snap container and vertical social sidebar as per visual specs.
+- **Changes**: [Created `src/components/ui/social-sidebar.astro` with GitHub, Instagram, LinkedIn icons. Created `src/components/sections/main-layout.astro` with scroll-snap container and sticky social sidebars (desktop left side, mobile bottom). Updated `src/pages/index.astro` to use MainLayout.]
+- **Verification**: Build completed successfully. Social sidebar shows desktop variant (left side, hidden on mobile) and mobile variant (bottom bar, hidden on desktop). Scroll-snap configured with `scroll-snap-type: y mandatory`.
+- **Closure**: Task [BOOT-003] marked as `done`.
+
+---

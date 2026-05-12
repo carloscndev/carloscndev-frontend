@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 12,
-    "completed": 2,
+    "completed": 3,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -32,7 +32,7 @@
     {
       "id": "BOOT-003",
       "name": "Main Layout Infrastructure",
-      "status": "pending",
+      "status": "done",
       "description": "Build the persistent MainLayout including the scroll-snap container and the social sidebar.",
       "acceptance": [
         "Vertical social sidebar implemented",

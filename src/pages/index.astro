@@ -1,3 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import MainLayout from "../components/sections/main-layout.astro";
 ---
+
+<MainLayout title="Carlos CN - Portfolio">
+  <section class="hero-section">
+    <h1>Hero Section - Coming Soon</h1>
+  </section>
+</MainLayout>
+
+<style>
+  .hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    color: var(--text-base);
+  }
+</style>
