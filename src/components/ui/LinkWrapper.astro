@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  isExternal?: boolean;
+}
+
+const { href, isExternal = true } = Astro.props;
+const isMail = href.startsWith("mailto:");
+const useTargetBlank = isExternal && !isMail;
+---
+
+<a
+  href={href}
+  target={useTargetBlank ? "_blank" : undefined}
+  rel={useTargetBlank ? "noopener" : undefined}
+  class="link"
+>
+  <slot />
+</a>

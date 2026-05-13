@@ -1,7 +1,4 @@
 ---
-import iconDark from "../../assets/logos/IconDark.svg";
-import iconLight from "../../assets/logos/IconLight.svg";
-
 interface Props {
   lang?: "es" | "en";
 }
@@ -21,22 +18,7 @@ const currentPath = Astro.url.pathname;
 
 <header class="header">
   <div class="header__container">
-    <a href="/" class="header__logo" aria-label="Go to homepage">
-      <img
-        src={iconDark.src}
-        alt="Carlos CN Logo"
-        class="header__logo-icon header__logo-icon--dark"
-        width="40"
-        height="40"
-      />
-      <img
-        src={iconLight.src}
-        alt="Carlos CN Logo"
-        class="header__logo-icon header__logo-icon--light"
-        width="40"
-        height="40"
-      />
-    </a>
+    <a href="/" class="header__logo" aria-label="Go to homepage"> icon </a>
 
     <nav class="header__nav" aria-label="Main navigation">
       <ul class="header__nav-list" role="list">

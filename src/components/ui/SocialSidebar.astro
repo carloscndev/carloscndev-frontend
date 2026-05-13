@@ -1,114 +1,87 @@
 ---
-import githubIcon from "../../assets/logos/github.svg";
-import instagramIcon from "../../assets/logos/instagram.svg";
-import linkedinIcon from "../../assets/logos/linkedln.svg";
-
-const socials = [
-  { name: "GitHub", href: "https://github.com/carloscndev", icon: githubIcon },
-  {
-    name: "Instagram",
-    href: "https://instagram.com/carloscndev",
-    icon: instagramIcon,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/carloscndev",
-    icon: linkedinIcon,
-  },
-];
+import GithubIcon from "@components/icons/GithubIcon.astro";
+import InstagramIcon from "@components/icons/InstagramIcon.astro";
+import LinkedInIcon from "@components/icons/LinkedInIcon.astro";
+import MailIcon from "@components/icons/MailIcon.astro";
+import LinkWrapper from "./LinkWrapper.astro";
 ---
 
 <aside class="social-sidebar">
-  <ul class="social-sidebar__list" role="list">
-    {
-      socials.map((social) => (
-        <li class="social-sidebar__item">
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit my ${social.name} profile`}
-            class="social-sidebar__link"
-          >
-            <img
-              src={social.icon.src}
-              alt={`${social.name} icon`}
-              width="24"
-              height="24"
-              loading="lazy"
-            />
-          </a>
-        </li>
-      ))
-    }
+  <ul class="social-sidebar-list" role="list">
+    <li class="social-sidebar-list-item">
+      <LinkWrapper href="https://github.com/carloscndev">
+        <GithubIcon />
+      </LinkWrapper>
+    </li>
+    <li class="social-sidebar-list-item">
+      <LinkWrapper href="https://github.com/carloscndev">
+        <InstagramIcon />
+      </LinkWrapper>
+    </li>
+    <li class="social-sidebar-list-item">
+      <LinkWrapper href="https://github.com/carloscndev">
+        <LinkedInIcon />
+      </LinkWrapper>
+    </li>
+    <li class="social-sidebar-list-item">
+      <LinkWrapper href="https://github.com/carloscndev" isExternal={false}>
+        <MailIcon />
+      </LinkWrapper>
+    </li>
   </ul>
+  <div class="social-sidebar-line"></div>
 </aside>
 
 <style>
   .social-sidebar {
-    position: fixed;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: 0;
-  }
+    display: block;
+    margin: auto;
+    width: 80%;
+    margin-bottom: 2rem;
+    .social-sidebar-list {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      .social-sidebar-list-item {
+        color: var(--color-word);
+        text-decoration: none;
+        transition: var(--transition-theme);
 
-  .social-sidebar__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+        &:hover {
+          color: var(--color-accent);
+          transform: scale(1.2);
+        }
+      }
+    }
 
-  .social-sidebar--mobile .social-sidebar__list {
-    flex-direction: row;
-    gap: 2rem;
-  }
-
-  .social-sidebar__link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    color: var(--text-base);
-    opacity: 0.7;
-    transition:
-      opacity 0.3s ease-in-out,
-      transform 0.3s ease-in-out;
-  }
-
-  .social-sidebar__link:hover {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-
-  .social-sidebar__link img {
-    width: 1.5rem;
-    height: 1.5rem;
+    .social-sidebar-line {
+      display: none;
+    }
   }
 
   @media (min-width: 768px) {
-    .social-sidebar--mobile {
-      display: none;
-    }
+    .social-sidebar {
+      align-items: center;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+      position: fixed;
+      width: auto;
 
-    .social-sidebar--desktop {
-      left: 2.5rem;
-    }
+      .social-sidebar-list {
+        flex-direction: column;
 
-    .social-sidebar__link img {
-      width: 1.75rem;
-      height: 1.75rem;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .social-sidebar--desktop {
-      display: none;
+        .social-sidebar-list-item {
+          padding: var(--spacing-md);
+        }
+      }
+      .social-sidebar-line {
+        display: inline-block;
+        width: 2px;
+        height: 100px;
+        background-color: var(--color-word);
+      }
     }
   }
 </style>
