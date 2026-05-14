@@ -199,6 +199,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+    width: 100%;
+    overflow: hidden;
   }
   .experience-carousel__track {
     display: flex;
@@ -206,9 +208,9 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    gap: var(--spacing-md);
     scrollbar-width: none;
     -ms-overflow-style: none;
+    width: 100%;
   }
   .experience-carousel__track::-webkit-scrollbar {
     display: none;
