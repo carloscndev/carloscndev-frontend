@@ -192,6 +192,7 @@
       "description": "Create a custom 404 page for non-existing routes.",
       "acceptance": [
         "Create a dedicated 404 page.",
+        "There is not visual spec for this page",
         "The page must render for all non-existing routes.",
         "The only visible content required for now is '404'.",
         "The page must use the existing project styling/layout conventions.",
