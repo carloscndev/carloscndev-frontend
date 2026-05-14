@@ -1,3 +1,416 @@
-<section id="experience" data-i18n-content="section.experience">
-  Experiencia Profesional
+---
+import experienceDataRaw from "../../data/experience.json";
+import Diamond from "../icons/Diamond.astro";
+
+const currentLang = "es";
+
+function getExperienceData(lang: "es" | "en") {
+  const root = experienceDataRaw.data.attributes;
+  if (root.locale === lang) return root;
+  const loc = (root as any).localizations.data.find(
+    (l: any) => l.attributes.locale === lang,
+  );
+  return loc?.attributes ?? root;
+}
+
+const data = getExperienceData(currentLang);
+
+const embeddedData = {
+  es: getExperienceData("es"),
+  en: getExperienceData("en"),
+};
+const embeddedDataJson = JSON.stringify(embeddedData);
+---
+
+<section id="experience" class="experience-section">
+  <script
+    type="application/json"
+    id="experience-data"
+    set:html={embeddedDataJson}
+  />
+
+  <header class="experience-section__header">
+    <h2
+      class="experience-section__title"
+      data-experience-title
+      data-i18n-content="section.experience"
+    >
+      {data.title}
+    </h2>
+    <p class="experience-section__intro" data-experience-intro>{data.intro}</p>
+  </header>
+
+  <!-- Desktop Tabs (visible >=768px) -->
+  <div class="experience-tabs">
+    <div class="experience-tabs__list" role="tablist">
+      {
+        data.jobs.map((job, idx) => (
+          <button
+            class:list={[
+              "experience-tabs__tab",
+              idx === 0 ? "experience-tabs__tab--active" : "",
+            ]}
+            role="tab"
+            aria-selected={idx === 0 ? "true" : "false"}
+            data-tab={job.id}
+            type="button"
+          >
+            <Diamond size="16" class="experience-tabs__diamond" />
+            <span class="experience-tabs__tab-company">{job.company}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="experience-tabs__content">
+      {
+        data.jobs.map((job, idx) => (
+          <div
+            class:list={[
+              "experience-tabs__panel",
+              idx === 0 ? "experience-tabs__panel--active" : "",
+            ]}
+            role="tabpanel"
+            data-panel={job.id}
+          >
+            <h3 class="experience-tabs__role" data-job-role>
+              {job.role}
+            </h3>
+            <p class="experience-tabs__company" data-job-company>
+              @{job.company}
+            </p>
+            <p class="experience-tabs__period" data-job-period>
+              {job.period}
+            </p>
+            <div class="experience-tabs__description" data-job-description>
+              <p>{job.description_p1}</p>
+              <p>{job.description_p2}</p>
+            </div>
+            <div class="experience-tabs__tags" data-job-tags>
+              {job.technologies.map((tech) => (
+                <span class="experience-tabs__tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Mobile Carousel (visible <768px) -->
+  <div class="experience-carousel">
+    <div class="experience-carousel__track" data-carousel-track>
+      {
+        data.jobs.map((job, idx) => (
+          <div
+            class:list={[
+              "experience-carousel__slide",
+              idx === 0 ? "experience-carousel__slide--active" : "",
+            ]}
+            data-slide={job.id}
+          >
+            <h3 class="experience-carousel__role" data-job-role>
+              {job.role}
+            </h3>
+            <p class="experience-carousel__company" data-job-company>
+              @{job.company}
+            </p>
+            <p class="experience-carousel__period" data-job-period>
+              {job.period}
+            </p>
+            <div class="experience-carousel__description" data-job-description>
+              <p>{job.description_p1}</p>
+              <p>{job.description_p2}</p>
+            </div>
+            <div class="experience-carousel__tags" data-job-tags>
+              {job.technologies.map((tech) => (
+                <span class="experience-carousel__tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="experience-carousel__dots" data-carousel-dots>
+      {
+        data.jobs.map((_, idx) => (
+          <button
+            class:list={[
+              "experience-carousel__dot",
+              idx === 0 ? "experience-carousel__dot--active" : "",
+            ]}
+            data-dot={String(idx)}
+            aria-label={`Job ${idx + 1}`}
+            type="button"
+          />
+        ))
+      }
+    </div>
+  </div>
 </section>
+
+<script>
+  import {
+    initExperienceLangSwitch,
+    initExperienceTabs,
+    initExperienceCarousel,
+  } from "../../utils/experience.ts";
+  initExperienceLangSwitch();
+  initExperienceTabs();
+  initExperienceCarousel();
+</script>
+
+<style>
+  .experience-section {
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: var(--spacing-lg);
+  }
+  .experience-section::-webkit-scrollbar {
+    display: none;
+  }
+
+  .experience-section__header {
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+  }
+  .experience-section__title {
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h2-mobile);
+    font-weight: var(--weight-space-semibold);
+    color: var(--text-base);
+    margin-bottom: var(--spacing-sm);
+  }
+  .experience-section__intro {
+    font-family: var(--font-body);
+    color: var(--color-word);
+    line-height: 1.8;
+  }
+
+  /* Desktop tabs hidden on mobile */
+  .experience-tabs {
+    display: none;
+  }
+
+  /* Mobile carousel */
+  .experience-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .experience-carousel__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .experience-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .experience-carousel__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(47, 66, 160, 0.15);
+  }
+  :global(.dark) .experience-carousel__slide {
+    border-color: rgba(127, 139, 228, 0.15);
+  }
+
+  .experience-carousel__role {
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h3-mobile);
+    font-weight: var(--weight-space-semibold);
+    color: var(--text-base);
+    margin-bottom: var(--spacing-xs);
+  }
+  .experience-carousel__company {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--color-accent);
+    font-weight: var(--weight-inter-medium);
+    margin-bottom: var(--spacing-xs);
+  }
+  .experience-carousel__period {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-word);
+    margin-bottom: var(--spacing-md);
+  }
+  .experience-carousel__description {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    line-height: 1.7;
+  }
+  .experience-carousel__description p {
+    margin-bottom: var(--spacing-sm);
+  }
+  .experience-carousel__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+  }
+  .experience-carousel__tag {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-base);
+    background: rgba(51, 31, 232, 0.1);
+    border: 1px solid rgba(51, 31, 232, 0.25);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  .experience-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+  }
+  .experience-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--color-accent);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 300ms ease;
+  }
+  .experience-carousel__dot--active {
+    background: var(--color-accent);
+  }
+  .experience-carousel__dot:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Desktop: >= 768px */
+  @media (min-width: 768px) {
+    .experience-section {
+      padding: var(--spacing-lg) calc(var(--spacing-lg) * 3);
+    }
+    .experience-section__title {
+      font-size: var(--font-size-h2-desktop);
+    }
+    .experience-section__intro {
+      font-size: var(--font-size-body-desktop);
+      max-width: 680px;
+    }
+
+    .experience-tabs {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: var(--spacing-xl);
+    }
+    .experience-carousel {
+      display: none;
+    }
+
+    .experience-tabs__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+    .experience-tabs__tab {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      width: 100%;
+      padding: var(--spacing-md);
+      background: none;
+      border: none;
+      border-radius: var(--border-radius);
+      color: var(--text-base);
+      font-family: var(--font-titles);
+      font-size: var(--font-size-h3-desktop);
+      font-weight: var(--weight-space-medium);
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 300ms ease;
+    }
+    .experience-tabs__tab:hover {
+      background: rgba(51, 31, 232, 0.05);
+    }
+    .experience-tabs__tab:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+    .experience-tabs__tab--active {
+      background: rgba(51, 31, 232, 0.08);
+    }
+
+    .experience-tabs__diamond {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+    .experience-tabs__tab--active .experience-tabs__diamond {
+      opacity: 1;
+    }
+    .experience-tabs__tab-company {
+      flex: 1;
+    }
+
+    .experience-tabs__panel {
+      display: none;
+    }
+    .experience-tabs__panel--active {
+      display: block;
+    }
+
+    .experience-tabs__role {
+      font-family: var(--font-titles);
+      font-size: var(--font-size-h2-desktop);
+      font-weight: var(--weight-space-semibold);
+      color: var(--text-base);
+      margin-bottom: var(--spacing-xs);
+    }
+    .experience-tabs__company {
+      font-family: var(--font-body);
+      font-size: var(--font-size-body-desktop);
+      color: var(--color-accent);
+      font-weight: var(--weight-inter-medium);
+      margin-bottom: var(--spacing-xs);
+    }
+    .experience-tabs__period {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--color-word);
+      margin-bottom: var(--spacing-md);
+    }
+    .experience-tabs__description {
+      font-family: var(--font-body);
+      font-size: var(--font-size-body-desktop);
+      color: var(--text-base);
+      line-height: 1.8;
+    }
+    .experience-tabs__description p {
+      margin-bottom: var(--spacing-md);
+    }
+    .experience-tabs__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      margin-top: var(--spacing-md);
+    }
+    .experience-tabs__tag {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-base);
+      background: rgba(51, 31, 232, 0.1);
+      border: 1px solid rgba(51, 31, 232, 0.25);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-xs) var(--spacing-sm);
+    }
+  }
+</style>

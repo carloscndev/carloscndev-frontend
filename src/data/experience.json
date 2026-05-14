@@ -1,6 +1,7 @@
 {
-  "es": {
-    "experience": {
+  "data": {
+    "id": 7,
+    "attributes": {
       "title": "Experiencia Profesional",
       "intro": "A lo largo de los años, he trabajado en diferentes equipos y proyectos. A continuación se presenta una breve descripción de mi experiencia.",
       "jobs": [
@@ -59,70 +60,88 @@
             "Linux"
           ]
         }
-      ]
-    }
-  },
-  "en": {
-    "experience": {
-      "title": "Professional Experience",
-      "intro": "Over the years, I have worked across different teams and projects. The following is a brief overview of my experience.",
-      "jobs": [
-        {
-          "id": "c3ai",
-          "company": "C3 AI",
-          "role": "Mid Software Engineer",
-          "period": "Jan 2023 - May 2025",
-          "description_p1": "In this role, I worked on full stack applications in production. I led the development of features from the initial architecture to the final deployment.",
-          "description_p2": "I focused on the integration of Generative AI into enterprise products and the construction of Machine Learning pipelines in distributed systems. On a daily basis, I integrated language models into real workflows, working closely with the design and product teams to build scalable systems and improve the development experience.",
-          "technologies": ["Generative AI", "React", "TypeScript", "Python"]
-        },
-        {
-          "id": "liverpool",
-          "company": "Liverpool",
-          "role": "Software Engineer",
-          "period": "Feb 2020 - Nov 2022",
-          "description_p1": "In this role, I worked on the development and maintenance of one of the largest e-commerce platforms in Mexico, which serves over 13 million monthly active users. I was involved in the delivery of new features using a technology stack based on React, Next.js, and Node.js.",
-          "description_p2": "Additionally, I designed and implemented Cloud Functions on GCP to automate frontend processes. I also led performance improvements and developed internal tools to increase code quality and optimize team workflows.",
-          "technologies": [
-            "React",
-            "Node.js",
-            "Express.js",
-            "GCP Cloud Functions"
-          ]
-        },
-        {
-          "id": "sngular",
-          "company": "Sngular",
-          "role": "Frontend Developer",
-          "period": "Mar 2018 - Feb 2020",
-          "description_p1": "In this role, I led frontend development, working with modern React-based architectures and migrating legacy platforms to more current stacks using Gatsby, GraphQL, and Styled Components.",
-          "description_p2": "I contributed to building reusable components with Redux and maintaining code quality through unit testing with Jest. Additionally, I worked on automating internal processes with AWS Lambda, implementing CI/CD pipelines, and developing backend support services with Node.js and Express.",
-          "technologies": [
-            "React",
-            "Gatsby",
-            "GraphQL",
-            "AWS Lambda",
-            "Jest",
-            "Node.js"
-          ]
-        },
-        {
-          "id": "stc",
-          "company": "STC Metro",
-          "role": "Software Developer",
-          "period": "Aug 2015 - Mar 2018",
-          "description_p1": "In this role, I led the modernization of remote monitoring systems for automatic control cabinets, designing web-based platforms with Python and JavaScript to replace licensed software and reduce operational costs.",
-          "description_p2": "I also contributed to the development of monitoring tools for signaling infrastructure and supported updates to embedded systems on legacy electronic platforms using C/C++. This work involved combining web technologies with critical real-time systems to improve monitoring efficiency.",
-          "technologies": [
-            "Python",
-            "JavaScript",
-            "C/C++",
-            "PHP",
-            "Embedded Systems",
-            "Linux"
-          ]
-        }
-      ]
+      ],
+      "locale": "es",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "publishedAt": "2025-01-01T00:00:00.000Z",
+      "localizations": {
+        "data": [
+          {
+            "id": 8,
+            "attributes": {
+              "title": "Professional Experience",
+              "intro": "Over the years, I have worked across different teams and projects. The following is a brief overview of my experience.",
+              "jobs": [
+                {
+                  "id": "c3ai",
+                  "company": "C3 AI",
+                  "role": "Mid Software Engineer",
+                  "period": "Jan 2023 - May 2025",
+                  "description_p1": "In this role, I worked on full stack applications in production. I led the development of features from the initial architecture to the final deployment.",
+                  "description_p2": "I focused on the integration of Generative AI into enterprise products and the construction of Machine Learning pipelines in distributed systems. On a daily basis, I integrated language models into real workflows, working closely with the design and product teams to build scalable systems and improve the development experience.",
+                  "technologies": [
+                    "Generative AI",
+                    "React",
+                    "TypeScript",
+                    "Python"
+                  ]
+                },
+                {
+                  "id": "liverpool",
+                  "company": "Liverpool",
+                  "role": "Software Engineer",
+                  "period": "Feb 2020 - Nov 2022",
+                  "description_p1": "In this role, I worked on the development and maintenance of one of the largest e-commerce platforms in Mexico, which serves over 13 million monthly active users. I was involved in the delivery of new features using a technology stack based on React, Next.js, and Node.js.",
+                  "description_p2": "Additionally, I designed and implemented Cloud Functions on GCP to automate frontend processes. I also led performance improvements and developed internal tools to increase code quality and optimize team workflows.",
+                  "technologies": [
+                    "React",
+                    "Node.js",
+                    "Express.js",
+                    "GCP Cloud Functions"
+                  ]
+                },
+                {
+                  "id": "sngular",
+                  "company": "Sngular",
+                  "role": "Frontend Developer",
+                  "period": "Mar 2018 - Feb 2020",
+                  "description_p1": "In this role, I led frontend development, working with modern React-based architectures and migrating legacy platforms to more current stacks using Gatsby, GraphQL, and Styled Components.",
+                  "description_p2": "I contributed to building reusable components with Redux and maintaining code quality through unit testing with Jest. Additionally, I worked on automating internal processes with AWS Lambda, implementing CI/CD pipelines, and developing backend support services with Node.js and Express.",
+                  "technologies": [
+                    "React",
+                    "Gatsby",
+                    "GraphQL",
+                    "AWS Lambda",
+                    "Jest",
+                    "Node.js"
+                  ]
+                },
+                {
+                  "id": "stc",
+                  "company": "STC Metro",
+                  "role": "Software Developer",
+                  "period": "Aug 2015 - Mar 2018",
+                  "description_p1": "In this role, I led the modernization of remote monitoring systems for automatic control cabinets, designing web-based platforms with Python and JavaScript to replace licensed software and reduce operational costs.",
+                  "description_p2": "I also contributed to the development of monitoring tools for signaling infrastructure and supported updates to embedded systems on legacy electronic platforms using C/C++. This work involved combining web technologies with critical real-time systems to improve monitoring efficiency.",
+                  "technologies": [
+                    "Python",
+                    "JavaScript",
+                    "C/C++",
+                    "PHP",
+                    "Embedded Systems",
+                    "Linux"
+                  ]
+                }
+              ],
+              "locale": "en",
+              "createdAt": "2025-01-01T00:00:00.000Z",
+              "updatedAt": "2025-01-01T00:00:00.000Z",
+              "publishedAt": "2025-01-01T00:00:00.000Z"
+            }
+          }
+        ]
+      }
     }
   }
 }

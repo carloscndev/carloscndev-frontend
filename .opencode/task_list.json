@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 30,
-    "completed": 28,
+    "completed": 29,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -331,7 +331,7 @@
     {
       "id": "FEAT-003",
       "name": "Section: Professional Experience Interactive Display",
-      "status": "todo",
+      "status": "done",
       "description": "Implement the 'Mi Experiencia' section. This component must act as a dynamic display for professional roles, featuring a vertical tab system for desktop and a touch-enabled carousel for mobile. Localization and strict adherence to visual references (03-experience-C3, 03-experience-liverpool, 03-experience-sngular, 03-experience-STC) are mandatory.",
       "acceptance": [
         "Implement the Experience section using the existing Astro container/wrapper. Do NOT recreate the outer layout structure.",
