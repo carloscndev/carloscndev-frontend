@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 40,
+    "completed": 41,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -507,7 +507,7 @@
     {
       "id": "FIX-023",
       "name": "Portfolio Title & Intro Alignment + Color",
-      "status": "pending",
+      "status": "done",
       "description": "Left-align portfolio-section__title and portfolio-section__intro. Change intro color from current to --text-base.",
       "acceptance": ["Title and intro left-aligned", "Intro color: --text-base"]
     },
