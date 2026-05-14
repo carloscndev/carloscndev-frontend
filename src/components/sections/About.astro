@@ -134,10 +134,9 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   }
 
   .about-section__tech {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: var(--spacing-sm);
-    justify-content: center;
     margin-top: var(--spacing-md);
   }
 
@@ -189,7 +188,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
 
     .about-section__tech {
-      justify-content: flex-start;
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .about-section__tech-chip {
