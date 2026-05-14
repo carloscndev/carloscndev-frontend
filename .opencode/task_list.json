@@ -330,17 +330,49 @@
     },
     {
       "id": "FEAT-003",
-      "name": "Section: Experience",
-      "status": "pending",
-      "description": "Desktop implementation of About and Experience timeline.",
-      "acceptance": ["Interactive sidebar", "Refined spacing"]
+      "name": "Section: Professional Experience Interactive Display",
+      "status": "todo",
+      "description": "Implement the 'Mi Experiencia' section. This component must act as a dynamic display for professional roles, featuring a vertical tab system for desktop and a touch-enabled carousel for mobile. Localization and strict adherence to visual references (03-experience-C3, 03-experience-liverpool, 03-experience-sngular, 03-experience-STC) are mandatory.",
+      "acceptance": [
+        "Implement the Experience section using the existing Astro container/wrapper. Do NOT recreate the outer layout structure.",
+        "Desktop Layout (Ref: 03-experience.png): Must feature a two-column layout. Left column contains a vertical list of company names (tabs); right column displays the detailed role information.",
+        "Mobile Layout (Ref: 03-experience-liverpool.png): Must transform the layout into a vertical stack where the company details are navigable via a horizontal carousel or slider with pagination dots.",
+        "Data Structure Flexibility: The agent is authorized to modify or define the 'data/experience' structure to optimize the implementation, as the final API will be modeled based on this schema.",
+        "Desktop Tab Behavior: Clicking a company name must update the right-hand content block (Title, Company with @, Dates, Description, and Tech Tags) without a page reload.",
+        "Active State: The selected company in the desktop list must have a distinct background/active style and the diamond icon visibility as shown in the reference.",
+        "Mobile Carousel: Implement touch/swipe support for navigating between different job experiences. Pagination dots must reflect the current active index.",
+        "Visual Hierarchy: The job title must be white, and the company name (prefixed with '@') must use the brand blue color.",
+        "Tech Tags: Implement a flex-wrap container for technology tags at the bottom of each description. Tags must have rounded corners and the specific blue background seen in references.",
+        "Localization: All content (Job titles, dates, descriptions) must be pulled from data files supporting English and Spanish. Switching language must update the experience content dynamically.",
+        "Typography: Maintain strict visual parity with the reference headings ('Mi Experiencia') and paragraph leading (line height).",
+        "Iconography: Use the diamond icon from 'components/icons' for the desktop list items.",
+        "Styling: Paragraphs must match the rhythmic spacing and dark navy background aesthetic of the '03-experience.png' reference.",
+        "No hardcoded content: All text and company names must be mapped from the data source.",
+        "Intermediate Breakpoints: Ensure a smooth transition between the desktop tab list and the mobile carousel without layout breakage.",
+        "Util Functions: Logic for tab switching or carousel indexing should be extracted into reusable helper functions."
+      ]
     },
     {
       "id": "FEAT-004",
-      "name": "Section: Portfolio",
+      "name": "Section: Portfolio Adaptive Project Display",
       "status": "pending",
-      "description": "Desktop implementation of the works and posts grids.",
-      "acceptance": ["Card hover effects", "Grid-breaking layout"]
+      "description": "Implement the 'Mi Portafolio' section. The component must transition from a multi-column grid layout on desktop to an interactive accordion-style list on mobile. The project data structure must be flexible to support conditional rendering of external links (Repo, Demo, Article).",
+      "acceptance": [
+        "Implement the Portfolio section using the existing Astro container. Reuse typography and background tokens for consistency.",
+        "Desktop Layout (Ref: 04-portafolio.png): Implement a responsive 3-column grid (or 2-column for smaller screens) displaying project cards.",
+        "Mobile Layout (Ref: 04-portafolio.png): Transform the grid into a vertical list of expandable/collapsible items (Accordion). Only one project should ideally be expanded at a time to maintain focus.",
+        "Conditional Links: Project cards/items must support and conditionally render three types of links: 'repo' (GitHub icon), 'demo' (External link icon), and 'article' (Document/File icon). If a link is missing in the data, its icon must not appear.",
+        "Card Content: Each project must display: Diamond icon, Title, Description, a row of Tech Tags, and the Action Icons (links).",
+        "Data Structure Flexibility: The agent is authorized to modify the 'data/portfolio' schema. Suggested structure: { title, description, tags: [], links: { repo?, demo?, article? } }.",
+        "Desktop Hover Effects: Implement a subtle scale or shadow transition on the cards to match the '04-portafolio.png' aesthetic. The action icons should be clearly visible but can have hover states.",
+        "Mobile Accordion Logic: Each item shows the diamond icon and title by default. Clicking the title or the arrow icon toggles the visibility of the description, tags, and links with a smooth transition.",
+        "Tech Tags: Render tags using the same styling as the Experience section (rounded borders, specific blue background).",
+        "Localization: Pull all titles and descriptions from localized data sources. Support dynamic swapping between English and Spanish without page reload.",
+        "Visual Parity: Typography hierarchy for 'Mi Portafolio' and the 'ver más' button at the bottom must strictly match the references.",
+        "Iconography: Use icons from 'components/icons'. Ensure the arrow icons (up/down) in mobile match the reference 04-portafolio.png.",
+        "No Hardcoded Content: All project details must be mapped from the data/portfolio source.",
+        "Strict Responsive Design: Ensure the layout doesn't break at tablet widths, transitioning cleanly from grid to accordion."
+      ]
     },
     {
       "id": "FEAT-005",
@@ -351,10 +383,23 @@
     },
     {
       "id": "FEAT-006",
-      "name": "Section: Contact",
+      "name": "Section: Contact & Global Footer",
       "status": "pending",
-      "description": "Desktop implementation of the 'Let's Talk' section.",
-      "acceptance": ["Mail-to integration", "Footer implemented"]
+      "description": "Implement the 'Hablemos' (Contact) section and the global footer. This section serves as the final call to action. It must maintain a specific viewport height in mobile to accommodate the social media bar properly, as per the visual references (06-contact.png and 06-contact-m.png).",
+      "acceptance": [
+        "Implement the Contact section using the existing Astro container. Maintain strict visual parity with '06-contact.png'.",
+        "CTA Button: The 'Escríbeme' button must be a 'mailto' integration. Ensure the email address is pulled from a global configuration or data file.",
+        "Mobile Viewport Height: DO NOT modify the specific height logic of the mobile container. It is intentionally designed to ensure the social media bar is visible at the bottom of the screen (Ref: 06-contact.png).",
+        "Desktop Layout: Center all content (Heading, Paragraph, Button) both horizontally and vertically within the section.",
+        "Global Footer: Implement the 'Diseñado y Construido por @carloscndev' text at the absolute bottom. This text must be localized.",
+        "Typography & Emoji: The heading 'Hablemos' must include the waving hand emoji (👋). Ensure the font weight and size match the reference exactly.",
+        "Button Styling: The button must have a transparent background with a solid blue border and blue text, matching the '06-contact.png' visual style. Implement a subtle hover state.",
+        "Social Media Bar (Mobile): Ensure the social icons (Instagram, LinkedIn, GitHub) are aligned horizontally at the bottom of the mobile view, respecting the existing spacing.",
+        "Social Media Bar (Desktop): Ensure the vertical social bar on the left remains consistent and does not overlap with the centered contact content.",
+        "Localization: The 'Let's Talk' message, the description paragraph, the button text, and the footer credits must all support English and Spanish dynamic switching.",
+        "Data Source: The agent may define the 'data/contact' structure for the email and text content. No hardcoded strings are allowed.",
+        "Visual Parity: Paragraph width and line-height must match the centered, breathable layout shown in the desktop reference."
+      ]
     }
   ]
 }
