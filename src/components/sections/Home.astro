@@ -167,8 +167,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
 
     .home-section__grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 65%;
       gap: var(--spacing-xl);
+    }
+
+    .home-section__avatar {
+      justify-content: flex-start;
+      order: 0;
     }
 
     .home-section__avatar {
