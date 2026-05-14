@@ -140,3 +140,13 @@
 - **Changes**: [Added `id` attributes to all 6 section components (home/about/experience/portfolio/blog/contact). Added `Blog` import and component to `src/pages/index.astro`. Created `src/utils/anchor-routing.ts` with `scrollToHash()`, `initAnchorRouting()`, hash-link click interception, and Astro ClientRouter event handling. Updated `src/layouts/MainLayout.astro` with script importing `initAnchorRouting()`. Updated `src/components/ui/header.astro` with hash-aware active nav state logic and mobile-menu active class CSS.]
 - **Verification**: Build completed successfully (`npm run build`, 3 pages, zero errors). Sections now scroll smoothly via `scrollIntoView({ behavior: "smooth" })`. Active nav state updates dynamically on hash change. Hash links use `pushState` for URL updates.
 - **Closure**: Task [BOOT-009] marked as `done`.
+
+---
+
+### 2026-05-14 — [BOOT-010: Dummy Blog Post Integration]
+
+- **Agent**: Coder #1 (via orchestrator with Leader planning and Reviewer audit)
+- **Plan**: Add 4 missing blog posts to blog-post.json (utmb-vallarta, training-days, own-react, running-reflection) and build a fully functional blog grid section in Blog.astro with responsive 1→2→3 column layout, category-themed gradients, i18n support via blog.ts utility, and proper scroll-snap compatibility.
+- **Changes**: [Modified `src/data/blog-post.json` — Added 4 posts to ES and EN arrays. Rewrote `src/components/sections/Blog.astro` with blog grid (6 cards), embedded JSON data for client-side i18n, category-themed image placeholders, and `initBlogLangSwitch()` integration.]
+- **Verification**: Build succeeded (`npm run build`): 13 pages (12 blog detail routes + index). All 6 posts render correctly in both ES and EN. Blog grid displays with proper data attributes matching `src/utils/blog.ts` contract. Reviewer audit passed after fixing: missing EN paragraph in static-architecture, blog-card__separator opacity, dead CSS property, and aria-labels.
+- **Closure**: Task [BOOT-010] marked as `done`.

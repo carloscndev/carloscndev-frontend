@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 17,
-    "completed": 12,
+    "completed": 13,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -172,9 +172,10 @@
     {
       "id": "BOOT-010",
       "name": "Dummy Blog Post Integration",
-      "status": "pending",
+      "status": "done",
       "description": "Create a dummy blog post to validate the blog page flow and post rendering using the existing Post layout.",
       "acceptance": [
+        "The visual spec is 05-blog-detail-tech-running or 05-blog-detail-tech",
         "Create a dummy blog post with placeholder content.",
         "The blog post must use the existing Post layout.",
         "The new post must appear inside the Blog section list/grid.",
