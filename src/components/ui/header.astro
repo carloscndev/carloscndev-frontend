@@ -10,13 +10,23 @@ interface Props {
 }
 
 const { lang = "es" } = Astro.props;
+
+// i18n labels map for navigation
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/#about" },
-  { label: "Portfolio", href: "/#portfolio" },
-  { label: "Blog", href: "/#blog" },
-  { label: "Contact", href: "/#contact" },
+  { key: "home", href: "/" },
+  { key: "about", href: "/#about" },
+  { key: "portfolio", href: "/#portfolio" },
+  { key: "blog", href: "/#blog" },
+  { key: "contact", href: "/#contact" },
 ];
+
+const navLabels: Record<string, Record<"es" | "en", string>> = {
+  home: { es: "Inicio", en: "Home" },
+  about: { es: "Acerca de", en: "About" },
+  portfolio: { es: "Portafolio", en: "Portfolio" },
+  blog: { es: "Blog", en: "Blog" },
+  contact: { es: "Contacto", en: "Contact" },
+};
 
 const currentPath = Astro.url.pathname;
 ---
@@ -42,8 +52,9 @@ const currentPath = Astro.url.pathname;
                   "header-nav-link",
                   currentPath === link.href ? "header-nav-link--active" : "",
                 ]}
+                data-i18n-nav={link.key}
               >
-                {link.label}
+                {navLabels[link.key][lang]}
               </a>
             </li>
           ))
@@ -85,6 +96,8 @@ const currentPath = Astro.url.pathname;
 
     .header-icon {
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
 
     .header-menu {

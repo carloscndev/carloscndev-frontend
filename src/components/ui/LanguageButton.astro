@@ -8,27 +8,41 @@ interface Props {
 const { lang = "es" } = Astro.props;
 ---
 
-<div class="language-button">
+<div
+  class="language-button"
+  id="language-toggle"
+  role="button"
+  tabindex="0"
+  aria-label={`Switch language, currently ${lang === "es" ? "Spanish" : "English"}`}
+>
   <div class="icon-wrapper">
     <GlobeIcon />
   </div>
-  <div class="current-language-text">{lang === "es" ? "Es" : "En"}</div>
+  <div class="current-language-text" data-lang-indicator>
+    {lang === "es" ? "Es" : "En"}
+  </div>
 </div>
+
+<script>
+  import { initLangListener } from "../../utils/lang.ts";
+
+  initLangListener();
+</script>
 
 <style>
   .language-button {
     align-items: center;
     display: flex;
     cursor: pointer;
-
+    transition: opacity duration-300 ease-in-out;
     .icon-wrapper {
       margin-right: 2px;
     }
-
     .current-language-text {
       font-family: var(--font-titles);
       font-weight: var(--weight-space-medium);
       padding-top: 0.5rem;
+      color: var(--text-base);
     }
   }
 </style>

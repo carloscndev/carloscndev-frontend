@@ -1,13 +1,76 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import LinkWrapper from "../components/ui/LinkWrapper.astro";
+import WebIcon from "@components/icons/WebIcon.astro";
+import LanguageButton from "../components/ui/LanguageButton.astro";
 
-const { title, lang } = Astro.props;
+const { title, lang = "es" } = Astro.props;
 ---
 
 <BaseLayout title={title} lang={lang} description="Blog post">
-  <body class="post-body">
-    <article class="PostLayout">
-      <slot />
-    </article>
-  </body>
+  <header class="post-header">
+    <div class="post-header-content">
+      <div class="post-header-icon">
+        <LinkWrapper href="/" isExternal={false}>
+          <WebIcon size="40" />
+        </LinkWrapper>
+      </div>
+      <LanguageButton lang={lang} />
+    </div>
+  </header>
+
+  <article class="PostLayout">
+    <slot />
+  </article>
 </BaseLayout>
+
+<style>
+  .post-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-desktop-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-lg);
+    z-index: 50;
+    background: var(--bg-primary);
+    border-bottom: 1px solid transparent;
+    transition: all duration-300 ease-in-out;
+
+    .post-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .post-header-icon {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .PostLayout {
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+    padding-top: calc(var(--header-desktop-height) + var(--spacing-lg));
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .post-header {
+      padding: 0 var(--spacing-xl);
+    }
+
+    .PostLayout {
+      padding: var(--spacing-xl);
+      padding-top: calc(var(--header-desktop-height) + var(--spacing-xl));
+    }
+  }
+</style>

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 17,
-    "completed": 7,
+    "completed": 9,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -97,7 +97,7 @@
     {
       "id": "FIX-003",
       "name": "Theme Transition Sync",
-      "status": "pending",
+      "status": "done",
       "description": "Fix the desynchronized theme animation between Main and Reader layouts.",
       "acceptance": [
         "Unified theme transition without 'double jump' effect",
@@ -107,7 +107,7 @@
     {
       "id": "FIX-004",
       "name": "I18n Visual Sync (Header & Reader)",
-      "status": "pending",
+      "status": "done",
       "description": "Ensure the language toggle reflects changes in the Header and updates the logo in the Reader layout.",
       "acceptance": [
         "Language switch updates navigation labels in Header",
@@ -119,11 +119,14 @@
       "id": "UI-001",
       "name": "Mobile Menu Logic",
       "status": "pending",
-      "description": "Implement mobile menu functionality with full-screen overlay and scroll lock.",
+      "description": "Implement a full-screen responsive mobile navigation menu overlay triggered by MobileMenuIcon, adhering to zero-visual-spec strict implementation rules.",
       "acceptance": [
-        "Full-screen menu appearance",
-        "Body scroll lock (overflow-hidden) active when open",
-        "Functional close button"
+        "Clicking MobileMenuIcon opens a full-screen navigation overlay displaying all layout navLinks.",
+        "The overlay must feature an explicit, accessible close button (X) to dismiss the view.",
+        "Body scroll lock must be active when the menu is open by dynamically applying an 'overflow-hidden' utility to the document root/body.",
+        "Clicking any navigation link must successfully route the user and automatically close the mobile menu view.",
+        "Mobile menu state, events, and DOM hooks must fully survive Astro's ClientRouter transitions without hanging listeners or memory leaks (bind via 'astro:page-load').",
+        "Complex animation triggers or open/close state logic calculations must be extracted to a helper function within a utils file."
       ]
     },
     {

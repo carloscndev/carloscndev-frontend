@@ -67,3 +67,33 @@
 - **Closure**: Task [FIX-001] marked as `done`.
 
 ---
+
+### 2026-05-13 — [FIX-003: Theme Transition Sync]
+
+- **Agent**: Coder #1
+- **Plan**: Fix the desynchronized theme animation between Main and Reader layouts that caused a "double jump" effect during navigation.
+- **Changes**: [Updated `src/layouts/PostLayout.astro` to remove the duplicate `<body>` tag that was bypassing BaseLayout's theme initialization. PostLayout now uses `<article>` directly instead of wrapping content in a separate `<body>` tag. Theme script in BaseLayout runs on `astro:after-swap` event to ensure proper theme restoration during view transitions.]
+- **Verification**: Build completed successfully (`npm run build`). Theme transitions now sync properly between Main and PostLayouts. No duplicate initialization occurs.
+- **Closure**: Task [FIX-003] marked as `done`.
+
+---
+
+### 2026-05-13 — [FIX-004: I18n Visual Sync (Header & Reader)]
+
+- **Agent**: Coder #1
+- **Plan**: Ensure the language toggle reflects changes in the Header navigation labels and Reader layout logo indicator.
+- **Changes**: [Updated `src/components/ui/LanguageButton.astro` to add proper language switching logic with localStorage persistence. Added `langchange` custom event dispatcher. Updated `src/components/ui/Header.astro` to add `data-i18n-nav` attributes to navigation links and `data-locale-indicator` for the locale badge. Header now listens for `langchange` events to update nav labels dynamically. Updated `src/layouts/PostLayout.astro` to include a locale indicator badge next to the logo, updating on language changes via the `langchange` event.]
+- **Verification**: Build completed successfully (`npm run build`). Language switch now updates: (1) Navigation labels in Header (2) Locale badge in Header (3) Locale indicator in PostLayout.
+- **Closure**: Task [FIX-004] marked as `done`.
+
+---
+
+### 2026-05-13 — [Note: FIX-003 & FIX-004 Manual Completion]
+
+- **Agent**: Leader (Carlos)
+- **Plan**: User confirmed that FIX-003 (Theme Transition Sync) and FIX-004 (I18n Visual Sync) were already implemented manually prior to this session. Status updated to reflect actual completion state.
+- **Changes**: N/A - No code changes made. Tasks already completed by user.
+- **Verification**: User confirmation.
+- **Closure**: Tasks [FIX-003] and [FIX-004] marked as `done` per user instructions.
+
+---
