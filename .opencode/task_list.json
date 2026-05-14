@@ -170,6 +170,34 @@
       ]
     },
     {
+      "id": "BOOT-010",
+      "name": "Dummy Blog Post Integration",
+      "status": "pending",
+      "description": "Create a dummy blog post to validate the blog page flow and post rendering using the existing Post layout.",
+      "acceptance": [
+        "Create a dummy blog post with placeholder content.",
+        "The blog post must use the existing Post layout.",
+        "The new post must appear inside the Blog section list/grid.",
+        "Clicking the blog entry must correctly navigate to the post page.",
+        "The post route must render correctly on desktop and mobile.",
+        "The blog entry must include basic metadata (title, date, description, cover if supported).",
+        "Implementation must follow the existing blog structure and conventions of the project."
+      ]
+    },
+    {
+      "id": "BOOT-011",
+      "name": "404 Page",
+      "status": "pending",
+      "description": "Create a custom 404 page for non-existing routes.",
+      "acceptance": [
+        "Create a dedicated 404 page.",
+        "The page must render for all non-existing routes.",
+        "The only visible content required for now is '404'.",
+        "The page must use the existing project styling/layout conventions.",
+        "The 404 page must render correctly on desktop and mobile."
+      ]
+    },
+    {
       "id": "FEAT-001",
       "name": "Section: Home Intro & Interactive Hobbies",
       "status": "pending",
