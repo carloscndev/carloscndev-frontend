@@ -70,6 +70,26 @@ export function toggleLanguage(): void {
   );
 }
 
+function bindLangListeners(): void {
+  if (typeof document === "undefined") return;
+
+  const toggle = document.getElementById("language-toggle");
+  if (toggle) {
+    toggle.removeEventListener("click", toggleLanguage);
+    toggle.removeEventListener("keydown", handleLangKeydown);
+    toggle.addEventListener("click", toggleLanguage);
+    toggle.addEventListener("keydown", handleLangKeydown);
+  }
+}
+
+function handleLangKeydown(e: Event): void {
+  const keyboardEvent = e as KeyboardEvent;
+  if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
+    keyboardEvent.preventDefault();
+    toggleLanguage();
+  }
+}
+
 export function initLangListener(): void {
   const storedLang = getStoredLang();
   const currentLang = document.documentElement.lang as Lang;
@@ -81,18 +101,13 @@ export function initLangListener(): void {
 
   updateLangUI(initialLang);
 
-  // Attach click handler
-  const toggle = document.getElementById("language-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", toggleLanguage);
-    toggle.addEventListener("keydown", (e: Event) => {
-      const keyboardEvent = e as KeyboardEvent;
-      if (keyboardEvent.key === "Enter" || keyboardEvent.key === " ") {
-        keyboardEvent.preventDefault();
-        toggleLanguage();
-      }
-    });
-  }
+  // Initial binding on first load
+  bindLangListeners();
+
+  // Re-bind listeners after Astro swaps DOM content
+  document.addEventListener("astro:page-load", () => {
+    bindLangListeners();
+  });
 
   document.addEventListener("astro:after-swap", () => {
     const lang = document.documentElement.lang as Lang;

@@ -97,3 +97,31 @@
 - **Closure**: Tasks [FIX-003] and [FIX-004] marked as `done` per user instructions.
 
 ---
+
+### 2026-05-13 — [UI-001: Mobile Menu Logic]
+
+- **Agent**: Coder #1
+- **Plan**: Implement full-screen responsive mobile navigation menu overlay with scroll lock, close button, and proper state management following the utils pattern established by theme.ts.
+- **Changes**: [Created `src/components/icons/CloseIcon.astro` (X button SVG). Created `src/utils/mobile-menu.ts` with helper functions: `isMobileMenuOpen()`, `openMobileMenu()`, `closeMobileMenu()`, `toggleMobileMenu()`, `initMobileMenuListener()`. Updated `src/components/ui/Header.astro` to include mobile menu overlay with `data-mobile-menu-toggle`, `data-mobile-menu-close`, `data-mobile-menu-link` attributes. Menu uses `data-open` state, applies `overflow-hidden` to body when open, auto-closes on nav link click, and handles Astro page transitions properly.]
+- **Verification**: Build completed successfully (`npm run build`). Desktop navigation unchanged (768px+ breakpoint). Mobile menu: full-screen overlay, close button with X icon, body scroll lock, auto-close on navigation.
+- **Closure**: Task [UI-001] marked as `done`.
+
+---
+
+### 2026-05-13 — [UI-001-FIX: Mobile Menu Listener Rebinding]
+
+- **Agent**: Coder #1
+- **Plan**: Fix bug where mobile menu would stop working after navigation. Event listeners were bound once on page load but not re-attached after Astro's ClientRouter DOM swap.
+- **Changes**: [Updated `src/utils/mobile-menu.ts` to add `bindMobileMenuListeners()` helper function that removes old listeners before adding new ones. Added `astro:page-load` event listener that calls `bindMobileMenuListeners()` to re-query and rebind events after each navigation. This follows the same pattern used in `theme.ts` for the theme toggle button.]
+- **Verification**: Build completed successfully (`npm run build`). Mobile menu now properly rebinds listeners after each page transition, fixing the "menu stops working after first navigation" bug.
+- **Closure**: Task [UI-001-FIX] marked as `done`.
+
+---
+
+### 2026-05-13 — [LANG-FIX: Language Button Listener Rebinding]
+
+- **Agent**: Leader (Carlos)
+- **Plan**: Fix language toggle functionality that broke after applying the same `astro:page-load` pattern to mobile-menu.ts. The issue was that initLangListener() didn't have proper listener rebinding on page load.
+- **Changes**: [Updated `src/utils/lang.ts` to add `bindLangListeners()` helper function with proper remove/add pattern. Added `astro:page-load` event listener to rebind language toggle listeners after DOM swap, following the same pattern used in mobile-menu.ts and theme.ts.]
+- **Verification**: Build completed successfully (`npm run build`). Language toggle now properly rebinds listeners after each page transition.
+- **Closure**: Task [LANG-FIX] marked as `done`.

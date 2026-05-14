@@ -2,6 +2,7 @@
 import LinkWrapper from "./LinkWrapper.astro";
 import WebIcon from "@components/icons/WebIcon.astro";
 import MobileMenuIcon from "@components/icons/MobileMenuIcon.astro";
+import CloseIcon from "@components/icons/CloseIcon.astro";
 import ThemeButton from "./ThemeButton.astro";
 import LanguageButton from "./LanguageButton.astro";
 
@@ -32,7 +33,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="header">
-  <div class="mobile-menu-wrapper">
+  <div class="mobile-menu-wrapper" data-mobile-menu-toggle>
     <MobileMenuIcon class="mobile-menu" />
   </div>
   <div class="header-icon">
@@ -70,10 +71,50 @@ const currentPath = Astro.url.pathname;
   </div>
 </header>
 
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu"
+  class="mobile-menu"
+  data-open="false"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+>
+  <div class="mobile-menu-content">
+    <button
+      class="mobile-menu-close"
+      data-mobile-menu-close
+      aria-label="Close menu"
+    >
+      <CloseIcon size="32" />
+    </button>
+    <nav class="mobile-menu-nav" aria-label="Mobile navigation">
+      <ul class="mobile-menu-list" role="list">
+        {
+          navLinks.map((link) => (
+            <li class="mobile-menu-item">
+              <a
+                href={link.href}
+                class="mobile-menu-link"
+                data-mobile-menu-link
+                data-i18n-nav={link.key}
+              >
+                {navLabels[link.key][lang]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</div>
+
 <script>
   import { initThemeListener } from "../../utils/theme.ts";
+  import { initMobileMenuListener } from "../../utils/mobile-menu.ts";
 
   initThemeListener();
+  initMobileMenuListener();
 </script>
 
 <style>
@@ -140,6 +181,82 @@ const currentPath = Astro.url.pathname;
     }
   }
 
+  /* Mobile Menu Overlay */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background-color: var(--bg-primary);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity duration-300 ease-in-out,
+      visibility duration-300 ease-in-out;
+
+    &[data-open="true"] {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      padding: var(--spacing-lg);
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+      color: var(--text-base);
+      transition: transform duration-300 ease-in-out;
+      svg {
+        fill: var(--text-base);
+      }
+    }
+
+    .mobile-menu-nav {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .mobile-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .mobile-menu-item {
+      text-align: center;
+    }
+
+    .mobile-menu-link {
+      font-family: var(--font-titles);
+      font-size: var(--font-size-h2-mobile);
+      font-weight: var(--weight-space-medium);
+      color: var(--text-base);
+      transition: color duration-300 ease-in-out;
+
+      &:hover {
+        color: var(--color-accent);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 4px;
+        border-radius: 4px;
+      }
+    }
+  }
+
   @media (min-width: 768px) {
     .header {
       padding: 0;
@@ -153,6 +270,10 @@ const currentPath = Astro.url.pathname;
           display: inline-block;
         }
       }
+    }
+
+    .mobile-menu {
+      display: none;
     }
   }
 </style>
