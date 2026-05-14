@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 17,
-    "completed": 14,
+    "completed": 15,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -202,7 +202,7 @@
     {
       "id": "FEAT-001",
       "name": "Section: Home Intro & Interactive Hobbies",
-      "status": "pending",
+      "status": "done",
       "description": "Implement the complete Home section for desktop and mobile based on the provided visual references. The Astro container component already exists and must not be recreated. Focus only on the internal section structure, responsive layout, typography hierarchy, interactive hobby behavior, image transitions, localization support, and strict visual parity with the design references.",
       "acceptance": [
         "Implement the Home section — this is NOT a Hero component. The Astro wrapper/container already exists and must be reused.",

@@ -91,9 +91,11 @@
   --weight-inter-medium: 500;
 
   /* --- Spaces --- */
+  --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
   --border-radius: 5px;
   --header-desktop-height: 80px;
 
@@ -214,7 +216,7 @@ h3 {
 }
 
 strong {
-  color: var(--text-accent);
+  color: var(--color-word);
   font-weight: var(--weight-space-medium);
 }
 

@@ -1,1 +1,198 @@
-<section id="home" data-i18n-content="section.home">Inicio</section>
+---
+import homeDataRaw from "../../data/home.json";
+import helloImg from "../../assets/images/hello.png";
+import runningImg from "../../assets/images/running.png";
+import readingImg from "../../assets/images/reading.png";
+import playingImg from "../../assets/images/playing.png";
+
+const currentLang = "es";
+
+function getHomeData(lang: "es" | "en") {
+  const root = homeDataRaw.data.attributes;
+  if (root.locale === lang) return root;
+  const loc = (root as any).localizations.data.find(
+    (l: any) => l.attributes.locale === lang,
+  );
+  return loc?.attributes ?? root;
+}
+
+const homeData = getHomeData(currentLang);
+
+const avatarMap: Record<string, string> = {
+  default: helloImg.src,
+  running: runningImg.src,
+  reading: readingImg.src,
+  videogames: playingImg.src,
+};
+
+const subtitleHTML = homeData.subtitle.replace(/dev$/, "<strong>dev</strong>");
+
+const embeddedData = {
+  es: { ...getHomeData("es"), avatarPaths: avatarMap },
+  en: { ...getHomeData("en"), avatarPaths: avatarMap },
+};
+
+const embeddedDataJson = JSON.stringify(embeddedData);
+---
+
+<section id="home" class="home-section">
+  <script type="application/json" id="home-data" set:html={embeddedDataJson} />
+
+  <div class="home-section__grid">
+    <div class="home-section__avatar">
+      <img
+        class="home-section__avatar-img"
+        id="home-avatar"
+        src={avatarMap.default}
+        alt={`${homeData.intro} ${homeData.title}`}
+        width="400"
+        height="400"
+        loading="eager"
+      />
+    </div>
+
+    <div class="home-section__content">
+      <p class="home-section__intro" data-home-intro>
+        {homeData.intro}
+      </p>
+      <h1 class="home-section__title" data-home-title>
+        {homeData.title}
+      </h1>
+      <p class="home-section__subtitle" set:html={subtitleHTML} />
+      <div
+        class="home-section__body"
+        data-home-content
+        set:html={homeData.content}
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initHomeLangSwitch, initHomeHobbies } from "../../utils/home.ts";
+  initHomeLangSwitch();
+  initHomeHobbies();
+</script>
+
+<style>
+  .home-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .home-section__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+    width: 100%;
+    max-width: var(--max-width);
+  }
+
+  .home-section__avatar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .home-section__avatar-img {
+    width: 200px;
+    height: auto;
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+  }
+
+  .home-section__avatar-img--swapping {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .home-section__content {
+    text-align: center;
+  }
+
+  .home-section__intro {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--color-word);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .home-section__title {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .home-section__subtitle {
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h1-mobile);
+    font-weight: var(--weight-space-semibold);
+    color: var(--text-base);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .home-section__subtitle :global(strong) {
+    color: var(--color-accent);
+    font-weight: var(--weight-space-medium);
+  }
+
+  .home-section__body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    line-height: 1.8;
+    color: var(--text-base);
+  }
+
+  .home-section__body :global(p) {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .home-section__body :global(strong) {
+    color: var(--color-word);
+    font-weight: var(--weight-space-medium);
+    cursor: pointer;
+    transition: color 300ms ease;
+  }
+
+  .home-section__body :global(strong):hover {
+    color: var(--color-accent);
+  }
+
+  @media (min-width: 768px) {
+    .home-section {
+      padding: 0 var(--spacing-lg) 0 0;
+    }
+
+    .home-section__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .home-section__avatar {
+      justify-content: flex-end;
+    }
+
+    .home-section__avatar-img {
+      width: 350px;
+    }
+
+    .home-section__content {
+      text-align: left;
+    }
+
+    .home-section__intro {
+      font-size: var(--font-size-body-desktop);
+    }
+
+    .home-section__subtitle {
+      font-size: var(--font-size-h1-desktop);
+    }
+
+    .home-section__body {
+      font-size: var(--font-size-body-desktop);
+    }
+  }
+</style>
