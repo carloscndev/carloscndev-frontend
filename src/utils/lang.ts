@@ -1,3 +1,5 @@
+import uiTranslations from "../i18n/ui.json";
+
 const STORAGE_KEY = "carloscndev-lang";
 
 export type Lang = "es" | "en";
@@ -9,6 +11,26 @@ const NAV_LABELS: Record<string, Record<Lang, string>> = {
   blog: { es: "Blog", en: "Blog" },
   contact: { es: "Contacto", en: "Contact" },
 };
+
+export function getUITranslation(key: string, lang: Lang): string {
+  const translations = (
+    uiTranslations as Record<string, Record<string, string>>
+  )[lang];
+  if (!translations) return key;
+  return translations[key] || key;
+}
+
+export function updateContentLabels(lang: Lang): void {
+  if (typeof document === "undefined") return;
+
+  const elements = document.querySelectorAll("[data-i18n-content]");
+  elements.forEach((el) => {
+    const key = el.getAttribute("data-i18n-content");
+    if (key) {
+      el.textContent = getUITranslation(key, lang);
+    }
+  });
+}
 
 export function getStoredLang(): Lang | null {
   if (typeof localStorage === "undefined") return null;
@@ -51,6 +73,8 @@ export function updateLangUI(newLang: Lang): void {
       el.textContent = getNavLabel(key, newLang);
     }
   });
+
+  updateContentLabels(newLang);
 }
 
 export function toggleLanguage(): void {

@@ -140,6 +140,36 @@
       ]
     },
     {
+      "id": "BOOT-008",
+      "name": "Global Language Switch",
+      "status": "pending",
+      "description": "Implement global language switching for the entire site using the existing language toggle. All visible content must support both Spanish and English, including section names/titles that currently only display the section name.",
+      "acceptance": [
+        "All visible site content must support Spanish and English.",
+        "Changing the language must update the UI without requiring a page refresh.",
+        "Navigation labels and section titles must be translated.",
+        "Sections that currently only contain the section name/title must also support translation.",
+        "Language state must persist correctly during Astro ClientRouter navigation.",
+        "Responsive layouts must remain visually correct in both languages."
+      ]
+    },
+    {
+      "id": "BOOT-009",
+      "name": "Section Anchor Routing",
+      "status": "pending",
+      "description": "Implement section-based routing using URL hash anchors for all main site sections.",
+      "acceptance": [
+        "Each main section must have a unique anchor id.",
+        "Navigation links must redirect using hash routes (example: /#about, /#portfolio, /#blog, /#contact).",
+        "The Home section must route only to '/'.",
+        "Navigation must perform smooth scrolling to the target section.",
+        "Active navigation behavior must continue working correctly with hash routes.",
+        "Section routing must work correctly on both desktop and mobile navigation.",
+        "Hash navigation must survive Astro ClientRouter transitions.",
+        "Directly opening a section URL with a hash must scroll correctly to the target section."
+      ]
+    },
+    {
       "id": "FEAT-001",
       "name": "Section: Home Intro & Interactive Hobbies",
       "status": "pending",
@@ -202,17 +232,6 @@
       "status": "pending",
       "description": "Desktop implementation of the 'Let's Talk' section.",
       "acceptance": ["Mail-to integration", "Footer implemented"]
-    },
-    {
-      "id": "RESP-001",
-      "name": "Mobile Optimization Pass",
-      "status": "pending",
-      "description": "Final pass to ensure all components follow the Mobile visual-specs.",
-      "acceptance": [
-        "Responsive grids",
-        "Mobile menu",
-        "Touch-friendly interactions"
-      ]
     }
   ]
 }

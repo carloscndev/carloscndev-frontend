@@ -1,0 +1,18 @@
+{
+  "es": {
+    "section.home": "Inicio",
+    "section.about": "Acerca de",
+    "section.experience": "Experiencia Profesional",
+    "section.portfolio": "Portafolio",
+    "section.blog": "Blog",
+    "section.contact": "Contacto"
+  },
+  "en": {
+    "section.home": "Home",
+    "section.about": "About",
+    "section.experience": "Professional Experience",
+    "section.portfolio": "Portfolio",
+    "section.blog": "Blog",
+    "section.contact": "Contact"
+  }
+}
