@@ -101,7 +101,7 @@
 
   --max-width: 1200px;
 
-  --transition-theme: transition-all duration-300 ease-in-out;
+  --transition-theme: all 300ms ease-in-out;
 }
 
 .dark {
@@ -109,6 +109,47 @@
   --text-base: #d6def5;
   --color-accent: #331fe8;
   --color-word: #7f8be4;
+}
+
+/* Smooth theme transition */
+html,
+body,
+header,
+footer,
+section,
+article,
+aside,
+nav,
+main,
+div,
+p,
+button,
+input,
+textarea,
+select,
+svg,
+path,
+circle,
+rect,
+g,
+img,
+picture,
+video,
+canvas {
+  transition:
+    background-color 400ms ease-in-out,
+    color 400ms ease-in-out,
+    border-color 400ms ease-in-out,
+    fill 400ms ease-in-out,
+    stroke 400ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
 }
 
 /* Rest Css */
@@ -203,6 +244,7 @@ h6 {
   font-weight: var(--weight-space-semibold);
   line-height: 1.2;
   margin: 0;
+  color: var(--text-base);
 }
 
 h1 {

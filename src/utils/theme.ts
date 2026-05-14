@@ -56,10 +56,13 @@ export function initThemeListener(): void {
     applyTheme(getPreferredTheme());
   });
   document.addEventListener("astro:page-load", () => {
-    const toggleBtn = document.getElementById("theme-toggle-button");
-    if (toggleBtn) {
-      toggleBtn.removeEventListener("click", toggleTheme);
-      toggleBtn.addEventListener("click", toggleTheme);
-    }
+    const TOGGLE_IDS = ["theme-toggle-button", "theme-toggle-mobile"];
+    TOGGLE_IDS.forEach((id) => {
+      const toggleBtn = document.getElementById(id);
+      if (toggleBtn) {
+        toggleBtn.removeEventListener("click", toggleTheme);
+        toggleBtn.addEventListener("click", toggleTheme);
+      }
+    });
   });
 }

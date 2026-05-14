@@ -3,14 +3,15 @@ import GlobeIcon from "@components/icons/GlobeIcon.astro";
 
 interface Props {
   lang?: "es" | "en";
+  id?: string;
 }
 
-const { lang = "es" } = Astro.props;
+const { lang = "es", id = "language-toggle" } = Astro.props;
 ---
 
 <div
   class="language-button"
-  id="language-toggle"
+  id={id}
   role="button"
   tabindex="0"
   aria-label={`Switch language, currently ${lang === "es" ? "Spanish" : "English"}`}
@@ -34,7 +35,7 @@ const { lang = "es" } = Astro.props;
     align-items: center;
     display: flex;
     cursor: pointer;
-    transition: opacity duration-300 ease-in-out;
+    transition: opacity 300ms ease-in-out;
     .icon-wrapper {
       margin-right: 2px;
     }

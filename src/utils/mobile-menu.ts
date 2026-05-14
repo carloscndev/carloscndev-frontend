@@ -16,9 +16,18 @@ export function openMobileMenu(): void {
   menu.dataset.open = "true";
   document.body.classList.add(BODY_LOCK_CLASS);
 
+  // Sync aria-expanded on toggle button
+  const toggle = document.querySelector<HTMLElement>(
+    "[data-mobile-menu-toggle]",
+  );
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close navigation menu");
+  }
+
   // Focus the close button for accessibility
-  const closeBtn = menu.querySelector("[data-mobile-menu-close]");
-  if (closeBtn instanceof HTMLElement) {
+  const closeBtn = menu.querySelector<HTMLElement>("[data-mobile-menu-close]");
+  if (closeBtn) {
     closeBtn.focus();
   }
 }
@@ -31,6 +40,15 @@ export function closeMobileMenu(): void {
 
   menu.dataset.open = "false";
   document.body.classList.remove(BODY_LOCK_CLASS);
+
+  // Sync aria-expanded on toggle button
+  const toggle = document.querySelector<HTMLElement>(
+    "[data-mobile-menu-toggle]",
+  );
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open navigation menu");
+  }
 }
 
 export function toggleMobileMenu(): void {
@@ -41,41 +59,87 @@ export function toggleMobileMenu(): void {
   }
 }
 
+function trapFocus(menu: HTMLElement, e: KeyboardEvent): void {
+  if (e.key !== "Tab") return;
+
+  const focusable = menu.querySelectorAll<HTMLElement>(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+  );
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (e.shiftKey) {
+    if (document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    }
+  } else {
+    if (document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+}
+
+function handleEscKey(e: KeyboardEvent): void {
+  if (e.key === "Escape" && isMobileMenuOpen()) {
+    closeMobileMenu();
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
+let menuKeydownHandler: ((event: Event) => void) | null = null;
+
 function bindMobileMenuListeners(): void {
   if (typeof document === "undefined") return;
 
-  // Listen for clicks on the hamburger menu icon
+  // Hamburger toggle
   const menuToggle = document.querySelector("[data-mobile-menu-toggle]");
   if (menuToggle) {
     menuToggle.removeEventListener("click", toggleMobileMenu);
     menuToggle.addEventListener("click", toggleMobileMenu);
   }
 
-  // Listen for clicks on the close button
+  // Close button
   const closeBtn = document.querySelector("[data-mobile-menu-close]");
   if (closeBtn) {
     closeBtn.removeEventListener("click", closeMobileMenu);
     closeBtn.addEventListener("click", closeMobileMenu);
   }
 
-  // Close menu when clicking a navigation link
+  // Close on nav link click
   const navLinks = document.querySelectorAll("[data-mobile-menu-link]");
   navLinks.forEach((link) => {
     link.removeEventListener("click", closeMobileMenu);
     link.addEventListener("click", closeMobileMenu);
   });
+
+  // Trap focus inside menu
+  const menu = document.getElementById(MOBILE_MENU_ID);
+  if (menu) {
+    if (menuKeydownHandler) {
+      menu.removeEventListener("keydown", menuKeydownHandler);
+    }
+    menuKeydownHandler = (e: Event) => trapFocus(menu, e as KeyboardEvent);
+    menu.addEventListener("keydown", menuKeydownHandler);
+  }
+
+  // Escape key closes menu
+  document.removeEventListener("keydown", handleEscKey);
+  document.addEventListener("keydown", handleEscKey);
 }
 
 export function initMobileMenuListener(): void {
-  // Initial binding on first load
+  // Initial binding
   bindMobileMenuListeners();
 
-  // Re-bind listeners after Astro swaps DOM content
+  // Re-bind after Astro DOM swaps
   document.addEventListener("astro:page-load", () => {
     bindMobileMenuListeners();
   });
 
-  // Clean up body lock class after page swap
+  // Clean up body lock after page swap
   document.addEventListener("astro:after-swap", () => {
     document.body.classList.remove(BODY_LOCK_CLASS);
   });

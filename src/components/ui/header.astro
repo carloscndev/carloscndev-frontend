@@ -5,6 +5,7 @@ import MobileMenuIcon from "@components/icons/MobileMenuIcon.astro";
 import CloseIcon from "@components/icons/CloseIcon.astro";
 import ThemeButton from "./ThemeButton.astro";
 import LanguageButton from "./LanguageButton.astro";
+import { NAV_LABELS } from "../../utils/lang";
 
 interface Props {
   lang?: "es" | "en";
@@ -12,7 +13,6 @@ interface Props {
 
 const { lang = "es" } = Astro.props;
 
-// i18n labels map for navigation
 const navLinks = [
   { key: "home", href: "/" },
   { key: "about", href: "/#about" },
@@ -21,23 +21,21 @@ const navLinks = [
   { key: "contact", href: "/#contact" },
 ];
 
-const navLabels: Record<string, Record<"es" | "en", string>> = {
-  home: { es: "Inicio", en: "Home" },
-  about: { es: "Acerca de", en: "About" },
-  portfolio: { es: "Portafolio", en: "Portfolio" },
-  blog: { es: "Blog", en: "Blog" },
-  contact: { es: "Contacto", en: "Contact" },
-};
-
 const currentPath = Astro.url.pathname;
 const currentHash = Astro.url.hash || "";
 const fullPath = currentPath + currentHash;
 ---
 
 <header class="header">
-  <div class="mobile-menu-wrapper" data-mobile-menu-toggle>
-    <MobileMenuIcon class="mobile-menu" />
-  </div>
+  <button
+    class="mobile-menu-toggle"
+    data-mobile-menu-toggle
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    type="button"
+  >
+    <MobileMenuIcon class="mobile-menu-toggle__icon" />
+  </button>
   <div class="header-icon">
     <LinkWrapper href="/" isExternal={false}>
       <WebIcon size="50" />
@@ -57,7 +55,7 @@ const fullPath = currentPath + currentHash;
                 ]}
                 data-i18n-nav={link.key}
               >
-                {navLabels[link.key][lang]}
+                {NAV_LABELS[link.key][lang]}
               </a>
             </li>
           ))
@@ -76,7 +74,7 @@ const fullPath = currentPath + currentHash;
 <!-- Mobile Menu Overlay -->
 <div
   id="mobile-menu"
-  class="mobile-menu"
+  class="mobile-menu-overlay"
   data-open="false"
   role="dialog"
   aria-modal="true"
@@ -87,6 +85,7 @@ const fullPath = currentPath + currentHash;
       class="mobile-menu-close"
       data-mobile-menu-close
       aria-label="Close menu"
+      type="button"
     >
       <CloseIcon size="32" />
     </button>
@@ -99,18 +98,24 @@ const fullPath = currentPath + currentHash;
                 href={link.href}
                 class:list={[
                   "mobile-menu-link",
-                  fullPath === link.href ? "header-nav-link--active" : "",
+                  fullPath === link.href ? "mobile-menu-link--active" : "",
                 ]}
                 data-mobile-menu-link
                 data-i18n-nav={link.key}
               >
-                {navLabels[link.key][lang]}
+                {NAV_LABELS[link.key][lang]}
               </a>
             </li>
           ))
         }
       </ul>
     </nav>
+    <div class="mobile-menu-controls">
+      <div id="theme-toggle-mobile" class="mobile-menu-theme">
+        <ThemeButton />
+      </div>
+      <LanguageButton lang={lang} id="language-toggle-mobile" />
+    </div>
   </div>
 </div>
 
@@ -132,10 +137,16 @@ const fullPath = currentPath + currentHash;
     height: var(--header-desktop-height);
     padding: 0 var(--spacing-md);
 
-    .mobile-menu-wrapper {
+    .mobile-menu-toggle {
+      background: transparent;
+      border: none;
       cursor: pointer;
       flex: 1;
-      .mobile-menu {
+      padding: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+
+      .mobile-menu-toggle__icon {
         fill: var(--text-base);
       }
     }
@@ -187,7 +198,7 @@ const fullPath = currentPath + currentHash;
   }
 
   /* Mobile Menu Overlay */
-  .mobile-menu {
+  .mobile-menu-overlay {
     position: fixed;
     inset: 0;
     z-index: 100;
@@ -195,8 +206,8 @@ const fullPath = currentPath + currentHash;
     opacity: 0;
     visibility: hidden;
     transition:
-      opacity duration-300 ease-in-out,
-      visibility duration-300 ease-in-out;
+      opacity 300ms ease-in-out,
+      visibility 300ms ease-in-out;
 
     &[data-open="true"] {
       opacity: 1;
@@ -211,6 +222,7 @@ const fullPath = currentPath + currentHash;
       height: 100%;
       width: 100%;
       padding: var(--spacing-lg);
+      gap: var(--spacing-xl);
     }
 
     .mobile-menu-close {
@@ -222,7 +234,14 @@ const fullPath = currentPath + currentHash;
       cursor: pointer;
       padding: var(--spacing-sm);
       color: var(--text-base);
-      transition: transform duration-300 ease-in-out;
+      transition: transform 300ms ease-in-out;
+
+      &:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 4px;
+        border-radius: 4px;
+      }
+
       svg {
         fill: var(--text-base);
       }
@@ -248,9 +267,9 @@ const fullPath = currentPath + currentHash;
       font-size: var(--font-size-h2-mobile);
       font-weight: var(--weight-space-medium);
       color: var(--text-base);
-      transition: color duration-300 ease-in-out;
+      transition: color 300ms ease-in-out;
 
-      &.header-nav-link--active {
+      &.mobile-menu-link--active {
         color: var(--color-accent);
         font-weight: var(--weight-space-semibold);
       }
@@ -265,12 +284,35 @@ const fullPath = currentPath + currentHash;
         border-radius: 4px;
       }
     }
+
+    .mobile-menu-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu-overlay {
+      transition: none;
+    }
+
+    .mobile-menu-close {
+      transition: none;
+    }
+
+    .mobile-menu-link {
+      transition: none;
+    }
   }
 
   @media (min-width: 768px) {
     .header {
       padding: 0;
-      .mobile-menu-wrapper {
+
+      .mobile-menu-toggle {
         display: none;
         flex: 0;
       }
@@ -282,7 +324,7 @@ const fullPath = currentPath + currentHash;
       }
     }
 
-    .mobile-menu {
+    .mobile-menu-overlay {
       display: none;
     }
   }
