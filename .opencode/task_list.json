@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 17,
-    "completed": 15,
+    "total_tasks": 19,
+    "completed": 16,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -232,7 +232,7 @@
     {
       "id": "FEAT-002",
       "name": "Section: About",
-      "status": "pending",
+      "status": "done",
       "description": "Desktop implementation of About and Experience timeline.",
       "acceptance": ["Interactive sidebar", "Refined spacing"]
     },

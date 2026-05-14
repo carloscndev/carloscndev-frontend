@@ -170,3 +170,23 @@
 - **Changes**: [Rewrote `src/data/home.json` as Strapi v4 single-type mock (data.attributes + localizations). Rewrote `src/components/sections/Home.astro` with server-side image imports, BEM grid layout, scoped CSS (mobile-first, 2-column desktop at 768px), and embedded bilingual JSON. Created `src/utils/home.ts` with `initHomeLangSwitch()`, `initHomeHobbies()`, 5-second timer logic, and Astro ClientRouter survival. Edited `src/styles/global.css` — added `--color-accent`, `--spacing-xs`, `--spacing-xl` tokens.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Reviewer audit passed after fixing 2 critical A11y issues (keyboard accessibility via tabindex/role="button"/keydown handlers on hobby strong elements, dynamic alt text on avatar swap) and 1 design system alignment (400ms → 300ms transition). All 29 acceptance criteria met.
 - **Closure**: Task [FEAT-001] marked as `done`.
+
+---
+
+### 2026-05-14 — [FEAT-002: Section: About]
+
+- **Agent**: Coder #1 (via orchestrator with Leader planning and Reviewer audit)
+- **Plan**: Implement complete About section using the same patterns established by FEAT-001 (Home). Restructure about.json as Strapi v4 mock, build About.astro with desktop content-left/avatar-right layout (opposite of Home), technology chips with Diamond icons, and client-side i18n via about.ts utility.
+- **Changes**: [Rewrote `src/data/about.json` as Strapi v4 single-type mock (data.attributes + localizations). Rewrote `src/components/sections/About.astro` with BEM grid, mobile-first CSS, server-side Diamond icon rendering, and embedded bilingual JSON. Created `src/utils/about.ts` with `initAboutLangSwitch()`, inline Diamond SVG for client-side tech chip rebuild, and astro:page-load survival.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Lint clean (`npx eslint` zero errors). Reviewer approved — all 11 acceptance criteria met. Pre-existing codebase-wide `data-i18n-content` pattern noted as non-blocking observation.
+- **Closure**: Task [FEAT-002] marked as `done`.
+
+---
+
+### 2026-05-14 — [FEAT-002: Section: About]
+
+- **Agent**: Coder #1
+- **Plan**: Implement complete About section following FEAT-001 patterns: Strapi v4 mock data in about.json, content-left/avatar-right desktop layout (DOM-order + order manipulation for mobile stacking), diamond-icon technology chips with color-word themed borders, client-side i18n via about.ts utility, zero hardcoded text.
+- **Changes**: [Rewrote `src/data/about.json` as Strapi v4 single-type mock (data.attributes + localizations). Rewrote `src/components/sections/About.astro` with server-side image import, Diamond icon component, BEM grid layout, scoped CSS (mobile-first, 2-column desktop at 768px, order: -1/+0 for stacking), and embedded bilingual JSON. Created `src/utils/about.ts` with `initAboutLangSwitch()`, inline SVG for client-side diamond icon rendering, and Astro ClientRouter survival.]
+- **Verification**: Build succeeded (`npx astro build`): 14 pages, zero errors. ESLint passed (`npx eslint src/utils/about.ts`): zero warnings, zero errors (auto-fixed 2 prettier formatting issues).
+- **Closure**: Task [FEAT-002] marked as `done`.

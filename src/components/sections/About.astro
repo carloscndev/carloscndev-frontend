@@ -1,1 +1,199 @@
-<section id="about" data-i18n-content="section.about">Acerca de</section>
+---
+import aboutDataRaw from "../../data/about.json";
+import workingImg from "../../assets/images/working.png";
+import Diamond from "../icons/Diamond.astro";
+
+const currentLang = "es";
+
+function getAboutData(lang: "es" | "en") {
+  const root = aboutDataRaw.data.attributes;
+  if (root.locale === lang) return root;
+  const loc = (root as any).localizations.data.find(
+    (l: any) => l.attributes.locale === lang,
+  );
+  return loc?.attributes ?? root;
+}
+
+const aboutData = getAboutData(currentLang);
+
+const avatarMap: Record<string, string> = {
+  default: workingImg.src,
+};
+
+const embeddedData = {
+  es: { ...getAboutData("es"), avatarPath: avatarMap.default },
+  en: { ...getAboutData("en"), avatarPath: avatarMap.default },
+};
+
+const embeddedDataJson = JSON.stringify(embeddedData);
+---
+
+<section id="about" class="about-section">
+  <script type="application/json" id="about-data" set:html={embeddedDataJson} />
+
+  <div class="about-section__grid">
+    <div class="about-section__content">
+      <h2
+        class="about-section__title"
+        data-about-title
+        data-i18n-content="section.about"
+      >
+        {aboutData.title}
+      </h2>
+
+      <div
+        class="about-section__body"
+        data-about-content
+        set:html={aboutData.contentText}
+      />
+
+      <div class="about-section__tech" data-about-tech>
+        {
+          aboutData.technologies.map((tech) => (
+            <span class="about-section__tech-chip">
+              <Diamond size="16" class="about-section__tech-icon" />
+              <span>{tech.name}</span>
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="about-section__avatar">
+      <img
+        class="about-section__avatar-img"
+        id="about-avatar"
+        src={avatarMap.default}
+        alt={aboutData.title}
+        width="400"
+        height="400"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initAboutLangSwitch } from "../../utils/about.ts";
+  initAboutLangSwitch();
+</script>
+
+<style>
+  .about-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .about-section__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+    width: 100%;
+    max-width: var(--max-width);
+  }
+
+  .about-section__avatar {
+    display: flex;
+    justify-content: center;
+    order: -1;
+  }
+
+  .about-section__avatar-img {
+    width: 180px;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+
+  .about-section__content {
+    text-align: center;
+  }
+
+  .about-section__title {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-section__body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    line-height: 1.8;
+    color: var(--text-base);
+  }
+
+  .about-section__body :global(p) {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-section__body :global(strong) {
+    color: var(--color-word);
+    font-weight: var(--weight-space-medium);
+  }
+
+  .about-section__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .about-section__tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-word);
+    border-radius: var(--border-radius);
+  }
+
+  .about-section__tech-icon {
+    color: var(--color-word);
+  }
+
+  @media (min-width: 768px) {
+    .about-section {
+      padding: 0 0 0 var(--spacing-lg);
+    }
+
+    .about-section__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    .about-section__avatar {
+      justify-content: flex-start;
+      order: 0;
+    }
+
+    .about-section__avatar-img {
+      width: 350px;
+    }
+
+    .about-section__content {
+      text-align: left;
+    }
+
+    .about-section__title {
+      font-size: var(--font-size-h2-desktop);
+    }
+
+    .about-section__body {
+      font-size: var(--font-size-body-desktop);
+    }
+
+    .about-section__tech {
+      justify-content: flex-start;
+    }
+
+    .about-section__tech-chip {
+      font-size: var(--font-size-body-desktop);
+    }
+  }
+</style>
