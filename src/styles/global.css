@@ -52,6 +52,7 @@
   --text-base: #080d29;
   --color-accent: #331fe8;
   --color-word: #2f42a0;
+  --pill-bg: rgba(51, 31, 232, 0.2);
 
   --color-running-primary-dark: #001221;
   --color-running-secondary-dark: #0092da;
@@ -109,6 +110,7 @@
   --text-base: #d6def5;
   --color-accent: #331fe8;
   --color-word: #7f8be4;
+  --pill-bg: var(--color-accent);
 }
 
 /* Smooth theme transition */

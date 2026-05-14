@@ -1,6 +1,7 @@
 ---
 import experienceDataRaw from "../../data/experience.json";
-import Diamond from "../icons/Diamond.astro";
+import Chevron from "../icons/Chevron.astro";
+import TechPill from "../ui/TechPill.astro";
 
 const currentLang = "es";
 
@@ -51,7 +52,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             data-tab={job.id}
             type="button"
           >
-            <Diamond size="16" class="experience-tabs__diamond" />
+            <Chevron size="14" class="experience-tabs__chevron" />
             <span class="experience-tabs__tab-company">{job.company}</span>
           </button>
         ))
@@ -84,7 +85,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             </div>
             <div class="experience-tabs__tags" data-job-tags>
               {job.technologies.map((tech) => (
-                <span class="experience-tabs__tag">{tech}</span>
+                <TechPill label={tech} />
               ))}
             </div>
           </div>
@@ -120,7 +121,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             </div>
             <div class="experience-carousel__tags" data-job-tags>
               {job.technologies.map((tech) => (
-                <span class="experience-carousel__tag">{tech}</span>
+                <TechPill label={tech} />
               ))}
             </div>
           </div>
@@ -217,11 +218,14 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     .experience-tabs__tab--active {
       background: rgba(51, 31, 232, 0.2);
     }
-    .experience-tabs__diamond {
+    :global(.experience-tabs__chevron) {
       color: var(--color-accent);
+      flex-shrink: 0;
       opacity: 0;
+      transition: opacity 300ms ease;
     }
-    .experience-tabs__tab--active .experience-tabs__diamond {
+
+    .experience-tabs__tab--active :global(.experience-tabs__chevron) {
       opacity: 1;
     }
     .experience-tabs__panel {
@@ -283,9 +287,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       scroll-snap-align: start;
       box-sizing: border-box;
       padding: var(--spacing-md);
-      border: 1px solid rgba(47, 66, 160, 0.1);
-      border-radius: 8px;
     }
+
+    .experience-carousel__tags {
+      margin-top: 1rem;
+    }
+
     .experience-carousel__dots {
       display: flex;
       justify-content: center;

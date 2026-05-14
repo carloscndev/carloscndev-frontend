@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 36,
-    "completed": 30,
+    "completed": 34,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -404,7 +404,7 @@
     {
       "id": "FIX-013",
       "name": "Experience Section Spacing",
-      "status": "pending",
+      "status": "done",
       "description": "Adjust spacing between h2 and intro paragraph (1rem desktop / 0.5rem mobile) and between intro and content (2rem desktop / 1rem mobile).",
       "acceptance": [
         "h2 to p gap: 1rem desktop, 0.5rem mobile",
@@ -414,7 +414,7 @@
     {
       "id": "FIX-014",
       "name": "Experience Active Tab Background",
-      "status": "pending",
+      "status": "done",
       "description": "Change active tab background in desktop tabs to --color-accent at 20% opacity.",
       "acceptance": [
         "Active tab: background rgba(51, 31, 232, 0.2)",
@@ -424,7 +424,7 @@
     {
       "id": "FIX-015",
       "name": "Create Reusable TechPill Component",
-      "status": "pending",
+      "status": "done",
       "description": "Create a reusable TechPill.astro component for technology tags used across multiple sections (Experience, Portfolio, About).",
       "acceptance": [
         "Background: --color-accent, text color: --text-base",
@@ -437,7 +437,7 @@
     {
       "id": "FIX-016",
       "name": "Replace Diamond with Chevron in Experience Tabs",
-      "status": "pending",
+      "status": "done",
       "description": "Swap the Diamond icon for a Chevron (down arrow) in the Experience desktop tab list. Color must be --color-accent.",
       "acceptance": [
         "Chevron icon replaces Diamond in tab buttons",
