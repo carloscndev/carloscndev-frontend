@@ -2,7 +2,7 @@
 import portfolioDataRaw from "../../data/portafolio.json";
 import Diamond from "../icons/Diamond.astro";
 import GithubIcon from "../icons/GithubIcon.astro";
-import GlobeIcon from "../icons/GlobeIcon.astro";
+import BlogLink from "../icons/BlogLink.astro";
 import FileIcon from "../icons/FileIcon.astro";
 
 const currentLang = "es";
@@ -49,7 +49,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       data.projects.map((project: any) => (
         <div class="portfolio-grid__card" data-project-id={project.id}>
           <div class="portfolio-card__header">
-            <Diamond size="14" class="portfolio-card__diamond" />
+            <Diamond size="22" class="portfolio-card__diamond" />
             <div class="portfolio-card__links" data-project-links>
               {project.links.repo && (
                 <a
@@ -70,7 +70,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                   rel="noopener"
                   aria-label="Demo"
                 >
-                  <GlobeIcon size="18" />
+                  <BlogLink size="18" />
                 </a>
               )}
               {project.links.article && (
@@ -117,7 +117,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             aria-expanded="false"
             type="button"
           >
-            <Diamond size="14" class="portfolio-accordion__diamond" />
+            <Diamond size="22" class="portfolio-accordion__diamond" />
             <span class="portfolio-accordion__title" data-project-title>
               {project.title}
             </span>
@@ -167,7 +167,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                   rel="noopener"
                   aria-label="Demo"
                 >
-                  <GlobeIcon size="16" />
+                  <BlogLink size="16" />
                 </a>
               )}
               {project.links.article && (

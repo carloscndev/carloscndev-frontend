@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 42,
+    "completed": 43,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -526,7 +526,7 @@
     {
       "id": "FIX-025",
       "name": "Portfolio Correct Link Icons",
-      "status": "pending",
+      "status": "done",
       "description": "Use correct icons from components/icons for each link type: repo=GithubIcon, demo=BlogLink, article=FileIcon.",
       "acceptance": [
         "repo → GithubIcon",
