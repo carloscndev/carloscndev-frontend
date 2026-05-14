@@ -13,7 +13,7 @@ A strict modular organization is required to maintain a separation of concerns:
 
 - `src/assets/fonts/`: Local `.ttf` / `.woff2` files (Space Grotesk & Inter).
 - `src/assets/images/`: Optimized assets for Hobbies, Profile, and Projects.
-- `src/assets/icons/`: Pure SVG components or raw SVGs for social and UI elements.
+- `src/components/icons/`: Astro components for social and UI elements.
 - `src/components/ui/`: Atomic, reusable elements (Buttons, Badges, Inputs).
 - `src/components/sections/`: High-level page modules (Hero, Experience, BlogGrid).
 - `src/layouts/`: Structural wrappers (MainLayout, PostLayout).
@@ -22,7 +22,7 @@ A strict modular organization is required to maintain a separation of concerns:
 ## 2. Technical Execution Strategy
 
 - **Styling Engine**: Tailwind CSS. Implementation must use explicit dark mode utility classes (`dark:`) to match the visual specs for both themes.
-- **Dynamic Interactivity**: React Hooks for logic-heavy components, specifically the "Hobby Switcher" (5-second rotation logic).
+- **Dynamic Interactivity**: For complex logic, create a helper function within a utils file to keep the logic isolated. Use Astro <script> tags strictly to capture DOM elements and trigger those helper functions, specifically for the 'Hobby Switcher' (5-second rotation logic)
 - **Fluid Navigation**: Native Astro View Transitions API for seamless page loads and CSS Scroll Snapping for section-based layouts.
 
 ## 3. High-Fidelity Asset Mapping

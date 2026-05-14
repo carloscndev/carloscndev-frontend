@@ -24,4 +24,4 @@ pnpm-debug.log*
 .idea/
 
 # Design References
-.harness/visual-specs/
+.opencode/visual-specs/

@@ -86,7 +86,7 @@
     {
       "id": "FIX-002",
       "name": "Sidebar Icon Styling & Hover",
-      "status": "pending",
+      "status": "done",
       "description": "Adjust icon colors and add hover animations to the sidebar.",
       "acceptance": [
         "Base color #7f8be4 in Dark Theme",
