@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 30,
+    "total_tasks": 36,
     "completed": 30,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
@@ -399,6 +399,70 @@
         "Localization: The 'Let's Talk' message, the description paragraph, the button text, and the footer credits must all support English and Spanish dynamic switching.",
         "Data Source: The agent may define the 'data/contact' structure for the email and text content. No hardcoded strings are allowed.",
         "Visual Parity: Paragraph width and line-height must match the centered, breathable layout shown in the desktop reference."
+      ]
+    },
+    {
+      "id": "FIX-013",
+      "name": "Experience Section Spacing",
+      "status": "pending",
+      "description": "Adjust spacing between h2 and intro paragraph (1rem desktop / 0.5rem mobile) and between intro and content (2rem desktop / 1rem mobile).",
+      "acceptance": [
+        "h2 to p gap: 1rem desktop, 0.5rem mobile",
+        "intro p to content gap: 2rem desktop, 1rem mobile"
+      ]
+    },
+    {
+      "id": "FIX-014",
+      "name": "Experience Active Tab Background",
+      "status": "pending",
+      "description": "Change active tab background in desktop tabs to --color-accent at 20% opacity.",
+      "acceptance": [
+        "Active tab: background rgba(51, 31, 232, 0.2)",
+        "Inactive tabs remain transparent"
+      ]
+    },
+    {
+      "id": "FIX-015",
+      "name": "Create Reusable TechPill Component",
+      "status": "pending",
+      "description": "Create a reusable TechPill.astro component for technology tags used across multiple sections (Experience, Portfolio, About).",
+      "acceptance": [
+        "Background: --color-accent, text color: --text-base",
+        "Desktop: border-radius 30px, font-weight medium, 18px, Inter",
+        "Mobile: border-radius 30px, font-weight regular, 12px, Inter",
+        "No borders or shadows",
+        "Replace existing inline tag styles in Experience, Portfolio, and About"
+      ]
+    },
+    {
+      "id": "FIX-016",
+      "name": "Replace Diamond with Chevron in Experience Tabs",
+      "status": "pending",
+      "description": "Swap the Diamond icon for a Chevron (down arrow) in the Experience desktop tab list. Color must be --color-accent.",
+      "acceptance": [
+        "Chevron icon replaces Diamond in tab buttons",
+        "Chevron color: --color-accent",
+        "Same opacity toggle behavior (visible on active, hidden on inactive)"
+      ]
+    },
+    {
+      "id": "FIX-017",
+      "name": "Experience Description-to-Tags Spacing",
+      "status": "pending",
+      "description": "Set spacing between description text and technology pills: 2rem on desktop, 1rem on mobile.",
+      "acceptance": [
+        "Description to tags gap: 2rem desktop",
+        "Description to tags gap: 1rem mobile"
+      ]
+    },
+    {
+      "id": "FIX-018",
+      "name": "Carousel Dots Color",
+      "status": "pending",
+      "description": "Change carousel pagination dots colors: inactive = --color-word, active = --color-accent.",
+      "acceptance": [
+        "Inactive dot: border-color --color-word, background transparent",
+        "Active dot: border-color --color-accent, background --color-accent"
       ]
     }
   ]
