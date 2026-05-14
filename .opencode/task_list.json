@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 40,
-    "completed": 36,
+    "completed": 40,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -468,14 +468,14 @@
     {
       "id": "FIX-019",
       "name": "Experience Intro Text Color",
-      "status": "pending",
+      "status": "done",
       "description": "Change .experience-section__intro text color from --color-word to --text-base.",
       "acceptance": ["Intro paragraph uses --text-base color"]
     },
     {
       "id": "FIX-020",
       "name": "Experience Company Name Inline with Role",
-      "status": "pending",
+      "status": "done",
       "description": "Place @company next to role title (h2) instead of below it. Same font size, same typography (Space Grotesk). Current color (--color-accent) is fine.",
       "acceptance": [
         "@company appears inline next to role title, not on a new line",
@@ -486,7 +486,7 @@
     {
       "id": "FIX-021",
       "name": "Safari Theme Transition Delay on Carousel/Tabs Content",
-      "status": "pending",
+      "status": "done",
       "description": "When switching theme, carousel content (mobile) and tabs content (desktop) take too long to reflect the change in Safari. Similar issue to the menu delay fixed earlier with global transitions.",
       "acceptance": [
         "Theme switch applies instantly to carousel/tabs content in Safari",
@@ -497,7 +497,7 @@
     {
       "id": "FIX-022",
       "name": "Experience Description Paragraph Spacing",
-      "status": "pending",
+      "status": "done",
       "description": "Add margin-bottom to all <p> elements inside .experience-tabs__description: 1rem on desktop, 0.5rem on mobile. The last <p> should have no margin-bottom.",
       "acceptance": [
         "All <p> inside description have margin-bottom: 1rem desktop / 0.5rem mobile",
