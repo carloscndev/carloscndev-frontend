@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 30,
-    "completed": 26,
+    "completed": 27,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -312,7 +312,7 @@
     {
       "id": "FIX-012",
       "name": "Diamond Icon Color and Layout Fix",
-      "status": "pending",
+      "status": "done",
       "description": "The diamond icon still renders black instead of --color-accent. The text renders below the icon instead of next to it. Fix both issues in the About section tech chips.",
       "acceptance": [
         "Diamond icon renders with --color-accent, not black",

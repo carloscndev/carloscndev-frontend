@@ -30,6 +30,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
 <section id="about" class="about-section">
   <script type="application/json" id="about-data" set:html={embeddedDataJson} />
+  <template id="tech-chip-template">
+    <span class="about-section__tech-chip">
+      <Diamond size="16" class="about-section__tech-icon" />
+      <span data-tech-name></span>
+    </span>
+  </template>
 
   <div class="about-section__grid">
     <div class="about-section__content">
@@ -52,7 +58,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
           aboutData.technologies.map((tech) => (
             <span class="about-section__tech-chip">
               <Diamond size="16" class="about-section__tech-icon" />
-              <span>{tech.name}</span>
+              <span data-tech-name>{tech.name}</span>
             </span>
           ))
         }
@@ -135,12 +141,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   .about-section__tech {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
     margin-top: var(--spacing-md);
   }
-
-  .about-section__tech-chip {
+  :global(.about-section__tech-chip) {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
@@ -148,13 +153,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     font-size: var(--font-size-body-mobile);
     color: var(--text-base);
     padding: var(--spacing-xs) var(--spacing-sm);
-    border: 1px solid var(--color-accent);
-    border-radius: var(--border-radius);
   }
 
-  .about-section__tech-icon {
+  :global(.about-section__tech-icon) {
     color: var(--color-accent);
     display: inline;
+    flex-shrink: 0;
+    margin-right: var(--spacing-sm);
   }
 
   @media (max-height: 667px) {
@@ -182,10 +187,6 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       width: 350px;
     }
 
-    .about-section__content {
-      text-align: left;
-    }
-
     .about-section__title {
       font-size: var(--font-size-h2-desktop);
     }
@@ -194,11 +195,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       font-size: var(--font-size-body-desktop);
     }
 
-    .about-section__tech {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .about-section__tech-chip {
+    :global(.about-section__tech-chip) {
       font-size: var(--font-size-body-desktop);
     }
   }
