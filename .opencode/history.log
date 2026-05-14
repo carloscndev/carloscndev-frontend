@@ -220,3 +220,13 @@
 - **Changes**: [Rewrote `src/data/experience.json` as Strapi v4 shape (data.id:7, attributes with ES locale + localizations.data[0] with EN locale/id:8, all 4 jobs preserved with id/company/role/period/description_p1/description_p2/technologies[]). Created `src/utils/experience.ts` with `initExperienceLangSwitch()`, `initExperienceTabs()`, `initExperienceCarousel()`, `updateExperienceContent()` for dynamic i18n (title, intro, per-job role/company/@company prefix/period/description/tags), `bindTabListeners()` with clone-trigger pattern and aria-selected toggle, `bindCarouselLogic()` with IntersectionObserver (root:track, threshold:0.5) for dot state sync, and dot click scrollIntoView. Rewrote `src/components/sections/Experience.astro` with Strapi v4 data access helpers, embedded bilingual JSON via `set:html`, mobile-first scoped CSS (BEM naming, mobile carousel visible <768px, desktop tabs visible >=768px with grid-template-columns: 250px 1fr), scroll-snap container with hidden scrollbar, blue-tinted tech tags (rgba(51,31,232,0.1)), Diamond icon opacity 0→1 on active tab, company @ prefix in both server template and client rebuild.]
 - **Verification**: Build succeeded (`npx astro build`): 14 pages, zero errors. All 4 jobs rendered with correct data attributes (`data-panel`, `data-slide`, `data-job-role`, `data-job-company`, `data-job-period`, `data-job-description`, `data-job-tags`). Experience JS code compiled and present in output (IntersectionObserver, cloneNode, aria-selected, langchange keywords all found in dist/index.html). Desktop tabs + mobile carousel markup both present. Embedded JSON contains both ES and EN locale data.
 - **Closure**: Task [FEAT-003] marked as `done`.
+
+---
+
+### 2026-05-14 — [FEAT-006: Section: Contact & Global Footer]
+
+- **Agent**: Coder #1 (direct implementation)
+- **Plan**: Implement Contact section with centered layout, mailto CTA button, waving hand emoji heading, and localized global footer. Restructure contact.json to Strapi v4 mock.
+- **Changes**: [Rewrote `src/data/contact.json` as Strapi v4 mock. Created `src/utils/contact.ts` with `initContactLangSwitch()`. Rewrote `src/components/sections/Contact.astro` with centered inner container, title (👋 emoji), status paragraph, outlined mailto button with hover fill, global footer, and 70vh mobile / 100vh desktop height.]
+- **Verification**: Build succeeded (`npx astro build`): 14 pages, zero errors. Lint clean.
+- **Closure**: Task [FEAT-006] marked as `done`. All 30/30 tasks completed.

@@ -1,20 +1,34 @@
 {
-  "es": {
-    "contact": {
-      "title": "Let’s Talk 👋",
+  "data": {
+    "id": 9,
+    "attributes": {
+      "title": "Hablemos 👋",
       "status_message": "Actualmente no estoy buscando nuevas oportunidades, pero mi bandeja de entrada siempre está abierta. Si tienes alguna pregunta o simplemente quieres saludar, haré todo lo posible para responderte lo antes posible.",
-      "button_text": "Write me",
+      "button_text": "Escríbeme",
       "mail_to": "mailto:tu-email@carloscn.dev",
-      "footer": "Diseñado y Construido por @carloscndev"
-    }
-  },
-  "en": {
-    "contact": {
-      "title": "Let’s Talk 👋",
-      "status_message": "I am not currently looking for new opportunities, but my inbox is always open. If you have any questions, or simply want to say hello, I will do my best to respond as soon as possible.",
-      "button_text": "Write me",
-      "mail_to": "mailto:your-email@carloscn.dev",
-      "footer": "Designed and Built by @carloscndev"
+      "footer": "Diseñado y Construido por @carloscndev",
+      "locale": "es",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z",
+      "publishedAt": "2025-01-01T00:00:00.000Z",
+      "localizations": {
+        "data": [
+          {
+            "id": 10,
+            "attributes": {
+              "title": "Let's Talk 👋",
+              "status_message": "I am not currently looking for new opportunities, but my inbox is always open. If you have any questions, or simply want to say hello, I will do my best to respond as soon as possible.",
+              "button_text": "Write me",
+              "mail_to": "mailto:your-email@carloscn.dev",
+              "footer": "Designed and Built by @carloscndev",
+              "locale": "en",
+              "createdAt": "2025-01-01T00:00:00.000Z",
+              "updatedAt": "2025-01-01T00:00:00.000Z",
+              "publishedAt": "2025-01-01T00:00:00.000Z"
+            }
+          }
+        ]
+      }
     }
   }
 }

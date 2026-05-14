@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 30,
-    "completed": 29,
+    "completed": 30,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -384,7 +384,7 @@
     {
       "id": "FEAT-006",
       "name": "Section: Contact & Global Footer",
-      "status": "pending",
+      "status": "done",
       "description": "Implement the 'Hablemos' (Contact) section and the global footer. This section serves as the final call to action. It must maintain a specific viewport height in mobile to accommodate the social media bar properly, as per the visual references (06-contact.png and 06-contact-m.png).",
       "acceptance": [
         "Implement the Contact section using the existing Astro container. Maintain strict visual parity with '06-contact.png'.",
