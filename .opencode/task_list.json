@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 17,
-    "completed": 13,
+    "completed": 14,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -188,7 +188,7 @@
     {
       "id": "BOOT-011",
       "name": "404 Page",
-      "status": "pending",
+      "status": "done",
       "description": "Create a custom 404 page for non-existing routes.",
       "acceptance": [
         "Create a dedicated 404 page.",

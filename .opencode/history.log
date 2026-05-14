@@ -150,3 +150,13 @@
 - **Changes**: [Modified `src/data/blog-post.json` — Added 4 posts to ES and EN arrays. Rewrote `src/components/sections/Blog.astro` with blog grid (6 cards), embedded JSON data for client-side i18n, category-themed image placeholders, and `initBlogLangSwitch()` integration.]
 - **Verification**: Build succeeded (`npm run build`): 13 pages (12 blog detail routes + index). All 6 posts render correctly in both ES and EN. Blog grid displays with proper data attributes matching `src/utils/blog.ts` contract. Reviewer audit passed after fixing: missing EN paragraph in static-architecture, blog-card__separator opacity, dead CSS property, and aria-labels.
 - **Closure**: Task [BOOT-010] marked as `done`.
+
+---
+
+### 2026-05-14 — [BOOT-011: 404 Page]
+
+- **Agent**: Coder #1 (via orchestrator with Leader planning and Reviewer audit)
+- **Plan**: Create minimal 404 page using BaseLayout (not MainLayout) — centered "404" in viewport, no header/sidebar, leveraging existing responsive typography and theme persistence from global.css and BaseLayout.
+- **Changes**: [Created `src/pages/404.astro` with BaseLayout wrapper, `<main class="not-found">` flexbox centering, and `<h1>404</h1>`. Zero new CSS variables or scripts needed.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages total including `/404.html` (5,985 bytes). Theme persistence, ClientRouter, dark mode, and responsive typography all inherited from BaseLayout. Reviewer approved — no issues found.
+- **Closure**: Task [BOOT-011] marked as `done`.
