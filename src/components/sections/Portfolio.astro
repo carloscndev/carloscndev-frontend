@@ -1,3 +1,549 @@
-<section id="portfolio" data-i18n-content="section.portfolio">
-  Portafolio
+---
+import portfolioDataRaw from "../../data/portafolio.json";
+import Diamond from "../icons/Diamond.astro";
+import GithubIcon from "../icons/GithubIcon.astro";
+import GlobeIcon from "../icons/GlobeIcon.astro";
+import FileIcon from "../icons/FileIcon.astro";
+
+const currentLang = "es";
+
+function getPortfolioData(lang: "es" | "en") {
+  const root = portfolioDataRaw.data.attributes;
+  if (root.locale === lang) return root;
+  const loc = (root as any).localizations.data.find(
+    (l: any) => l.attributes.locale === lang,
+  );
+  return loc?.attributes ?? root;
+}
+
+const data = getPortfolioData(currentLang);
+
+const embeddedData = {
+  es: getPortfolioData("es"),
+  en: getPortfolioData("en"),
+};
+const embeddedDataJson = JSON.stringify(embeddedData);
+---
+
+<section id="portfolio" class="portfolio-section">
+  <script
+    type="application/json"
+    id="portfolio-data"
+    set:html={embeddedDataJson}
+  />
+
+  <header class="portfolio-section__header">
+    <h2
+      class="portfolio-section__title"
+      data-portfolio-title
+      data-i18n-content="section.portfolio"
+    >
+      {data.title}
+    </h2>
+    <p class="portfolio-section__intro" data-portfolio-intro>{data.intro}</p>
+  </header>
+
+  <!-- Desktop Grid (visible >= 480px) -->
+  <div class="portfolio-grid" data-portfolio-grid>
+    {
+      data.projects.map((project: any) => (
+        <div class="portfolio-grid__card" data-project-id={project.id}>
+          <div class="portfolio-card__header">
+            <Diamond size="14" class="portfolio-card__diamond" />
+            <h3 class="portfolio-card__title" data-project-title>
+              {project.title}
+            </h3>
+          </div>
+          <p class="portfolio-card__description" data-project-description>
+            {project.description}
+          </p>
+          <div class="portfolio-card__tags" data-project-tags>
+            {project.technologies.map((tech: string) => (
+              <span class="portfolio-card__tag">{tech}</span>
+            ))}
+          </div>
+          <div class="portfolio-card__links" data-project-links>
+            {project.links.repo && (
+              <a
+                href={project.links.repo}
+                class="portfolio-card__link"
+                target="_blank"
+                rel="noopener"
+                aria-label="Repository"
+              >
+                <GithubIcon size="18" />
+              </a>
+            )}
+            {project.links.demo && (
+              <a
+                href={project.links.demo}
+                class="portfolio-card__link"
+                target="_blank"
+                rel="noopener"
+                aria-label="Demo"
+              >
+                <GlobeIcon size="18" />
+              </a>
+            )}
+            {project.links.article && (
+              <a
+                href={project.links.article}
+                class="portfolio-card__link"
+                target="_blank"
+                rel="noopener"
+                aria-label="Article"
+              >
+                <FileIcon size="18" />
+              </a>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Mobile Accordion (visible < 480px) -->
+  <div class="portfolio-accordion" data-portfolio-accordion>
+    {
+      data.projects.map((project: any) => (
+        <div
+          class="portfolio-accordion__item"
+          data-accordion-item
+          data-project-id={project.id}
+        >
+          <button
+            class="portfolio-accordion__trigger"
+            data-accordion-trigger
+            aria-expanded="false"
+            type="button"
+          >
+            <Diamond size="14" class="portfolio-accordion__diamond" />
+            <span class="portfolio-accordion__title" data-project-title>
+              {project.title}
+            </span>
+            <svg
+              class="portfolio-accordion__chevron"
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="portfolio-accordion__panel" data-accordion-panel>
+            <p
+              class="portfolio-accordion__description"
+              data-project-description
+            >
+              {project.description}
+            </p>
+            <div class="portfolio-accordion__tags" data-project-tags>
+              {project.technologies.map((tech: string) => (
+                <span class="portfolio-accordion__tag">{tech}</span>
+              ))}
+            </div>
+            <div class="portfolio-accordion__links" data-project-links>
+              {project.links.repo && (
+                <a
+                  href={project.links.repo}
+                  class="portfolio-accordion__link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Repository"
+                >
+                  <GithubIcon size="16" />
+                </a>
+              )}
+              {project.links.demo && (
+                <a
+                  href={project.links.demo}
+                  class="portfolio-accordion__link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Demo"
+                >
+                  <GlobeIcon size="16" />
+                </a>
+              )}
+              {project.links.article && (
+                <a
+                  href={project.links.article}
+                  class="portfolio-accordion__link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Article"
+                >
+                  <FileIcon size="16" />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <a
+    href="/portfolio"
+    class="portfolio-section__view-more"
+    data-portfolio-viewmore
+  >
+    {data.view_more}
+  </a>
 </section>
+
+<script>
+  import {
+    initPortfolioLangSwitch,
+    initPortfolioAccordion,
+  } from "../../utils/portfolio.ts";
+  initPortfolioLangSwitch();
+  initPortfolioAccordion();
+</script>
+
+<style>
+  .portfolio-section {
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: var(--spacing-lg);
+  }
+
+  .portfolio-section::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio-section__header {
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+  }
+
+  .portfolio-section__title {
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h2-mobile);
+    font-weight: var(--weight-space-semibold);
+    color: var(--text-base);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-section__intro {
+    font-family: var(--font-body);
+    color: var(--color-word);
+    line-height: 1.8;
+  }
+
+  /* Desktop Grid (hidden on mobile) */
+  .portfolio-grid {
+    display: none;
+  }
+
+  /* Mobile Accordion (visible on mobile) */
+  .portfolio-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .portfolio-accordion__item {
+    border: 1px solid rgba(47, 66, 160, 0.15);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+
+  :global(.dark) .portfolio-accordion__item {
+    border-color: rgba(127, 139, 228, 0.15);
+  }
+
+  .portfolio-accordion__trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    padding: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--text-base);
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h3-mobile);
+    font-weight: var(--weight-space-medium);
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 200ms ease;
+  }
+
+  .portfolio-accordion__trigger:hover {
+    background: rgba(51, 31, 232, 0.05);
+  }
+
+  .portfolio-accordion__trigger:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--border-radius);
+  }
+
+  .portfolio-accordion__trigger[aria-expanded="true"] {
+    background: rgba(51, 31, 232, 0.08);
+  }
+
+  .portfolio-accordion__diamond {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .portfolio-accordion__title {
+    flex: 1;
+  }
+
+  .portfolio-accordion__chevron {
+    flex-shrink: 0;
+    color: var(--color-word);
+    transition: transform 300ms ease;
+  }
+
+  .portfolio-accordion__trigger[aria-expanded="true"]
+    .portfolio-accordion__chevron {
+    transform: rotate(180deg);
+  }
+
+  .portfolio-accordion__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 350ms ease,
+      padding 350ms ease;
+    padding: 0 var(--spacing-md);
+  }
+
+  .portfolio-accordion__panel--open {
+    max-height: 600px;
+    padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+
+  .portfolio-accordion__description {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-accordion__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-accordion__tag {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-base);
+    background: rgba(51, 31, 232, 0.1);
+    border: 1px solid rgba(51, 31, 232, 0.25);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .portfolio-accordion__links {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .portfolio-accordion__link {
+    color: var(--color-word);
+    transition: color 300ms ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .portfolio-accordion__link:hover {
+    color: var(--color-accent);
+  }
+
+  .portfolio-accordion__link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  /* View More button */
+  .portfolio-section__view-more {
+    display: block;
+    width: fit-content;
+    margin: var(--spacing-lg) auto 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    transition:
+      background-color 300ms ease,
+      color 300ms ease;
+    text-align: center;
+  }
+
+  .portfolio-section__view-more:hover {
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+  }
+
+  .portfolio-section__view-more:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: var(--border-radius);
+  }
+
+  /* Desktop grid: visible >= 480px, accordion hidden */
+  @media (min-width: 480px) {
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      padding-bottom: var(--spacing-lg);
+    }
+
+    .portfolio-accordion {
+      display: none;
+    }
+  }
+
+  /* Desktop card styles */
+  .portfolio-grid__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(47, 66, 160, 0.2);
+    background: var(--bg-primary);
+    padding: var(--spacing-md);
+    transition:
+      transform 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  :global(.dark) .portfolio-grid__card {
+    border-color: rgba(127, 139, 228, 0.2);
+  }
+
+  .portfolio-grid__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  :global(.dark) .portfolio-grid__card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .portfolio-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-card__diamond {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .portfolio-card__title {
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h3-mobile);
+    font-weight: var(--weight-space-semibold);
+    color: var(--text-base);
+  }
+
+  .portfolio-card__description {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .portfolio-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-card__tag {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-base);
+    background: rgba(51, 31, 232, 0.1);
+    border: 1px solid rgba(51, 31, 232, 0.25);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .portfolio-card__links {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+  }
+
+  .portfolio-card__link {
+    color: var(--color-word);
+    transition:
+      color 300ms ease,
+      transform 200ms ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .portfolio-card__link:hover {
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .portfolio-card__link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  /* 3-column grid at 768px */
+  @media (min-width: 768px) {
+    .portfolio-section {
+      padding: var(--spacing-lg) calc(var(--spacing-lg) * 3);
+    }
+
+    .portfolio-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .portfolio-section__title {
+      font-size: var(--font-size-h2-desktop);
+    }
+
+    .portfolio-section__intro {
+      font-size: var(--font-size-body-desktop);
+      max-width: 680px;
+    }
+
+    .portfolio-card__title {
+      font-size: var(--font-size-h3-desktop);
+    }
+
+    .portfolio-card__description {
+      font-size: var(--font-size-body-desktop);
+    }
+
+    .portfolio-section__view-more {
+      font-size: var(--font-size-body-desktop);
+    }
+  }
+</style>

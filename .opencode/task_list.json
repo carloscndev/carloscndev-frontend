@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 30,
-    "completed": 27,
+    "completed": 28,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -355,7 +355,7 @@
     {
       "id": "FEAT-004",
       "name": "Section: Portfolio Adaptive Project Display",
-      "status": "pending",
+      "status": "done",
       "description": "Implement the 'Mi Portafolio' section. The component must transition from a multi-column grid layout on desktop to an interactive accordion-style list on mobile. The project data structure must be flexible to support conditional rendering of external links (Repo, Demo, Article).",
       "acceptance": [
         "Implement the Portfolio section using the existing Astro container. Reuse typography and background tokens for consistency.",
