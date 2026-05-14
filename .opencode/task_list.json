@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 41,
+    "completed": 42,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -514,7 +514,7 @@
     {
       "id": "FIX-024",
       "name": "Portfolio Card Header Layout Reorder",
-      "status": "pending",
+      "status": "done",
       "description": "Reorder card layout: link icons on the right side, diamond icon on the left side, both in the header row. Title below header, then description and tags.",
       "acceptance": [
         "Diamond icon: left side of header",

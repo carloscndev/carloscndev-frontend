@@ -50,10 +50,45 @@ const embeddedDataJson = JSON.stringify(embeddedData);
         <div class="portfolio-grid__card" data-project-id={project.id}>
           <div class="portfolio-card__header">
             <Diamond size="14" class="portfolio-card__diamond" />
-            <h3 class="portfolio-card__title" data-project-title>
-              {project.title}
-            </h3>
+            <div class="portfolio-card__links" data-project-links>
+              {project.links.repo && (
+                <a
+                  href={project.links.repo}
+                  class="portfolio-card__link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Repository"
+                >
+                  <GithubIcon size="18" />
+                </a>
+              )}
+              {project.links.demo && (
+                <a
+                  href={project.links.demo}
+                  class="portfolio-card__link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Demo"
+                >
+                  <GlobeIcon size="18" />
+                </a>
+              )}
+              {project.links.article && (
+                <a
+                  href={project.links.article}
+                  class="portfolio-card__link"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Article"
+                >
+                  <FileIcon size="18" />
+                </a>
+              )}
+            </div>
           </div>
+          <h3 class="portfolio-card__title" data-project-title>
+            {project.title}
+          </h3>
           <p class="portfolio-card__description" data-project-description>
             {project.description}
           </p>
@@ -61,41 +96,6 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             {project.technologies.map((tech: string) => (
               <span class="portfolio-card__tag">{tech}</span>
             ))}
-          </div>
-          <div class="portfolio-card__links" data-project-links>
-            {project.links.repo && (
-              <a
-                href={project.links.repo}
-                class="portfolio-card__link"
-                target="_blank"
-                rel="noopener"
-                aria-label="Repository"
-              >
-                <GithubIcon size="18" />
-              </a>
-            )}
-            {project.links.demo && (
-              <a
-                href={project.links.demo}
-                class="portfolio-card__link"
-                target="_blank"
-                rel="noopener"
-                aria-label="Demo"
-              >
-                <GlobeIcon size="18" />
-              </a>
-            )}
-            {project.links.article && (
-              <a
-                href={project.links.article}
-                class="portfolio-card__link"
-                target="_blank"
-                rel="noopener"
-                aria-label="Article"
-              >
-                <FileIcon size="18" />
-              </a>
-            )}
           </div>
         </div>
       ))
@@ -222,6 +222,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .portfolio-section__header {
     margin-bottom: var(--spacing-lg);
     text-align: left;
+    width: 100%;
   }
 
   .portfolio-section__title {
@@ -443,7 +444,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .portfolio-card__header {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    justify-content: space-between;
     margin-bottom: var(--spacing-sm);
   }
 
@@ -457,6 +458,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     font-size: var(--font-size-h3-mobile);
     font-weight: var(--weight-space-semibold);
     color: var(--text-base);
+    margin-bottom: 1rem;
   }
 
   .portfolio-card__description {
@@ -491,8 +493,6 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .portfolio-card__links {
     display: flex;
     gap: var(--spacing-sm);
-    margin-top: auto;
-    padding-top: var(--spacing-sm);
   }
 
   .portfolio-card__link {
