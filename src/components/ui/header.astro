@@ -1,10 +1,15 @@
 ---
+import LinkWrapper from "./LinkWrapper.astro";
+import WebIcon from "@components/icons/WebIcon.astro";
+import MobileMenuIcon from "@components/icons/MobileMenuIcon.astro";
+import ThemeButton from "./ThemeButton.astro";
+import LanguageButton from "./LanguageButton.astro";
+
 interface Props {
   lang?: "es" | "en";
 }
 
 const { lang = "es" } = Astro.props;
-
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
@@ -17,19 +22,25 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="header">
-  <div class="header__container">
-    <a href="/" class="header__logo" aria-label="Go to homepage"> icon </a>
-
-    <nav class="header__nav" aria-label="Main navigation">
-      <ul class="header__nav-list" role="list">
+  <div class="mobile-menu-wrapper">
+    <MobileMenuIcon class="mobile-menu" />
+  </div>
+  <div class="header-icon">
+    <LinkWrapper href="/" isExternal={false}>
+      <WebIcon size="50" />
+    </LinkWrapper>
+  </div>
+  <div class="header-menu">
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul class="header-nav-list" role="list">
         {
           navLinks.map((link) => (
-            <li class="header__nav-item">
+            <li class="header-nav-item">
               <a
                 href={link.href}
                 class:list={[
-                  "header__nav-link",
-                  currentPath === link.href ? "header__nav-link--active" : "",
+                  "header-nav-link",
+                  currentPath === link.href ? "header-nav-link--active" : "",
                 ]}
               >
                 {link.label}
@@ -39,32 +50,12 @@ const currentPath = Astro.url.pathname;
         }
       </ul>
     </nav>
-
-    <div class="header__controls">
-      <button
-        class="header__toggle header__toggle--theme"
-        aria-label="Toggle theme"
-        type="button"
-        id="theme-toggle"
-      >
-        <span class="header__toggle-icon">◐</span>
-      </button>
-      <button
-        class="header__toggle header__toggle--lang"
-        aria-label="Switch language"
-        type="button"
-      >
-        <span class="header__toggle-text">{lang.toUpperCase()}</span>
-      </button>
+    <div class="header-controls">
+      <div id="theme-toggle-button">
+        <ThemeButton />
+      </div>
+      <LanguageButton lang={lang} />
     </div>
-
-    <button
-      class="header__mobile-menu-btn"
-      aria-label="Open menu"
-      type="button"
-    >
-      <span class="header__mobile-menu-icon"></span>
-    </button>
   </div>
 </header>
 
@@ -111,11 +102,15 @@ const currentPath = Astro.url.pathname;
     applyTheme(next);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    applyTheme(getPreferredTheme());
+  applyTheme(getPreferredTheme());
+  document.addEventListener("astro:after-swap", () =>
+    applyTheme(getPreferredTheme()),
+  );
 
-    const toggleBtn = document.getElementById("theme-toggle");
+  document.addEventListener("astro:page-load", () => {
+    const toggleBtn = document.getElementById("theme-toggle-button");
     if (toggleBtn) {
+      toggleBtn.removeEventListener("click", toggleTheme);
       toggleBtn.addEventListener("click", toggleTheme);
     }
   });
@@ -123,169 +118,79 @@ const currentPath = Astro.url.pathname;
 
 <style>
   .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  .header__container {
-    display: flex;
     align-items: center;
+    margin: auto;
+    width: 100%;
+    display: flex;
     justify-content: space-between;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
-  }
+    height: var(--header-desktop-height);
+    padding: 0 var(--spacing-md);
 
-  .header__logo {
-    display: flex;
-    align-items: center;
-    z-index: 110;
-  }
-
-  .header__logo-icon--light {
-    display: none;
-  }
-
-  :global(.dark) .header__logo-icon--dark {
-    display: block;
-  }
-
-  :global(.dark) .header__logo-icon--light {
-    display: none;
-  }
-
-  :global(:not(.dark)) .header__logo-icon--dark {
-    display: none;
-  }
-
-  :global(:not(.dark)) .header__logo-icon--light {
-    display: block;
-  }
-
-  .header__nav {
-    display: none;
-  }
-
-  @media (min-width: 768px) {
-    .header__nav {
-      display: block;
+    .mobile-menu-wrapper {
+      cursor: pointer;
+      flex: 1;
+      .mobile-menu {
+        fill: var(--text-base);
+      }
     }
-  }
 
-  .header__nav-list {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+    .header-icon {
+      flex-shrink: 0;
+    }
 
-  .header__nav-link {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-base);
-    text-decoration: none;
-    opacity: 0.7;
-    transition:
-      opacity 0.3s ease-in-out,
-      color 0.3s ease-in-out;
-  }
-
-  .header__nav-link:hover,
-  .header__nav-link--active {
-    opacity: 1;
-  }
-
-  .header__controls {
-    display: none;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .header__controls {
+    .header-menu {
+      align-items: center;
       display: flex;
+      flex: 1;
+      justify-content: flex-end;
+
+      .header-nav {
+        color: var(--text-base);
+        display: none;
+        font-family: var(--font-titles);
+        font-size: var(--font-size-h3-desktop);
+        font-weight: var(--weight-space-medium);
+        margin-right: var(--spacing-lg);
+        .header-nav-list {
+          display: flex;
+
+          .header-nav-item {
+            margin-right: var(--spacing-md);
+            .header-nav-link--active {
+              color: var(--color-accent);
+              font-weight: var(--weight-space-semibold);
+              text-decoration: underline;
+              text-underline-offset: 4px;
+              text-decoration-thickness: 2px;
+            }
+          }
+        }
+      }
+
+      .header-controls {
+        align-items: center;
+        display: flex;
+
+        #theme-toggle-button {
+          margin-right: var(--spacing-md);
+        }
+      }
     }
-  }
-
-  .header__toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.5rem;
-    color: var(--text-base);
-    cursor: pointer;
-    transition:
-      border-color 0.3s ease-in-out,
-      background-color 0.3s ease-in-out;
-  }
-
-  .header__toggle:hover {
-    border-color: var(--color-accent);
-    background-color: rgba(51, 31, 232, 0.1);
-  }
-
-  .header__toggle-text {
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-
-  .header__mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 110;
   }
 
   @media (min-width: 768px) {
-    .header__mobile-menu-btn {
-      display: none;
+    .header {
+      padding: 0;
+      .mobile-menu-wrapper {
+        display: none;
+        flex: 0;
+      }
+
+      .header-menu {
+        .header-nav {
+          display: inline-block;
+        }
+      }
     }
-  }
-
-  .header__mobile-menu-icon {
-    width: 1.5rem;
-    height: 0.125rem;
-    background-color: var(--text-base);
-    position: relative;
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  .header__mobile-menu-icon::before,
-  .header__mobile-menu-icon::after {
-    content: "";
-    position: absolute;
-    width: 1.5rem;
-    height: 0.125rem;
-    background-color: var(--text-base);
-    left: 0;
-    transition:
-      transform 0.3s ease-in-out,
-      opacity 0.3s ease-in-out;
-  }
-
-  .header__mobile-menu-icon::before {
-    top: -0.5rem;
-  }
-
-  .header__mobile-menu-icon::after {
-    top: 0.5rem;
   }
 </style>

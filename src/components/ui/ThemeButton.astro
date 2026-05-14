@@ -1,0 +1,44 @@
+---
+import DarkThemeButton from "@components/icons/DarkThemeButton.astro";
+import LightThemeButton from "@components/icons/LightThemeButton.astro";
+---
+
+<div class="theme-button">
+  <div class="theme-button-dark">
+    <DarkThemeButton class="theme-button-image" />
+  </div>
+
+  <div class="theme-button-light">
+    <LightThemeButton class="theme-button-image" />
+  </div>
+</div>
+
+<style>
+  .theme-button {
+    cursor: pointer;
+  }
+
+  .theme-button-dark,
+  .theme-button-light {
+    align-items: flex-end;
+    display: flex;
+
+    svg {
+      fill: var(--text-base);
+    }
+  }
+
+  .theme-button-dark {
+    display: flex;
+  }
+  .theme-button-light {
+    display: none;
+  }
+
+  :global(.dark) .theme-button-dark {
+    display: none;
+  }
+  :global(.dark) .theme-button-light {
+    display: flex;
+  }
+</style>

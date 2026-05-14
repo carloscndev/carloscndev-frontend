@@ -1,5 +1,5 @@
 ---
-// src/layouts/BaseLayout.astro
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 
 interface Props {
@@ -24,16 +24,24 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ClientRouter />
     <script is:inline>
-      (function () {
+      function applyTheme() {
         const stored = localStorage.getItem("carloscndev-theme");
         const preferred = window.matchMedia("(prefers-color-scheme: dark)")
           .matches
           ? "dark"
           : "light";
         const theme = stored || preferred;
-        document.documentElement.classList.toggle("dark", theme === "dark");
-      })();
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+
+      applyTheme();
+      document.addEventListener("astro:after-swap", applyTheme);
     </script>
   </head>
   <body>
@@ -43,10 +51,11 @@ const {
 
 <style>
   body {
-    max-width: var(--max-width);
-    margin: auto;
-    display: flex;
-    justify-content: center;
     align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    max-width: var(--max-width);
   }
 </style>
