@@ -234,9 +234,15 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
     .experience-tabs__panel {
       display: none;
+      transition: none;
     }
     .experience-tabs__panel--active {
       display: block;
+    }
+
+    .experience-tabs__description {
+      color: var(--text-base);
+      transition: none;
     }
 
     .experience-tabs__heading {
@@ -303,6 +309,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       scroll-snap-align: start;
       box-sizing: border-box;
       padding: var(--spacing-md);
+      transition: none;
+    }
+
+    .experience-carousel__description {
+      color: var(--text-base);
+      transition: none;
     }
 
     .experience-carousel__tags {
@@ -335,6 +347,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     .experience-carousel__role {
       font-size: 1.25rem;
       margin: 0;
+      color: var(--text-base);
     }
 
     .experience-carousel__company {
@@ -348,6 +361,10 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     .experience-carousel__period {
       color: var(--color-word);
       margin-bottom: 0.5rem;
+    }
+
+    .experience-carousel__description {
+      color: var(--text-base);
     }
 
     .experience-carousel__tag {
