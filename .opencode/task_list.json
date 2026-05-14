@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 19,
-    "completed": 16,
+    "total_tasks": 29,
+    "completed": 19,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -227,6 +227,86 @@
         "Implementation must strictly match the provided visual references for both desktop and mobile.",
         "The icon diamond is in components/icons",
         "The color for strong text must be --color-word"
+      ]
+    },
+    {
+      "id": "FIX-005",
+      "name": "Main Container Width Fix",
+      "status": "pending",
+      "description": "Fix content overlapping with social sidebar by reducing main container width by 60px on each side and centering content on desktop.",
+      "acceptance": [
+        "Reduce main container width by 60px per side on desktop",
+        "Center content within the container",
+        "No overlap between section content and social sidebar",
+        "Mobile layout unaffected"
+      ]
+    },
+    {
+      "id": "FIX-006",
+      "name": "Home & About Grid Proportions",
+      "status": "pending",
+      "description": "Modify grid proportions for Home and About sections to 65% 1fr. Image should be as far from text as possible: flex-start for Home, flex-end for About on desktop.",
+      "acceptance": [
+        "Home grid: 65% 1fr, image at flex-start",
+        "About grid: 65% 1fr, image at flex-end",
+        "Maximum separation between image and text",
+        "Mobile layout unaffected"
+      ]
+    },
+    {
+      "id": "FIX-007",
+      "name": "Diamond Icon Color",
+      "status": "pending",
+      "description": "Change diamond icon color in About section technology list from --color-word to --color-accent.",
+      "acceptance": [
+        "Diamond icon color: --color-accent",
+        "Both server-rendered and client-side icon paths affected",
+        "Color applies in both dark and light themes"
+      ]
+    },
+    {
+      "id": "FIX-008",
+      "name": "About Tech List Layout",
+      "status": "pending",
+      "description": "Display technology list in About section as 2 columns of 3 items, with icon next to text (not below).",
+      "acceptance": [
+        "Tech list: 2 columns, 3 rows",
+        "Icon next to text (inline), not stacked",
+        "Responsive: single column on mobile",
+        "Client-side i18n rebuild matches layout"
+      ]
+    },
+    {
+      "id": "FIX-009",
+      "name": "Mobile Text Alignment",
+      "status": "pending",
+      "description": "Align section text to the left on mobile instead of centered.",
+      "acceptance": [
+        "All section text left-aligned on mobile",
+        "Desktop layout unaffected",
+        "Tech chips, intros, and body text affected"
+      ]
+    },
+    {
+      "id": "FIX-010",
+      "name": "Home Title Spacing Mobile",
+      "status": "pending",
+      "description": "Reduce vertical spacing between 'Carlos Castañeda' and 'carloscndev' on mobile — they should be closer together with minimal gap.",
+      "acceptance": [
+        "Title and subtitle nearly touching on mobile",
+        "Desktop spacing unaffected",
+        "No extra margin or padding between h1 and subtitle p"
+      ]
+    },
+    {
+      "id": "FIX-011",
+      "name": "Mobile Short Viewport Image Scaling",
+      "status": "pending",
+      "description": "Reduce avatar image size on devices with viewport height under 667px so all content fits without scrolling.",
+      "acceptance": [
+        "Avatar image smaller on screens < 667px height",
+        "All section content visible without overflow",
+        "Desktop and taller mobile devices unaffected"
       ]
     },
     {
