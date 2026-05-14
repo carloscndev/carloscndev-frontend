@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 29,
-    "completed": 19,
+    "completed": 26,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -232,7 +232,7 @@
     {
       "id": "FIX-005",
       "name": "Main Container Width Fix",
-      "status": "pending",
+      "status": "done",
       "description": "Fix content overlapping with social sidebar by reducing main container width by 60px on each side and centering content on desktop.",
       "acceptance": [
         "Reduce main container width by 60px per side on desktop",
@@ -244,7 +244,7 @@
     {
       "id": "FIX-006",
       "name": "Home & About Grid Proportions",
-      "status": "pending",
+      "status": "done",
       "description": "Modify grid proportions for Home and About sections to 65% 1fr. Image should be as far from text as possible: flex-start for Home, flex-end for About on desktop.",
       "acceptance": [
         "Home grid: 65% 1fr, image at flex-start",
@@ -256,7 +256,7 @@
     {
       "id": "FIX-007",
       "name": "Diamond Icon Color",
-      "status": "pending",
+      "status": "done",
       "description": "Change diamond icon color in About section technology list from --color-word to --color-accent.",
       "acceptance": [
         "Diamond icon color: --color-accent",
@@ -267,7 +267,7 @@
     {
       "id": "FIX-008",
       "name": "About Tech List Layout",
-      "status": "pending",
+      "status": "done",
       "description": "Display technology list in About section as 2 columns of 3 items, with icon next to text (not below).",
       "acceptance": [
         "Tech list: 2 columns, 3 rows",
@@ -279,7 +279,7 @@
     {
       "id": "FIX-009",
       "name": "Mobile Text Alignment",
-      "status": "pending",
+      "status": "done",
       "description": "Align section text to the left on mobile instead of centered.",
       "acceptance": [
         "All section text left-aligned on mobile",
@@ -290,7 +290,7 @@
     {
       "id": "FIX-010",
       "name": "Home Title Spacing Mobile",
-      "status": "pending",
+      "status": "done",
       "description": "Reduce vertical spacing between 'Carlos Castañeda' and 'carloscndev' on mobile — they should be closer together with minimal gap.",
       "acceptance": [
         "Title and subtitle nearly touching on mobile",
@@ -301,7 +301,7 @@
     {
       "id": "FIX-011",
       "name": "Mobile Short Viewport Image Scaling",
-      "status": "pending",
+      "status": "done",
       "description": "Reduce avatar image size on devices with viewport height under 667px so all content fits without scrolling.",
       "acceptance": [
         "Avatar image smaller on screens < 667px height",
