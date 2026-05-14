@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 40,
+    "total_tasks": 51,
     "completed": 40,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
@@ -502,6 +502,114 @@
       "acceptance": [
         "All <p> inside description have margin-bottom: 1rem desktop / 0.5rem mobile",
         "Last <p> element has margin-bottom: 0"
+      ]
+    },
+    {
+      "id": "FIX-023",
+      "name": "Portfolio Title & Intro Alignment + Color",
+      "status": "pending",
+      "description": "Left-align portfolio-section__title and portfolio-section__intro. Change intro color from current to --text-base.",
+      "acceptance": ["Title and intro left-aligned", "Intro color: --text-base"]
+    },
+    {
+      "id": "FIX-024",
+      "name": "Portfolio Card Header Layout Reorder",
+      "status": "pending",
+      "description": "Reorder card layout: link icons on the right side, diamond icon on the left side, both in the header row. Title below header, then description and tags.",
+      "acceptance": [
+        "Diamond icon: left side of header",
+        "Link icons: right side of header",
+        "Title below header row",
+        "Description and tags follow"
+      ]
+    },
+    {
+      "id": "FIX-025",
+      "name": "Portfolio Correct Link Icons",
+      "status": "pending",
+      "description": "Use correct icons from components/icons for each link type: repo=GithubIcon, demo=BlogLink, article=FileIcon.",
+      "acceptance": [
+        "repo → GithubIcon",
+        "demo → BlogLink",
+        "article → FileIcon",
+        "All icons from components/icons folder"
+      ]
+    },
+    {
+      "id": "FIX-026",
+      "name": "Portfolio Card Title Color",
+      "status": "pending",
+      "description": "Change portfolio-card__title color to --color-accent.",
+      "acceptance": ["Card title color: --color-accent"]
+    },
+    {
+      "id": "FIX-027",
+      "name": "Portfolio Card Background",
+      "status": "pending",
+      "description": "Change card background to --color-tech-primary-dark for dark theme and --color-tech-primary-light for light theme.",
+      "acceptance": [
+        "Dark theme card bg: --color-tech-primary-dark",
+        "Light theme card bg: --color-tech-primary-light"
+      ]
+    },
+    {
+      "id": "FIX-028",
+      "name": "Use TechPill in Portfolio Cards",
+      "status": "pending",
+      "description": "Replace inline tech tags in portfolio cards with the existing reusable TechPill component.",
+      "acceptance": [
+        "Portfolio cards use TechPill.astro for tech tags",
+        "Desktop and mobile layouts both updated"
+      ]
+    },
+    {
+      "id": "FIX-029",
+      "name": "Portfolio View More Link Style",
+      "status": "pending",
+      "description": "Change 'Ver más' from a button to a text link with the ArrowDown icon below, centered.",
+      "acceptance": [
+        "Ver más is plain text, not a button",
+        "ArrowDown icon below the text",
+        "Both centered"
+      ]
+    },
+    {
+      "id": "FIX-030",
+      "name": "Remove Portfolio Card Border and Shadow",
+      "status": "pending",
+      "description": "Remove border, border-radius, and box-shadow from portfolio cards.",
+      "acceptance": [
+        "Cards have no border",
+        "Cards have no border-radius",
+        "Cards have no box-shadow or hover shadow"
+      ]
+    },
+    {
+      "id": "FIX-031",
+      "name": "Portfolio Card Icons Right-Aligned on Mobile",
+      "status": "pending",
+      "description": "Align card link icons to the right on mobile accordion layout.",
+      "acceptance": ["Link icons right-aligned in mobile accordion cards"]
+    },
+    {
+      "id": "FIX-032",
+      "name": "Fix Mobile Accordion Trembling",
+      "status": "pending",
+      "description": "When opening one accordion card on mobile, the others tremble/shake in a strange way, affecting UX.",
+      "acceptance": [
+        "Opening a card does not cause visual trembling in other cards",
+        "Smooth accordion expand/collapse animation"
+      ]
+    },
+    {
+      "id": "FIX-033",
+      "name": "Portfolio View More Scroll Behavior",
+      "status": "pending",
+      "description": "Clicking 'Ver más' should trigger a scroll within portfolio-grid (desktop) or portfolio-accordion (mobile) to reveal more cards, without leaving the current view.",
+      "acceptance": [
+        "Ver más triggers internal scroll in portfolio-grid on desktop",
+        "Ver más triggers internal scroll in portfolio-accordion on mobile",
+        "Does not navigate away from the section"
       ]
     }
   ]
