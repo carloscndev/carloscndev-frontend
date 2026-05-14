@@ -16,6 +16,11 @@ const { title, lang } = Astro.props;
   </main>
 </BaseLayout>
 
+<script>
+  import { initAnchorRouting } from "../utils/anchor-routing";
+  initAnchorRouting();
+</script>
+
 <style>
   .main-content {
     height: calc(100vh - var(--header-desktop-height));

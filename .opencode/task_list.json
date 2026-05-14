@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 17,
-    "completed": 10,
+    "completed": 12,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -142,7 +142,7 @@
     {
       "id": "BOOT-008",
       "name": "Global Language Switch",
-      "status": "pending",
+      "status": "done",
       "description": "Implement global language switching for the entire site using the existing language toggle. All visible content must support both Spanish and English, including section names/titles that currently only display the section name.",
       "acceptance": [
         "All visible site content must support Spanish and English.",
@@ -156,7 +156,7 @@
     {
       "id": "BOOT-009",
       "name": "Section Anchor Routing",
-      "status": "pending",
+      "status": "done",
       "description": "Implement section-based routing using URL hash anchors for all main site sections.",
       "acceptance": [
         "Each main section must have a unique anchor id.",

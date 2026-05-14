@@ -30,6 +30,8 @@ const navLabels: Record<string, Record<"es" | "en", string>> = {
 };
 
 const currentPath = Astro.url.pathname;
+const currentHash = Astro.url.hash || "";
+const fullPath = currentPath + currentHash;
 ---
 
 <header class="header">
@@ -51,7 +53,7 @@ const currentPath = Astro.url.pathname;
                 href={link.href}
                 class:list={[
                   "header-nav-link",
-                  currentPath === link.href ? "header-nav-link--active" : "",
+                  fullPath === link.href ? "header-nav-link--active" : "",
                 ]}
                 data-i18n-nav={link.key}
               >
@@ -95,7 +97,10 @@ const currentPath = Astro.url.pathname;
             <li class="mobile-menu-item">
               <a
                 href={link.href}
-                class="mobile-menu-link"
+                class:list={[
+                  "mobile-menu-link",
+                  fullPath === link.href ? "header-nav-link--active" : "",
+                ]}
                 data-mobile-menu-link
                 data-i18n-nav={link.key}
               >
@@ -244,6 +249,11 @@ const currentPath = Astro.url.pathname;
       font-weight: var(--weight-space-medium);
       color: var(--text-base);
       transition: color duration-300 ease-in-out;
+
+      &.header-nav-link--active {
+        color: var(--color-accent);
+        font-weight: var(--weight-space-semibold);
+      }
 
       &:hover {
         color: var(--color-accent);

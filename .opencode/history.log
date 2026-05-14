@@ -125,3 +125,18 @@
 - **Changes**: [Updated `src/utils/lang.ts` to add `bindLangListeners()` helper function with proper remove/add pattern. Added `astro:page-load` event listener to rebind language toggle listeners after DOM swap, following the same pattern used in mobile-menu.ts and theme.ts.]
 - **Verification**: Build completed successfully (`npm run build`). Language toggle now properly rebinds listeners after each page transition.
 - **Closure**: Task [LANG-FIX] marked as `done`.
+### 2026-05-13 — [BOOT-008: Global Language Switch]
+
+- **Agent**: Coder #1
+- **Plan**: Create a centralized i18n dictionary (`src/i18n/ui.json`) and extend the language utils to support global content translation. All section components updated to use `data-i18n-content` attributes for real-time language switching without page refresh.
+- **Changes**: [Created `src/i18n/ui.json` with ES/EN translations for all section titles. Updated `src/utils/lang.ts` to import UI dictionary, added `getUITranslation()` and `updateContentLabels()` functions, integrated `updateContentLabels` into `updateLangUI()` for automatic content updates on language change. Updated all 6 section components (`Home.astro`, `About.astro`, `Experience.astro`, `Portfolio.astro`, `Blog.astro`, `Contact.astro`) with `data-i18n-content` attributes replacing hardcoded text.]
+- **Verification**: Build completed successfully (`npm run build`). Generated HTML contains `data-i18n-content` attributes on all sections. UI dictionary bundled in client JS. Language toggle now updates navigation labels AND section content simultaneously via `updateContentLabels()`.
+- **Closure**: Task [BOOT-008] marked as `done`.
+
+### 2026-05-13 — [BOOT-009: Section Anchor Routing]
+
+- **Agent**: Coder #1
+- **Plan**: Add id attributes to all section components matching navigation hash routes, create anchor routing utility for smooth scrolling and ClientRouter survival, and ensure active nav state updates with hash-based navigation.
+- **Changes**: [Added `id` attributes to all 6 section components (home/about/experience/portfolio/blog/contact). Added `Blog` import and component to `src/pages/index.astro`. Created `src/utils/anchor-routing.ts` with `scrollToHash()`, `initAnchorRouting()`, hash-link click interception, and Astro ClientRouter event handling. Updated `src/layouts/MainLayout.astro` with script importing `initAnchorRouting()`. Updated `src/components/ui/header.astro` with hash-aware active nav state logic and mobile-menu active class CSS.]
+- **Verification**: Build completed successfully (`npm run build`, 3 pages, zero errors). Sections now scroll smoothly via `scrollIntoView({ behavior: "smooth" })`. Active nav state updates dynamically on hash change. Hash links use `pushState` for URL updates.
+- **Closure**: Task [BOOT-009] marked as `done`.
