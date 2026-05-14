@@ -190,3 +190,13 @@
 - **Changes**: [Rewrote `src/data/about.json` as Strapi v4 single-type mock (data.attributes + localizations). Rewrote `src/components/sections/About.astro` with server-side image import, Diamond icon component, BEM grid layout, scoped CSS (mobile-first, 2-column desktop at 768px, order: -1/+0 for stacking), and embedded bilingual JSON. Created `src/utils/about.ts` with `initAboutLangSwitch()`, inline SVG for client-side diamond icon rendering, and Astro ClientRouter survival.]
 - **Verification**: Build succeeded (`npx astro build`): 14 pages, zero errors. ESLint passed (`npx eslint src/utils/about.ts`): zero warnings, zero errors (auto-fixed 2 prettier formatting issues).
 - **Closure**: Task [FEAT-002] marked as `done`.
+
+---
+
+### 2026-05-14 — [FEAT-004: Portfolio Adaptive Project Display]
+
+- **Agent**: Coder #1
+- **Plan**: Implement the Portfolio section with adaptive layout — a 3-column card grid on desktop (480px+) and an interactive accordion on mobile (<480px). Restructure portafolio.json to Strapi v4 single-type mock pattern matching home.json / about.json. Create FileIcon component. Build portfolio.ts utility for client-side i18n and accordion logic.
+- **Changes**: [Rewrote `src/data/portafolio.json` as Strapi v4 shape (data.id:5, attributes + localizations with ES/EN locales, createdAt/updatedAt/publishedAt timestamps, all 6 projects preserved). Created `src/components/icons/FileIcon.astro` (stroke-based outline SVG, Props interface matching icon conventions). Created `src/utils/portfolio.ts` with `initPortfolioLangSwitch()`, `initPortfolioAccordion()`, `updatePortfolioContent()` for dynamic i18n (title, intro, view_more, per-project title/description/tags/links), inline GitHub/Globe/File SVG strings for client-side link rebuild, accordion toggle with one-open-at-a-time behavior, chevron rotation, max-height transition, and clone-trigger pattern to avoid duplicate listeners. Rewrote `src/components/sections/Portfolio.astro` with Strapi v4 data access helpers, mobile-first scoped CSS (BEM naming, desktop grid 2-col at 480px / 3-col at 768px, accordion hidden on desktop, grid hidden on mobile), scroll-snap container with hidden scrollbar, blue-tinted tech tags (rgba(51,31,232,0.1)), description 3-line clamp, card hover elevation, view_more button with accent border/fill transition.]
+- **Verification**: Build succeeded (`npx astro build`): 14 pages, zero errors. Verified embedded JSON in dist/index.html contains both ES and EN locale data. Verified generated JS bundle (4.88 kB) includes all 8 helper functions and 3 inline SVG templates. Desktop grid and mobile accordion markup both present in output.
+- **Closure**: Task [FEAT-004] marked as `done`.
