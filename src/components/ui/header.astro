@@ -60,60 +60,9 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <script>
-  const STORAGE_KEY = "carloscndev-theme";
-  const DARK = "dark";
-  const LIGHT = "light";
+  import { initThemeListener } from "../../utils/theme.ts";
 
-  function getStoredTheme() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === DARK || stored === LIGHT) {
-      return stored;
-    }
-    return null;
-  }
-
-  function setStoredTheme(theme) {
-    localStorage.setItem(STORAGE_KEY, theme);
-  }
-
-  function getPreferredTheme() {
-    const stored = getStoredTheme();
-    if (stored) return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? DARK
-      : LIGHT;
-  }
-
-  function applyTheme(theme) {
-    const html = document.documentElement;
-    if (theme === DARK) {
-      html.classList.add(DARK);
-    } else {
-      html.classList.remove(DARK);
-    }
-    setStoredTheme(theme);
-  }
-
-  function toggleTheme() {
-    const current = document.documentElement.classList.contains(DARK)
-      ? DARK
-      : LIGHT;
-    const next = current === DARK ? LIGHT : DARK;
-    applyTheme(next);
-  }
-
-  applyTheme(getPreferredTheme());
-  document.addEventListener("astro:after-swap", () =>
-    applyTheme(getPreferredTheme()),
-  );
-
-  document.addEventListener("astro:page-load", () => {
-    const toggleBtn = document.getElementById("theme-toggle-button");
-    if (toggleBtn) {
-      toggleBtn.removeEventListener("click", toggleTheme);
-      toggleBtn.addEventListener("click", toggleTheme);
-    }
-  });
+  initThemeListener();
 </script>
 
 <style>
