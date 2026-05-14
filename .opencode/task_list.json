@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 36,
-    "completed": 34,
+    "completed": 36,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -448,7 +448,7 @@
     {
       "id": "FIX-017",
       "name": "Experience Description-to-Tags Spacing",
-      "status": "pending",
+      "status": "done",
       "description": "Set spacing between description text and technology pills: 2rem on desktop, 1rem on mobile.",
       "acceptance": [
         "Description to tags gap: 2rem desktop",
@@ -458,7 +458,7 @@
     {
       "id": "FIX-018",
       "name": "Carousel Dots Color",
-      "status": "pending",
+      "status": "done",
       "description": "Change carousel pagination dots colors: inactive = --color-word, active = --color-accent.",
       "acceptance": [
         "Inactive dot: border-color --color-word, background transparent",
