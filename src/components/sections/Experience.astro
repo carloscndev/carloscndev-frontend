@@ -164,9 +164,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .experience-section {
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: var(--spacing-lg);
+    width: 100%;
+    max-width: 100%;
   }
   .experience-section::-webkit-scrollbar {
     display: none;
@@ -218,6 +221,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   .experience-carousel__slide {
     flex: 0 0 100%;
+    min-width: 0;
     scroll-snap-align: start;
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
@@ -252,6 +256,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     font-size: var(--font-size-body-mobile);
     color: var(--text-base);
     line-height: 1.7;
+    overflow-wrap: break-word;
   }
   .experience-carousel__description p {
     margin-bottom: var(--spacing-sm);
