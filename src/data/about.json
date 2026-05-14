@@ -2,17 +2,14 @@
   "es": {
     "about": {
       "title": "Un poco sobre mi",
-      "subtitle": "Un poco sobre mi",
-      "description_p1": "Soy un ingeniero de software con más de ocho años de experiencia. Mi trabajo se ha centrado principalmente en el desarrollo frontend, aunque también poseo experiencia en sistemas backend y en el desarrollo de pipelines de CI/CD.",
-      "description_p2": "En los últimos años, me he centrado en sistemas de inteligencia artificial generativa y aprendizaje automático, específicamente en lo que respecta a la integración de modelos de lenguaje grande (LLMs) en flujos de trabajo de productos del mundo real.",
-      "tech_intro": "Algunas de las tecnologías con las que he trabajado recientemente incluyen:",
+      "contentText": "<p>Soy ingeniero de software con más de 8 años de experiencia. Me enfoco principalmente en desarrollo <strong>frontend</strong>, aunque también tengo experiencia en <strong>backend</strong> y en la creación de pipelines de <strong>CI/CD</strong>.</p><p>Recientemente me he enfocado en sistemas de <strong>inteligencia artificial generativa</strong> y <strong>machine learning</strong>, incluyendo la integración de modelos de lenguaje (<strong>LLMs</strong>) en flujos de trabajo de productos reales.</p><p>Algunas tecnologías con las que he trabajado recientemente:</p>",
       "technologies": [
-        { "name": "Ecosistema de React", "icon": "react-icon" },
-        { "name": "TypeScript", "icon": "typescript-icon" },
-        { "name": "Node.js", "icon": "node-icon" },
-        { "name": "LLMs", "icon": "llm-icon" },
-        { "name": "Astro", "icon": "astro-icon" },
-        { "name": "Python", "icon": "python-icon" }
+        { "name": "Ecosistema de React", "icon": "diamond" },
+        { "name": "TypeScript", "icon": "diamond" },
+        { "name": "Node.js", "icon": "diamond" },
+        { "name": "LLMs", "icon": "diamond" },
+        { "name": "Astro", "icon": "diamond" },
+        { "name": "Python", "icon": "diamond" }
       ],
       "image": "working.png"
     }
@@ -20,17 +17,14 @@
   "en": {
     "about": {
       "title": "A bit about me",
-      "subtitle": "A bit about me",
-      "description_p1": "I am a software engineer with over eight years of experience. My work has been primarily focused on frontend development, although I also possess experience in backend systems and the development of CI/CD pipelines.",
-      "description_p2": "In recent years, I have been focusing on generative AI and machine learning systems, specifically regarding the integration of Large Language Models (LLMs) into real-world product workflows.",
-      "tech_intro": "Some of the technologies with which I have recently worked include:",
+      "contentText": "<p>I'm a software engineer with more than 8 years of experience. My main focus is <strong>frontend</strong> development, although I also have experience in <strong>backend</strong> systems and building <strong>CI/CD</strong> pipelines.</p><p>Recently, I’ve been focused on <strong>generative artificial intelligence</strong> and <strong>machine learning</strong> systems, including integrating language models (<strong>LLMs</strong>) into real product workflows.</p><p>Some technologies I’ve worked with recently:</p>",
       "technologies": [
-        { "name": "React Ecosystem", "icon": "react-icon" },
-        { "name": "TypeScript", "icon": "typescript-icon" },
-        { "name": "Node.js", "icon": "node-icon" },
-        { "name": "LLMs", "icon": "llm-icon" },
-        { "name": "Astro", "icon": "astro-icon" },
-        { "name": "Python", "icon": "python-icon" }
+        { "name": "React Ecosystem", "icon": "diamond" },
+        { "name": "TypeScript", "icon": "diamond" },
+        { "name": "Node.js", "icon": "diamond" },
+        { "name": "LLMs", "icon": "diamond" },
+        { "name": "Astro", "icon": "diamond" },
+        { "name": "Python", "icon": "diamond" }
       ],
       "image": "working.png"
     }
