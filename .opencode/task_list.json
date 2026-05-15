@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 48,
+    "completed": 49,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -587,7 +587,7 @@
     {
       "id": "FIX-031",
       "name": "Portfolio Card Icons Right-Aligned on Mobile",
-      "status": "pending",
+      "status": "done",
       "description": "Align card link icons to the right on mobile accordion layout.",
       "acceptance": ["Link icons right-aligned in mobile accordion cards"]
     },

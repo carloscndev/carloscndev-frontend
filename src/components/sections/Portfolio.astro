@@ -253,6 +253,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .portfolio-accordion__item {
     border-radius: var(--border-radius);
     overflow: hidden;
+    background: var(--color-tech-primary-light);
+  }
+
+  :global(.dark) .portfolio-accordion__item {
+    background: var(--color-tech-primary-dark);
   }
 
   .portfolio-accordion__trigger {
@@ -339,6 +344,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .portfolio-accordion__links {
     display: flex;
     gap: var(--spacing-sm);
+    justify-content: flex-end;
   }
 
   .portfolio-accordion__link {
