@@ -155,11 +155,7 @@ function updatePortfolioContent(lang: Lang): void {
         "[data-project-tags]",
       );
       if (tagsContainer) {
-        const tagClass = tagsContainer.classList.contains(
-          "portfolio-accordion__tags",
-        )
-          ? "portfolio-accordion__tag"
-          : "portfolio-card__tag";
+        const tagClass = "tech-pill tech-pill--card";
         buildTagElements(project.technologies, tagsContainer, tagClass);
       }
 

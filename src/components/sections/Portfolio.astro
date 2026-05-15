@@ -1,9 +1,11 @@
 ---
 import portfolioDataRaw from "../../data/portafolio.json";
 import Diamond from "../icons/Diamond.astro";
+import TechPill from "../ui/TechPill.astro";
 import GithubIcon from "../icons/GithubIcon.astro";
 import BlogLink from "../icons/BlogLink.astro";
 import FileIcon from "../icons/FileIcon.astro";
+import ArrowDown from "../icons/ArrowDown.astro";
 
 const currentLang = "es";
 
@@ -94,7 +96,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
           </p>
           <div class="portfolio-card__tags" data-project-tags>
             {project.technologies.map((tech: string) => (
-              <span class="portfolio-card__tag">{tech}</span>
+              <TechPill label={tech} variant="card" />
             ))}
           </div>
         </div>
@@ -144,7 +146,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             </p>
             <div class="portfolio-accordion__tags" data-project-tags>
               {project.technologies.map((tech: string) => (
-                <span class="portfolio-accordion__tag">{tech}</span>
+                <TechPill label={tech} variant="card" />
               ))}
             </div>
             <div class="portfolio-accordion__links" data-project-links>
@@ -188,13 +190,10 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
   </div>
 
-  <a
-    href="/portfolio"
-    class="portfolio-section__view-more"
-    data-portfolio-viewmore
-  >
-    {data.view_more}
-  </a>
+  <div class="portfolio-section__view-more" data-portfolio-viewmore>
+    <span>{data.view_more}</span>
+    <ArrowDown size="20" class="portfolio-section__view-more-icon" />
+  </div>
 </section>
 
 <script>
@@ -342,16 +341,6 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     margin-bottom: var(--spacing-sm);
   }
 
-  .portfolio-accordion__tag {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--text-base);
-    background: rgba(51, 31, 232, 0.1);
-    border: 1px solid rgba(51, 31, 232, 0.25);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-
   .portfolio-accordion__links {
     display: flex;
     gap: var(--spacing-sm);
@@ -374,32 +363,27 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     border-radius: 4px;
   }
 
-  /* View More button */
+  /* View More */
   .portfolio-section__view-more {
-    display: block;
-    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
     margin: var(--spacing-lg) auto 0;
     font-family: var(--font-body);
     font-size: var(--font-size-body-mobile);
-    color: var(--color-accent);
-    border: 1px solid var(--color-accent);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    transition:
-      background-color 300ms ease,
-      color 300ms ease;
+    color: var(--text-base);
     text-align: center;
+    cursor: pointer;
+    transition: color 300ms ease;
   }
 
   .portfolio-section__view-more:hover {
-    background-color: var(--color-accent);
-    color: var(--bg-primary);
+    color: var(--color-accent);
   }
 
-  .portfolio-section__view-more:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
-    border-radius: var(--border-radius);
+  .portfolio-section__view-more-icon {
+    color: var(--color-accent);
   }
 
   /* Desktop grid: visible >= 480px, accordion hidden */
@@ -483,16 +467,6 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     flex-wrap: wrap;
     gap: var(--spacing-xs);
     margin-bottom: var(--spacing-sm);
-  }
-
-  .portfolio-card__tag {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--text-base);
-    background: rgba(51, 31, 232, 0.1);
-    border: 1px solid rgba(51, 31, 232, 0.25);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-xs) var(--spacing-sm);
   }
 
   .portfolio-card__links {

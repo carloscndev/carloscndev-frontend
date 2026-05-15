@@ -1,15 +1,18 @@
 ---
 interface Props {
   label: string;
+  variant?: "default" | "card";
 }
 
-const { label } = Astro.props;
+const { label, variant = "default" } = Astro.props;
 ---
 
-<span class="tech-pill">{label}</span>
+<span class:list={["tech-pill", variant === "card" ? "tech-pill--card" : ""]}>
+  {label}
+</span>
 
 <style>
-  .tech-pill {
+  :global(.tech-pill) {
     display: inline-block;
     font-family: var(--font-body);
     font-size: 0.75rem;
@@ -24,11 +27,23 @@ const { label } = Astro.props;
     margin-bottom: var(--spacing-sm);
   }
 
+  :global(.tech-pill--card) {
+    font-size: 0.75rem;
+    font-weight: var(--weight-inter-regular);
+    padding: 0.5rem 0.75rem;
+  }
+
   @media (min-width: 768px) {
-    .tech-pill {
+    :global(.tech-pill) {
       font-size: 1.125rem;
       font-weight: var(--weight-inter-medium);
       padding: 0.5rem 1rem;
+    }
+
+    :global(.tech-pill--card) {
+      font-size: 0.75rem;
+      font-weight: var(--weight-inter-regular);
+      padding: 0.5rem 0.75rem;
     }
   }
 </style>

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 45,
+    "completed": 46,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -555,7 +555,7 @@
     {
       "id": "FIX-028",
       "name": "Use TechPill in Portfolio Cards",
-      "status": "pending",
+      "status": "done",
       "description": "Replace inline tech tags in portfolio cards with the existing reusable TechPill component.",
       "acceptance": [
         "Portfolio cards use TechPill.astro for tech tags",
