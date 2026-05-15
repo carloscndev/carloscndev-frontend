@@ -192,8 +192,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   <div class="portfolio-section__view-more" data-portfolio-viewmore>
     <span>{data.view_more}</span>
-    <ArrowDown size="20" class="portfolio-section__view-more-icon" />
   </div>
+  <ArrowDown size="20" class="portfolio-section__view-more-icon" />
 </section>
 
 <script>
@@ -371,8 +371,9 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     gap: var(--spacing-xs);
     margin: var(--spacing-lg) auto 0;
     font-family: var(--font-body);
-    font-size: var(--font-size-body-mobile);
-    color: var(--text-base);
+    font-size: 1.125rem;
+    font-weight: var(--weight-inter-medium);
+    color: var(--color-word);
     text-align: center;
     cursor: pointer;
     transition: color 300ms ease;
@@ -382,7 +383,15 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     color: var(--color-accent);
   }
 
-  .portfolio-section__view-more-icon {
+  :global(.portfolio-section__view-more-icon) {
+    display: block;
+    margin: var(--spacing-xs) auto 0;
+    color: var(--color-word);
+    cursor: pointer;
+    transition: color 300ms ease;
+  }
+
+  :global(.portfolio-section__view-more-icon):hover {
     color: var(--color-accent);
   }
 
