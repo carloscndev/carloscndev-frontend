@@ -422,11 +422,15 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     flex-direction: column;
     border-radius: var(--border-radius);
     border: 1px solid rgba(47, 66, 160, 0.2);
-    background: var(--bg-primary);
+    background: var(--color-tech-primary-light);
     padding: var(--spacing-md);
     transition:
       transform 300ms ease,
       box-shadow 300ms ease;
+  }
+
+  :global(.dark) .portfolio-grid__card {
+    background: var(--color-tech-primary-dark);
   }
 
   :global(.dark) .portfolio-grid__card {

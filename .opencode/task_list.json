@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 44,
+    "completed": 45,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -545,7 +545,7 @@
     {
       "id": "FIX-027",
       "name": "Portfolio Card Background",
-      "status": "pending",
+      "status": "done",
       "description": "Change card background to --color-tech-primary-dark for dark theme and --color-tech-primary-light for light theme.",
       "acceptance": [
         "Dark theme card bg: --color-tech-primary-dark",
