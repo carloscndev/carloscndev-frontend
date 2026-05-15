@@ -251,13 +251,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   }
 
   .portfolio-accordion__item {
-    border: 1px solid rgba(47, 66, 160, 0.15);
     border-radius: var(--border-radius);
     overflow: hidden;
-  }
-
-  :global(.dark) .portfolio-accordion__item {
-    border-color: rgba(127, 139, 228, 0.15);
   }
 
   .portfolio-accordion__trigger {
@@ -414,29 +409,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius);
-    border: 1px solid rgba(47, 66, 160, 0.2);
     background: var(--color-tech-primary-light);
     padding: var(--spacing-md);
-    transition:
-      transform 300ms ease,
-      box-shadow 300ms ease;
   }
 
   :global(.dark) .portfolio-grid__card {
     background: var(--color-tech-primary-dark);
-  }
-
-  :global(.dark) .portfolio-grid__card {
-    border-color: rgba(127, 139, 228, 0.2);
-  }
-
-  .portfolio-grid__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  }
-
-  :global(.dark) .portfolio-grid__card:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   }
 
   .portfolio-card__header {

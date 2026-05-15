@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 51,
-    "completed": 46,
+    "completed": 48,
     "current_sprint": "Phase 1: Zero-State & Foundation"
   },
   "tasks": [
@@ -565,7 +565,7 @@
     {
       "id": "FIX-029",
       "name": "Portfolio View More Link Style",
-      "status": "pending",
+      "status": "done",
       "description": "Change 'Ver más' from a button to a text link with the ArrowDown icon below, centered.",
       "acceptance": [
         "Ver más is plain text, not a button",
@@ -576,7 +576,7 @@
     {
       "id": "FIX-030",
       "name": "Remove Portfolio Card Border and Shadow",
-      "status": "pending",
+      "status": "done",
       "description": "Remove border, border-radius, and box-shadow from portfolio cards.",
       "acceptance": [
         "Cards have no border",
