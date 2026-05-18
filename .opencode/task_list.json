@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 55,
+    "total_tasks": 57,
     "completed": 55,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -659,6 +659,31 @@
         "Hovering the text also triggers the icon hover color",
         "Hovering the icon also triggers the text hover color",
         "Desktop and mobile layouts both updated"
+      ]
+    },
+    {
+      "id": "FIX-038",
+      "name": "Portfolio Card Hover Effect Matching Blog Cards",
+      "status": "pending",
+      "description": "Portfolio cards must have the same hover effect as the blog cards: a vertical upward displacement on hover plus cursor pointer. Currently portfolio cards lack these interactive cues.",
+      "acceptance": [
+        "Portfolio cards have cursor: pointer on hover",
+        "Portfolio cards translate upward (translateY) on hover matching blog card behavior",
+        "Hover transition is smooth (matching existing transition patterns)",
+        "Desktop grid cards and mobile accordion items both affected",
+        "Hover effect does not interfere with accordion expand/collapse on mobile"
+      ]
+    },
+    {
+      "id": "FIX-039",
+      "name": "Conditional View More for Portfolio",
+      "status": "pending",
+      "description": "The 'Ver más' element and ArrowNext icon at the bottom of the Portfolio section must only appear when there are more than 6 project cards. If there are 6 or fewer projects, the element should be hidden.",
+      "acceptance": [
+        "View More hidden when projects.length <= 6",
+        "View More visible when projects.length > 6",
+        "Server-rendered decision (no flicker from client-side hide/show)",
+        "ArrowNext icon hidden along with View More text"
       ]
     }
   ]
