@@ -2,9 +2,9 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 51,
+    "total_tasks": 49,
     "completed": 49,
-    "current_sprint": "Phase 1: Zero-State & Foundation"
+    "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
     {
@@ -590,27 +590,6 @@
       "status": "done",
       "description": "Align card link icons to the right on mobile accordion layout.",
       "acceptance": ["Link icons right-aligned in mobile accordion cards"]
-    },
-    {
-      "id": "FIX-032",
-      "name": "Fix Mobile Accordion Trembling",
-      "status": "pending",
-      "description": "When opening one accordion card on mobile, the others tremble/shake in a strange way, affecting UX.",
-      "acceptance": [
-        "Opening a card does not cause visual trembling in other cards",
-        "Smooth accordion expand/collapse animation"
-      ]
-    },
-    {
-      "id": "FIX-033",
-      "name": "Portfolio View More Scroll Behavior",
-      "status": "pending",
-      "description": "Clicking 'Ver más' should trigger a scroll within portfolio-grid (desktop) or portfolio-accordion (mobile) to reveal more cards, without leaving the current view.",
-      "acceptance": [
-        "Ver más triggers internal scroll in portfolio-grid on desktop",
-        "Ver más triggers internal scroll in portfolio-accordion on mobile",
-        "Does not navigate away from the section"
-      ]
     }
   ]
 }
