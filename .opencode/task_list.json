@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 55,
-    "completed": 52,
+    "completed": 53,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -630,7 +630,7 @@
     {
       "id": "FIX-035",
       "name": "Portfolio Card Content-to-Pills Spacing",
-      "status": "pending",
+      "status": "done",
       "description": "The vertical gap between the card description text and the tech pills must equal the gap between the card title and the description text for consistent visual rhythm.",
       "acceptance": [
         "Description-to-pills gap equals title-to-description gap",

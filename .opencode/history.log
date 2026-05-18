@@ -260,3 +260,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — changed `.portfolio-card__diamond` and `.portfolio-accordion__diamond` from `color: var(--color-accent)` to `color: var(--color-word)`. Wrapped `.portfolio-card__link`, `.portfolio-card__link:hover`, `.portfolio-card__link:focus-visible`, `.portfolio-accordion__link`, `.portfolio-accordion__link:hover`, and `.portfolio-accordion__link:focus-visible` color rules with `:global()` to apply to dynamically created DOM elements.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-034] marked as `done`.
+
+---
+
+### 2026-05-18 — [FIX-035: Portfolio Card Content-to-Pills Spacing]
+
+- **Agent**: Coder #1
+- **Plan**: Equalize the vertical gap between card description text and tech pills to match the gap between card title and description (1rem). Previously title→description was 1rem but description→pills was var(--spacing-sm) (0.5rem).
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — changed `.portfolio-card__description` and `.portfolio-accordion__description` `margin-bottom` from `var(--spacing-sm)` to `1rem`. Added `padding-top: 1rem` to `.portfolio-accordion__panel--open` for consistent header-to-content gap in mobile accordion.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-035] marked as `done`.
