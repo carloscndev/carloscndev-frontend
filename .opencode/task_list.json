@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 55,
-    "completed": 53,
+    "completed": 54,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -641,7 +641,7 @@
     {
       "id": "FIX-036",
       "name": "Theme Transition Icon Flicker",
-      "status": "pending",
+      "status": "done",
       "description": "When switching between dark and light themes, the Portfolio card icons exhibit an unwanted flicker: they briefly darken/change color before settling to the correct theme color. Remove this visual glitch.",
       "acceptance": [
         "No visible flicker or color flash on icons during theme toggle",

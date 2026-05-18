@@ -486,6 +486,18 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     border-radius: 4px;
   }
 
+  /* Prevent Safari icon flicker during theme transitions */
+  :global(.portfolio-card__link svg),
+  :global(.portfolio-card__link path),
+  :global(.portfolio-accordion__link svg),
+  :global(.portfolio-accordion__link path),
+  :global(.portfolio-card__diamond),
+  :global(.portfolio-card__diamond path),
+  :global(.portfolio-accordion__diamond),
+  :global(.portfolio-accordion__diamond path) {
+    transition: none;
+  }
+
   /* 3-column grid at 768px */
   @media (min-width: 768px) {
     .portfolio-section {

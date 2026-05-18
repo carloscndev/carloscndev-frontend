@@ -270,3 +270,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — changed `.portfolio-card__description` and `.portfolio-accordion__description` `margin-bottom` from `var(--spacing-sm)` to `1rem`. Added `padding-top: 1rem` to `.portfolio-accordion__panel--open` for consistent header-to-content gap in mobile accordion.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-035] marked as `done`.
+
+---
+
+### 2026-05-18 — [FIX-036: Theme Transition Icon Flicker (Safari)]
+
+- **Agent**: Coder #1
+- **Plan**: Remove the Safari-specific icon flicker that occurs during Dark/Light theme transitions. Root cause: `global.css` applies `transition: fill 400ms, stroke 400ms` to all `svg`/`path` elements, which competes with the parent link's `transition: color 300ms` during theme changes, producing a visible intermediate dark flash in Safari. Fix: override with `transition: none` on all Portfolio card icon SVGs and paths.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — added CSS rule setting `transition: none` on `:global(.portfolio-card__link) svg, path, :global(.portfolio-accordion__link) svg, path, :global(.portfolio-card__diamond), path, :global(.portfolio-accordion__diamond), path`. Hover behavior unaffected — the parent link's `color` transition still works.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-036] marked as `done`.
