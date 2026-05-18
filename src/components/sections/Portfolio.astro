@@ -3,9 +3,9 @@ import portfolioDataRaw from "../../data/portafolio.json";
 import Diamond from "../icons/Diamond.astro";
 import TechPill from "../ui/TechPill.astro";
 import GithubIcon from "../icons/GithubIcon.astro";
-import BlogLink from "../icons/BlogLink.astro";
+import ExternalLink from "../icons/ExternalLink.astro";
 import FileIcon from "../icons/FileIcon.astro";
-import ArrowDown from "../icons/ArrowDown.astro";
+import ArrowNext from "../icons/ArrowNext.astro";
 
 const currentLang = "es";
 
@@ -72,7 +72,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                   rel="noopener"
                   aria-label="Demo"
                 >
-                  <BlogLink size="18" />
+                  <ExternalLink size="18" />
                 </a>
               )}
               {project.links.article && (
@@ -169,7 +169,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                   rel="noopener"
                   aria-label="Demo"
                 >
-                  <BlogLink size="16" />
+                  <ExternalLink size="16" />
                 </a>
               )}
               {project.links.article && (
@@ -193,7 +193,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   <div class="portfolio-section__view-more" data-portfolio-viewmore>
     <span>{data.view_more}</span>
   </div>
-  <ArrowDown size="20" class="portfolio-section__view-more-icon" />
+  <ArrowNext size="20" class="portfolio-section__view-more-icon" />
 </section>
 
 <script>

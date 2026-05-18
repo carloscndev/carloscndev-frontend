@@ -527,10 +527,10 @@
       "id": "FIX-025",
       "name": "Portfolio Correct Link Icons",
       "status": "done",
-      "description": "Use correct icons from components/icons for each link type: repo=GithubIcon, demo=BlogLink, article=FileIcon.",
+      "description": "Use correct icons from components/icons for each link type: repo=GithubIcon, demo=ExternalLink, article=FileIcon.",
       "acceptance": [
         "repo → GithubIcon",
-        "demo → BlogLink",
+        "demo → ExternalLink",
         "article → FileIcon",
         "All icons from components/icons folder"
       ]
@@ -566,10 +566,10 @@
       "id": "FIX-029",
       "name": "Portfolio View More Link Style",
       "status": "done",
-      "description": "Change 'Ver más' from a button to a text link with the ArrowDown icon below, centered.",
+      "description": "Change 'Ver más' from a button to a text link with the ArrowNext icon below, centered.",
       "acceptance": [
         "Ver más is plain text, not a button",
-        "ArrowDown icon below the text",
+        "ArrowNext icon below the text",
         "Both centered"
       ]
     },
