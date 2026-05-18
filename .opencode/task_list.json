@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 58,
-    "completed": 57,
+    "total_tasks": 59,
+    "completed": 58,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -689,13 +689,25 @@
     {
       "id": "FIX-040",
       "name": "Mobile Accordion Trembling on Card Open",
-      "status": "pending",
+      "status": "done",
       "description": "When a portfolio accordion card is opened on mobile, all the other cards tremble/shake in an unintended way. This behavior started after adding the desktop card hover effects (FIX-038: transform transition on .portfolio-grid__card). The transform/transition properties are likely leaking to the accordion items.",
       "acceptance": [
         "No trembling or shaking on any accordion item when one is expanded",
         "Desktop card hover effect (translateY) still works correctly",
         "Accordion expand/collapse transition remains smooth",
         "No visual regression on desktop grid cards"
+      ]
+    },
+    {
+      "id": "FIX-041",
+      "name": "Experience Carousel Dot Indicator Breaks on Home Navigation",
+      "status": "pending",
+      "description": "On mobile, when tapping the '/' (Home) navigation link, the IntersectionObserver-driven dot indicator in the Experience carousel stops updating. The dots no longer reflect the current active slide after navigating home.",
+      "acceptance": [
+        "Carousel dots update correctly after clicking the Home link",
+        "IntersectionObserver rebinds properly after ClientRouter navigation",
+        "Dots reflect the correct active slide on both initial load and after navigation",
+        "Issue only occurs on mobile (< 768px)"
       ]
     }
   ]
