@@ -300,3 +300,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — added `cursor: pointer`, `transition: transform 300ms ease, box-shadow 300ms ease`, and `:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }` to `.portfolio-grid__card`. Added `:global(.dark) .portfolio-grid__card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.4); }` for dark mode.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-038] marked as `done`.
+
+---
+
+### 2026-05-18 — [FIX-039: Conditional View More for Portfolio]
+
+- **Agent**: Coder #1
+- **Plan**: Wrap the "Ver más" section in a server-side conditional (`data.projects.length > 6`) so it only renders when there are more than 6 project cards. With the current 6 projects, the element is hidden. No client-side flicker.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — wrapped `.portfolio-section__view-more-wrapper` in `{data.projects.length > 6 && (...)}` conditional block. Applied `.slice(0, 6)` to both desktop grid and mobile accordion project rendering to cap visible cards at 6.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Confirmed `view-more-wrapper` absent from `dist/index.html` (0 occurrences — 6 projects ≤ 6 threshold).
+- **Closure**: Task [FIX-039] marked as `done`. All 57/57 tasks completed.

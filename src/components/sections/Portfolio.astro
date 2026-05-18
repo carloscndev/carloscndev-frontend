@@ -48,7 +48,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   <!-- Desktop Grid (visible >= 480px) -->
   <div class="portfolio-grid" data-portfolio-grid>
     {
-      data.projects.map((project: any) => (
+      data.projects.slice(0, 6).map((project: any) => (
         <div class="portfolio-grid__card" data-project-id={project.id}>
           <div class="portfolio-card__header">
             <Diamond size="22" class="portfolio-card__diamond" />
@@ -107,7 +107,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   <!-- Mobile Accordion (visible < 480px) -->
   <div class="portfolio-accordion" data-portfolio-accordion>
     {
-      data.projects.map((project: any) => (
+      data.projects.slice(0, 6).map((project: any) => (
         <div
           class="portfolio-accordion__item"
           data-accordion-item
@@ -190,12 +190,16 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
   </div>
 
-  <div class="portfolio-section__view-more-wrapper">
-    <div class="portfolio-section__view-more" data-portfolio-viewmore>
-      <span>{data.view_more}</span>
-    </div>
-    <ArrowNext size="20" class="portfolio-section__view-more-icon" />
-  </div>
+  {
+    data.projects.length > 6 && (
+      <div class="portfolio-section__view-more-wrapper">
+        <div class="portfolio-section__view-more" data-portfolio-viewmore>
+          <span>{data.view_more}</span>
+        </div>
+        <ArrowNext size="20" class="portfolio-section__view-more-icon" />
+      </div>
+    )
+  }
 </section>
 
 <script>
@@ -416,7 +420,6 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     border-radius: var(--border-radius);
     background: var(--color-tech-primary-light);
     padding: var(--spacing-md);
-    cursor: pointer;
     transition:
       transform 300ms ease,
       box-shadow 300ms ease;

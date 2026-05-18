@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 57,
-    "completed": 56,
+    "completed": 57,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -677,7 +677,7 @@
     {
       "id": "FIX-039",
       "name": "Conditional View More for Portfolio",
-      "status": "pending",
+      "status": "done",
       "description": "The 'Ver más' element and ArrowNext icon at the bottom of the Portfolio section must only appear when there are more than 6 project cards. If there are 6 or fewer projects, the element should be hidden.",
       "acceptance": [
         "View More hidden when projects.length <= 6",
