@@ -320,3 +320,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — added `overflow-anchor: none` to `.portfolio-section` to prevent browser scroll anchoring from fighting with accordion panel height changes on mobile. Restored `transition: transform 300ms ease, box-shadow 300ms ease`, `:hover { transform: translateY(-4px); box-shadow: ... }`, and dark-mode hover shadow on `.portfolio-grid__card`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-040] marked as `done`. All 58/58 tasks completed.
+
+---
+
+### 2026-05-18 — [FIX-041: Experience Carousel Dot Indicator Breaks on Home Navigation]
+
+- **Agent**: Coder #1
+- **Plan**: Fix the Experience carousel dot indicator that stops updating on mobile after clicking the "/" (Home) navigation link. Root cause: `initExperienceTabs()` and `initExperienceCarousel()` were called once in Experience.astro's `<script>` tag without rebinding on `astro:page-load`. After Astro ClientRouter navigation to home, the DOM was swapped but listeners were not re-attached.
+- **Changes**: [Rewrote `src/utils/experience.ts` — extracted `bindTabListeners()` and `bindCarouselLogic()` with clone-trigger pattern (cloneNode + replaceWith) for safe rebinding. Added `document.addEventListener("astro:page-load", ...)` to call both bind functions after ClientRouter navigation.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-041] marked as `done`. All 59/59 tasks completed.

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 59,
-    "completed": 58,
+    "completed": 59,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -701,7 +701,7 @@
     {
       "id": "FIX-041",
       "name": "Experience Carousel Dot Indicator Breaks on Home Navigation",
-      "status": "pending",
+      "status": "done",
       "description": "On mobile, when tapping the '/' (Home) navigation link, the IntersectionObserver-driven dot indicator in the Experience carousel stops updating. The dots no longer reflect the current active slide after navigating home.",
       "acceptance": [
         "Carousel dots update correctly after clicking the Home link",

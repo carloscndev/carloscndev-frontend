@@ -23,37 +23,22 @@ function updateExperienceContent(lang: Lang): void {
   });
 }
 
-export function initExperienceTabs(): void {
-  if (typeof document === "undefined") return;
-  const tabs = document.querySelectorAll<HTMLElement>("[data-tab]");
-  const panels = document.querySelectorAll<HTMLElement>("[data-panel]");
+/* ------------------------------------------------------------------ */
+/*  Carousel dot logic (mobile)                                       */
+/* ------------------------------------------------------------------ */
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const id = tab.dataset.tab;
-      tabs.forEach((t) => t.classList.remove("experience-tabs__tab--active"));
-      panels.forEach((p) =>
-        p.classList.remove("experience-tabs__panel--active"),
-      );
-
-      tab.classList.add("experience-tabs__tab--active");
-      document
-        .querySelector(`[data-panel="${id}"]`)
-        ?.classList.add("experience-tabs__panel--active");
-    });
-  });
-}
-
-export function initExperienceCarousel(): void {
+function bindCarouselLogic(): void {
   if (typeof document === "undefined") return;
   const track = document.querySelector<HTMLElement>("[data-carousel-track]");
   const dots = document.querySelectorAll<HTMLElement>("[data-dot]");
 
   if (!track || !dots.length) return;
 
-  // Click en dots
   dots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
+    const cloned = dot.cloneNode(true) as HTMLElement;
+    dot.replaceWith(cloned);
+
+    cloned.addEventListener("click", () => {
       track.scrollTo({
         left: track.offsetWidth * i,
         behavior: "smooth",
@@ -61,13 +46,53 @@ export function initExperienceCarousel(): void {
     });
   });
 
-  // Sync scroll con dots
+  track.onscroll = null;
   track.addEventListener("scroll", () => {
     const index = Math.round(track.scrollLeft / track.offsetWidth);
-    dots.forEach((d, i) =>
-      d.classList.toggle("experience-carousel__dot--active", i === index),
-    );
+    document
+      .querySelectorAll<HTMLElement>("[data-dot]")
+      .forEach((d, i) =>
+        d.classList.toggle("experience-carousel__dot--active", i === index),
+      );
   });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Tab logic (desktop)                                               */
+/* ------------------------------------------------------------------ */
+
+function bindTabListeners(): void {
+  if (typeof document === "undefined") return;
+  const tabs = document.querySelectorAll<HTMLElement>("[data-tab]");
+
+  tabs.forEach((tab) => {
+    const cloned = tab.cloneNode(true) as HTMLElement;
+    tab.replaceWith(cloned);
+
+    cloned.addEventListener("click", () => {
+      const id = cloned.dataset.tab;
+      document
+        .querySelectorAll<HTMLElement>("[data-tab]")
+        .forEach((t) => t.classList.remove("experience-tabs__tab--active"));
+      document
+        .querySelectorAll<HTMLElement>("[data-panel]")
+        .forEach((p) => p.classList.remove("experience-tabs__panel--active"));
+      cloned.classList.add("experience-tabs__tab--active");
+      document
+        .querySelector(`[data-panel="${id}"]`)
+        ?.classList.add("experience-tabs__panel--active");
+    });
+  });
+}
+
+export function initExperienceTabs(): void {
+  if (typeof document === "undefined") return;
+  bindTabListeners();
+}
+
+export function initExperienceCarousel(): void {
+  if (typeof document === "undefined") return;
+  bindCarouselLogic();
 }
 
 export function initExperienceLangSwitch(): void {
@@ -76,3 +101,8 @@ export function initExperienceLangSwitch(): void {
     updateExperienceContent(e.detail.lang),
   );
 }
+
+document.addEventListener("astro:page-load", () => {
+  bindTabListeners();
+  bindCarouselLogic();
+});
