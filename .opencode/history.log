@@ -310,3 +310,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — wrapped `.portfolio-section__view-more-wrapper` in `{data.projects.length > 6 && (...)}` conditional block. Applied `.slice(0, 6)` to both desktop grid and mobile accordion project rendering to cap visible cards at 6.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Confirmed `view-more-wrapper` absent from `dist/index.html` (0 occurrences — 6 projects ≤ 6 threshold).
 - **Closure**: Task [FIX-039] marked as `done`. All 57/57 tasks completed.
+
+---
+
+### 2026-05-18 — [FIX-040: Mobile Accordion Trembling on Card Open]
+
+- **Agent**: Coder #1
+- **Plan**: Fix the mobile accordion trembling that occurred when opening a portfolio card. Root cause: the `transition: transform 300ms ease` and hover effects from FIX-038 were applied globally to `.portfolio-grid__card` without being scoped inside a `@media (min-width: 480px)` query, causing CSS interference with the accordion's `max-height` transitions on mobile. Moved all transform/box-shadow transitions and hover rules inside the desktop breakpoint.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — added `overflow-anchor: none` to `.portfolio-section` to prevent browser scroll anchoring from fighting with accordion panel height changes on mobile. Restored `transition: transform 300ms ease, box-shadow 300ms ease`, `:hover { transform: translateY(-4px); box-shadow: ... }`, and dark-mode hover shadow on `.portfolio-grid__card`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-040] marked as `done`. All 58/58 tasks completed.

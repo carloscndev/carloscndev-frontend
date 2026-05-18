@@ -215,6 +215,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   .portfolio-section {
     height: 100vh;
     overflow-y: auto;
+    overflow-anchor: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: var(--spacing-lg);
@@ -260,6 +261,20 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     border-radius: var(--border-radius);
     overflow: hidden;
     background: var(--color-tech-primary-light);
+  }
+
+  .portfolio-accordion__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 350ms ease,
+      padding 350ms ease;
+    padding: 0 var(--spacing-md);
+  }
+
+  .portfolio-accordion__panel--open {
+    max-height: 600px;
+    padding: 1rem var(--spacing-md) var(--spacing-md);
   }
 
   :global(.dark) .portfolio-accordion__item {
@@ -420,6 +435,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     border-radius: var(--border-radius);
     background: var(--color-tech-primary-light);
     padding: var(--spacing-md);
+    cursor: pointer;
     transition:
       transform 300ms ease,
       box-shadow 300ms ease;
