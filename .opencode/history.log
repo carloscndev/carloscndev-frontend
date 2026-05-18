@@ -280,3 +280,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — added CSS rule setting `transition: none` on `:global(.portfolio-card__link) svg, path, :global(.portfolio-accordion__link) svg, path, :global(.portfolio-card__diamond), path, :global(.portfolio-accordion__diamond), path`. Hover behavior unaffected — the parent link's `color` transition still works.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-036] marked as `done`.
+
+---
+
+### 2026-05-18 — [FIX-037: View More + ArrowNext Unified Hover Container]
+
+- **Agent**: Coder #1
+- **Plan**: Wrap the "Ver más" text and ArrowNext icon in a single parent container so hovering over either triggers the hover color on both simultaneously. Previously they were siblings with independent hover states.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — added `.portfolio-section__view-more-wrapper` container around the "Ver más" text and ArrowNext icon. Moved `cursor`, `color`, and `transition` to the wrapper with `:hover` state. Both children use `color: inherit`. Removed redundant individual hover rules.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-037] marked as `done`. All 55/55 tasks completed.

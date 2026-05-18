@@ -190,10 +190,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
   </div>
 
-  <div class="portfolio-section__view-more" data-portfolio-viewmore>
-    <span>{data.view_more}</span>
+  <div class="portfolio-section__view-more-wrapper">
+    <div class="portfolio-section__view-more" data-portfolio-viewmore>
+      <span>{data.view_more}</span>
+    </div>
+    <ArrowNext size="20" class="portfolio-section__view-more-icon" />
   </div>
-  <ArrowNext size="20" class="portfolio-section__view-more-icon" />
 </section>
 
 <script>
@@ -365,35 +367,32 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   }
 
   /* View More */
-  .portfolio-section__view-more {
+  .portfolio-section__view-more-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xs);
     margin: var(--spacing-lg) auto 0;
-    font-family: var(--font-body);
-    font-size: 1.125rem;
-    font-weight: var(--weight-inter-medium);
     color: var(--color-word);
-    text-align: center;
     cursor: pointer;
     transition: color 300ms ease;
   }
 
-  .portfolio-section__view-more:hover {
+  .portfolio-section__view-more-wrapper:hover {
     color: var(--color-accent);
+  }
+
+  .portfolio-section__view-more {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: var(--weight-inter-medium);
+    text-align: center;
+    color: inherit;
   }
 
   :global(.portfolio-section__view-more-icon) {
     display: block;
-    margin: var(--spacing-xs) auto 0;
-    color: var(--color-word);
-    cursor: pointer;
-    transition: color 300ms ease;
-  }
-
-  :global(.portfolio-section__view-more-icon):hover {
-    color: var(--color-accent);
+    margin-top: var(--spacing-xs);
+    color: inherit;
   }
 
   /* Desktop grid: visible >= 480px, accordion hidden */

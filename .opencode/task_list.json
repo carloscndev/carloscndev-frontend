@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 55,
-    "completed": 54,
+    "completed": 55,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -652,7 +652,7 @@
     {
       "id": "FIX-037",
       "name": "View More + ArrowNext Unified Hover Container",
-      "status": "pending",
+      "status": "done",
       "description": "The 'Ver más' text and ArrowNext icon must be wrapped in a single container element so that hovering over either element triggers the hover state on both simultaneously.",
       "acceptance": [
         "View More text and ArrowNext icon share a single parent container",
