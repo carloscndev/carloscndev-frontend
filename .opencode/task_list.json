@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 49,
-    "completed": 49,
+    "total_tasks": 50,
+    "completed": 50,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -590,6 +590,19 @@
       "status": "done",
       "description": "Align card link icons to the right on mobile accordion layout.",
       "acceptance": ["Link icons right-aligned in mobile accordion cards"]
+    },
+    {
+      "id": "FIX-032",
+      "name": "Missing fill=currentColor in ArrowNext and ExternalLink Icons",
+      "status": "done",
+      "description": "ArrowNext.astro and ExternalLink.astro (also ExternalLink_SVG in portfolio.ts) are missing fill=\"currentColor\", causing icons to render black instead of inheriting CSS color variables. ArrowDown.astro had fill=\"currentColor\" and ArrowNext lost it during the rename.",
+      "acceptance": [
+        "ArrowNext.astro path uses fill=\"currentColor\"",
+        "ExternalLink.astro path uses fill=\"currentColor\"",
+        "ExternalLink_SVG inline string in portfolio.ts uses fill=\"currentColor\"",
+        "View More arrow inherits --color-word / --color-accent on hover",
+        "Demo link icon inherits --color-word / --color-accent on hover"
+      ]
     }
   ]
 }

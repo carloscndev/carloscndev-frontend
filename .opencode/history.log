@@ -230,3 +230,13 @@
 - **Changes**: [Rewrote `src/data/contact.json` as Strapi v4 mock. Created `src/utils/contact.ts` with `initContactLangSwitch()`. Rewrote `src/components/sections/Contact.astro` with centered inner container, title (👋 emoji), status paragraph, outlined mailto button with hover fill, global footer, and 70vh mobile / 100vh desktop height.]
 - **Verification**: Build succeeded (`npx astro build`): 14 pages, zero errors. Lint clean.
 - **Closure**: Task [FEAT-006] marked as `done`. All 30/30 tasks completed.
+
+---
+
+### 2026-05-18 — [FIX-032: Missing fill=currentColor in ArrowNext and ExternalLink Icons]
+
+- **Agent**: Coder #1
+- **Plan**: Add `fill="currentColor"` to ArrowNext.astro and ExternalLink.astro (both the Astro SVG component and the inline ExternalLink_SVG string in portfolio.ts) so icons inherit CSS color variables instead of rendering black. ArrowDown.astro had `fill="currentColor"` but ArrowNext lost it during the rename in commit b902ed8.
+- **Changes**: [Updated `src/components/icons/ArrowNext.astro` to add `fill="currentColor"` on `<path>`. Updated `src/components/icons/ExternalLink.astro` to add `fill="currentColor"` on `<path>`. Updated `src/utils/portfolio.ts` ExternalLink_SVG to include `fill="currentColor"` on `<svg>`. Created task FIX-032 in task_list.json with 5 acceptance criteria.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-032] marked as `done`.
