@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 57,
-    "completed": 55,
+    "completed": 56,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -664,7 +664,7 @@
     {
       "id": "FIX-038",
       "name": "Portfolio Card Hover Effect Matching Blog Cards",
-      "status": "pending",
+      "status": "done",
       "description": "Portfolio cards must have the same hover effect as the blog cards: a vertical upward displacement on hover plus cursor pointer. Currently portfolio cards lack these interactive cues.",
       "acceptance": [
         "Portfolio cards have cursor: pointer on hover",

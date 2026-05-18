@@ -290,3 +290,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — added `.portfolio-section__view-more-wrapper` container around the "Ver más" text and ArrowNext icon. Moved `cursor`, `color`, and `transition` to the wrapper with `:hover` state. Both children use `color: inherit`. Removed redundant individual hover rules.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-037] marked as `done`. All 55/55 tasks completed.
+
+---
+
+### 2026-05-18 — [FIX-038: Portfolio Card Hover Effect Matching Blog Cards]
+
+- **Agent**: Coder #1
+- **Plan**: Add the same hover effect to Portfolio desktop cards that Blog cards have: cursor pointer, translateY(-4px) upward displacement, and box-shadow with dark mode variant.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — added `cursor: pointer`, `transition: transform 300ms ease, box-shadow 300ms ease`, and `:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }` to `.portfolio-grid__card`. Added `:global(.dark) .portfolio-grid__card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.4); }` for dark mode.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-038] marked as `done`.
