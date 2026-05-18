@@ -250,3 +250,13 @@
 - **Changes**: [Rewrote `src/components/icons/ExternalLink.astro` — replaced viewBox `0 0 509 511.54` with `0 0 24 24` and replaced path with a clean Material Design external-link fill path. Rewrote `ExternalLink_SVG` inline SVG in `src/utils/portfolio.ts` with the same 24x24 viewBox and matching path. Added `xmlns` attribute to both for standards compliance.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. JS bundle for Portfolio reduced from 5.41 kB to 4.72 kB.
 - **Closure**: Task [FIX-033] marked as `done`.
+
+---
+
+### 2026-05-18 — [FIX-034: Portfolio Card Icon Color]
+
+- **Agent**: Coder #1
+- **Plan**: Change Diamond icon color from `--color-accent` to `--color-word` in both desktop grid and mobile accordion cards. Also fix link icon colors that displayed as `--text-base` instead of `--color-word` because Astro's scoped CSS (`data-astro-cid-*`) doesn't apply to dynamically created anchor elements in portfolio.ts. Wrapped `.portfolio-card__link` and `.portfolio-accordion__link` color rules in `:global()` so they apply to both server-rendered and client-rendered elements.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — changed `.portfolio-card__diamond` and `.portfolio-accordion__diamond` from `color: var(--color-accent)` to `color: var(--color-word)`. Wrapped `.portfolio-card__link`, `.portfolio-card__link:hover`, `.portfolio-card__link:focus-visible`, `.portfolio-accordion__link`, `.portfolio-accordion__link:hover`, and `.portfolio-accordion__link:focus-visible` color rules with `:global()` to apply to dynamically created DOM elements.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-034] marked as `done`.

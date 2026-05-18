@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 55,
-    "completed": 51,
+    "completed": 52,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -618,7 +618,7 @@
     {
       "id": "FIX-034",
       "name": "Portfolio Card Icon Color",
-      "status": "pending",
+      "status": "done",
       "description": "All icons inside Portfolio cards (GitHub, ExternalLink, File, Diamond) must use --color-word as their base color, matching the card link styling.",
       "acceptance": [
         "All card link icons use --color-word",

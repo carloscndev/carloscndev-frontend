@@ -291,8 +291,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     background: rgba(51, 31, 232, 0.08);
   }
 
-  .portfolio-accordion__diamond {
-    color: var(--color-accent);
+  :global(.portfolio-accordion__diamond) {
+    color: var(--color-word);
     flex-shrink: 0;
   }
 
@@ -347,18 +347,18 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     justify-content: flex-end;
   }
 
-  .portfolio-accordion__link {
+  :global(.portfolio-accordion__link) {
     color: var(--color-word);
     transition: color 300ms ease;
     display: inline-flex;
     align-items: center;
   }
 
-  .portfolio-accordion__link:hover {
+  :global(.portfolio-accordion__link):hover {
     color: var(--color-accent);
   }
 
-  .portfolio-accordion__link:focus-visible {
+  :global(.portfolio-accordion__link):focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 4px;
     border-radius: 4px;
@@ -430,9 +430,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     margin-bottom: var(--spacing-sm);
   }
 
-  .portfolio-card__diamond {
-    color: var(--color-accent);
-    flex-shrink: 0;
+  :global(.portfolio-card__diamond) {
+    color: var(--color-word);
   }
 
   .portfolio-card__title {
@@ -467,7 +466,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     gap: var(--spacing-sm);
   }
 
-  .portfolio-card__link {
+  :global(.portfolio-card__link) {
     color: var(--color-word);
     transition:
       color 300ms ease,
@@ -476,12 +475,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     align-items: center;
   }
 
-  .portfolio-card__link:hover {
+  :global(.portfolio-card__link):hover {
     color: var(--color-accent);
     transform: translateY(-2px);
   }
 
-  .portfolio-card__link:focus-visible {
+  :global(.portfolio-card__link):focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 4px;
     border-radius: 4px;
