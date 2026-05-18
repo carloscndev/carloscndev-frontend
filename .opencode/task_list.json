@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 57,
+    "total_tasks": 58,
     "completed": 57,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -684,6 +684,18 @@
         "View More visible when projects.length > 6",
         "Server-rendered decision (no flicker from client-side hide/show)",
         "ArrowNext icon hidden along with View More text"
+      ]
+    },
+    {
+      "id": "FIX-040",
+      "name": "Mobile Accordion Trembling on Card Open",
+      "status": "pending",
+      "description": "When a portfolio accordion card is opened on mobile, all the other cards tremble/shake in an unintended way. This behavior started after adding the desktop card hover effects (FIX-038: transform transition on .portfolio-grid__card). The transform/transition properties are likely leaking to the accordion items.",
+      "acceptance": [
+        "No trembling or shaking on any accordion item when one is expanded",
+        "Desktop card hover effect (translateY) still works correctly",
+        "Accordion expand/collapse transition remains smooth",
+        "No visual regression on desktop grid cards"
       ]
     }
   ]
