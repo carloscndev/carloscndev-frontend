@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 50,
+    "total_tasks": 55,
     "completed": 50,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -602,6 +602,63 @@
         "ExternalLink_SVG inline string in portfolio.ts uses fill=\"currentColor\"",
         "View More arrow inherits --color-word / --color-accent on hover",
         "Demo link icon inherits --color-word / --color-accent on hover"
+      ]
+    },
+    {
+      "id": "FIX-033",
+      "name": "ExternalLink Icon Size Mismatch",
+      "status": "pending",
+      "description": "The ExternalLink icon in Portfolio cards renders slightly larger than the adjacent GitHub and File icons, breaking visual alignment in the card header row.",
+      "acceptance": [
+        "ExternalLink icon matches the same rendered size as GithubIcon and FileIcon",
+        "All three icons in card header are visually aligned (same height/width)",
+        "Fix applies to both server-rendered (Astro component) and client-rendered (portfolio.ts inline SVG)"
+      ]
+    },
+    {
+      "id": "FIX-034",
+      "name": "Portfolio Card Icon Color",
+      "status": "pending",
+      "description": "All icons inside Portfolio cards (GitHub, ExternalLink, File, Diamond) must use --color-word as their base color, matching the card link styling.",
+      "acceptance": [
+        "All card link icons use --color-word",
+        "Diamond icon in card header uses --color-word",
+        "Hover state uses --color-accent",
+        "Fix applies to both server-rendered and client-rendered icons"
+      ]
+    },
+    {
+      "id": "FIX-035",
+      "name": "Portfolio Card Content-to-Pills Spacing",
+      "status": "pending",
+      "description": "The vertical gap between the card description text and the tech pills must equal the gap between the card title and the description text for consistent visual rhythm.",
+      "acceptance": [
+        "Description-to-pills gap equals title-to-description gap",
+        "Desktop and mobile layouts both updated",
+        "Accordion mobile layout maintains same spacing ratio"
+      ]
+    },
+    {
+      "id": "FIX-036",
+      "name": "Theme Transition Icon Flicker",
+      "status": "pending",
+      "description": "When switching between dark and light themes, the Portfolio card icons exhibit an unwanted flicker: they briefly darken/change color before settling to the correct theme color. Remove this visual glitch.",
+      "acceptance": [
+        "No visible flicker or color flash on icons during theme toggle",
+        "Icons transition smoothly or instantly without intermediate dark state",
+        "Applies to all Portfolio card icons (GitHub, ExternalLink, File, Diamond)"
+      ]
+    },
+    {
+      "id": "FIX-037",
+      "name": "View More + ArrowNext Unified Hover Container",
+      "status": "pending",
+      "description": "The 'Ver más' text and ArrowNext icon must be wrapped in a single container element so that hovering over either element triggers the hover state on both simultaneously.",
+      "acceptance": [
+        "View More text and ArrowNext icon share a single parent container",
+        "Hovering the text also triggers the icon hover color",
+        "Hovering the icon also triggers the text hover color",
+        "Desktop and mobile layouts both updated"
       ]
     }
   ]
