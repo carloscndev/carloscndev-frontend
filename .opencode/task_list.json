@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 55,
-    "completed": 50,
+    "completed": 51,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -607,7 +607,7 @@
     {
       "id": "FIX-033",
       "name": "ExternalLink Icon Size Mismatch",
-      "status": "pending",
+      "status": "done",
       "description": "The ExternalLink icon in Portfolio cards renders slightly larger than the adjacent GitHub and File icons, breaking visual alignment in the card header row.",
       "acceptance": [
         "ExternalLink icon matches the same rendered size as GithubIcon and FileIcon",

@@ -240,3 +240,13 @@
 - **Changes**: [Updated `src/components/icons/ArrowNext.astro` to add `fill="currentColor"` on `<path>`. Updated `src/components/icons/ExternalLink.astro` to add `fill="currentColor"` on `<path>`. Updated `src/utils/portfolio.ts` ExternalLink_SVG to include `fill="currentColor"` on `<svg>`. Created task FIX-032 in task_list.json with 5 acceptance criteria.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-032] marked as `done`.
+
+---
+
+### 2026-05-18 — [FIX-033: ExternalLink Icon Size Mismatch]
+
+- **Agent**: Coder #1
+- **Plan**: Normalize the ExternalLink icon from a non-standard 509x511.54 viewBox to a standard 24x24 viewBox so it renders at the same visual size as the adjacent GithubIcon and FileIcon cards.
+- **Changes**: [Rewrote `src/components/icons/ExternalLink.astro` — replaced viewBox `0 0 509 511.54` with `0 0 24 24` and replaced path with a clean Material Design external-link fill path. Rewrote `ExternalLink_SVG` inline SVG in `src/utils/portfolio.ts` with the same 24x24 viewBox and matching path. Added `xmlns` attribute to both for standards compliance.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. JS bundle for Portfolio reduced from 5.41 kB to 4.72 kB.
+- **Closure**: Task [FIX-033] marked as `done`.
