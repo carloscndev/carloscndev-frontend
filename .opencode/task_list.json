@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 59,
+    "total_tasks": 63,
     "completed": 59,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -708,6 +708,54 @@
         "IntersectionObserver rebinds properly after ClientRouter navigation",
         "Dots reflect the correct active slide on both initial load and after navigation",
         "Issue only occurs on mobile (< 768px)"
+      ]
+    },
+    {
+      "id": "FIX-042",
+      "name": "Blog Section Title and Intro Left Alignment",
+      "status": "pending",
+      "description": "The blog section title and intro text are currently centered. They must be left-aligned to match the visual design. The issue may be caused by the `max-width` combined with `text-align: center`.",
+      "acceptance": [
+        "blog-section__title is left-aligned",
+        "blog-section__intro is left-aligned",
+        "Desktop and mobile layouts both updated",
+        "No visual regression on other elements"
+      ]
+    },
+    {
+      "id": "FIX-043",
+      "name": "Replace Blog Card Image Placeholder with wallpaper.jpg",
+      "status": "pending",
+      "description": "All blog cards currently use a gradient placeholder (blog-card__image-placeholder) as the card image. Replace it with the actual wallpaper image located at src/assets/images/wallper.jpg.",
+      "acceptance": [
+        "All blog cards display wallpaper.jpg as their image",
+        "blog-card__image shows the actual image instead of the gradient placeholder",
+        "Image aspect ratio and sizing match the current card design",
+        "Dark/light theme compatibility maintained"
+      ]
+    },
+    {
+      "id": "FIX-044",
+      "name": "Fix Blog Card Element Order",
+      "status": "pending",
+      "description": "The order of elements in blog cards is incorrect. The correct order should be: title first, then read time and date (left-aligned), and category on the right side.",
+      "acceptance": [
+        "Card order: title → read time + date (left) / category (right)",
+        "Read time and date are aligned to the left",
+        "Category is aligned to the right in the same row",
+        "Desktop and mobile layouts both updated"
+      ]
+    },
+    {
+      "id": "FIX-045",
+      "name": "Add Category Icons to Blog Cards",
+      "status": "pending",
+      "description": "Each blog card must display the category icon next to the category label. Tech posts use TechIcon, Running posts use RunningIcon. Icons are in src/components/icons/.",
+      "acceptance": [
+        "Tech category cards show TechIcon next to the category label",
+        "Running category cards show RunningIcon next to the category label",
+        "Icons are imported from src/components/icons/",
+        "Icons match the existing icon style and color conventions"
       ]
     }
   ]
