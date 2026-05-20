@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 67,
-    "completed": 66,
+    "completed": 67,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -795,7 +795,7 @@
     {
       "id": "FIX-049",
       "name": "Blog Card Hover Overlay with Resume and ExternalLink",
-      "status": "pending",
+      "status": "done",
       "description": "On blog card hover: the blog-card__image opacity must change to 0.5, and a resume/overlay text must appear in --text-base color, plus an ExternalLink icon in the top-right corner of the image, also in --text-base color.",
       "acceptance": [
         "Image opacity 0.5 on card hover",

@@ -400,3 +400,13 @@
 - **Changes**: [Updated `src/components/sections/Blog.astro` — changed `color: var(--color-word)` to `color: var(--text-base)` in `.blog-section__intro`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-048] marked as `done`.
+
+---
+
+### 2026-05-20 — [FIX-049: Blog Card Hover Overlay with Resume and ExternalLink]
+
+- **Agent**: Coder #1
+- **Plan**: Add a hover overlay to blog cards showing the resume text and an ExternalLink icon. On hover, the image fades to 0.5 opacity and the overlay appears with the resume text in --text-base and the icon positioned top-right.
+- **Changes**: [Updated `src/components/sections/Blog.astro` — imported ExternalLink icon. Added `.blog-card__overlay` div with `<ExternalLink>` icon and `<p>` resume text inside `.blog-card__image`. Added CSS: `position: relative` on `.blog-card__image`, `.blog-card__image-img { transition: opacity 300ms }`, `.blog-card:hover .blog-card__image-img { opacity: 0.5 }`, overlay absolute positioning with opacity transition, icon top-right absolute, text centered with 4-line clamp.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-049] marked as `done`. All 67/67 tasks completed.

@@ -3,6 +3,7 @@ import blogData from "../../data/blog.json";
 import wallperImage from "../../assets/images/wallper.jpg";
 import TechIcon from "../icons/TechIcon.astro";
 import RunningIcon from "../icons/RunningIcon.astro";
+import ExternalLink from "../icons/ExternalLink.astro";
 
 const lang = "es";
 const data = blogData[lang];
@@ -35,7 +36,11 @@ const blogDataJson = JSON.stringify(blogData);
               alt={post.title}
               class="blog-card__image-img"
             />
+            <div class="blog-card__overlay">
+              <p class="blog-card__overlay-text">{post.resume || ""}</p>
+            </div>
           </div>
+          <ExternalLink size="18" class="blog-card__overlay-icon" />
           <div class="blog-card__content">
             <h3 class="blog-card__title" data-post-title>
               {post.title}
@@ -152,12 +157,60 @@ const blogDataJson = JSON.stringify(blogData);
   .blog-card__image {
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    position: relative;
   }
 
   .blog-card__image-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: opacity 300ms ease;
+  }
+
+  .blog-card:hover .blog-card__image-img {
+    opacity: 0.2;
+  }
+
+  .blog-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-md);
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+  }
+
+  .blog-card:hover .blog-card__overlay {
+    opacity: 1;
+  }
+
+  :global(.blog-card__overlay-icon) {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    color: var(--text-base);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .blog-card:hover :global(.blog-card__overlay-icon) {
+    opacity: 1;
+  }
+
+  .blog-card__overlay-text {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-base);
+    line-height: 1.5;
+    text-align: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 
   .blog-card__content {
