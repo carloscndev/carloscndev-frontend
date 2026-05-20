@@ -420,3 +420,13 @@
 - **Changes**: [Updated `src/components/sections/Blog.astro` — added `.blog-accordion` container with `blog-accordion__item` items (trigger with TechIcon/RunningIcon, title, ExternalLink, chevron; panel with resume text). Added mobile CSS: `.blog-accordion` flex column with category-themed backgrounds and text colors, trigger/pill/chevron styles, panel max-height animation, one-open-at-a-time JS logic. Desktop: grid shown, accordion hidden via `@media (min-width: 768px)`. Updated `src/utils/blog.ts` — added `initBlogAccordion()`, `bindBlogAccordion()` with clone-trigger pattern and external link click exclusion, `closeAllPanelsExcept()`, and `astro:page-load` rebinding. Post-build fixes: restored `position: relative` on `.blog-card` for overlay icon, per-category trigger icon colors via `[data-category-theme]`, trigger icon `align-items: flex-start`, `overflow-anchor: none` on `.blog-section`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FEAT-007] marked as `done`. All 68/68 tasks completed.
+
+---
+
+### 2026-05-20 — [FIX-050: Contact Section Status Color to --text-base]
+
+- **Agent**: Coder #1
+- **Plan**: Change contact-section__status color from --color-word to --text-base.
+- **Changes**: [Updated `src/components/sections/Contact.astro` — changed `color: var(--color-word)` to `color: var(--text-base)` in `.contact-section__status`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-050] marked as `done`.
