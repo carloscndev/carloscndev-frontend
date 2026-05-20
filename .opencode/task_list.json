@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 68,
+    "total_tasks": 71,
     "completed": 68,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -822,6 +822,37 @@
         "Data Structure Adaptability: Ensure the JSON schema (data/blog) supports properties like: { id, title, description, url, iconType }. Hardcoded text strings are strictly forbidden.",
         "Localization Support: All titles, subtitles, and descriptions must pull data dynamically from the localized schema, ensuring reactive translation swapping (Es/En) without forcing a hard page reload.",
         "Strict Layout Containment: Ensure the mobile list fills 100% of the available viewport width with proper responsive padding to prevent any horizontal page overflow."
+      ]
+    },
+    {
+      "id": "FIX-050",
+      "name": "Contact Section Status Color to --text-base",
+      "status": "pending",
+      "description": "Change the contact-section__status text color from --color-word to --text-base.",
+      "acceptance": [
+        "contact-section__status uses color: var(--text-base)",
+        "Dark and light themes both updated"
+      ]
+    },
+    {
+      "id": "FIX-051",
+      "name": "Contact Section Status Width to 100%",
+      "status": "pending",
+      "description": "The contact-section__status element must occupy 100% width to match the other section text elements.",
+      "acceptance": [
+        "contact-section__status has width: 100%",
+        "Text remains left-aligned",
+        "Mobile and desktop layouts both updated"
+      ]
+    },
+    {
+      "id": "FIX-052",
+      "name": "Contact Section Title Margin-Bottom Triple",
+      "status": "pending",
+      "description": "Increase the margin-bottom of contact-section__title to triple its current value (var(--spacing-md) = 0.5rem → 1.5rem).",
+      "acceptance": [
+        "contact-section__title margin-bottom: 1.5rem",
+        "Mobile and desktop layouts both updated"
       ]
     }
   ]
