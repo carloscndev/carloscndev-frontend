@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 63,
-    "completed": 59,
+    "completed": 60,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -713,7 +713,7 @@
     {
       "id": "FIX-042",
       "name": "Blog Section Title and Intro Left Alignment",
-      "status": "pending",
+      "status": "done",
       "description": "The blog section title and intro text are currently centered. They must be left-aligned to match the visual design. The issue may be caused by the `max-width` combined with `text-align: center`.",
       "acceptance": [
         "blog-section__title is left-aligned",

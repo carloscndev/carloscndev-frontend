@@ -330,3 +330,13 @@
 - **Changes**: [Rewrote `src/utils/experience.ts` — extracted `bindTabListeners()` and `bindCarouselLogic()` with clone-trigger pattern (cloneNode + replaceWith) for safe rebinding. Added `document.addEventListener("astro:page-load", ...)` to call both bind functions after ClientRouter navigation.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-041] marked as `done`. All 59/59 tasks completed.
+
+---
+
+### 2026-05-20 — [FIX-042: Blog Section Title and Intro Left Alignment]
+
+- **Agent**: Coder #1
+- **Plan**: Change blog section title and intro text from centered to left-aligned to match the visual design.
+- **Changes**: [Updated `src/components/sections/Blog.astro` — changed `.blog-section__header { text-align: center }` to `text-align: left` and `.blog-section__intro { text-align: center }` to `text-align: left`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-042] marked as `done`.
