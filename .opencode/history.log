@@ -490,3 +490,13 @@
 - **Changes**: [Updated `src/components/ui/SocialSidebar.astro` — added `position: relative; z-index: 1` to `.social-sidebar` mobile block.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-056] marked as `done`. All 75/75 tasks completed. Also updated social media links to correct URLs (Instagram, LinkedIn, mailto).
+
+---
+
+### 2026-05-20 — [FIX-057: Add CV Link to Social Sidebar]
+
+- **Agent**: Coder #1
+- **Plan**: Add a new CV icon and link pointing to https://carloscndev.github.io to the social sidebar. Also add hover tooltips to all social sidebar icons.
+- **Changes**: [Updated `src/components/ui/SocialSidebar.astro` — imported CVIcon from `@components/icons/CV.astro`. Added new `<li>` with `LinkWrapper` href="https://carloscndev.github.io" tooltip="Resume" and `<CVIcon />`. Added tooltip props to all social links (GitHub, Instagram, LinkedIn, Email, Resume). Updated `src/components/ui/LinkWrapper.astro` — added `tooltip` prop, renders `<span class="link-tooltip">` inside `<a>`. Added CSS for tooltip pill: absolute position above link, right-aligned with `translateX(60%)`, `margin-bottom: 4px`, `background: var(--color-accent)`, `color: var(--text-base)`, opacity 0→1 on parent hover. Added `position: relative` and `display: inline-flex` to `.link`. Updated `src/components/icons/CV.astro` — added `fill="currentColor"` to SVG root.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-057] marked as `done`. All 76/76 tasks completed.

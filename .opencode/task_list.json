@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 75,
-    "completed": 75,
+    "total_tasks": 76,
+    "completed": 76,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -899,6 +899,18 @@
         "Social media icons are clickable on mobile",
         "Icons render above any overlapping elements",
         "Desktop sidebar unaffected"
+      ]
+    },
+    {
+      "id": "FIX-057",
+      "name": "Add CV Link to Social Sidebar",
+      "status": "done",
+      "description": "Add a new CV link with CV icon to the SocialSidebar component. URL: https://carloscndev.github.io, using the existing CV icon from components/icons.",
+      "acceptance": [
+        "CV icon and link added to social sidebar",
+        "Link points to https://carloscndev.github.io",
+        "Icon uses the existing CV.astro component",
+        "Mobile and desktop layouts both updated"
       ]
     }
   ]

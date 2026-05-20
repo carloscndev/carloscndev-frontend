@@ -2,9 +2,11 @@
 interface Props {
   href: string;
   isExternal?: boolean;
+  title?: string;
+  tooltip?: string;
 }
 
-const { href, isExternal = true } = Astro.props;
+const { href, isExternal = true, title, tooltip } = Astro.props;
 const isMail = href.startsWith("mailto:");
 const useTargetBlank = isExternal && !isMail;
 ---
@@ -14,6 +16,37 @@ const useTargetBlank = isExternal && !isMail;
   target={useTargetBlank ? "_blank" : undefined}
   rel={useTargetBlank ? "noopener" : undefined}
   class="link"
+  title={title}
 >
   <slot />
+  {tooltip && <span class="link-tooltip">{tooltip}</span>}
 </a>
+
+<style>
+  .link {
+    position: relative;
+    display: inline-flex;
+  }
+
+  :global(.link-tooltip) {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    transform: translateX(60%);
+    margin-bottom: 4px;
+    background: var(--color-accent);
+    color: var(--text-base);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+
+  .link:hover :global(.link-tooltip) {
+    opacity: 1;
+  }
+</style>

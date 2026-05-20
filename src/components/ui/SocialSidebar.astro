@@ -3,29 +3,45 @@ import GithubIcon from "@components/icons/GithubIcon.astro";
 import InstagramIcon from "@components/icons/InstagramIcon.astro";
 import LinkedInIcon from "@components/icons/LinkedInIcon.astro";
 import MailIcon from "@components/icons/MailIcon.astro";
+import CVIcon from "@components/icons/CV.astro";
 import LinkWrapper from "./LinkWrapper.astro";
 ---
 
 <aside class="social-sidebar">
   <ul class="social-sidebar-list" role="list">
     <li class="social-sidebar-list-item">
-      <LinkWrapper href="https://github.com/carloscndev">
+      <LinkWrapper href="https://github.com/carloscndev" tooltip="GitHub">
         <GithubIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
-      <LinkWrapper href="https://www.instagram.com/carloscndev.isrunning/">
+      <LinkWrapper
+        href="https://www.instagram.com/carloscndev.isrunning/"
+        tooltip="Instagram"
+      >
         <InstagramIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
-      <LinkWrapper href="https://www.linkedin.com/in/carloscndev/">
+      <LinkWrapper
+        href="https://www.linkedin.com/in/carloscndev/"
+        tooltip="LinkedIn"
+      >
         <LinkedInIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
-      <LinkWrapper href="mailto:carloscndev@gmail.com" isExternal={false}>
+      <LinkWrapper
+        href="mailto:carloscndev@gmail.com"
+        isExternal={false}
+        tooltip="Email"
+      >
         <MailIcon />
+      </LinkWrapper>
+    </li>
+    <li class="social-sidebar-list-item">
+      <LinkWrapper href="https://carloscndev.github.io" tooltip="Resume">
+        <CVIcon />
       </LinkWrapper>
     </li>
   </ul>
