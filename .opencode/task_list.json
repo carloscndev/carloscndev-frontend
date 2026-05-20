@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 71,
+    "total_tasks": 72,
     "completed": 71,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -853,6 +853,18 @@
       "acceptance": [
         "contact-section__title margin-bottom: 1.5rem",
         "Mobile and desktop layouts both updated"
+      ]
+    },
+    {
+      "id": "FIX-053",
+      "name": "Mobile Scroll-Snap Section Centering on Menu Navigation",
+      "status": "pending",
+      "description": "On mobile, when navigating to a section via the menu (hash anchor), the scroll-snap does not center the target section properly — part of the content remains outside the viewport. The issue occurs because the anchor routing's smooth scrolling conflicts with the scroll-snap behavior.",
+      "acceptance": [
+        "Clicking a mobile menu link centers the target section correctly in the viewport",
+        "No content is cut off or partially visible after navigation",
+        "Scroll-snap still works correctly on manual scroll",
+        "Desktop navigation unaffected"
       ]
     }
   ]
