@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 74,
+    "total_tasks": 75,
     "completed": 71,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -888,6 +888,17 @@
         "Close button remains on the right side",
         "Theme and language toggles are on the left side of the same row",
         "Mobile menu layout otherwise unchanged"
+      ]
+    },
+    {
+      "id": "FIX-056",
+      "name": "Social Media Icons z-index on Mobile",
+      "status": "pending",
+      "description": "On mobile, the social media icons (GitHub, Instagram, LinkedIn, Mail) in the bottom bar are not clickable/functional because they are being overlapped by other elements. Add z-index: 1 to ensure they render on top and are interactive.",
+      "acceptance": [
+        "Social media icons are clickable on mobile",
+        "Icons render above any overlapping elements",
+        "Desktop sidebar unaffected"
       ]
     }
   ]
