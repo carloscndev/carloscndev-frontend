@@ -410,3 +410,13 @@
 - **Changes**: [Updated `src/components/sections/Blog.astro` — imported ExternalLink icon. Added `.blog-card__overlay` div with `<ExternalLink>` icon and `<p>` resume text inside `.blog-card__image`. Added CSS: `position: relative` on `.blog-card__image`, `.blog-card__image-img { transition: opacity 300ms }`, `.blog-card:hover .blog-card__image-img { opacity: 0.5 }`, overlay absolute positioning with opacity transition, icon top-right absolute, text centered with 4-line clamp.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-049] marked as `done`. All 67/67 tasks completed.
+
+---
+
+### 2026-05-20 — [FEAT-007: Blog Mobile Accordion Refactoring]
+
+- **Agent**: Coder #1
+- **Plan**: Implement mobile accordion layout for blog cards (< 768px), matching the portfolio accordion pattern. Desktop grid remains unchanged.
+- **Changes**: [Updated `src/components/sections/Blog.astro` — added `.blog-accordion` container with `blog-accordion__item` items (trigger with TechIcon/RunningIcon, title, ExternalLink, chevron; panel with resume text). Added mobile CSS: `.blog-accordion` flex column with category-themed backgrounds and text colors, trigger/pill/chevron styles, panel max-height animation, one-open-at-a-time JS logic. Desktop: grid shown, accordion hidden via `@media (min-width: 768px)`. Updated `src/utils/blog.ts` — added `initBlogAccordion()`, `bindBlogAccordion()` with clone-trigger pattern and external link click exclusion, `closeAllPanelsExcept()`, and `astro:page-load` rebinding. Post-build fixes: restored `position: relative` on `.blog-card` for overlay icon, per-category trigger icon colors via `[data-category-theme]`, trigger icon `align-items: flex-start`, `overflow-anchor: none` on `.blog-section`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FEAT-007] marked as `done`. All 68/68 tasks completed.

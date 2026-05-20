@@ -3,6 +3,7 @@ import type { Lang } from "./lang";
 interface BlogPost {
   id: string;
   title: string;
+  resume?: string;
   read_time: string;
   date: string;
   category: string;
@@ -42,20 +43,23 @@ export function updateBlogEntries(lang: Lang): void {
 
   // Update each card by matching the data-post-id attribute
   blogData.blog.posts.forEach((post) => {
-    const card = document.querySelector(`[data-post-id="${post.id}"]`);
-    if (!card) return;
+    const cards = document.querySelectorAll(`[data-post-id="${post.id}"]`);
+    cards.forEach((card) => {
+      const titleEl = card.querySelector("[data-post-title]");
+      if (titleEl) titleEl.textContent = post.title;
 
-    const titleEl = card.querySelector("[data-post-title]");
-    if (titleEl) titleEl.textContent = post.title;
+      const categoryEl = card.querySelector("[data-post-category]");
+      if (categoryEl) categoryEl.textContent = post.category;
 
-    const categoryEl = card.querySelector("[data-post-category]");
-    if (categoryEl) categoryEl.textContent = post.category;
+      const dateEl = card.querySelector("[data-post-date]");
+      if (dateEl) dateEl.textContent = post.date;
 
-    const dateEl = card.querySelector("[data-post-date]");
-    if (dateEl) dateEl.textContent = post.date;
+      const readTimeEl = card.querySelector("[data-post-read-time]");
+      if (readTimeEl) readTimeEl.textContent = post.read_time;
 
-    const readTimeEl = card.querySelector("[data-post-read-time]");
-    if (readTimeEl) readTimeEl.textContent = post.read_time;
+      const resumeEl = card.querySelector("[data-post-resume]");
+      if (resumeEl) resumeEl.textContent = post.resume || "";
+    });
   });
 }
 
@@ -79,5 +83,74 @@ export function initBlogLangSwitch(): void {
 
   document.addEventListener("astro:page-load", () => {
     bindBlogLangSwitch();
+    bindBlogAccordion();
   });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Blog accordion logic (mobile)                                     */
+/* ------------------------------------------------------------------ */
+
+function closeAllPanelsExcept(activePanel: HTMLElement | null): void {
+  const allPanels = document.querySelectorAll<HTMLElement>(
+    "[data-blog-accordion] [data-accordion-panel]",
+  );
+  const allTriggers = document.querySelectorAll<HTMLElement>(
+    "[data-blog-accordion] [data-accordion-trigger]",
+  );
+
+  allPanels.forEach((panel) => {
+    if (panel !== activePanel) {
+      panel.classList.remove("blog-accordion__panel--open");
+    }
+  });
+
+  allTriggers.forEach((trigger) => {
+    const panel = trigger
+      .closest("[data-accordion-item]")
+      ?.querySelector<HTMLElement>("[data-accordion-panel]");
+    if (panel && panel !== activePanel) {
+      trigger.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
+function bindBlogAccordion(): void {
+  if (typeof document === "undefined") return;
+
+  const triggers = document.querySelectorAll<HTMLElement>(
+    "[data-blog-accordion] [data-accordion-trigger]",
+  );
+
+  triggers.forEach((trigger) => {
+    const cloned = trigger.cloneNode(true) as HTMLElement;
+    trigger.replaceWith(cloned);
+
+    cloned.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(".blog-accordion__trigger-link")) return;
+
+      const item = cloned.closest("[data-accordion-item]");
+      if (!item) return;
+
+      const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
+      if (!panel) return;
+
+      const isOpen = panel.classList.contains("blog-accordion__panel--open");
+
+      if (isOpen) {
+        panel.classList.remove("blog-accordion__panel--open");
+        cloned.setAttribute("aria-expanded", "false");
+      } else {
+        closeAllPanelsExcept(panel);
+        panel.classList.add("blog-accordion__panel--open");
+        cloned.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+}
+
+export function initBlogAccordion(): void {
+  if (typeof document === "undefined") return;
+  bindBlogAccordion();
 }

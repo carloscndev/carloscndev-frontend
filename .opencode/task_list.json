@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 68,
-    "completed": 67,
+    "completed": 68,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -807,7 +807,7 @@
     {
       "id": "FEAT-007",
       "name": "Section: Blog Mobile Accordion Refactoring",
-      "status": "pending",
+      "status": "done",
       "description": "Refactor the 'Mi Blog' section for mobile devices. The component must transform from its current layout into an interactive accordion-style vertical list on mobile screens (< 768px). Each post row must feature a dynamic article icon, external link behavior, and a smooth expand/collapse transition for the description.",
       "acceptance": [
         "Implement the Blog section refactoring inside the existing Astro component, preserving the typography token hierarchy for 'Mi Blog' and the subtitle intro.",
