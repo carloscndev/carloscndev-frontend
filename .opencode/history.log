@@ -440,3 +440,13 @@
 - **Changes**: [Updated `src/components/sections/Contact.astro` — replaced `max-width: 560px` with `width: 100%` in `.contact-section__status`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-051] marked as `done`.
+
+---
+
+### 2026-05-20 — [FIX-052: Contact Section Title Margin-Bottom Triple]
+
+- **Agent**: Coder #1
+- **Plan**: Increase contact-section__title margin-bottom from var(--spacing-md) (0.5rem) to 1.5rem.
+- **Changes**: [Updated `src/components/sections/Contact.astro` — changed `margin-bottom: var(--spacing-md)` to `margin-bottom: 1.5rem` in `.contact-section__title`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-052] marked as `done`. All 71/71 tasks completed.

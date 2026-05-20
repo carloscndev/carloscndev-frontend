@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 71,
-    "completed": 70,
+    "completed": 71,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -848,7 +848,7 @@
     {
       "id": "FIX-052",
       "name": "Contact Section Title Margin-Bottom Triple",
-      "status": "pending",
+      "status": "done",
       "description": "Increase the margin-bottom of contact-section__title to triple its current value (var(--spacing-md) = 0.5rem → 1.5rem).",
       "acceptance": [
         "contact-section__title margin-bottom: 1.5rem",
