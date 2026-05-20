@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 72,
+    "total_tasks": 74,
     "completed": 71,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -865,6 +865,29 @@
         "No content is cut off or partially visible after navigation",
         "Scroll-snap still works correctly on manual scroll",
         "Desktop navigation unaffected"
+      ]
+    },
+    {
+      "id": "FIX-054",
+      "name": "Mobile Icons Flicker on Theme Change",
+      "status": "pending",
+      "description": "The icons MobileMenuIcon, GlobeIcon, and CloseIcon in the mobile header/menu flicker briefly when switching between dark and light themes. Same root cause as the portfolio card icon flicker (FIX-036): global CSS transitions on SVG/path elements conflict during theme variable changes.",
+      "acceptance": [
+        "No visible flicker on MobileMenuIcon, GlobeIcon, or CloseIcon during theme toggle",
+        "Icons transition smoothly between themes",
+        "Desktop icons unaffected"
+      ]
+    },
+    {
+      "id": "FIX-055",
+      "name": "Move Theme and Language Toggles in Mobile Menu",
+      "status": "pending",
+      "description": "In the mobile menu overlay, move the theme toggle and language toggle icons to the same row as the close button, but positioned on the opposite side (left). Currently they appear below the menu options.",
+      "acceptance": [
+        "Theme and language toggles are in the same top row as the close button",
+        "Close button remains on the right side",
+        "Theme and language toggles are on the left side of the same row",
+        "Mobile menu layout otherwise unchanged"
       ]
     }
   ]
