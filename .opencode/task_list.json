@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 64,
-    "completed": 63,
+    "completed": 64,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -761,7 +761,7 @@
     {
       "id": "FIX-046",
       "name": "Blog Card Category-Themed Colors",
-      "status": "pending",
+      "status": "done",
       "description": "Blog cards must use semantic category-themed colors instead of the current neutral colors. Running cards: dark background --color-running-primary-dark + text --color-running-secondary-dark, light background --color-running-primary-light + text --color-running-secondary-light. Tech cards: dark background --color-tech-primary-dark + text --color-tech-secondary-dark, light background --color-tech-primary-light + text --color-tech-secondary-light.",
       "acceptance": [
         "Running cards (dark): bg --color-running-primary-dark, text --color-running-secondary-dark",

@@ -116,7 +116,7 @@ const blogDataJson = JSON.stringify(blogData);
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius);
-    background: var(--bg-primary);
+    background: var(--color-tech-primary-light);
     transition:
       transform 300ms ease,
       box-shadow 300ms ease;
@@ -124,8 +124,20 @@ const blogDataJson = JSON.stringify(blogData);
     text-decoration: none;
   }
 
-  :global(.dark) .blog-card {
-    border-color: rgba(127, 139, 228, 0.2);
+  .blog-card[data-category-theme="tech"] {
+    background: var(--color-tech-primary-light);
+  }
+
+  .blog-card[data-category-theme="running"] {
+    background: var(--color-running-primary-light);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="tech"] {
+    background: var(--color-tech-primary-dark);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="running"] {
+    background: var(--color-running-primary-dark);
   }
 
   .blog-card:hover {
@@ -192,6 +204,39 @@ const blogDataJson = JSON.stringify(blogData);
     font-family: var(--font-body);
     font-size: 0.8rem;
     color: var(--color-word);
+  }
+
+  /* Category-themed text colors */
+  .blog-card[data-category-theme="tech"] .blog-card__title,
+  .blog-card[data-category-theme="tech"] .blog-card__read-time,
+  .blog-card[data-category-theme="tech"] .blog-card__meta,
+  .blog-card[data-category-theme="tech"] .blog-card__category {
+    color: var(--color-tech-secondary-light);
+  }
+
+  .blog-card[data-category-theme="running"] .blog-card__title,
+  .blog-card[data-category-theme="running"] .blog-card__read-time,
+  .blog-card[data-category-theme="running"] .blog-card__meta,
+  .blog-card[data-category-theme="running"] .blog-card__category {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__title,
+  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__read-time,
+  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__meta,
+  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__category {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="running"] .blog-card__title,
+  :global(.dark)
+    .blog-card[data-category-theme="running"]
+    .blog-card__read-time,
+  :global(.dark) .blog-card[data-category-theme="running"] .blog-card__meta,
+  :global(.dark)
+    .blog-card[data-category-theme="running"]
+    .blog-card__category {
+    color: var(--color-running-secondary-dark);
   }
 
   @media (min-width: 480px) {

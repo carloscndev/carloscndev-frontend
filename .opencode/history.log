@@ -370,3 +370,13 @@
 - **Changes**: [Updated `src/components/sections/Blog.astro` — imported TechIcon and RunningIcon. Added conditional icon rendering next to category label based on `post.icon`. Updated `.blog-card__category` to `display: inline-flex; align-items: center; gap: 0.25rem`. Added `:global(.blog-card__category-icon)` for icon styling.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-045] marked as `done`. All 63/63 tasks completed.
+
+---
+
+### 2026-05-20 — [FIX-046: Blog Card Category-Themed Colors]
+
+- **Agent**: Coder #1
+- **Plan**: Apply semantic category-themed colors to blog cards using `data-category-theme` attribute. Tech cards use `--color-tech-primary-*` / `--color-tech-secondary-*`, Running cards use `--color-running-primary-*` / `--color-running-secondary-*`. Both light and dark theme variants are handled.
+- **Changes**: [Updated `src/components/sections/Blog.astro` — replaced generic `.blog-card` background with category-themed variants using `[data-category-theme]` selectors. Added light/dark text color rules for `.blog-card__title`, `.blog-card__read-time`, `.blog-card__meta`, and `.blog-card__category`. Removed unused `:global(.dark) .blog-card` border-color rule.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-046] marked as `done`. All 64/64 tasks completed.
