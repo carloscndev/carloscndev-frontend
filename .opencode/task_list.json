@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 67,
-    "completed": 64,
+    "completed": 65,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -775,7 +775,7 @@
     {
       "id": "FIX-047",
       "name": "Remove Cursor Pointer from Portfolio Cards",
-      "status": "pending",
+      "status": "done",
       "description": "Remove the cursor: pointer style from portfolio grid cards. The cards are not clickable links so they should not show a pointer cursor.",
       "acceptance": [
         "Portfolio grid cards do not show cursor: pointer",

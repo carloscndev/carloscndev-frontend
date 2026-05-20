@@ -380,3 +380,13 @@
 - **Changes**: [Updated `src/components/sections/Blog.astro` — replaced generic `.blog-card` background with category-themed variants using `[data-category-theme]` selectors. Added light/dark text color rules for `.blog-card__title`, `.blog-card__read-time`, `.blog-card__meta`, and `.blog-card__category`. Removed unused `:global(.dark) .blog-card` border-color rule.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-046] marked as `done`. All 64/64 tasks completed.
+
+---
+
+### 2026-05-20 — [FIX-047: Remove Cursor Pointer from Portfolio Cards]
+
+- **Agent**: Coder #1
+- **Plan**: Remove the cursor: pointer style from portfolio grid cards since they are not clickable links.
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — removed `cursor: pointer` from `.portfolio-grid__card` CSS block.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-047] marked as `done`.
