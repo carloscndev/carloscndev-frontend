@@ -1,6 +1,8 @@
 ---
 import blogData from "../../data/blog.json";
 import wallperImage from "../../assets/images/wallper.jpg";
+import TechIcon from "../icons/TechIcon.astro";
+import RunningIcon from "../icons/RunningIcon.astro";
 
 const lang = "es";
 const data = blogData[lang];
@@ -47,6 +49,11 @@ const blogDataJson = JSON.stringify(blogData);
               </span>
               <span class="blog-card__category" data-post-category>
                 {post.category}
+                {post.icon === "tech-icon" ? (
+                  <TechIcon size="14" class="blog-card__category-icon" />
+                ) : (
+                  <RunningIcon size="14" class="blog-card__category-icon" />
+                )}
               </span>
             </div>
           </div>
@@ -157,11 +164,19 @@ const blogDataJson = JSON.stringify(blogData);
   }
 
   .blog-card__category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
     font-family: var(--font-titles);
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--color-word);
+  }
+
+  :global(.blog-card__category-icon) {
+    display: inline-block;
+    flex-shrink: 0;
   }
 
   .blog-card__read-time {

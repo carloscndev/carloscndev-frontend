@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 63,
-    "completed": 62,
+    "completed": 63,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -749,7 +749,7 @@
     {
       "id": "FIX-045",
       "name": "Add Category Icons to Blog Cards",
-      "status": "pending",
+      "status": "done",
       "description": "Each blog card must display the category icon next to the category label. Tech posts use TechIcon, Running posts use RunningIcon. Icons are in src/components/icons/.",
       "acceptance": [
         "Tech category cards show TechIcon next to the category label",
