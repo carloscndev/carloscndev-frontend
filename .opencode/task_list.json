@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 75,
-    "completed": 74,
+    "completed": 75,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -893,7 +893,7 @@
     {
       "id": "FIX-056",
       "name": "Social Media Icons z-index on Mobile",
-      "status": "pending",
+      "status": "done",
       "description": "On mobile, the social media icons (GitHub, Instagram, LinkedIn, Mail) in the bottom bar are not clickable/functional because they are being overlapped by other elements. Add z-index: 1 to ensure they render on top and are interactive.",
       "acceptance": [
         "Social media icons are clickable on mobile",

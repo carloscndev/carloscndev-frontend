@@ -480,3 +480,13 @@
 - **Changes**: [Updated `src/components/ui/header.astro` — added `.mobile-menu-header` wrapper with absolute positioning (`top: -7px`) matching the main header height (80px) and padding, containing close button on the left and theme/language toggles on the right. Removed old `.mobile-menu-controls`. Added WebIcon at bottom-right of menu overlay (`position: absolute; bottom: var(--spacing-lg); right: var(--spacing-lg)`, size 60px). Added `.mobile-menu-content` fade + slide-up transition (`opacity 0 → 1, translateY(20px) → 0, 300ms`). Updated `.mobile-menu-close` to remove old absolute positioning. Adjusted mobile-menu-content `justify-content: center` for centered nav options.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-055] marked as `done`.
+
+---
+
+### 2026-05-20 — [FIX-056: Social Media Icons z-index on Mobile]
+
+- **Agent**: Coder #1
+- **Plan**: Add z-index: 1 to the social media sidebar on mobile so the icons render above overlapping elements and are clickable.
+- **Changes**: [Updated `src/components/ui/SocialSidebar.astro` — added `position: relative; z-index: 1` to `.social-sidebar` mobile block.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-056] marked as `done`. All 75/75 tasks completed. Also updated social media links to correct URLs (Instagram, LinkedIn, mailto).
