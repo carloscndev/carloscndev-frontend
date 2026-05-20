@@ -293,6 +293,14 @@ const fullPath = currentPath + currentHash;
     }
   }
 
+  /* Prevent icon flicker during theme transitions (Safari) */
+  :global(.mobile-menu-toggle__icon),
+  :global(.mobile-menu-toggle__icon path),
+  :global(.mobile-menu-close svg),
+  :global(.mobile-menu-close path) {
+    transition: none;
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .mobile-menu-overlay {

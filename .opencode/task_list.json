@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 75,
-    "completed": 72,
+    "completed": 73,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -870,7 +870,7 @@
     {
       "id": "FIX-054",
       "name": "Mobile Icons Flicker on Theme Change",
-      "status": "pending",
+      "status": "done",
       "description": "The icons MobileMenuIcon, GlobeIcon, and CloseIcon in the mobile header/menu flicker briefly when switching between dark and light themes. Same root cause as the portfolio card icon flicker (FIX-036): global CSS transitions on SVG/path elements conflict during theme variable changes.",
       "acceptance": [
         "No visible flicker on MobileMenuIcon, GlobeIcon, or CloseIcon during theme toggle",

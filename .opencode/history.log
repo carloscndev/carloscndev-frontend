@@ -460,3 +460,13 @@
 - **Changes**: [Updated `src/utils/anchor-routing.ts` — changed `scrollIntoView({ block: "start" })` to `scrollIntoView({ block: "center" })` to match the scroll-snap alignment. Also fixed `updateActiveNavLink()` to apply `mobile-menu-link--active` class for mobile menu links (was only applying `header-nav-link--active`).]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-053] marked as `done`.
+
+---
+
+### 2026-05-20 — [FIX-054: Mobile Icons Flicker on Theme Change]
+
+- **Agent**: Coder #1
+- **Plan**: Fix Safari theme transition flicker on MobileMenuIcon, CloseIcon, and GlobeIcon. Same root cause as FIX-036: global CSS `transition: fill/stroke 400ms` on SVG/path conflicts during theme variable changes. Applied `transition: none` on the affected icon SVGs and paths.
+- **Changes**: [Updated `src/components/ui/header.astro` — added `transition: none` rule for `.mobile-menu-toggle__icon`, its path, and `.mobile-menu-close svg/path`. Updated `src/components/ui/LanguageButton.astro` — added `transition: none` rule for `.language-button svg/path`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-054] marked as `done`.

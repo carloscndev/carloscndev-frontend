@@ -146,6 +146,14 @@ canvas {
     stroke 400ms ease-in-out;
 }
 
+/* Prevent SVG icon color/fill/stroke transitions during theme changes */
+svg,
+svg * {
+  transition:
+    background-color 400ms ease-in-out,
+    border-color 400ms ease-in-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

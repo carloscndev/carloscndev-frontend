@@ -46,4 +46,13 @@ const { lang = "es", id = "language-toggle" } = Astro.props;
       color: var(--text-base);
     }
   }
+
+  :global(.language-button .icon-wrapper) {
+    color: var(--text-base);
+    transition: none;
+  }
+
+  :global(.language-button .icon-wrapper svg) {
+    transition: none;
+  }
 </style>
