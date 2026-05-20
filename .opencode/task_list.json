@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 64,
+    "total_tasks": 67,
     "completed": 64,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -770,6 +770,38 @@
         "Tech cards (light): bg --color-tech-primary-light, text --color-tech-secondary-light",
         "Category icon matches the text color",
         "Hover effect (translateY + box-shadow) still works correctly"
+      ]
+    },
+    {
+      "id": "FIX-047",
+      "name": "Remove Cursor Pointer from Portfolio Cards",
+      "status": "pending",
+      "description": "Remove the cursor: pointer style from portfolio grid cards. The cards are not clickable links so they should not show a pointer cursor.",
+      "acceptance": [
+        "Portfolio grid cards do not show cursor: pointer",
+        "Desktop layout unaffected otherwise"
+      ]
+    },
+    {
+      "id": "FIX-048",
+      "name": "Blog Section Intro Color to --text-base",
+      "status": "pending",
+      "description": "Change the blog-section__intro text color from --color-word to --text-base to match the design system.",
+      "acceptance": [
+        "blog-section__intro uses color: --text-base",
+        "Dark and light themes both updated"
+      ]
+    },
+    {
+      "id": "FIX-049",
+      "name": "Blog Card Hover Overlay with Resume and ExternalLink",
+      "status": "pending",
+      "description": "On blog card hover: the blog-card__image opacity must change to 0.5, and a resume/overlay text must appear in --text-base color, plus an ExternalLink icon in the top-right corner of the image, also in --text-base color.",
+      "acceptance": [
+        "Image opacity 0.5 on card hover",
+        "Resume text visible on hover in --text-base",
+        "ExternalLink icon visible top-right on hover in --text-base",
+        "Hover effects (translateY + box-shadow) still work"
       ]
     }
   ]
