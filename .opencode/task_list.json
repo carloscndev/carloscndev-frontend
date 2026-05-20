@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 67,
+    "total_tasks": 68,
     "completed": 67,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -802,6 +802,26 @@
         "Resume text visible on hover in --text-base",
         "ExternalLink icon visible top-right on hover in --text-base",
         "Hover effects (translateY + box-shadow) still work"
+      ]
+    },
+    {
+      "id": "FEAT-007",
+      "name": "Section: Blog Mobile Accordion Refactoring",
+      "status": "pending",
+      "description": "Refactor the 'Mi Blog' section for mobile devices. The component must transform from its current layout into an interactive accordion-style vertical list on mobile screens (< 768px). Each post row must feature a dynamic article icon, external link behavior, and a smooth expand/collapse transition for the description.",
+      "acceptance": [
+        "Implement the Blog section refactoring inside the existing Astro component, preserving the typography token hierarchy for 'Mi Blog' and the subtitle intro.",
+        "Desktop Layout (Ref: Existing Desktop View): Maintain the current desktop grid/list layout completely untouched. All mobile modifications must be strictly scoped within a media query context (< 768px).",
+        "Mobile Layout Accordion (Ref: visual-specs/Spanish/Mobile/05-blog.png): Transform the posts layout into a stack of dark-background horizontal rows acting as accordion headers.",
+        "Row Structure (Left to Right): Each row header must align horizontally: a dynamic category/topic icon, the post title (e.g., 'Generative Project'), an external link icon, and an interactive state arrow indicator.",
+        "Dynamic Iconography: The structure must map and render a specific icon per post from 'components/icons' (e.g., wave/boat icon or gear/atom icon) based on the post category declared in the JSON data.",
+        "Direct External Link: Clicking the external link icon (square with diagonal arrow) must open the corresponding article URL in a new tab without toggling the accordion state.",
+        "Mobile Accordion Logic: Clicking anywhere else on the row header must toggle the visibility of the post description (Lorem Ipsum/content). By default, only one row can be expanded at a time, displaying an upward triangle arrow (▲).",
+        "Collapsed State: Non-active rows must remain collapsed, hiding their description text and displaying a downward triangle arrow (▼).",
+        "Smooth Animation: The expansion and collapse of the content panel must transition smoothly using CSS max-height or transform properties.",
+        "Data Structure Adaptability: Ensure the JSON schema (data/blog) supports properties like: { id, title, description, url, iconType }. Hardcoded text strings are strictly forbidden.",
+        "Localization Support: All titles, subtitles, and descriptions must pull data dynamically from the localized schema, ensuring reactive translation swapping (Es/En) without forcing a hard page reload.",
+        "Strict Layout Containment: Ensure the mobile list fills 100% of the available viewport width with proper responsive padding to prevent any horizontal page overflow."
       ]
     }
   ]
