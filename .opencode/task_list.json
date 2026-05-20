@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 75,
-    "completed": 73,
+    "completed": 74,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -881,7 +881,7 @@
     {
       "id": "FIX-055",
       "name": "Move Theme and Language Toggles in Mobile Menu",
-      "status": "pending",
+      "status": "done",
       "description": "In the mobile menu overlay, move the theme toggle and language toggle icons to the same row as the close button, but positioned on the opposite side (left). Currently they appear below the menu options.",
       "acceptance": [
         "Theme and language toggles are in the same top row as the close button",

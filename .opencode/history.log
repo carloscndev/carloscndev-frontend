@@ -466,7 +466,17 @@
 ### 2026-05-20 — [FIX-054: Mobile Icons Flicker on Theme Change]
 
 - **Agent**: Coder #1
-- **Plan**: Fix Safari theme transition flicker on MobileMenuIcon, CloseIcon, and GlobeIcon. Same root cause as FIX-036: global CSS `transition: fill/stroke 400ms` on SVG/path conflicts during theme variable changes. Applied `transition: none` on the affected icon SVGs and paths.
-- **Changes**: [Updated `src/components/ui/header.astro` — added `transition: none` rule for `.mobile-menu-toggle__icon`, its path, and `.mobile-menu-close svg/path`. Updated `src/components/ui/LanguageButton.astro` — added `transition: none` rule for `.language-button svg/path`.]
+- **Plan**: Fix theme transition flicker on MobileMenuIcon, CloseIcon, and GlobeIcon. Root cause: global CSS `transition: fill/stroke 400ms` on SVG/path conflicts during theme variable changes, plus inherited `color` from ancestors with `transition: color 400ms` causing `stroke="currentColor"` to animate slowly. Solution: explicit `color: var(--text-base)` with `transition: none` on wrappers to break inherited color chain, plus `transition: none` on SVG elements.
+- **Changes**: [Updated `src/components/ui/header.astro` — added `transition: none` rule for `.mobile-menu-toggle__icon` and `.mobile-menu-close svg/path` (with `:global()` selectors). Updated `src/components/ui/LanguageButton.astro` — added explicit `color: var(--text-base); transition: none` on `.icon-wrapper` to break inherited color chain, plus `transition: none` on SVG. Updated `src/styles/global.css` — added override rule for SVG elements removing `color`, `fill`, `stroke` from transitions and keeping only `background-color` and `border-color`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-054] marked as `done`.
+
+---
+
+### 2026-05-20 — [FIX-055: Move Theme and Language Toggles in Mobile Menu]
+
+- **Agent**: Coder #1
+- **Plan**: Restructure the mobile menu overlay so the theme and language toggle buttons appear in the same row as the close button — toggles on the left, close on the right. Also add WebIcon at the bottom-right and a fade/slide-up transition for menu open.
+- **Changes**: [Updated `src/components/ui/header.astro` — added `.mobile-menu-header` wrapper with absolute positioning (`top: -7px`) matching the main header height (80px) and padding, containing close button on the left and theme/language toggles on the right. Removed old `.mobile-menu-controls`. Added WebIcon at bottom-right of menu overlay (`position: absolute; bottom: var(--spacing-lg); right: var(--spacing-lg)`, size 60px). Added `.mobile-menu-content` fade + slide-up transition (`opacity 0 → 1, translateY(20px) → 0, 300ms`). Updated `.mobile-menu-close` to remove old absolute positioning. Adjusted mobile-menu-content `justify-content: center` for centered nav options.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-055] marked as `done`.
