@@ -1,5 +1,6 @@
 ---
 import blogData from "../../data/blog.json";
+import wallperImage from "../../assets/images/wallper.jpg";
 
 const lang = "es";
 const data = blogData[lang];
@@ -27,7 +28,11 @@ const blogDataJson = JSON.stringify(blogData);
           aria-label={post.title}
         >
           <div class="blog-card__image">
-            <div class="blog-card__image-placeholder" />
+            <img
+              src={wallperImage.src}
+              alt={post.title}
+              class="blog-card__image-img"
+            />
           </div>
           <div class="blog-card__content">
             <span class="blog-card__category" data-post-category>
@@ -132,25 +137,10 @@ const blogDataJson = JSON.stringify(blogData);
     overflow: hidden;
   }
 
-  .blog-card__image-placeholder {
+  .blog-card__image-img {
     width: 100%;
     height: 100%;
-  }
-
-  .blog-card[data-category-theme="tech"] .blog-card__image-placeholder {
-    background: linear-gradient(
-      135deg,
-      var(--color-tech-primary-dark),
-      var(--color-tech-secondary-dark)
-    );
-  }
-
-  .blog-card[data-category-theme="running"] .blog-card__image-placeholder {
-    background: linear-gradient(
-      135deg,
-      var(--color-running-primary-dark),
-      var(--color-running-secondary-dark)
-    );
+    object-fit: cover;
   }
 
   .blog-card__content {

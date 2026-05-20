@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 63,
-    "completed": 60,
+    "completed": 61,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -725,7 +725,7 @@
     {
       "id": "FIX-043",
       "name": "Replace Blog Card Image Placeholder with wallpaper.jpg",
-      "status": "pending",
+      "status": "done",
       "description": "All blog cards currently use a gradient placeholder (blog-card__image-placeholder) as the card image. Replace it with the actual wallpaper image located at src/assets/images/wallper.jpg.",
       "acceptance": [
         "All blog cards display wallpaper.jpg as their image",
