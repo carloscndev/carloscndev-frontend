@@ -14,14 +14,17 @@ export function scrollToHash(hash: string): void {
   const cleanHash = hash.replace(/^#/, "");
 
   if (!cleanHash || cleanHash === "/") {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const homeSection = document.getElementById("home");
+    if (homeSection) {
+      homeSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
     updateActiveNavLink("");
     return;
   }
 
   const element = document.getElementById(cleanHash);
   if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
     updateActiveNavLink(cleanHash);
   }
 }
@@ -41,10 +44,14 @@ function updateActiveNavLink(sectionId: string): void {
     const isActive =
       sectionId === "" ? href === "/" : href === `/#${sectionId}`;
 
+    const activeClass = link.classList.contains("mobile-menu-link")
+      ? "mobile-menu-link--active"
+      : "header-nav-link--active";
+
     if (isActive) {
-      link.classList.add("header-nav-link--active");
+      link.classList.add(activeClass);
     } else {
-      link.classList.remove("header-nav-link--active");
+      link.classList.remove(activeClass);
     }
   });
 }
@@ -59,11 +66,15 @@ function handleHashLinkClick(event: Event): void {
   const href = target.getAttribute("href");
   if (!href) return;
 
-  // Only intercept internal hash links on the root path
-  if (href.startsWith("/#")) {
+  // Only intercept internal hash links and the home link on the root path
+  if (href === "/" || href.startsWith("/#")) {
     event.preventDefault();
-    const hash = href.substring(href.indexOf("#"));
-    scrollToHash(hash);
+    if (href === "/") {
+      scrollToHash("/");
+    } else {
+      const hash = href.substring(href.indexOf("#"));
+      scrollToHash(hash);
+    }
 
     // Update browser URL without a full page reload
     if (typeof window !== "undefined" && window.history) {
@@ -79,10 +90,7 @@ function handleInitialHash(): void {
   if (typeof window === "undefined" || typeof document === "undefined") return;
 
   const hash = window.location.hash;
-  if (hash) {
-    // Small delay to ensure the DOM is fully rendered
-    requestAnimationFrame(() => scrollToHash(hash));
-  }
+  requestAnimationFrame(() => scrollToHash(hash || "/"));
 }
 
 /**
@@ -91,8 +99,9 @@ function handleInitialHash(): void {
 function bindHashLinkListeners(): void {
   if (typeof document === "undefined") return;
 
-  const hashLinks =
-    document.querySelectorAll<HTMLAnchorElement>('a[href^="/#"]');
+  const hashLinks = document.querySelectorAll<HTMLAnchorElement>(
+    'a[href="/"], a[href^="/#"]',
+  );
 
   hashLinks.forEach((link) => {
     link.removeEventListener("click", handleHashLinkClick);
@@ -127,9 +136,7 @@ export function initAnchorRouting(): void {
   document.addEventListener("astro:after-swap", () => {
     if (typeof window !== "undefined") {
       const hash = window.location.hash;
-      if (hash) {
-        requestAnimationFrame(() => scrollToHash(hash));
-      }
+      requestAnimationFrame(() => scrollToHash(hash || "/"));
     }
   });
 

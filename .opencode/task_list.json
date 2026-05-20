@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 75,
-    "completed": 71,
+    "completed": 72,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -858,7 +858,7 @@
     {
       "id": "FIX-053",
       "name": "Mobile Scroll-Snap Section Centering on Menu Navigation",
-      "status": "pending",
+      "status": "done",
       "description": "On mobile, when navigating to a section via the menu (hash anchor), the scroll-snap does not center the target section properly — part of the content remains outside the viewport. The issue occurs because the anchor routing's smooth scrolling conflicts with the scroll-snap behavior.",
       "acceptance": [
         "Clicking a mobile menu link centers the target section correctly in the viewport",

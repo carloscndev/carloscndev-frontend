@@ -450,3 +450,13 @@
 - **Changes**: [Updated `src/components/sections/Contact.astro` — changed `margin-bottom: var(--spacing-md)` to `margin-bottom: 1.5rem` in `.contact-section__title`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-052] marked as `done`. All 71/71 tasks completed.
+
+---
+
+### 2026-05-20 — [FIX-053: Mobile Scroll-Snap Section Centering on Menu Navigation]
+
+- **Agent**: Coder #1
+- **Plan**: Fix the mobile scroll-snap issue where sections were not centered when navigating via menu. Root cause: `scrollIntoView({ block: "start" })` scrolled the section to the top of the container, but the scroll-snap CSS (`scroll-snap-align: center`) tried to align it to center, causing a conflict that left content partially out of view.
+- **Changes**: [Updated `src/utils/anchor-routing.ts` — changed `scrollIntoView({ block: "start" })` to `scrollIntoView({ block: "center" })` to match the scroll-snap alignment. Also fixed `updateActiveNavLink()` to apply `mobile-menu-link--active` class for mobile menu links (was only applying `header-nav-link--active`).]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-053] marked as `done`.
