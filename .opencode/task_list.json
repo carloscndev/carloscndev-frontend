@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 63,
-    "completed": 61,
+    "completed": 62,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -737,7 +737,7 @@
     {
       "id": "FIX-044",
       "name": "Fix Blog Card Element Order",
-      "status": "pending",
+      "status": "done",
       "description": "The order of elements in blog cards is incorrect. The correct order should be: title first, then read time and date (left-aligned), and category on the right side.",
       "acceptance": [
         "Card order: title → read time + date (left) / category (right)",

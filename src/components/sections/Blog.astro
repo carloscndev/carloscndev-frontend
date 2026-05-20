@@ -35,19 +35,18 @@ const blogDataJson = JSON.stringify(blogData);
             />
           </div>
           <div class="blog-card__content">
-            <span class="blog-card__category" data-post-category>
-              {post.category}
-            </span>
             <h3 class="blog-card__title" data-post-title>
               {post.title}
             </h3>
+            <span class="blog-card__read-time" data-post-read-time>
+              {post.read_time}
+            </span>
             <div class="blog-card__meta">
               <span class="blog-card__date" data-post-date>
                 {post.date}
               </span>
-              <span class="blog-card__separator">·</span>
-              <span class="blog-card__read-time" data-post-read-time>
-                {post.read_time}
+              <span class="blog-card__category" data-post-category>
+                {post.category}
               </span>
             </div>
           </div>
@@ -110,7 +109,6 @@ const blogDataJson = JSON.stringify(blogData);
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius);
-    border: 1px solid rgba(47, 66, 160, 0.2);
     background: var(--bg-primary);
     transition:
       transform 300ms ease,
@@ -150,14 +148,6 @@ const blogDataJson = JSON.stringify(blogData);
     gap: var(--spacing-sm);
   }
 
-  .blog-card__category {
-    font-family: var(--font-titles);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-word);
-  }
-
   .blog-card__title {
     font-family: var(--font-titles);
     font-size: var(--font-size-h3-mobile);
@@ -166,13 +156,24 @@ const blogDataJson = JSON.stringify(blogData);
     line-height: 1.3;
   }
 
-  .blog-card__separator {
-    opacity: 0.5;
+  .blog-card__category {
+    font-family: var(--font-titles);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-word);
+  }
+
+  .blog-card__read-time {
+    font-size: 0.8rem;
+    color: var(--color-word);
+    margin-bottom: 0.25rem;
   }
 
   .blog-card__meta {
     display: flex;
-    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
     font-family: var(--font-body);
     font-size: 0.8rem;
     color: var(--color-word);
