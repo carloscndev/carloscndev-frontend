@@ -390,3 +390,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — removed `cursor: pointer` from `.portfolio-grid__card` CSS block.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
 - **Closure**: Task [FIX-047] marked as `done`.
+
+---
+
+### 2026-05-20 — [FIX-048: Blog Section Intro Color to --text-base]
+
+- **Agent**: Coder #1
+- **Plan**: Change blog-section__intro text color from --color-word to --text-base.
+- **Changes**: [Updated `src/components/sections/Blog.astro` — changed `color: var(--color-word)` to `color: var(--text-base)` in `.blog-section__intro`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-048] marked as `done`.

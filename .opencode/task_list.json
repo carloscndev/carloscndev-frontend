@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 67,
-    "completed": 65,
+    "completed": 66,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -785,7 +785,7 @@
     {
       "id": "FIX-048",
       "name": "Blog Section Intro Color to --text-base",
-      "status": "pending",
+      "status": "done",
       "description": "Change the blog-section__intro text color from --color-word to --text-base to match the design system.",
       "acceptance": [
         "blog-section__intro uses color: --text-base",
