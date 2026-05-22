@@ -667,3 +667,12 @@
 - **Changes**: [Updated `src/data/experience.json` — already migrated to `description` array format by user. Updated `src/utils/experience.ts` — changed from `description_p1`/`description_p2` to `job.description.map()`. Updated `src/components/sections/Experience.astro` — replaced hardcoded `<p>{description_p1}</p>` with `{job.description.map()}`, changed paragraph spacing from `margin-bottom` to `display: flex; gap: var(--spacing-lg)`, wrapped `@company` in LinkWrapper with `company_url` and `target="_blank"`, added `:global()` to company CSS with `text-decoration: none`. Updated `src/data/config.json` — added experience nav item `/#experience`. Updated `src/utils/lang.ts` — added `experience: { es: "Experiencia", en: "Experience" }` to NAV_LABELS. Updated tests: `experience.test.ts` — uses description array, `lang.test.ts` — checks experience NAV_LABEL, `config.test.ts` — checks experience nav item.]
 - **Verification**: Build succeeded, 134 tests pass (19 files), zero errors.
 - **Closure**: All changes functional. Experience section now has linked company names, proper paragraph spacing, and navigation menu entry.
+
+---
+
+### 2026-05-22 — [FIX: Migrate PNG images to WebP format]
+
+- **Agent**: Coder #1
+- **Plan**: Update all image imports from .png to .webp after user converted the source images (except wallpaper.jpg). This leverages Astro's Image component for further optimization.
+- **Changes**: [Updated `src/components/sections/Home.astro` — hello.png/running.png/reading.png/playing.png → .webp. Updated `src/components/sections/About.astro` — working.png → .webp. Updated `src/pages/404.astro` — slepping.png → .webp. Wallpaper.jpg kept as-is per user request.]
+- **Verification**: Build succeeded, 134 tests pass, images properly served as webp through Astro Image component.
