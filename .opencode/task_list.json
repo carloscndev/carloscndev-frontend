@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 114,
-    "completed": 114,
+    "total_tasks": 115,
+    "completed": 115,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1424,6 +1424,18 @@
         "Blog card images, avatar images, hero images all optimized",
         "Build succeeds with zero errors",
         "No visual regressions or broken images"
+      ]
+    },
+    {
+      "id": "FIX-068",
+      "name": "Update experience description to array format",
+      "status": "done",
+      "description": "Adapt experience.json, Experience.astro, and experience.ts to use description as an array of paragraph strings instead of description_p1/description_p2 properties.",
+      "acceptance": [
+        "experience.ts uses job.description array to build paragraphs",
+        "Experience.astro renders description array correctly",
+        "Build succeeds with zero errors",
+        "No visual regressions"
       ]
     }
   ]

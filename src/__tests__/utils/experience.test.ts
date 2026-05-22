@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 
 describe("experience", () => {
   it("should update experience content from embedded JSON", async () => {
@@ -10,8 +10,7 @@ describe("experience", () => {
           {
             id: "c3ai",
             role: "Engineer",
-            description_p1: "P1",
-            description_p2: "P2",
+            description: ["Paragraph 1", "Paragraph 2"],
           },
         ],
       },
@@ -21,8 +20,7 @@ describe("experience", () => {
           {
             id: "c3ai",
             role: "Engineer EN",
-            description_p1: "P1 EN",
-            description_p2: "P2 EN",
+            description: ["Paragraph 1 EN", "Paragraph 2 EN"],
           },
         ],
       },
@@ -47,5 +45,8 @@ describe("experience", () => {
     expect(title.textContent).toBe("Experiencia");
     const role = document.querySelector("[data-job-role]")!;
     expect(role.textContent).toBe("Engineer");
+    const desc = document.querySelector("[data-job-description]")!;
+    expect(desc.innerHTML).toContain("<p>Paragraph 1</p>");
+    expect(desc.innerHTML).toContain("<p>Paragraph 2</p>");
   });
 });

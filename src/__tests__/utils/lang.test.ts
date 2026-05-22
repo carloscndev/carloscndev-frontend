@@ -12,6 +12,8 @@ describe("lang", () => {
     expect(NAV_LABELS.home.en).toBe("Home");
     expect(NAV_LABELS.about.es).toBe("Acerca de");
     expect(NAV_LABELS.about.en).toBe("About");
+    expect(NAV_LABELS.experience.es).toBe("Experiencia");
+    expect(NAV_LABELS.experience.en).toBe("Experience");
     expect(NAV_LABELS.portfolio).toBeDefined();
     expect(NAV_LABELS.blog).toBeDefined();
     expect(NAV_LABELS.contact).toBeDefined();

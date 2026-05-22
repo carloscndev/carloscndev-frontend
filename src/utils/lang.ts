@@ -7,6 +7,7 @@ export type Lang = "es" | "en";
 export const NAV_LABELS: Record<string, Record<Lang, string>> = {
   home: { es: "Inicio", en: "Home" },
   about: { es: "Acerca de", en: "About" },
+  experience: { es: "Experiencia", en: "Experience" },
   portfolio: { es: "Portafolio", en: "Portfolio" },
   blog: { es: "Blog", en: "Blog" },
   contact: { es: "Contacto", en: "Contact" },

@@ -648,3 +648,22 @@
 - **Changes**: [Updated `src/components/sections/Home.astro` — added Image import, replaced avatar img with `<Image src={helloImg} />` (482kB → 15kB). Updated `src/components/sections/About.astro` — added Image import, replaced working.png img. Updated `src/components/sections/Blog.astro` — added Image import, replaced wallpaper img. Updated `src/pages/posts.astro` — added Image import, replaced blog card img. Updated `src/pages/404.astro` — added Image import, replaced sleeping img (537kB → 20kB). Updated `src/pages/blog/[slug].astro` — added Image import, replaced hero img (197kB → 118kB). All img src changed from .src string to imported image object.]
 - **Verification**: Build succeeded, images optimized to WebP with significant size reduction. All 133 tests pass.
 - **Closure**: Task [FIX-067] marked as `done`. All 114/114 tasks completed.
+
+
+---
+
+### 2026-05-22 — [FIX-068: Update experience description to array format]
+
+- **Agent**: Coder #1
+- **Plan**: Adapt experience.json, Experience.astro, and experience.ts to use description as an array of paragraph strings instead of description_p1/description_p2 properties.
+- **Changes**: [Updated `src/utils/experience.ts` — changed description render from `<p>\${job.description_p1}</p><p>\${job.description_p2}</p>` to `job.description.map(p => \`<p>\${p}</p>\`).join("")`. Updated `src/components/sections/Experience.astro` — replaced hardcoded `<p>{job.description_p1}</p><p>{job.description_p2}</p>` with `{job.description.map(paragraph => <p>{paragraph}</p>)}` in both desktop tabs and mobile carousel.]
+- **Verification**: Build succeeded, 133 tests pass, zero errors.
+- **Closure**: Task [FIX-068] marked as `done`. All 115/115 tasks completed.
+
+### 2026-05-22 — [Session: Experience section enhancements]
+
+- **Agent**: Coder #1
+- **Plan**: Multiple improvements to the experience section: migrate description_p1/p2 to description array, add company_url links, add experience to navigation menu, fix paragraph spacing with flexbox gap.
+- **Changes**: [Updated `src/data/experience.json` — already migrated to `description` array format by user. Updated `src/utils/experience.ts` — changed from `description_p1`/`description_p2` to `job.description.map()`. Updated `src/components/sections/Experience.astro` — replaced hardcoded `<p>{description_p1}</p>` with `{job.description.map()}`, changed paragraph spacing from `margin-bottom` to `display: flex; gap: var(--spacing-lg)`, wrapped `@company` in LinkWrapper with `company_url` and `target="_blank"`, added `:global()` to company CSS with `text-decoration: none`. Updated `src/data/config.json` — added experience nav item `/#experience`. Updated `src/utils/lang.ts` — added `experience: { es: "Experiencia", en: "Experience" }` to NAV_LABELS. Updated tests: `experience.test.ts` — uses description array, `lang.test.ts` — checks experience NAV_LABEL, `config.test.ts` — checks experience nav item.]
+- **Verification**: Build succeeded, 134 tests pass (19 files), zero errors.
+- **Closure**: All changes functional. Experience section now has linked company names, proper paragraph spacing, and navigation menu entry.

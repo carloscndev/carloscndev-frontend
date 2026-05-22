@@ -33,8 +33,16 @@ describe("config.json", () => {
       });
     });
 
-    it("should have at least 3 navigation items", () => {
-      expect(config.navigation.length).toBeGreaterThanOrEqual(3);
+    it("should have at least 5 navigation items", () => {
+      expect(config.navigation.length).toBeGreaterThanOrEqual(5);
+    });
+
+    it("should include experience section", () => {
+      const experience = config.navigation.find(
+        (item) => item.key === "experience",
+      );
+      expect(experience).toBeDefined();
+      expect(experience!.href).toBe("/#experience");
     });
   });
 

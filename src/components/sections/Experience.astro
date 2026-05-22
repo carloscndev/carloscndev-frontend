@@ -2,6 +2,7 @@
 import experienceDataRaw from "../../data/experience.json";
 import Chevron from "../icons/Chevron.astro";
 import TechPill from "../ui/TechPill.astro";
+import LinkWrapper from "../ui/LinkWrapper.astro";
 
 const currentLang = "es";
 const data = experienceDataRaw[currentLang];
@@ -64,16 +65,21 @@ const embeddedDataJson = JSON.stringify(embeddedData);
               <h3 class="experience-tabs__role" data-job-role>
                 {job.role}
               </h3>
-              <span class="experience-tabs__company" data-job-company>
+              <LinkWrapper
+                href={job.company_url}
+                class="experience-tabs__company"
+                data-job-company
+              >
                 @{job.company}
-              </span>
+              </LinkWrapper>
             </div>
             <p class="experience-tabs__period" data-job-period>
               {job.period}
             </p>
             <div class="experience-tabs__description" data-job-description>
-              <p>{job.description_p1}</p>
-              <p>{job.description_p2}</p>
+              {job.description.map((paragraph: string) => (
+                <p>{paragraph}</p>
+              ))}
             </div>
             <div class="experience-tabs__tags" data-job-tags>
               {job.technologies.map((tech) => (
@@ -102,16 +108,21 @@ const embeddedDataJson = JSON.stringify(embeddedData);
               <h3 class="experience-carousel__role" data-job-role>
                 {job.role}
               </h3>
-              <span class="experience-carousel__company" data-job-company>
+              <LinkWrapper
+                href={job.company_url}
+                class="experience-carousel__company"
+                data-job-company
+              >
                 @{job.company}
-              </span>
+              </LinkWrapper>
             </div>
             <p class="experience-carousel__period" data-job-period>
               {job.period}
             </p>
             <div class="experience-carousel__description" data-job-description>
-              <p>{job.description_p1}</p>
-              <p>{job.description_p2}</p>
+              {job.description.map((paragraph: string) => (
+                <p>{paragraph}</p>
+              ))}
             </div>
             <div class="experience-carousel__tags" data-job-tags>
               {job.technologies.map((tech) => (
@@ -233,14 +244,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     .experience-tabs__description {
       color: var(--text-base);
       transition: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
     }
 
     .experience-tabs__description p {
-      margin-bottom: 1rem;
-    }
-
-    .experience-tabs__description p:last-child {
-      margin-bottom: 0;
+      margin: 0;
     }
 
     .experience-tabs__heading {
@@ -258,12 +268,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       margin: 0;
     }
 
-    .experience-tabs__company {
+    :global(.experience-tabs__company) {
       font-family: var(--font-titles);
       font-size: var(--font-size-h2-desktop);
       font-weight: var(--weight-space-semibold);
       color: var(--color-accent);
       margin: 0;
+      text-decoration: none;
     }
     .experience-tabs__period {
       color: var(--color-word);
@@ -356,12 +367,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       color: var(--text-base);
     }
 
-    .experience-carousel__company {
+    :global(.experience-carousel__company) {
       font-family: var(--font-titles);
       font-size: 1.25rem;
       font-weight: var(--weight-space-semibold);
       color: var(--color-accent);
       margin: 0;
+      text-decoration: none;
     }
 
     .experience-carousel__period {
