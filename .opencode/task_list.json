@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 80,
+    "total_tasks": 81,
     "completed": 80,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -968,6 +968,22 @@
         "Desktop Layout (Ref: visual-specs/Spanish/Desktop/Dark/06-404x.jpg): On viewports >= 768px, display a 2-column or split-center layout where the sleeping illustration sits on the left and the error copy blocks align to its right, properly clearing the fixed social sidebar.",
         "Mobile Layout (Ref: visual-specs/Spanish/Mobile/06-404.png): On viewports < 768px, hide the 'socialsidebar', use the standard mobile navigation header, and stack the elements vertically (Illustration top, Text content middle, Action button bottom) centered 100% full-width with safe padding.",
         "Typography Styles: Maintain text consistency using the design system's typography hierarchy. The error headers and body messaging must leverage the correct light tokens over the global dark layout background."
+      ]
+    },
+    {
+      "id": "FIX-060",
+      "name": "Unificar formato de JSON en carpeta data",
+      "status": "pending",
+      "description": "Unify all JSON data files in src/data/ to use the same format as blog-post.json: top-level keys 'es' and 'en' with the localized content nested inside. Currently about.json, contact.json, experience.json, home.json, and portafolio.json use the Strapi v4 pattern (data.attributes + localizations). They must be restructured to { 'es': { ... }, 'en': { ... } }.",
+      "acceptance": [
+        "Restructure about.json to { es: { ... }, en: { ... } } format",
+        "Restructure contact.json to { es: { ... }, en: { ... } } format",
+        "Restructure experience.json to { es: { ... }, en: { ... } } format",
+        "Restructure home.json to { es: { ... }, en: { ... } } format",
+        "Restructure portafolio.json to { es: { ... }, en: { ... } } format",
+        "Update all components that consume these data files to work with the new format",
+        "Build succeeds with zero errors",
+        "No visual regressions or broken i18n"
       ]
     }
   ]
