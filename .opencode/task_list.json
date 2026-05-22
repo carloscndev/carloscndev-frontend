@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 89,
-    "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
+    "completed": 90,
+    "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
     {
@@ -1107,7 +1107,7 @@
     {
       "id": "TEST-001",
       "name": "Phase 1: Install and configure Vitest",
-      "status": "pending",
+      "status": "done",
       "description": "Install vitest, @vitest/ui, happy-dom. Create vitest.config.ts with path aliases. Add test scripts to package.json.",
       "acceptance": [
         "vitest, @vitest/ui, happy-dom installed",
