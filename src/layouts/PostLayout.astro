@@ -6,15 +6,17 @@ interface Props {
   title: string;
   lang?: "es" | "en";
   categoryTheme?: string;
+  noindex?: boolean;
 }
 
-const { title, lang = "es", categoryTheme } = Astro.props;
+const { title, lang = "es", categoryTheme, noindex } = Astro.props;
 ---
 
 <BaseLayout
   title={title}
   lang={lang}
   categoryTheme={categoryTheme}
+  noindex={noindex}
   description="Blog post"
 >
   <Header lang={lang} />

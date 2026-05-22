@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+
+const SITE = "https://carloscndev.com";
+const siteDescription =
+  description ||
+  "Carlos Castañeda — Software Engineer. Portfolio, blog, and projects.";
+const siteImage = image || `${SITE}/favicon.svg`;
+---
+
+<meta name="description" content={siteDescription} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={siteDescription} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={new URL(Astro.url.pathname, SITE).href} />
+<meta property="og:image" content={siteImage} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={siteDescription} />
+<meta name="twitter:image" content={siteImage} />

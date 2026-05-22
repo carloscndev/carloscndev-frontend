@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import { getPreferredTheme, applyTheme } from "@utils/theme";
+import BaseSEO from "@components/BaseSEO.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -8,6 +9,8 @@ interface Props {
   lang?: "es" | "en";
   description?: string;
   categoryTheme?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -15,6 +18,8 @@ const {
   lang = "es",
   description = "carloscndev's blog and portfolio",
   categoryTheme,
+  image,
+  noindex,
 } = Astro.props;
 
 const inlineThemeScript = `
@@ -50,10 +55,15 @@ const inlineThemeScript = `
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="canonical"
+      href={`${"https://carloscndev.com"}${Astro.url.pathname}`}
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <BaseSEO title={title} description={description} image={image} />
     <ClientRouter />
 
     <script is:inline set:html={inlineThemeScript} />

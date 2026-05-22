@@ -618,3 +618,13 @@
 - **Changes**: [Updated `src/layouts/BaseLayout.astro` — added skip link `<a href="#main">Skip to content</a>` with CSS for off-screen positioning and focus visibility. Updated `src/layouts/MainLayout.astro` — added `id="main"` to `<main>`. Updated `src/layouts/PostLayout.astro` — added `id="main"` to `<article>`. Verified all images have alt text, all buttons have type="button", heading hierarchy is correct (single h1 per page, logical h2/h3 nesting), aria-expanded present on accordions and menus, focus-visible styles on interactive elements, aria-labels on links, semantic HTML landmarks present.]
 - **Verification**: Build succeeded (`npm run build`): 16 pages, zero errors. Verified skip link, main landmarks, button types, alt text, aria attributes.
 - **Closure**: Task [FIX-064] marked as `done`. All 87/87 tasks completed.
+
+---
+
+### 2026-05-22 — [FEAT-011: Advanced SEO Optimization]
+
+- **Agent**: Coder #1
+- **Plan**: Implement complete technical and on-page SEO strategy using the seo skill. Site config already has site URL and @astrojs/sitemap. Added robots.txt, canonical URLs, BaseSEO component with OG/Twitter cards, noindex on 404, and JSON-LD Person schema on home page.
+- **Changes**: [Created `public/robots.txt` — allows all crawlers, references sitemap-index.xml. Created `src/components/BaseSEO.astro` — generates meta description, Open Graph (og:title, og:description, og:type, og:url, og:image) and Twitter Card (summary_large_image) tags. Updated `src/layouts/BaseLayout.astro` — added `image` and `noindex` props, imports BaseSEO, adds canonical `<link rel="canonical">` with `Astro.url.pathname`, renders noindex meta when prop is set, removed duplicate hardcoded meta description. Updated `src/layouts/PostLayout.astro` — added `noindex` prop passthrough to BaseLayout. Updated `src/pages/404.astro` — passes `noindex` to PostLayout. Updated `src/pages/index.astro` — added JSON-LD Person schema block.]
+- **Verification**: Build succeeded (`npm run build`): 16 pages + robots.txt, sitemap-index.xml. Verified canonical URL, OG/Twitter tags, noindex on 404, JSON-LD schema in output.
+- **Closure**: Task [FEAT-011] marked as `done`. 88/88 tasks completed.

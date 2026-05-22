@@ -9,6 +9,23 @@ import Contact from "@components/sections/Contact.astro";
 ---
 
 <MainLayout title="carloscndev">
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Carlos Castañeda",
+      alternateName: "carloscndev",
+      url: "https://carloscndev.com",
+      image: "https://carloscndev.com/favicon.svg",
+      jobTitle: "Software Engineer",
+      sameAs: [
+        "https://github.com/carloscndev",
+        "https://www.linkedin.com/in/carloscndev/",
+        "https://www.instagram.com/carloscndev.isrunning/",
+      ],
+    })}
+  />
   <Home />
   <About />
   <Experience />
