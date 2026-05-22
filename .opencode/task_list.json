@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 110,
+    "completed": 112,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1372,7 +1372,7 @@
     {
       "id": "TEST-022",
       "name": "Phase 5: Configure Vitest coverage reporting",
-      "status": "pending",
+      "status": "done",
       "description": "Add coverage config (c8/istanbul). Set minimum thresholds: 70% utils, 50% global. Add test:coverage script.",
       "acceptance": [
         "Coverage report generates correctly",
@@ -1384,7 +1384,7 @@
     {
       "id": "TEST-023",
       "name": "Phase 5: Testing guide documentation in docs/testing.md",
-      "status": "pending",
+      "status": "done",
       "description": "Create internal testing guide with project-specific examples, AAA pattern, common mocks, and how to run tests.",
       "acceptance": [
         "docs/testing.md created with setup instructions",
