@@ -608,3 +608,13 @@
 - **Changes**: [Added new variables to `src/styles/global.css`: `--spacing-sm-md: 0.75rem`, `--spacing-md-lg: 1.5rem`, `--shadow-card`, `--shadow-card-dark`, `--shadow-text`. Updated `src/components/sections/Blog.astro` — replaced hardcoded box-shadows with `--shadow-card`/`--shadow-card-dark`. Updated `src/components/sections/Portfolio.astro` — replaced hardcoded box-shadows and spacing values. Updated `src/components/sections/Experience.astro` — replaced `0.5rem` and `1.5rem` with `--spacing-sm` and `--spacing-md-lg`. Updated `src/pages/blog/[slug].astro` — replaced text-shadow with `--shadow-text`, gap values with spacing variables. Updated `src/pages/posts.astro` — replaced box-shadows with shadow variables. Updated `src/pages/projects.astro` — replaced box-shadows with shadow variables.]
 - **Verification**: Build succeeded (`npm run build`): 16 pages, zero errors.
 - **Closure**: Task [FIX-063] marked as `done`. 86/87 tasks completed.
+
+---
+
+### 2026-05-22 — [FIX-064: Auditoría y corrección de accesibilidad web (WCAG 2.1)]
+
+- **Agent**: Coder #1
+- **Plan**: Using the web-accessibility skill, audit the entire site for WCAG 2.1 compliance. Found: skip link missing, focus-visible inconsistencies. Fixed: added skip link to BaseLayout targeting #main, added id="main" to MainLayout and PostLayout containers.
+- **Changes**: [Updated `src/layouts/BaseLayout.astro` — added skip link `<a href="#main">Skip to content</a>` with CSS for off-screen positioning and focus visibility. Updated `src/layouts/MainLayout.astro` — added `id="main"` to `<main>`. Updated `src/layouts/PostLayout.astro` — added `id="main"` to `<article>`. Verified all images have alt text, all buttons have type="button", heading hierarchy is correct (single h1 per page, logical h2/h3 nesting), aria-expanded present on accordions and menus, focus-visible styles on interactive elements, aria-labels on links, semantic HTML landmarks present.]
+- **Verification**: Build succeeded (`npm run build`): 16 pages, zero errors. Verified skip link, main landmarks, button types, alt text, aria attributes.
+- **Closure**: Task [FIX-064] marked as `done`. All 87/87 tasks completed.

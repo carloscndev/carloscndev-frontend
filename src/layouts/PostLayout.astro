@@ -19,7 +19,7 @@ const { title, lang = "es", categoryTheme } = Astro.props;
 >
   <Header lang={lang} />
   <div class="post-layout">
-    <article class="post-layout__article">
+    <article id="main" class="post-layout__article">
       <slot />
     </article>
   </div>

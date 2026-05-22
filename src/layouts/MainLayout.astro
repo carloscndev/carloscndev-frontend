@@ -8,7 +8,7 @@ const { title, lang } = Astro.props;
 
 <BaseLayout title={title} lang={lang}>
   <Header lang={lang} />
-  <main class="main-content">
+  <main id="main" class="main-content">
     <SocialSidebar />
     <article>
       <slot />

@@ -59,6 +59,7 @@ const inlineThemeScript = `
     <script is:inline set:html={inlineThemeScript} />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <slot />
     <script type="module">
       import { inject } from "@vercel/analytics";
@@ -74,5 +75,22 @@ const inlineThemeScript = `
     flex-direction: column;
     margin: auto;
     max-width: var(--max-width);
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--spacing-md);
+    background: var(--color-accent);
+    color: #fff;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    z-index: 200;
+    font-family: var(--font-body);
+    transition: top 200ms ease;
+  }
+
+  .skip-link:focus {
+    top: var(--spacing-sm);
   }
 </style>

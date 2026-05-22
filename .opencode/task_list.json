@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 88,
-    "completed": 86,
+    "completed": 87,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -1077,7 +1077,7 @@
     {
       "id": "FIX-064",
       "name": "Auditoría y corrección de accesibilidad web (WCAG 2.1)",
-      "status": "pending",
+      "status": "done",
       "description": "Using the web-accessibility skill, audit the entire site for WCAG 2.1 compliance and fix any issues found. Focus on semantic HTML, ARIA attributes, keyboard navigation, focus management, color contrast, and screen reader support.",
       "acceptance": [
         "Audit all pages for semantic HTML (headings hierarchy, landmarks, roles)",
