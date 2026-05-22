@@ -128,7 +128,10 @@ function updatePortfolioContent(lang: Lang): void {
   const viewMoreEl = document.querySelector<HTMLElement>(
     "[data-portfolio-viewmore]",
   );
-  if (viewMoreEl) viewMoreEl.textContent = data.view_more;
+  if (viewMoreEl) {
+    const span = viewMoreEl.querySelector("span");
+    if (span) span.textContent = data.view_more;
+  }
 
   /* --- Per-project updates --- */
   data.projects.forEach((project) => {

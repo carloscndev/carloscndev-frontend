@@ -598,7 +598,7 @@ const blogDataJson = JSON.stringify(blogData);
     padding-bottom: var(--spacing-lg);
   }
 
-  .blog-section__view-more {
+  :global(.blog-section__view-more) {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -609,7 +609,7 @@ const blogDataJson = JSON.stringify(blogData);
     transition: color 300ms ease;
   }
 
-  .blog-section__view-more:hover {
+  :global(.blog-section__view-more):hover {
     color: var(--color-accent);
   }
 
@@ -617,7 +617,8 @@ const blogDataJson = JSON.stringify(blogData);
     transition: transform 300ms ease;
   }
 
-  .blog-section__view-more:hover :global(.blog-section__view-more-icon) {
+  :global(.blog-section__view-more):hover
+    :global(.blog-section__view-more-icon) {
     transform: translateX(4px);
   }
 </style>

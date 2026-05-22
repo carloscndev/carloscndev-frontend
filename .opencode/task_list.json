@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 83,
-    "completed": 82,
+    "completed": 83,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -1005,7 +1005,7 @@
     {
       "id": "FEAT-010",
       "name": "Página /projects con listado completo de portafolio",
-      "status": "pending",
+      "status": "done",
       "description": "Create the /projects page that lists all portfolio cards using the same design as the Portfolio section, displayed only when there are more than 6 projects. The title must be centered and the intro must not appear. Modify the Portfolio section's 'Ver más' link to redirect to /projects.",
       "acceptance": [
         "Create src/pages/projects.astro with the same card/accordion layout as Portfolio.astro",

@@ -568,3 +568,13 @@
 - **Changes**: [Created `src/pages/posts.astro` — uses PostLayout for Header and normal scroll, renders full card grid (1-2-3 columns responsive) + mobile accordion with all blog posts from `blog.json`, title centered via `text-align: center`, no intro text. Updated `src/components/sections/Blog.astro` — imported LinkWrapper and ArrowNext, capped grid and accordion at `.slice(0, 6)`, added conditional "Ver más" block with ArrowNext icon linking to `/posts` (shown only when `posts.length > 6`). Added view-more CSS styles matching Portfolio section pattern.]
 - **Verification**: Build succeeded (`npm run build`): 15 pages including `/posts/index.html`, zero errors.
 - **Closure**: Task [FEAT-009] marked as `done`. 82/83 tasks completed.
+
+---
+
+### 2026-05-22 — [FEAT-010: Página /projects con listado completo de portafolio]
+
+- **Agent**: Coder #1
+- **Plan**: Create /projects page listing all portfolio cards with centered title, no intro, normal scroll. Update Portfolio.astro Ver más link to point to /projects.
+- **Changes**: [Created `src/pages/projects.astro` — uses PostLayout for Header and normal scroll, renders full card grid (2-3 columns responsive) + mobile accordion with all portfolio projects from `portafolio.json`, title centered via `text-align: center`, no intro text. Updated `src/components/sections/Portfolio.astro` — wrapped Ver más section in LinkWrapper pointing to `/projects` with `isExternal={false}`.]
+- **Verification**: Build succeeded (`npm run build`): 16 pages including `/projects/index.html`, zero errors.
+- **Closure**: Task [FEAT-010] marked as `done`. All 83/83 tasks completed.

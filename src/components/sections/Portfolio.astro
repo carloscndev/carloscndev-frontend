@@ -172,10 +172,15 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   {
     data.projects.length > 6 && (
       <div class="portfolio-section__view-more-wrapper">
-        <div class="portfolio-section__view-more" data-portfolio-viewmore>
+        <LinkWrapper
+          href="/projects"
+          isExternal={false}
+          class="portfolio-section__view-more"
+          data-portfolio-viewmore
+        >
           <span>{data.view_more}</span>
-        </div>
-        <ArrowNext size="20" class="portfolio-section__view-more-icon" />
+          <ArrowNext size="20" class="portfolio-section__view-more-icon" />
+        </LinkWrapper>
       </div>
     )
   }
@@ -380,12 +385,14 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     color: var(--color-accent);
   }
 
-  .portfolio-section__view-more {
+  :global(.portfolio-section__view-more) {
     font-family: var(--font-body);
     font-size: 1.125rem;
     font-weight: var(--weight-inter-medium);
     text-align: center;
     color: inherit;
+    flex-direction: column;
+    align-items: center;
   }
 
   :global(.portfolio-section__view-more-icon) {
@@ -534,8 +541,9 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       font-size: var(--font-size-body-desktop);
     }
 
-    .portfolio-section__view-more {
+    :global(.portfolio-section__view-more) {
       font-size: var(--font-size-body-desktop);
+      flex-direction: column;
     }
   }
 </style>
