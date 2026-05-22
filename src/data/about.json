@@ -14,7 +14,7 @@
   },
   "en": {
     "title": "A bit about me",
-    "contentText": "<p>I'm a software engineer with more than 8 years of experience. My main focus is <strong>frontend</strong> development, although I also have experience in <strong>backend</strong> systems and building <strong>CI/CD</strong> pipelines.</p><p>Recently, I've been focused on <strong>generative artificial intelligence</strong> and <strong>machine learning</strong> systems, including integrating language models (<strong>LLMs</strong>) into real product workflows.</p><p>Some technologies I've worked with recently:</p>",
+    "contentText": "<p>I am a software engineer with over eight years of experience. My work has been primarily focused on <strong>frontend</strong> development, although I also possess experience in <strong>backend</strong> systems and the development of <strong>CI/CD</strong> pipelines.</p><p>In recent years, I have been focusing on <strong>generative AI</strong> and <strong>machine learning</strong> systems, specifically regarding the integration of Large Language Models (<strong>LLMs</strong>) into real-world product workflows.</p><p>Some of the technologies with which I have recently worked include:</p>",
     "technologies": [
       { "name": "React Ecosystem", "icon": "diamond" },
       { "name": "TypeScript", "icon": "diamond" },

@@ -17,7 +17,7 @@
     "intro": "Hi, I'm",
     "title": "Carlos Castañeda",
     "subtitle": "carloscndev",
-    "content": "<p>This is my website. Here you can learn a bit more about me, explore some of my projects, see what I'm currently working on and, if you're interested, read something on the blog.</p><p>I'm a software engineer. In my free time I enjoy <strong data-action=\"running\">running</strong>. I've completed several marathons and I'm almost always preparing for the next challenge.</p><p>I'm also interested in design, <strong data-action=\"reading\">reading</strong> and <strong data-action=\"videogames\">videogames</strong>.</p>",
+    "content": "<p>This is my space. Here you can learn a bit more about me, see some of my projects, what I’m currently working on, and, if you’re interested, read something on the blog.</p><p>I am a Software Engineer. In my leisure time, I enjoy <strong data-action=\"running\">running</strong>. I have completed several marathons and I am usually preparing for the next challenge.</p><p>I am also interested in design, <strong data-action=\"reading\">reading</strong>, and <strong data-action=\"videogames\">video games</strong>.</p>",
     "avatar": {
       "default": "hello.png",
       "variants": {
