@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 93,
+    "completed": 97,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1155,7 +1155,7 @@
     {
       "id": "TEST-005",
       "name": "Phase 2: Tests for src/utils/theme.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test getPreferredTheme, applyTheme, initThemeListener. Mock localStorage, document.documentElement, matchMedia.",
       "acceptance": [
         "getPreferredTheme handles stored/system preference",
@@ -1168,7 +1168,7 @@
     {
       "id": "TEST-006",
       "name": "Phase 2: Tests for src/utils/lang.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test getStoredLang, setStoredLang, toggleLang, getUITranslation, updateContentLabels, updateLangUI, NAV_LABELS.",
       "acceptance": [
         "getStoredLang/setStoredLang persistence tested",
@@ -1182,7 +1182,7 @@
     {
       "id": "TEST-007",
       "name": "Phase 2: Tests for src/utils/mobile-menu.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test isMobileMenuOpen, openMobileMenu, closeMobileMenu, toggleMobileMenu. Verify overflow-hidden, data-open, aria-expanded.",
       "acceptance": [
         "openMobileMenu sets data-open and overflow-hidden",
@@ -1195,7 +1195,7 @@
     {
       "id": "TEST-008",
       "name": "Phase 2: Tests for src/utils/anchor-routing.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test scrollToHash, handleHashLinkClick, bindHashLinkListeners, updateActiveNavLink. Mock DOM elements and history API.",
       "acceptance": [
         "scrollToHash scrolls to valid element",
