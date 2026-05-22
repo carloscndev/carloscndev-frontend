@@ -628,3 +628,13 @@
 - **Changes**: [Created `public/robots.txt` — allows all crawlers, references sitemap-index.xml. Created `src/components/BaseSEO.astro` — generates meta description, Open Graph (og:title, og:description, og:type, og:url, og:image) and Twitter Card (summary_large_image) tags. Updated `src/layouts/BaseLayout.astro` — added `image` and `noindex` props, imports BaseSEO, adds canonical `<link rel="canonical">` with `Astro.url.pathname`, renders noindex meta when prop is set, removed duplicate hardcoded meta description. Updated `src/layouts/PostLayout.astro` — added `noindex` prop passthrough to BaseLayout. Updated `src/pages/404.astro` — passes `noindex` to PostLayout. Updated `src/pages/index.astro` — added JSON-LD Person schema block.]
 - **Verification**: Build succeeded (`npm run build`): 16 pages + robots.txt, sitemap-index.xml. Verified canonical URL, OG/Twitter tags, noindex on 404, JSON-LD schema in output.
 - **Closure**: Task [FEAT-011] marked as `done`. 88/88 tasks completed.
+
+---
+
+### 2026-05-22 — [FIX-066: Extract hardcoded config data to src/data/config.json]
+
+- **Agent**: Coder #1
+- **Plan**: Create a centralized configuration file for site metadata, navigation links, social URLs, and other hardcoded values. Update all components to consume from this config.
+- **Changes**: [Created `src/data/config.json` with `site` (url, name, title, description, author), `locales`, `defaultLocale`, `navigation` (key+href array), `social` (github, instagram, linkedin, cv, email). Updated `src/components/ui/Header.astro` — imports config for navLinks and defaultLocale. Updated `src/components/ui/SocialSidebar.astro` — all 5 social URLs from config.social. Updated `src/components/BaseSEO.astro` — site URL and description from config.site. Updated `src/layouts/BaseLayout.astro` — canonical URL and default description from config. Updated `src/pages/index.astro` — JSON-LD Person schema uses config.site and config.social. Updated `src/__tests__/data/validation.test.ts` — added config.json specific test.]
+- **Verification**: Build succeeded, 126 tests pass (18 files), zero errors.
+- **Closure**: Task [FIX-066] marked as `done`. All 113/113 tasks completed.

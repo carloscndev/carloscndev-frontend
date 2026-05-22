@@ -6,20 +6,14 @@ import CloseIcon from "@components/icons/CloseIcon.astro";
 import ThemeButton from "./ThemeButton.astro";
 import LanguageButton from "./LanguageButton.astro";
 import { NAV_LABELS } from "../../utils/lang";
+import config from "../../data/config.json";
 
 interface Props {
   lang?: "es" | "en";
 }
 
-const { lang = "es" } = Astro.props;
-
-const navLinks = [
-  { key: "home", href: "/" },
-  { key: "about", href: "/#about" },
-  { key: "portfolio", href: "/#portfolio" },
-  { key: "blog", href: "/#blog" },
-  { key: "contact", href: "/#contact" },
-];
+const { lang = config.defaultLocale } = Astro.props;
+const navLinks = config.navigation;
 
 const currentPath = Astro.url.pathname;
 const currentHash = Astro.url.hash || "";

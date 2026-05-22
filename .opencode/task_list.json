@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 112,
-    "completed": 112,
+    "total_tasks": 113,
+    "completed": 113,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1391,6 +1391,24 @@
         "Includes AAA pattern examples from project",
         "Documents common mocks (localStorage, IntersectionObserver)",
         "Includes CI integration notes"
+      ]
+    },
+    {
+      "id": "FIX-066",
+      "name": "Extract hardcoded config data to src/data/config.json",
+      "status": "done",
+      "description": "Create a centralized configuration file for site metadata, navigation links, social URLs, locales, and other hardcoded values. Update all components to consume from this config.",
+      "acceptance": [
+        "src/data/config.json created with site, locales, navigation, and social sections",
+        "Header.astro nav links consumed from config",
+        "SocialSidebar.astro social URLs consumed from config",
+        "BaseSEO.astro site URL reused from config",
+        "BaseLayout.astro description default from config",
+        "lang.ts locales and default from config",
+        "index.astro JSON-LD URLs from config",
+        "Contact.astro email from config",
+        "Build succeeds with zero errors",
+        "No visual regressions"
       ]
     }
   ]

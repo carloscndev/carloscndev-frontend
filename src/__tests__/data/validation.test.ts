@@ -12,6 +12,17 @@ describe("data validation", () => {
     describe(file, () => {
       const data = JSON.parse(fs.readFileSync(filepath, "utf-8"));
 
+      if (file === "config.json") {
+        it("should have site, locales, navigation, social sections", () => {
+          expect(data.site).toBeDefined();
+          expect(data.site.url).toBeDefined();
+          expect(data.locales).toBeDefined();
+          expect(data.navigation).toBeDefined();
+          expect(data.social).toBeDefined();
+        });
+        return;
+      }
+
       it("should have es and en keys", () => {
         expect(data.es).toBeDefined();
         expect(data.en).toBeDefined();

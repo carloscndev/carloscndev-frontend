@@ -1,4 +1,5 @@
 ---
+import config from "../data/config.json";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
 import About from "../components/sections/About.astro";
@@ -8,21 +9,21 @@ import Blog from "@components/sections/Blog.astro";
 import Contact from "@components/sections/Contact.astro";
 ---
 
-<MainLayout title="carloscndev">
+<MainLayout title={config.site.title}>
   <script
     type="application/ld+json"
     set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
-      name: "Carlos Castañeda",
-      alternateName: "carloscndev",
-      url: "https://carloscndev.com",
-      image: "https://carloscndev.com/favicon.ico",
+      name: config.site.name,
+      alternateName: config.site.title,
+      url: config.site.url,
+      image: `${config.site.url}/favicon.ico`,
       jobTitle: "Software Engineer",
       sameAs: [
-        "https://github.com/carloscndev",
-        "https://www.linkedin.com/in/carloscndev/",
-        "https://www.instagram.com/carloscndev.isrunning/",
+        config.social.github,
+        config.social.linkedin,
+        config.social.instagram,
       ],
     })}
   />

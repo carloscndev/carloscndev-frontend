@@ -5,39 +5,34 @@ import LinkedInIcon from "@components/icons/LinkedInIcon.astro";
 import MailIcon from "@components/icons/MailIcon.astro";
 import CVIcon from "@components/icons/CV.astro";
 import LinkWrapper from "./LinkWrapper.astro";
+import config from "../../data/config.json";
 ---
 
 <aside class="social-sidebar">
   <ul class="social-sidebar-list" role="list">
     <li class="social-sidebar-list-item">
-      <LinkWrapper href="https://github.com/carloscndev" tooltip="GitHub">
+      <LinkWrapper href={config.social.github} tooltip="GitHub">
         <GithubIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
-      <LinkWrapper
-        href="https://www.instagram.com/carloscndev.isrunning/"
-        tooltip="Instagram"
-      >
+      <LinkWrapper href={config.social.instagram} tooltip="Instagram">
         <InstagramIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
-      <LinkWrapper href="https://carloscndev.github.io" tooltip="Resume">
+      <LinkWrapper href={config.social.cv} tooltip="Resume">
         <CVIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
-      <LinkWrapper
-        href="https://www.linkedin.com/in/carloscndev/"
-        tooltip="LinkedIn"
-      >
+      <LinkWrapper href={config.social.linkedin} tooltip="LinkedIn">
         <LinkedInIcon />
       </LinkWrapper>
     </li>
     <li class="social-sidebar-list-item">
       <LinkWrapper
-        href="mailto:carloscndev@gmail.com"
+        href={config.social.email}
         isExternal={false}
         tooltip="Email"
       >

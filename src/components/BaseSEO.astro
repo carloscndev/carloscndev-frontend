@@ -1,4 +1,6 @@
 ---
+import config from "../data/config.json";
+
 interface Props {
   title: string;
   description?: string;
@@ -7,10 +9,8 @@ interface Props {
 
 const { title, description, image } = Astro.props;
 
-const SITE = "https://carloscndev.com";
-const siteDescription =
-  description ||
-  "Carlos Castañeda — Software Engineer. Portfolio, blog, and projects.";
+const SITE = config.site.url;
+const siteDescription = description || config.site.description;
 const siteImage = image || `${SITE}/favicon.ico`;
 ---
 

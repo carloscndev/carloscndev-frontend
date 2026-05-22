@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { getPreferredTheme, applyTheme } from "@utils/theme";
 import BaseSEO from "@components/BaseSEO.astro";
+import config from "../data/config.json";
 import "../styles/global.css";
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
 const {
   title,
   lang = "es",
-  description = "carloscndev's blog and portfolio",
+  description = config.site.description,
   categoryTheme,
   image,
   noindex,
@@ -56,10 +57,7 @@ const inlineThemeScript = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link
-      rel="canonical"
-      href={`${"https://carloscndev.com"}${Astro.url.pathname}`}
-    />
+    <link rel="canonical" href={`${config.site.url}${Astro.url.pathname}`} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {noindex && <meta name="robots" content="noindex, follow" />}
