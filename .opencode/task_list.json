@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 92,
+    "completed": 93,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1142,7 +1142,7 @@
     {
       "id": "TEST-004",
       "name": "Phase 2: Tests for src/utils/common.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test cloneAndReplace, getCurrentLang, closeAllPanelsExcept, parseEmbeddedData. Cover valid, null, and edge cases.",
       "acceptance": [
         "cloneAndReplace tested with valid element",
