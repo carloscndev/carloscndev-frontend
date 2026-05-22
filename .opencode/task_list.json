@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 77,
-    "completed": 77,
+    "total_tasks": 79,
+    "completed": 78,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -917,9 +917,9 @@
       "id": "FEAT-007",
       "name": "Page: BlogPost Dynamic Layout and Styling",
       "status": "done",
-      "description": "Implement the individual blog post detail page template. The component must integrate into a 'ScrollLayout' that wraps the common site header menu and the vertical social sidebar. The page must support conditional background colors based on the post category (tech or running), display a full-width hero image banner, and structure article typography cleanly across desktop and mobile viewports.",
+      "description": "Implement the individual blog post detail page template. The component must integrate into a 'PostLayout' that wraps the common site header menu and the vertical social sidebar. The page must support conditional background colors based on the post category (tech or running), display a full-width hero image banner, and structure article typography cleanly across desktop and mobile viewports.",
       "acceptance": [
-        "Template Integration: Build or refactor the single post template (e.g., pages/blog/[slug].astro) so it renders wrapped inside the existing ScrollLayout component.",
+        "Template Integration: Build or refactor the single post template (e.g., pages/blog/[slug].astro) so it renders wrapped inside the existing PostLayout component.",
         "Global Layout Components: Ensure the page explicitly displays the global navigation header menu at the top and the 'socialsidebar' (Instagram, LinkedIn, GitHub vertical line) pinned to the left margin on desktop as shown in the reference.",
         "Hero Banner Structure: Implement a top Hero section containing a full-width wallpaper image backdrop overlayed with the main post title ('Arquitectura de un blog estático moderno.') aligned centrally.",
         "Conditional Category Backgrounds: The main content container background color must change dynamically based on the post category from the data source: use the specific dark background token corresponding to the 'tech' card or 'running' card style used in the blog listing.",
@@ -929,6 +929,29 @@
         "Mobile Responsiveness (Ref: visual-specs/Spanish/Mobile/05-blog-detail.png): On mobile viewports (< 768px), hide the desktop social sidebar, swap the top menu for the standard hamburger mobile drawer button, and expand the post body text container to occupy full width with safe padding.",
         "No Hardcoded Body Strings: The post content, author metadata, titles, and category parameters must map entirely from the Astro collection entry or markdown/JSON data source.",
         "Dynamic Localization: Ensure the layout supports reactive content switching (Es/En) for both the boilerplate text (e.g., 'Autor:') and the main article Markdown/HTML body context."
+      ]
+    },
+    {
+      "id": "FIX-058",
+      "name": "Renombrar ScrollLayout to PostLayout",
+      "status": "done",
+      "description": "Rename the ScrollLayout component and all its references to PostLayout to better reflect its purpose as the blog post detail layout.",
+      "acceptance": [
+        "Rename src/layouts/ScrollLayout.astro to src/layouts/PostLayout.astro",
+        "Update all imports referencing ScrollLayout to PostLayout",
+        "Build succeeds with zero errors"
+      ]
+    },
+    {
+      "id": "FIX-059",
+      "name": "Cambiar enlaces <a> por LinkWrapper",
+      "status": "pending",
+      "description": "Replace all plain <a> tag links across the project with the reusable LinkWrapper component to ensure consistent link styling and behavior.",
+      "acceptance": [
+        "All <a> tags replaced with LinkWrapper component",
+        "Internal and external links handled correctly",
+        "Build succeeds with zero errors",
+        "No visual regressions"
       ]
     }
   ]

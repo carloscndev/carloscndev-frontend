@@ -1,5 +1,5 @@
 ---
-import ScrollLayout from "../../layouts/ScrollLayout.astro";
+import PostLayout from "../../layouts/PostLayout.astro";
 import blogPostData from "../../data/blog-post.json";
 import wallperImage from "../../assets/images/wallper.jpg";
 import uiDict from "../../i18n/ui.json";
@@ -45,7 +45,7 @@ const blogPostDataJson = JSON.stringify(blogPostData);
 const uiDictJson = JSON.stringify(uiDict);
 ---
 
-<ScrollLayout title={post.title} lang={lang} categoryTheme={categoryTheme}>
+<PostLayout title={post.title} lang={lang} categoryTheme={categoryTheme}>
   <script
     type="application/json"
     id="blog-post-data"
@@ -86,7 +86,7 @@ const uiDictJson = JSON.stringify(uiDict);
       </div>
     </div>
   </div>
-</ScrollLayout>
+</PostLayout>
 
 <script>
   import { initBlogPostLangSwitch } from "../../utils/blog-post.ts";

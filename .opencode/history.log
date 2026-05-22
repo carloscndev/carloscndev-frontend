@@ -518,3 +518,13 @@
   - **Design tokens**: Changed `--color-running-primary-light` from `#0092da` to `#bcdbff` in `src/styles/global.css`, updated corresponding `rgba(188, 219, 255, 0.85)` in blog post hero overlay, updated `docs/design-system.md`.
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Verified HTML output contains `data-category-theme="tech"` on blog post page, category-themed `html` and `body` backgrounds, WebIcon fallback colors on home page vs category colors on blog post, scrollbar theme variables, and anchor routing compiled with mobile retry logic.
 - **Closure**: Task [FEAT-006] marked as `done`. All 77/77 tasks completed.
+
+---
+
+### 2026-05-21 — [FIX-058: Renombrar ScrollLayout to PostLayout]
+
+- **Agent**: Coder #1
+- **Plan**: Rename ScrollLayout component and all its CSS classes/imports to PostLayout to better reflect its purpose as the blog post detail layout.
+- **Changes**: [Renamed `src/layouts/ScrollLayout.astro` → `src/layouts/PostLayout.astro`. Updated all CSS classes from `scroll-layout`/`scroll-layout__article` to `post-layout`/`post-layout__article`. Updated import and usage in `src/pages/blog/[slug].astro`. Updated `docs/architecture.md` reference.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors.
+- **Closure**: Task [FIX-058] marked as `done`. 78/79 tasks completed.

@@ -18,27 +18,27 @@ const { title, lang = "es", categoryTheme } = Astro.props;
   description="Blog post"
 >
   <Header lang={lang} />
-  <div class="scroll-layout">
-    <article class="scroll-layout__article">
+  <div class="post-layout">
+    <article class="post-layout__article">
       <slot />
     </article>
   </div>
 </BaseLayout>
 
 <style>
-  .scroll-layout {
+  .post-layout {
     min-height: calc(100vh - var(--header-desktop-height));
     width: 100%;
     padding-top: var(--spacing-md);
   }
 
-  .scroll-layout__article {
+  .post-layout__article {
     width: 100%;
     max-width: 100%;
   }
 
   @media (min-width: 768px) {
-    .scroll-layout__article {
+    .post-layout__article {
       padding: 0 60px;
     }
   }
