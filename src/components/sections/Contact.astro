@@ -1,5 +1,6 @@
 ---
 import contactDataRaw from "../../data/contact.json";
+import LinkWrapper from "../ui/LinkWrapper.astro";
 
 const currentLang = "es";
 
@@ -37,15 +38,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       {data.status_message}
     </p>
 
-    <a
+    <LinkWrapper
       href={data.mail_to}
       class="contact-section__button"
       data-contact-button
-      target="_blank"
-      rel="noopener"
     >
       {data.button_text}
-    </a>
+    </LinkWrapper>
   </div>
 
   <footer class="contact-section__footer" data-contact-footer>

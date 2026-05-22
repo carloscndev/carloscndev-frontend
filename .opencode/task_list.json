@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 79,
-    "completed": 78,
+    "completed": 79,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -945,7 +945,7 @@
     {
       "id": "FIX-059",
       "name": "Cambiar enlaces <a> por LinkWrapper",
-      "status": "pending",
+      "status": "done",
       "description": "Replace all plain <a> tag links across the project with the reusable LinkWrapper component to ensure consistent link styling and behavior.",
       "acceptance": [
         "All <a> tags replaced with LinkWrapper component",

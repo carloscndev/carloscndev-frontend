@@ -6,6 +6,7 @@ import GithubIcon from "../icons/GithubIcon.astro";
 import ExternalLink from "../icons/ExternalLink.astro";
 import FileIcon from "../icons/FileIcon.astro";
 import ArrowNext from "../icons/ArrowNext.astro";
+import LinkWrapper from "../ui/LinkWrapper.astro";
 
 const currentLang = "es";
 
@@ -54,37 +55,31 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             <Diamond size="22" class="portfolio-card__diamond" />
             <div class="portfolio-card__links" data-project-links>
               {project.links.repo && (
-                <a
+                <LinkWrapper
                   href={project.links.repo}
                   class="portfolio-card__link"
-                  target="_blank"
-                  rel="noopener"
                   aria-label="Repository"
                 >
                   <GithubIcon size="18" />
-                </a>
+                </LinkWrapper>
               )}
               {project.links.demo && (
-                <a
+                <LinkWrapper
                   href={project.links.demo}
                   class="portfolio-card__link"
-                  target="_blank"
-                  rel="noopener"
                   aria-label="Demo"
                 >
                   <ExternalLink size="18" />
-                </a>
+                </LinkWrapper>
               )}
               {project.links.article && (
-                <a
+                <LinkWrapper
                   href={project.links.article}
                   class="portfolio-card__link"
-                  target="_blank"
-                  rel="noopener"
                   aria-label="Article"
                 >
                   <FileIcon size="18" />
-                </a>
+                </LinkWrapper>
               )}
             </div>
           </div>
@@ -151,37 +146,31 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             </div>
             <div class="portfolio-accordion__links" data-project-links>
               {project.links.repo && (
-                <a
+                <LinkWrapper
                   href={project.links.repo}
                   class="portfolio-accordion__link"
-                  target="_blank"
-                  rel="noopener"
                   aria-label="Repository"
                 >
                   <GithubIcon size="16" />
-                </a>
+                </LinkWrapper>
               )}
               {project.links.demo && (
-                <a
+                <LinkWrapper
                   href={project.links.demo}
                   class="portfolio-accordion__link"
-                  target="_blank"
-                  rel="noopener"
                   aria-label="Demo"
                 >
                   <ExternalLink size="16" />
-                </a>
+                </LinkWrapper>
               )}
               {project.links.article && (
-                <a
+                <LinkWrapper
                   href={project.links.article}
                   class="portfolio-accordion__link"
-                  target="_blank"
-                  rel="noopener"
                   aria-label="Article"
                 >
                   <FileIcon size="16" />
-                </a>
+                </LinkWrapper>
               )}
             </div>
           </div>

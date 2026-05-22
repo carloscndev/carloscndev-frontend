@@ -4,9 +4,18 @@ interface Props {
   isExternal?: boolean;
   title?: string;
   tooltip?: string;
+  class?: string;
 }
 
-const { href, isExternal = true, title, tooltip } = Astro.props;
+const {
+  href,
+  isExternal = true,
+  title,
+  tooltip,
+  class: className,
+  ...rest
+} = Astro.props;
+
 const isMail = href.startsWith("mailto:");
 const useTargetBlank = isExternal && !isMail;
 ---
@@ -15,8 +24,9 @@ const useTargetBlank = isExternal && !isMail;
   href={href}
   target={useTargetBlank ? "_blank" : undefined}
   rel={useTargetBlank ? "noopener" : undefined}
-  class="link"
   title={title}
+  class:list={["link", className]}
+  {...rest}
 >
   <slot />
   {tooltip && <span class="link-tooltip">{tooltip}</span>}

@@ -4,6 +4,7 @@ import wallperImage from "../../assets/images/wallper.jpg";
 import TechIcon from "../icons/TechIcon.astro";
 import RunningIcon from "../icons/RunningIcon.astro";
 import ExternalLink from "../icons/ExternalLink.astro";
+import LinkWrapper from "../ui/LinkWrapper.astro";
 
 const lang = "es";
 const data = blogData[lang];
@@ -23,8 +24,9 @@ const blogDataJson = JSON.stringify(blogData);
   <div class="blog-grid">
     {
       posts.map((post) => (
-        <a
+        <LinkWrapper
           href={post.link}
+          isExternal={false}
           class="blog-card"
           data-post-id={post.id}
           data-category-theme={post.icon === "tech-icon" ? "tech" : "running"}
@@ -62,7 +64,7 @@ const blogDataJson = JSON.stringify(blogData);
               </span>
             </div>
           </div>
-        </a>
+        </LinkWrapper>
       ))
     }
   </div>
@@ -91,14 +93,15 @@ const blogDataJson = JSON.stringify(blogData);
             <h3 class="blog-accordion__trigger-title" data-post-title>
               {post.title}
             </h3>
-            <a
+            <LinkWrapper
               href={post.link}
+              isExternal={false}
               class="blog-accordion__trigger-link"
               rel="noopener"
               aria-label="Open article"
             >
               <ExternalLink size="16" />
-            </a>
+            </LinkWrapper>
             <svg
               class="blog-accordion__trigger-chevron"
               viewBox="0 0 24 24"

@@ -47,8 +47,9 @@ const fullPath = currentPath + currentHash;
         {
           navLinks.map((link) => (
             <li class="header-nav-item">
-              <a
+              <LinkWrapper
                 href={link.href}
+                isExternal={false}
                 class:list={[
                   "header-nav-link",
                   fullPath === link.href ? "header-nav-link--active" : "",
@@ -56,7 +57,7 @@ const fullPath = currentPath + currentHash;
                 data-i18n-nav={link.key}
               >
                 {NAV_LABELS[link.key][lang]}
-              </a>
+              </LinkWrapper>
             </li>
           ))
         }
@@ -102,8 +103,9 @@ const fullPath = currentPath + currentHash;
         {
           navLinks.map((link) => (
             <li class="mobile-menu-item">
-              <a
+              <LinkWrapper
                 href={link.href}
+                isExternal={false}
                 class:list={[
                   "mobile-menu-link",
                   fullPath === link.href ? "mobile-menu-link--active" : "",
@@ -112,7 +114,7 @@ const fullPath = currentPath + currentHash;
                 data-i18n-nav={link.key}
               >
                 {NAV_LABELS[link.key][lang]}
-              </a>
+              </LinkWrapper>
             </li>
           ))
         }
