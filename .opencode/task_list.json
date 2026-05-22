@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 105,
+    "completed": 110,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1307,7 +1307,7 @@
     {
       "id": "TEST-017",
       "name": "Phase 3: Data validation tests for src/data/*.json",
-      "status": "pending",
+      "status": "done",
       "description": "Validate all JSON files have consistent { es/en } structure, identical keys, non-empty arrays, valid URLs.",
       "acceptance": [
         "All files follow { es: {...}, en: {...} } format",
@@ -1320,7 +1320,7 @@
     {
       "id": "TEST-018",
       "name": "Phase 3: Snapshot/i18n consistency tests",
-      "status": "pending",
+      "status": "done",
       "description": "Snapshot tests verifying complete ES/EN coverage across all data files. No missing translations.",
       "acceptance": [
         "Every key in ES exists in EN and vice versa",
@@ -1332,7 +1332,7 @@
     {
       "id": "TEST-019",
       "name": "Phase 4: Render smoke tests for icons",
-      "status": "pending",
+      "status": "done",
       "description": "Test that all *.astro icon components render a valid SVG with correct viewBox and dimensions.",
       "acceptance": [
         "All 19 icon components render valid <svg>",
@@ -1345,7 +1345,7 @@
     {
       "id": "TEST-020",
       "name": "Phase 4: Render smoke tests for layouts",
-      "status": "pending",
+      "status": "done",
       "description": "Test BaseLayout, MainLayout, PostLayout render slots, include html lang, SEO tags, ClientRouter, skip-link, and canonical URL.",
       "acceptance": [
         "BaseLayout renders <html lang> and <head> elements",
@@ -1358,7 +1358,7 @@
     {
       "id": "TEST-021",
       "name": "Phase 4: Render smoke tests for pages",
-      "status": "pending",
+      "status": "done",
       "description": "Smoke tests for index.astro, 404.astro, posts.astro, projects.astro, blog/[slug].astro. Verify valid HTML output with expected content.",
       "acceptance": [
         "index.astro renders all 6 sections",
