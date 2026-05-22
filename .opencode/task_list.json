@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 89,
-    "completed": 88,
+    "total_tasks": 112,
+    "completed": 89,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -566,9 +566,9 @@
       "id": "FIX-029",
       "name": "Portfolio View More Link Style",
       "status": "done",
-      "description": "Change 'Ver más' from a button to a text link with the ArrowNext icon below, centered.",
+      "description": "Change 'View more' from a button to a text link with the ArrowNext icon below, centered.",
       "acceptance": [
-        "Ver más is plain text, not a button",
+        "View more is plain text, not a button",
         "ArrowNext icon below the text",
         "Both centered"
       ]
@@ -653,7 +653,7 @@
       "id": "FIX-037",
       "name": "View More + ArrowNext Unified Hover Container",
       "status": "done",
-      "description": "The 'Ver más' text and ArrowNext icon must be wrapped in a single container element so that hovering over either element triggers the hover state on both simultaneously.",
+      "description": "The 'View more' text and ArrowNext icon must be wrapped in a single container element so that hovering over either element triggers the hover state on both simultaneously.",
       "acceptance": [
         "View More text and ArrowNext icon share a single parent container",
         "Hovering the text also triggers the icon hover color",
@@ -678,7 +678,7 @@
       "id": "FIX-039",
       "name": "Conditional View More for Portfolio",
       "status": "done",
-      "description": "The 'Ver más' element and ArrowNext icon at the bottom of the Portfolio section must only appear when there are more than 6 project cards. If there are 6 or fewer projects, the element should be hidden.",
+      "description": "The 'View more' element and ArrowNext icon at the bottom of the Portfolio section must only appear when there are more than 6 project cards. If there are 6 or fewer projects, the element should be hidden.",
       "acceptance": [
         "View More hidden when projects.length <= 6",
         "View More visible when projects.length > 6",
@@ -988,39 +988,39 @@
     },
     {
       "id": "FEAT-009",
-      "name": "Página /posts con listado completo de blog",
+      "name": "/posts page with full blog listing",
       "status": "done",
-      "description": "Create the /posts page that lists all blog cards using the same design as the Blog section. blog-section__title must be centered, section__intro must not appear. Scroll must be normal (no snap). If there are more than 6 cards, display a 'Ver más' button that links to this page. Modify the Blog section's 'Ver más' link to redirect to /posts.",
+      "description": "Create the /posts page that lists all blog cards using the same design as the Blog section. The title must be centered and the intro must not appear. Normal scroll (no snap). If there are more than 6 cards, display a 'View more' button linking to this page. Modify the Blog section's 'View more' link to redirect to /posts.",
       "acceptance": [
         "Create src/pages/posts.astro with the same card grid layout as Blog.astro",
-        "blog-section__title centered",
-        "section__intro hidden/removed",
+        "Title centered",
+        "Intro hidden/removed",
         "Normal scroll (no scroll-snap)",
         "All blog cards listed without capping at 6",
-        "Update Blog.astro 'Ver más' link to point to /posts",
+        "Update Blog.astro 'View more' link to point to /posts",
         "Build succeeds with zero errors",
         "Responsive on desktop and mobile"
       ]
     },
     {
       "id": "FEAT-010",
-      "name": "Página /projects con listado completo de portafolio",
+      "name": "/projects page with full portfolio listing",
       "status": "done",
-      "description": "Create the /projects page that lists all portfolio cards using the same design as the Portfolio section, displayed only when there are more than 6 projects. The title must be centered and the intro must not appear. Modify the Portfolio section's 'Ver más' link to redirect to /projects.",
+      "description": "Create the /projects page that lists all portfolio cards using the same design as the Portfolio section, displayed only when there are more than 6 projects. The title must be centered and the intro must not appear. Modify the Portfolio section's 'View more' link to redirect to /projects.",
       "acceptance": [
         "Create src/pages/projects.astro with the same card/accordion layout as Portfolio.astro",
         "Portfolio title centered",
         "Portfolio intro hidden/removed",
         "Normal scroll (no scroll-snap)",
         "All portfolio cards listed without capping at 6",
-        "Update Portfolio.astro 'Ver más' link to point to /projects",
+        "Update Portfolio.astro 'View more' link to point to /projects",
         "Build succeeds with zero errors",
         "Responsive on desktop and mobile"
       ]
     },
     {
       "id": "FIX-061",
-      "name": "Unificar margin-bottom de títulos en secciones",
+      "name": "Unify h2 margin-bottom across About, Portfolio, Blog sections",
       "status": "done",
       "description": "Unify the margin-bottom of h2 titles across About, Portfolio, and Blog sections. Each currently has a different margin-bottom. Use a CSS variable for consistency.",
       "acceptance": [
@@ -1046,9 +1046,9 @@
     },
     {
       "id": "FIX-063",
-      "name": "Revisar y normalizar valores CSS sueltos con variables",
+      "name": "Review and normalize hardcoded CSS values with variables",
       "status": "done",
-      "description": "Review all CSS across the project for hardcoded values like 1rem, rgba() without variables, etc. Map them to existing CSS variables from global.css or create new variables where needed.",
+      "description": "Review all CSS across the project for hardcoded values like rem, rgba() without variables. Map them to existing CSS variables from global.css or create new variables where needed.",
       "acceptance": [
         "No hardcoded spacing values (rem, px) without CSS variable",
         "No hardcoded color values (hex, rgba) without CSS variable",
@@ -1076,7 +1076,7 @@
     },
     {
       "id": "FIX-064",
-      "name": "Auditoría y corrección de accesibilidad web (WCAG 2.1)",
+      "name": "Web accessibility audit and fixes (WCAG 2.1)",
       "status": "done",
       "description": "Using the web-accessibility skill, audit the entire site for WCAG 2.1 compliance and fix any issues found. Focus on semantic HTML, ARIA attributes, keyboard navigation, focus management, color contrast, and screen reader support.",
       "acceptance": [
@@ -1094,7 +1094,7 @@
     {
       "id": "FIX-065",
       "name": "Restaurar colores originales de cards de proyectos en tema dark",
-      "status": "pending",
+      "status": "done",
       "description": "Restore the original dark theme background colors for the portfolio project cards (both desktop grid and mobile accordion), using the mobile accordion version as reference for the correct dark colors.",
       "acceptance": [
         "Desktop portfolio grid cards use the correct dark theme background",
@@ -1102,6 +1102,295 @@
         "Colors match what the mobile version previously displayed",
         "Build succeeds with zero errors",
         "No visual regressions in other components"
+      ]
+    },
+    {
+      "id": "TEST-001",
+      "name": "Phase 1: Install and configure Vitest",
+      "status": "pending",
+      "description": "Install vitest, @vitest/ui, happy-dom. Create vitest.config.ts with path aliases. Add test scripts to package.json.",
+      "acceptance": [
+        "vitest, @vitest/ui, happy-dom installed",
+        "vitest.config.ts with correct path aliases",
+        "scripts: test, test:watch in package.json",
+        "vitest runs without errors"
+      ]
+    },
+    {
+      "id": "TEST-002",
+      "name": "Phase 1: Create src/__tests__/ directory structure",
+      "status": "pending",
+      "description": "Create mirror structure: utils/, data/, components/. Add global setup file with DOM mocks.",
+      "acceptance": [
+        "src/__tests__/utils/ directory created",
+        "src/__tests__/data/ directory created",
+        "src/__tests__/components/ directory created",
+        "setup.ts with happy-dom mocks created"
+      ]
+    },
+    {
+      "id": "TEST-003",
+      "name": "Phase 1: Configure CI/linting for tests",
+      "status": "pending",
+      "description": "Ensure test files are excluded from build output. Verify eslint works with test files.",
+      "acceptance": [
+        "Test files excluded from dist/",
+        "eslint passes on test files",
+        "pre-commit hooks work with test files"
+      ]
+    },
+    {
+      "id": "TEST-004",
+      "name": "Phase 2: Tests for src/utils/common.ts",
+      "status": "pending",
+      "description": "Test cloneAndReplace, getCurrentLang, closeAllPanelsExcept, parseEmbeddedData. Cover valid, null, and edge cases.",
+      "acceptance": [
+        "cloneAndReplace tested with valid element",
+        "getCurrentLang tested with ES/EN fallback",
+        "closeAllPanelsExcept tested with mock DOM",
+        "parseEmbeddedData tested with valid/invalid JSON",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-005",
+      "name": "Phase 2: Tests for src/utils/theme.ts",
+      "status": "pending",
+      "description": "Test getPreferredTheme, applyTheme, initThemeListener. Mock localStorage, document.documentElement, matchMedia.",
+      "acceptance": [
+        "getPreferredTheme handles stored/system preference",
+        "applyTheme adds/removes dark class",
+        "initThemeListener rebinds on astro:page-load",
+        "localStorage persistence verified",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-006",
+      "name": "Phase 2: Tests for src/utils/lang.ts",
+      "status": "pending",
+      "description": "Test getStoredLang, setStoredLang, toggleLang, getUITranslation, updateContentLabels, updateLangUI, NAV_LABELS.",
+      "acceptance": [
+        "getStoredLang/setStoredLang persistence tested",
+        "toggleLang dispatches langchange event",
+        "getUITranslation returns correct ES/EN values",
+        "updateContentLabels updates DOM elements",
+        "NAV_LABELS has all required keys",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-007",
+      "name": "Phase 2: Tests for src/utils/mobile-menu.ts",
+      "status": "pending",
+      "description": "Test isMobileMenuOpen, openMobileMenu, closeMobileMenu, toggleMobileMenu. Verify overflow-hidden, data-open, aria-expanded.",
+      "acceptance": [
+        "openMobileMenu sets data-open and overflow-hidden",
+        "closeMobileMenu removes classes and attributes",
+        "toggleMobileMenu toggles state correctly",
+        "isMobileMenuOpen returns correct boolean",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-008",
+      "name": "Phase 2: Tests for src/utils/anchor-routing.ts",
+      "status": "pending",
+      "description": "Test scrollToHash, handleHashLinkClick, bindHashLinkListeners, updateActiveNavLink. Mock DOM elements and history API.",
+      "acceptance": [
+        "scrollToHash scrolls to valid element",
+        "handleHashLinkClick prevents default and pushes state",
+        "bindHashLinkListeners only binds on root page",
+        "updateActiveNavLink sets correct active class",
+        "pathname filtering works correctly",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-009",
+      "name": "Phase 2: Tests for src/utils/home.ts",
+      "status": "pending",
+      "description": "Test updateHomeContent, initHomeLangSwitch, initHomeHobbies. Mock embedded JSON, DOM, timers.",
+      "acceptance": [
+        "updateHomeContent parses embedded JSON correctly",
+        "initHomeLangSwitch binds langchange event",
+        "initHomeHobbies swaps avatar on click/keyboard",
+        "5-second hobby timer resets correctly",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-010",
+      "name": "Phase 2: Tests for src/utils/about.ts",
+      "status": "pending",
+      "description": "Test updateAboutContent (tech chips rebuild), initAboutLangSwitch. Mock template element and DOM.",
+      "acceptance": [
+        "updateAboutContent rebuilds tech chips from template",
+        "initAboutLangSwitch rebinds on astro:page-load",
+        "avatar src updates on language change",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-011",
+      "name": "Phase 2: Tests for src/utils/experience.ts",
+      "status": "pending",
+      "description": "Test updateExperienceContent, bindTabListeners, bindCarouselLogic. Mock IntersectionObserver and scroll.",
+      "acceptance": [
+        "updateExperienceContent updates job cards correctly",
+        "bindTabListeners handles clone+replace pattern",
+        "bindCarouselLogic updates dots on scroll",
+        "intersection observer mocked correctly",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-012",
+      "name": "Phase 2: Tests for src/utils/portfolio.ts",
+      "status": "pending",
+      "description": "Test updatePortfolioContent (SVG inline links), bindAccordionTriggers, initPortfolioLangSwitch.",
+      "acceptance": [
+        "updatePortfolioContent rebuilds link SVGs correctly",
+        "GithubIcon_SVG, ExternalLink_SVG, FileIcon_SVG render valid HTML",
+        "bindAccordionTriggers handles one-open-at-a-time",
+        "view_more span text updates correctly",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-013",
+      "name": "Phase 2: Tests for src/utils/blog.ts",
+      "status": "pending",
+      "description": "Test updateBlogEntries, bindBlogAccordion, initBlogLangSwitch. Mock blog data and DOM.",
+      "acceptance": [
+        "updateBlogEntries updates all card fields",
+        "bindBlogAccordion closes other panels on open",
+        "initBlogLangSwitch rebinds on astro:page-load",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-014",
+      "name": "Phase 2: Tests for src/utils/contact.ts",
+      "status": "pending",
+      "description": "Test updateContactContent (mailto, footer), initContactLangSwitch.",
+      "acceptance": [
+        "updateContactContent updates title/status/button/footer",
+        "mail_to href attribute updated correctly",
+        "initContactLangSwitch rebinds on astro:page-load",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-015",
+      "name": "Phase 2: Tests for src/utils/404.ts",
+      "status": "pending",
+      "description": "Test update404Content (span text, title, message), init404LangSwitch.",
+      "acceptance": [
+        "update404Content updates title/message/button span",
+        "init404LangSwitch rebinds on astro:page-load",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-016",
+      "name": "Phase 2: Tests for src/utils/blog-post.ts",
+      "status": "pending",
+      "description": "Test updateBlogPostContent (hero title, meta, paragraphs), initBlogPostLangSwitch. Verify slug extraction from URL.",
+      "acceptance": [
+        "updateBlogPostContent updates hero and content from URL slug",
+        "author prefix resolved from UI dictionary",
+        "initBlogPostLangSwitch rebinds on astro:page-load",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-017",
+      "name": "Phase 3: Data validation tests for src/data/*.json",
+      "status": "pending",
+      "description": "Validate all JSON files have consistent { es/en } structure, identical keys, non-empty arrays, valid URLs.",
+      "acceptance": [
+        "All files follow { es: {...}, en: {...} } format",
+        "ES and EN have identical key structure",
+        "No empty arrays or missing required fields",
+        "mail_to fields contain valid mailto: URLs",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-018",
+      "name": "Phase 3: Snapshot/i18n consistency tests",
+      "status": "pending",
+      "description": "Snapshot tests verifying complete ES/EN coverage across all data files. No missing translations.",
+      "acceptance": [
+        "Every key in ES exists in EN and vice versa",
+        "blog-post.json posts have matching IDs ES/EN",
+        "Technologies arrays match across languages",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-019",
+      "name": "Phase 4: Render smoke tests for icons",
+      "status": "pending",
+      "description": "Test that all *.astro icon components render a valid SVG with correct viewBox and dimensions.",
+      "acceptance": [
+        "All 19 icon components render valid <svg>",
+        "viewBox attribute present and non-empty",
+        "Default size prop applies correctly",
+        "className prop passes through to <svg>",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-020",
+      "name": "Phase 4: Render smoke tests for layouts",
+      "status": "pending",
+      "description": "Test BaseLayout, MainLayout, PostLayout render slots, include html lang, SEO tags, ClientRouter, skip-link, and canonical URL.",
+      "acceptance": [
+        "BaseLayout renders <html lang> and <head> elements",
+        "MainLayout renders Header + SocialSidebar + main",
+        "PostLayout renders Header + article with id=main",
+        "Canonical URL, skip-link, OG tags present",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-021",
+      "name": "Phase 4: Render smoke tests for pages",
+      "status": "pending",
+      "description": "Smoke tests for index.astro, 404.astro, posts.astro, projects.astro, blog/[slug].astro. Verify valid HTML output with expected content.",
+      "acceptance": [
+        "index.astro renders all 6 sections",
+        "404.astro renders sleeping avatar + error text + button",
+        "posts.astro renders all blog cards",
+        "projects.astro renders all portfolio cards",
+        "blog/[slug].astro renders hero + article + metadata",
+        "All tests pass"
+      ]
+    },
+    {
+      "id": "TEST-022",
+      "name": "Phase 5: Configure Vitest coverage reporting",
+      "status": "pending",
+      "description": "Add coverage config (c8/istanbul). Set minimum thresholds: 70% utils, 50% global. Add test:coverage script.",
+      "acceptance": [
+        "Coverage report generates correctly",
+        "Thresholds: >= 70% utils, >= 50% global",
+        "script test:coverage works",
+        "Report excludes test files and generated code"
+      ]
+    },
+    {
+      "id": "TEST-023",
+      "name": "Phase 5: Testing guide documentation in docs/testing.md",
+      "status": "pending",
+      "description": "Create internal testing guide with project-specific examples, AAA pattern, common mocks, and how to run tests.",
+      "acceptance": [
+        "docs/testing.md created with setup instructions",
+        "Includes AAA pattern examples from project",
+        "Documents common mocks (localStorage, IntersectionObserver)",
+        "Includes CI integration notes"
       ]
     }
   ]

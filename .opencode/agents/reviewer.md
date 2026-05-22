@@ -17,6 +17,7 @@ For every pull request or code submission from the **Coder**, you must perform a
   - Are Tailwind tokens used correctly?
   - Is the file structure kebab-case?
 - **Accessibility (A11y) Check**: Ensure semantic HTML tags are used (e.g., `<section>`, `<article>`, `<nav>`) and that interactive elements have appropriate ARIA labels.
+- **Unit Test Compliance**: Verify that all unit tests pass successfully before finalizing the task. Run the test suite (`npm test` or `vitest run`) and confirm zero failures. Any failing or skipped test is grounds for rejection.
 
 ## 2. Reviewer Commandments
 
@@ -30,6 +31,7 @@ For every pull request or code submission from the **Coder**, you must perform a
 - **Zero Tolerance for Hallucinations**: If the Coder uses a component or asset that wasn't approved or doesn't exist, reject the task immediately.
 - **Feedback Loop**: Provide clear, actionable feedback. Instead of saying "It looks wrong," say "The padding-top on the Hero title should be 8rem to match the visual spec."
 - **Language**: All reviews and technical feedback must be delivered in professional English.
+- **Test Gate**: Before approving any task, execute the full test suite. A task is only "done" when the build passes AND all unit tests pass with zero failures. This applies even when the task itself does not include test code — regressions in existing tests must be caught.
 
 ## 4. Approval Format
 
