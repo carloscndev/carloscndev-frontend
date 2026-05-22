@@ -578,3 +578,13 @@
 - **Changes**: [Created `src/pages/projects.astro` — uses PostLayout for Header and normal scroll, renders full card grid (2-3 columns responsive) + mobile accordion with all portfolio projects from `portafolio.json`, title centered via `text-align: center`, no intro text. Updated `src/components/sections/Portfolio.astro` — wrapped Ver más section in LinkWrapper pointing to `/projects` with `isExternal={false}`.]
 - **Verification**: Build succeeded (`npm run build`): 16 pages including `/projects/index.html`, zero errors.
 - **Closure**: Task [FEAT-010] marked as `done`. All 83/83 tasks completed.
+
+---
+
+### 2026-05-22 — [FIX-061: Unificar margin-bottom de títulos en secciones]
+
+- **Agent**: Coder #1
+- **Plan**: Unify h2 title margin-bottom across About, Portfolio, and Blog sections to use the same CSS variable (`--spacing-md` = 1rem).
+- **Changes**: [Updated `src/components/sections/Portfolio.astro` — changed `.portfolio-section__title` margin-bottom from `var(--spacing-sm)` to `var(--spacing-md)`. Updated `src/components/sections/Blog.astro` — added `margin-bottom: var(--spacing-md)` to `.blog-section__title`. About section already used `var(--spacing-md)`.]
+- **Verification**: Build succeeded (`npm run build`): 16 pages, zero errors.
+- **Closure**: Task [FIX-061] marked as `done`. 84/87 tasks completed.

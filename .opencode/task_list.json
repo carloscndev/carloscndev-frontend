@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 88,
-    "completed": 83,
+    "completed": 84,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -1021,7 +1021,7 @@
     {
       "id": "FIX-061",
       "name": "Unificar margin-bottom de títulos en secciones",
-      "status": "pending",
+      "status": "done",
       "description": "Unify the margin-bottom of h2 titles across About, Portfolio, and Blog sections. Each currently has a different margin-bottom. Use a CSS variable for consistency.",
       "acceptance": [
         "About section h2 uses unified margin-bottom variable",
