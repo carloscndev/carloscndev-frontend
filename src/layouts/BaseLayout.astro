@@ -1,5 +1,4 @@
 ---
-import { Analytics } from "@vercel/analytics/astro";
 import { ClientRouter } from "astro:transitions";
 import { getPreferredTheme, applyTheme } from "@utils/theme";
 import "../styles/global.css";
@@ -61,7 +60,10 @@ const inlineThemeScript = `
   </head>
   <body>
     <slot />
-    <Analytics />
+    <script type="module">
+      import { inject } from "@vercel/analytics";
+      inject();
+    </script>
   </body>
 </html>
 
