@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 77,
-    "completed": 76,
+    "completed": 77,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -916,7 +916,7 @@
     {
       "id": "FEAT-006",
       "name": "Page: BlogPost Dynamic Layout and Styling",
-      "status": "pending",
+      "status": "done",
       "description": "Implement the individual blog post detail page template. The component must integrate into a 'ScrollLayout' that wraps the common site header menu and the vertical social sidebar. The page must support conditional background colors based on the post category (tech or running), display a full-width hero image banner, and structure article typography cleanly across desktop and mobile viewports.",
       "acceptance": [
         "Template Integration: Build or refactor the single post template (e.g., pages/blog/[slug].astro) so it renders wrapped inside the existing ScrollLayout component.",

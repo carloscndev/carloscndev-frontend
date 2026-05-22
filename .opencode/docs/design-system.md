@@ -29,7 +29,7 @@ Used to style category-specific components in the Blog and Portfolio.
 | Category             | Mode  | Primary   | Secondary |
 | :------------------- | :---- | :-------- | :-------- |
 | **Running & Travel** | Dark  | `#001221` | `#0092da` |
-|                      | Light | `#0092da` | `#001221` |
+|                      | Light | `#bcdbff` | `#001221` |
 | **Technology**       | Dark  | `#070341` | `#8c88f7` |
 |                      | Light | `#8c88f7` | `#070341` |
 

@@ -7,12 +7,14 @@ interface Props {
   title: string;
   lang?: "es" | "en";
   description?: string;
+  categoryTheme?: string;
 }
 
 const {
   title,
   lang = "es",
   description = "carloscndev's blog and portfolio",
+  categoryTheme,
 } = Astro.props;
 
 const inlineThemeScript = `
@@ -44,7 +46,7 @@ const inlineThemeScript = `
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-category-theme={categoryTheme}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,7 +68,6 @@ const inlineThemeScript = `
     align-items: start;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin: auto;
     max-width: var(--max-width);
   }

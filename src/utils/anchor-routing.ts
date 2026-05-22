@@ -16,7 +16,7 @@ export function scrollToHash(hash: string): void {
   if (!cleanHash || cleanHash === "/") {
     const homeSection = document.getElementById("home");
     if (homeSection) {
-      homeSection.scrollIntoView({ behavior: "smooth", block: "center" });
+      homeSection.scrollIntoView({ block: "center" });
     }
     updateActiveNavLink("");
     return;
@@ -24,8 +24,30 @@ export function scrollToHash(hash: string): void {
 
   const element = document.getElementById(cleanHash);
   if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "center" });
+    const container = element.closest(".main-content") as HTMLElement;
+    if (container) {
+      const elRect = element.getBoundingClientRect();
+      const contRect = container.getBoundingClientRect();
+      const relativeTop = elRect.top - contRect.top + container.scrollTop;
+      const targetY =
+        relativeTop - container.clientHeight / 2 + elRect.height / 2;
+      container.scrollTo({ top: targetY, behavior: "auto" });
+    }
     updateActiveNavLink(cleanHash);
+
+    if (window.innerWidth < 768) {
+      setTimeout(() => {
+        const el = document.getElementById(cleanHash);
+        const cont = el?.closest(".main-content") as HTMLElement;
+        if (el && cont) {
+          const r = el.getBoundingClientRect();
+          const cr = cont.getBoundingClientRect();
+          const rt = r.top - cr.top + cont.scrollTop;
+          const y = rt - cont.clientHeight / 2 + r.height / 2;
+          cont.scrollTo({ top: y, behavior: "auto" });
+        }
+      }, 300);
+    }
   }
 }
 
@@ -84,20 +106,13 @@ function handleHashLinkClick(event: Event): void {
 }
 
 /**
- * Handles the initial hash on page load.
- */
-function handleInitialHash(): void {
-  if (typeof window === "undefined" || typeof document === "undefined") return;
-
-  const hash = window.location.hash;
-  requestAnimationFrame(() => scrollToHash(hash || "/"));
-}
-
-/**
  * Binds click listeners to all hash links in the document.
  */
 function bindHashLinkListeners(): void {
   if (typeof document === "undefined") return;
+
+  const pathname = window.location.pathname;
+  if (pathname !== "/" && pathname !== "/index.html") return;
 
   const hashLinks = document.querySelectorAll<HTMLAnchorElement>(
     'a[href="/"], a[href^="/#"]',
@@ -122,26 +137,16 @@ function bindHashLinkListeners(): void {
 export function initAnchorRouting(): void {
   if (typeof document === "undefined") return;
 
-  // Handle initial hash on first load
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", handleInitialHash);
-  } else {
-    handleInitialHash();
-  }
-
-  // Bind hash link click listeners
   bindHashLinkListeners();
 
-  // After Astro client router swaps DOM content, scroll to hash if present
-  document.addEventListener("astro:after-swap", () => {
-    if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      requestAnimationFrame(() => scrollToHash(hash || "/"));
-    }
-  });
-
-  // Re-bind listeners after Astro page loads (handles ClientRouter navigation)
   document.addEventListener("astro:page-load", () => {
     bindHashLinkListeners();
+
+    if (typeof window !== "undefined") {
+      const pathname = window.location.pathname;
+      if (pathname !== "/" && pathname !== "/index.html") return;
+      const hash = window.location.hash;
+      setTimeout(() => scrollToHash(hash || "/"), 200);
+    }
   });
 }

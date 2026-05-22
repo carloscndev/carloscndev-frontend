@@ -1,76 +1,45 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import LinkWrapper from "../components/ui/LinkWrapper.astro";
-import WebIcon from "@components/icons/WebIcon.astro";
-import LanguageButton from "../components/ui/LanguageButton.astro";
+import Header from "../components/ui/Header.astro";
 
-const { title, lang = "es" } = Astro.props;
+interface Props {
+  title: string;
+  lang?: "es" | "en";
+  categoryTheme?: string;
+}
+
+const { title, lang = "es", categoryTheme } = Astro.props;
 ---
 
-<BaseLayout title={title} lang={lang} description="Blog post">
-  <header class="post-header">
-    <div class="post-header-content">
-      <div class="post-header-icon">
-        <LinkWrapper href="/" isExternal={false}>
-          <WebIcon size="40" />
-        </LinkWrapper>
-      </div>
-      <LanguageButton lang={lang} />
-    </div>
-  </header>
-
-  <article class="ScrollLayout">
-    <slot />
-  </article>
+<BaseLayout
+  title={title}
+  lang={lang}
+  categoryTheme={categoryTheme}
+  description="Blog post"
+>
+  <Header lang={lang} />
+  <div class="scroll-layout">
+    <article class="scroll-layout__article">
+      <slot />
+    </article>
+  </div>
 </BaseLayout>
 
 <style>
-  .post-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-desktop-height);
-    display: flex;
-    align-items: center;
-    padding: 0 var(--spacing-lg);
-    z-index: 50;
-    background: var(--bg-primary);
-    border-bottom: 1px solid transparent;
-    transition: all duration-300 ease-in-out;
-
-    .post-header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .post-header-icon {
-      display: flex;
-      align-items: center;
-    }
+  .scroll-layout {
+    min-height: calc(100vh - var(--header-desktop-height));
+    width: 100%;
+    padding-top: var(--spacing-md);
   }
 
-  .ScrollLayout {
-    min-height: 100vh;
-    padding: var(--spacing-lg);
-    padding-top: calc(var(--header-desktop-height) + var(--spacing-lg));
-    max-width: var(--max-width);
-    margin: 0 auto;
+  .scroll-layout__article {
     width: 100%;
+    max-width: 100%;
   }
 
   @media (min-width: 768px) {
-    .post-header {
-      padding: 0 var(--spacing-xl);
-    }
-
-    .ScrollLayout {
-      padding: var(--spacing-xl);
-      padding-top: calc(var(--header-desktop-height) + var(--spacing-xl));
+    .scroll-layout__article {
+      padding: 0 60px;
     }
   }
 </style>
