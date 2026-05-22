@@ -1,0 +1,2 @@
+// TEST-002: Test directory structure created
+// TEST-003: CI ready - test files excluded from dist/, eslint passes

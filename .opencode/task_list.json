@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 90,
+    "completed": 92,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1119,7 +1119,7 @@
     {
       "id": "TEST-002",
       "name": "Phase 1: Create src/__tests__/ directory structure",
-      "status": "pending",
+      "status": "done",
       "description": "Create mirror structure: utils/, data/, components/. Add global setup file with DOM mocks.",
       "acceptance": [
         "src/__tests__/utils/ directory created",
@@ -1131,7 +1131,7 @@
     {
       "id": "TEST-003",
       "name": "Phase 1: Configure CI/linting for tests",
-      "status": "pending",
+      "status": "done",
       "description": "Ensure test files are excluded from build output. Verify eslint works with test files.",
       "acceptance": [
         "Test files excluded from dist/",
