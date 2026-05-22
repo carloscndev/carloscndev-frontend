@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 83,
+    "total_tasks": 88,
     "completed": 83,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -1016,6 +1016,79 @@
         "Update Portfolio.astro 'Ver más' link to point to /projects",
         "Build succeeds with zero errors",
         "Responsive on desktop and mobile"
+      ]
+    },
+    {
+      "id": "FIX-061",
+      "name": "Unificar margin-bottom de títulos en secciones",
+      "status": "pending",
+      "description": "Unify the margin-bottom of h2 titles across About, Portfolio, and Blog sections. Each currently has a different margin-bottom. Use a CSS variable for consistency.",
+      "acceptance": [
+        "About section h2 uses unified margin-bottom variable",
+        "Portfolio section h2 uses unified margin-bottom variable",
+        "Blog section h2 uses unified margin-bottom variable",
+        "Use existing CSS variable or create a new one if needed",
+        "Build succeeds with zero errors"
+      ]
+    },
+    {
+      "id": "FIX-062",
+      "name": "Refactorizar funciones repetidas en utils a common.ts",
+      "status": "pending",
+      "description": "Review all .ts utility files and identify repeated functions or patterns. Extract common logic into a shared common.ts utility file to reduce duplication.",
+      "acceptance": [
+        "Identify repeated functions across home.ts, about.ts, experience.ts, portfolio.ts, contact.ts, blog.ts, blog-post.ts, 404.ts",
+        "Extract common patterns (e.g., data parsing, DOM queries, event binding) to common.ts",
+        "Update all utility files to import from common.ts",
+        "Build succeeds with zero errors",
+        "No functional regressions"
+      ]
+    },
+    {
+      "id": "FIX-063",
+      "name": "Revisar y normalizar valores CSS sueltos con variables",
+      "status": "pending",
+      "description": "Review all CSS across the project for hardcoded values like 1rem, rgba() without variables, etc. Map them to existing CSS variables from global.css or create new variables where needed.",
+      "acceptance": [
+        "No hardcoded spacing values (rem, px) without CSS variable",
+        "No hardcoded color values (hex, rgba) without CSS variable",
+        "New variables created in global.css where needed",
+        "Build succeeds with zero errors",
+        "No visual regressions"
+      ]
+    },
+    {
+      "id": "FEAT-011",
+      "name": "Feature: Advanced SEO Optimization, Metadata Automation and Sitemap Integration",
+      "status": "pending",
+      "description": "Implement a complete, production-ready Search Engine Optimization (SEO) strategy tailored for 'https://carloscndev.com'. This includes setting up automated XML sitemaps, dynamic canonical URLs, a structured robots.txt configuration, automated Open Graph/Twitter Meta tags, and a reusable SEO head component integrated within BaseLayout.",
+      "acceptance": [
+        "Astro Site Configuration: Define the production baseline URL 'site: \"https://carloscndev.com\"' inside 'astro.config.mjs'. This configuration is mandatory for structural asset mapping and correct absolute URL resolution.",
+        "Sitemap Generation: Install and configure the official integration '@astrojs/sitemap'. It must generate standard-compliant sitemaps ('sitemap-index.xml', 'sitemap-0.xml') automatically inside the 'dist/' folder upon project build.",
+        "Robots.txt Routing: Create a public 'robots.txt' file in the public directory defining explicit crawling guidelines. It must target all search engines ('User-agent: *'), allow full site crawling, and reference the absolute URL pointing to the generated sitemap: 'Sitemap: https://carloscndev.com/sitemap-index.xml'.",
+        "Dynamic Canonical Tags: Inject a programmatically resolved '<link rel=\"canonical\" href=\"...\" />' element inside the HTML '<head>'. The href value must combine the production site origin with 'Astro.url.pathname' to eliminate duplicate content flags.",
+        "Semantic Lang Attribute: Ensure the root '<html lang={lang}>' tag correctly updates its value based on the page props to accurately reflect the active content dictionary context to search indexing spiders.",
+        "Reusable BaseSEO Component: Create a new component at 'src/components/BaseSEO.astro' to handle standard and social meta tag injections. Integrate this component cleanly inside the layout header wrapper 'BaseLayout.astro'.",
+        "Social & Open Graph Protocols: Map structural Open Graph tags ('og:title', 'og:description', 'og:type', 'og:url', 'og:image') and Twitter Cards ('twitter:card', 'twitter:title', 'twitter:description', 'twitter:image'). If a page-specific 'header_image' prop is missing, fall back to the global site logo asset component or image path ('WebIcon').",
+        "Noindex Error Page Setup: Enforce a '<meta name=\"robots\" content=\"noindex, follow\" />' rule explicitly inside the custom 404 page template to prevent broken paths or broken links from appearing on search engine result pages.",
+        "Structured Data Schema: Inject a valid JSON-LD schema block on the home/about views targeting 'Person' schemas to enable rich search snippets in Google search results."
+      ]
+    },
+    {
+      "id": "FIX-064",
+      "name": "Auditoría y corrección de accesibilidad web (WCAG 2.1)",
+      "status": "pending",
+      "description": "Using the web-accessibility skill, audit the entire site for WCAG 2.1 compliance and fix any issues found. Focus on semantic HTML, ARIA attributes, keyboard navigation, focus management, color contrast, and screen reader support.",
+      "acceptance": [
+        "Audit all pages for semantic HTML (headings hierarchy, landmarks, roles)",
+        "Verify ARIA attributes on interactive elements (buttons, modals, menus, accordions)",
+        "Check keyboard navigation and focus management (tab order, focus traps)",
+        "Validate color contrast ratios meet WCAG AA (4.5:1 normal text, 3:1 large text)",
+        "Ensure all images have appropriate alt text",
+        "Verify mobile menu and accordions have proper aria-expanded states",
+        "Check form inputs have associated labels",
+        "Build succeeds with zero errors",
+        "No visual regressions"
       ]
     }
   ]
