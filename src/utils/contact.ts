@@ -14,7 +14,7 @@ interface EmbeddedContactData {
   en: ContactAttributes;
 }
 
-function updateContactContent(lang: Lang): void {
+export function updateContactContent(lang: Lang): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("contact-data");

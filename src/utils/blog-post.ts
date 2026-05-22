@@ -31,7 +31,7 @@ interface UIDict {
   en: Record<string, string>;
 }
 
-function updateBlogPostContent(lang: Lang): void {
+export function updateBlogPostContent(lang: Lang): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("blog-post-data");

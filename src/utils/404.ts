@@ -15,7 +15,7 @@ interface Full404Data {
   en: Locale404Data;
 }
 
-function update404Content(lang: string): void {
+export function update404Content(lang: string): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("error-404-data");

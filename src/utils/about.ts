@@ -19,7 +19,7 @@ interface EmbeddedAboutData {
   en: AboutAttributes;
 }
 
-function updateAboutContent(lang: Lang): void {
+export function updateAboutContent(lang: Lang): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("about-data");

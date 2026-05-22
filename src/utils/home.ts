@@ -20,7 +20,7 @@ interface EmbeddedHomeData {
 
 let hobbyTimer: ReturnType<typeof setTimeout> | null = null;
 
-function updateHomeContent(lang: Lang): void {
+export function updateHomeContent(lang: Lang): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("home-data");

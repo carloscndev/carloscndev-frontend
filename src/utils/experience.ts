@@ -1,7 +1,7 @@
 import type { Lang } from "./lang";
 import { cloneAndReplace, initLangSwitch } from "./common";
 
-function updateExperienceContent(lang: Lang): void {
+export function updateExperienceContent(lang: Lang): void {
   if (typeof document === "undefined") return;
   const dataEl = document.getElementById("experience-data");
   if (!dataEl?.textContent) return;

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 112,
-    "completed": 97,
+    "completed": 105,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1209,7 +1209,7 @@
     {
       "id": "TEST-009",
       "name": "Phase 2: Tests for src/utils/home.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updateHomeContent, initHomeLangSwitch, initHomeHobbies. Mock embedded JSON, DOM, timers.",
       "acceptance": [
         "updateHomeContent parses embedded JSON correctly",
@@ -1222,7 +1222,7 @@
     {
       "id": "TEST-010",
       "name": "Phase 2: Tests for src/utils/about.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updateAboutContent (tech chips rebuild), initAboutLangSwitch. Mock template element and DOM.",
       "acceptance": [
         "updateAboutContent rebuilds tech chips from template",
@@ -1234,7 +1234,7 @@
     {
       "id": "TEST-011",
       "name": "Phase 2: Tests for src/utils/experience.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updateExperienceContent, bindTabListeners, bindCarouselLogic. Mock IntersectionObserver and scroll.",
       "acceptance": [
         "updateExperienceContent updates job cards correctly",
@@ -1247,7 +1247,7 @@
     {
       "id": "TEST-012",
       "name": "Phase 2: Tests for src/utils/portfolio.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updatePortfolioContent (SVG inline links), bindAccordionTriggers, initPortfolioLangSwitch.",
       "acceptance": [
         "updatePortfolioContent rebuilds link SVGs correctly",
@@ -1260,7 +1260,7 @@
     {
       "id": "TEST-013",
       "name": "Phase 2: Tests for src/utils/blog.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updateBlogEntries, bindBlogAccordion, initBlogLangSwitch. Mock blog data and DOM.",
       "acceptance": [
         "updateBlogEntries updates all card fields",
@@ -1272,7 +1272,7 @@
     {
       "id": "TEST-014",
       "name": "Phase 2: Tests for src/utils/contact.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updateContactContent (mailto, footer), initContactLangSwitch.",
       "acceptance": [
         "updateContactContent updates title/status/button/footer",
@@ -1284,7 +1284,7 @@
     {
       "id": "TEST-015",
       "name": "Phase 2: Tests for src/utils/404.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test update404Content (span text, title, message), init404LangSwitch.",
       "acceptance": [
         "update404Content updates title/message/button span",
@@ -1295,7 +1295,7 @@
     {
       "id": "TEST-016",
       "name": "Phase 2: Tests for src/utils/blog-post.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Test updateBlogPostContent (hero title, meta, paragraphs), initBlogPostLangSwitch. Verify slug extraction from URL.",
       "acceptance": [
         "updateBlogPostContent updates hero and content from URL slug",
