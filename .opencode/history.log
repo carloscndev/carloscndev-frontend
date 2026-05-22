@@ -538,3 +538,13 @@
 - **Changes**: [Extended `src/components/ui/LinkWrapper.astro` — added `class` prop, combined with default `"link"` class via `class:list`, added `...rest` spread at end of `<a>` to pass-through `data-*`, `aria-*`, and `rel` attributes. Updated `src/components/ui/Header.astro` — replaced 10 `<a>` nav links (desktop + mobile menu) with `<LinkWrapper isExternal={false}>`, preserving `header-nav-link`/`mobile-menu-link` classes and `data-i18n-nav`/`data-mobile-menu-link` attributes. Updated `src/components/sections/Blog.astro` — imported LinkWrapper, replaced desktop card `<a>` and mobile accordion trigger `<a>` with `<LinkWrapper isExternal={false}>`, preserving `blog-card`/`blog-accordion__trigger-link` classes and `data-*` attributes. Updated `src/components/sections/Contact.astro` — imported LinkWrapper, replaced mailto `<a>` with `<LinkWrapper>`, preserving `contact-section__button` class. Updated `src/components/sections/Portfolio.astro` — imported LinkWrapper, replaced 6 `<a>` links (3 desktop card + 3 mobile accordion) with `<LinkWrapper>` for repo/demo/article links.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Verified all output links use `class="link"` combined with original classes: `link header-nav-link`, `link mobile-menu-link`, `link blog-card`, `link blog-accordion__trigger-link`, `link contact-section__button`, `link portfolio-card__link`, `link portfolio-accordion__link`.
 - **Closure**: Task [FIX-059] marked as `done`. All 79/79 tasks completed.
+
+---
+
+### 2026-05-22 — [FEAT-008: 404 Error Page Implementation]
+
+- **Agent**: Coder #1
+- **Plan**: Implement the custom 404 error page with PostLayout, sleeping avatar illustration, localized messaging, and an ArrowNext link for return-to-home. Desktop: horizontal split (image left, text right). Mobile: vertical stack.
+- **Changes**: [Rewrote `src/pages/404.astro` — uses PostLayout for Header, renders sleeping avatar from `slepping.png`, localized title/message from `src/data/404.json` with `data-404-*` attributes, and a LinkWrapper text link with ArrowNext icon after text pointing to `/`. Desktop: flex row, image left + text right. Mobile: flex column stacked centered. Button styled as plain text in `--color-accent` with hover to `--color-word`, margin-top added. Message text uses `--text-base`. SocialSidebar removed from this page. Created `src/utils/404.ts` with `init404LangSwitch()` for dynamic ES/EN switching via langchange event.]
+- **Verification**: Build succeeded (`npm run build`), zero errors. Verified embedded 404 JSON data, sleeping image, ArrowNext icon in output.
+- **Closure**: Task [FEAT-008] marked as `done`. All 80/80 tasks completed.
