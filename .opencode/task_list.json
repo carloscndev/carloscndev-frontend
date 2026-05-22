@@ -2,8 +2,8 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 113,
-    "completed": 113,
+    "total_tasks": 114,
+    "completed": 114,
     "current_sprint": "Phase 2: Unit Testing"
   },
   "tasks": [
@@ -1409,6 +1409,21 @@
         "Contact.astro email from config",
         "Build succeeds with zero errors",
         "No visual regressions"
+      ]
+    },
+    {
+      "id": "FIX-067",
+      "name": "Replace <img> tags with Astro Image component",
+      "status": "done",
+      "description": "Replace all native <img> tags across the project with Astro's built-in <Image /> component from astro:assets to leverage automatic image optimization, responsive srcset generation, and lazy loading.",
+      "acceptance": [
+        "All <img> tags in .astro files replaced with <Image /> from astro:assets",
+        "Images properly imported and sized with width/height attributes",
+        "Responsive images with appropriate densities and formats",
+        "Lazy loading enabled where appropriate",
+        "Blog card images, avatar images, hero images all optimized",
+        "Build succeeds with zero errors",
+        "No visual regressions or broken images"
       ]
     }
   ]

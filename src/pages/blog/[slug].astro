@@ -1,6 +1,7 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro";
 import blogPostData from "../../data/blog-post.json";
+import { Image } from "astro:assets";
 import wallperImage from "../../assets/images/wallper.jpg";
 import uiDict from "../../i18n/ui.json";
 
@@ -54,8 +55,8 @@ const uiDictJson = JSON.stringify(uiDict);
   <script type="application/json" id="blog-post-dict" set:html={uiDictJson} />
 
   <div class="post-hero">
-    <img
-      src={wallperImage.src}
+    <Image
+      src={wallperImage}
       alt=""
       class="post-hero__image"
       aria-hidden="true"

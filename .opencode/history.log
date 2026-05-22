@@ -638,3 +638,13 @@
 - **Changes**: [Created `src/data/config.json` with `site` (url, name, title, description, author), `locales`, `defaultLocale`, `navigation` (key+href array), `social` (github, instagram, linkedin, cv, email). Updated `src/components/ui/Header.astro` — imports config for navLinks and defaultLocale. Updated `src/components/ui/SocialSidebar.astro` — all 5 social URLs from config.social. Updated `src/components/BaseSEO.astro` — site URL and description from config.site. Updated `src/layouts/BaseLayout.astro` — canonical URL and default description from config. Updated `src/pages/index.astro` — JSON-LD Person schema uses config.site and config.social. Updated `src/__tests__/data/validation.test.ts` — added config.json specific test.]
 - **Verification**: Build succeeded, 126 tests pass (18 files), zero errors.
 - **Closure**: Task [FIX-066] marked as `done`. All 113/113 tasks completed.
+
+---
+
+### 2026-05-22 — [FIX-067: Replace <img> tags with Astro Image component]
+
+- **Agent**: Coder #1
+- **Plan**: Replace all native <img> tags with Astro's built-in <Image /> from astro:assets for automatic image optimization, WebP conversion, and responsive srcset generation.
+- **Changes**: [Updated `src/components/sections/Home.astro` — added Image import, replaced avatar img with `<Image src={helloImg} />` (482kB → 15kB). Updated `src/components/sections/About.astro` — added Image import, replaced working.png img. Updated `src/components/sections/Blog.astro` — added Image import, replaced wallpaper img. Updated `src/pages/posts.astro` — added Image import, replaced blog card img. Updated `src/pages/404.astro` — added Image import, replaced sleeping img (537kB → 20kB). Updated `src/pages/blog/[slug].astro` — added Image import, replaced hero img (197kB → 118kB). All img src changed from .src string to imported image object.]
+- **Verification**: Build succeeded, images optimized to WebP with significant size reduction. All 133 tests pass.
+- **Closure**: Task [FIX-067] marked as `done`. All 114/114 tasks completed.

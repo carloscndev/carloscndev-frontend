@@ -1,5 +1,6 @@
 ---
 import homeDataRaw from "../../data/home.json";
+import { Image } from "astro:assets";
 import helloImg from "../../assets/images/hello.png";
 import runningImg from "../../assets/images/running.png";
 import readingImg from "../../assets/images/reading.png";
@@ -30,13 +31,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   <div class="home-section__grid">
     <div class="home-section__avatar">
-      <img
+      <Image
         class="home-section__avatar-img"
         id="home-avatar"
-        src={avatarMap.default}
+        src={helloImg}
         alt={`${homeData.intro} ${homeData.title}`}
-        width="400"
-        height="400"
+        width={400}
+        height={400}
         loading="eager"
       />
     </div>
