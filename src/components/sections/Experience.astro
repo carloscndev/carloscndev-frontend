@@ -4,21 +4,11 @@ import Chevron from "../icons/Chevron.astro";
 import TechPill from "../ui/TechPill.astro";
 
 const currentLang = "es";
-
-function getExperienceData(lang: "es" | "en") {
-  const root = experienceDataRaw.data.attributes;
-  if (root.locale === lang) return root;
-  const loc = (root as any).localizations.data.find(
-    (l: any) => l.attributes.locale === lang,
-  );
-  return loc?.attributes ?? root;
-}
-
-const data = getExperienceData(currentLang);
+const data = experienceDataRaw[currentLang];
 
 const embeddedData = {
-  es: getExperienceData("es"),
-  en: getExperienceData("en"),
+  es: experienceDataRaw.es,
+  en: experienceDataRaw.en,
 };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---

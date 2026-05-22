@@ -19,7 +19,6 @@ interface PortfolioAttributes {
   intro: string;
   view_more: string;
   projects: Project[];
-  locale: string;
 }
 
 interface EmbeddedPortfolioData {

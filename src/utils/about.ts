@@ -10,7 +10,6 @@ interface AboutAttributes {
   contentText: string;
   technologies: TechItem[];
   image: string;
-  locale: string;
   avatarPath: string;
 }
 

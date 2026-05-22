@@ -548,3 +548,13 @@
 - **Changes**: [Rewrote `src/pages/404.astro` — uses PostLayout for Header, renders sleeping avatar from `slepping.png`, localized title/message from `src/data/404.json` with `data-404-*` attributes, and a LinkWrapper text link with ArrowNext icon after text pointing to `/`. Desktop: flex row, image left + text right. Mobile: flex column stacked centered. Button styled as plain text in `--color-accent` with hover to `--color-word`, margin-top added. Message text uses `--text-base`. SocialSidebar removed from this page. Created `src/utils/404.ts` with `init404LangSwitch()` for dynamic ES/EN switching via langchange event.]
 - **Verification**: Build succeeded (`npm run build`), zero errors. Verified embedded 404 JSON data, sleeping image, ArrowNext icon in output.
 - **Closure**: Task [FEAT-008] marked as `done`. All 80/80 tasks completed.
+
+---
+
+### 2026-05-22 — [FIX-060: Unificar formato de JSON en carpeta data]
+
+- **Agent**: Coder #1
+- **Plan**: Restructure all JSON data files from the Strapi v4 format (data.attributes + localizations) to the unified blog-post.json format ({ es: {...}, en: {...} }), and update all consuming components and utilities.
+- **Changes**: [Restructured `src/data/home.json` — removed `data.attributes` wrapper and `localizations`, top-level keys now `es` and `en`. Restructured `src/data/about.json` same pattern. Restructured `src/data/experience.json` same pattern. Restructured `src/data/portafolio.json` same pattern. Restructured `src/data/contact.json` same pattern. Updated `src/components/sections/Home.astro` — replaced `getHomeData()` with direct `homeDataRaw[currentLang]` access. Updated `src/components/sections/About.astro` same pattern. Updated `src/components/sections/Experience.astro` same pattern. Updated `src/components/sections/Portfolio.astro` same pattern. Updated `src/components/sections/Contact.astro` same pattern. Removed `locale` field from interfaces in `src/utils/home.ts`, `src/utils/about.ts`, `src/utils/contact.ts`, `src/utils/portfolio.ts`.]
+- **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Verified embedded JSON data in output uses new format with correct ES/EN keys.
+- **Closure**: Task [FIX-060] marked as `done`. All 81/81 tasks completed.

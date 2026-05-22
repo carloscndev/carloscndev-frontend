@@ -1,46 +1,28 @@
 {
-  "data": {
-    "id": 3,
-    "attributes": {
-      "title": "Un poco sobre mi",
-      "contentText": "<p>Soy ingeniero de software con más de 8 años de experiencia. Me enfoco principalmente en desarrollo <strong>frontend</strong>, aunque también tengo experiencia en <strong>backend</strong> y en la creación de pipelines de <strong>CI/CD</strong>.</p><p>Recientemente me he enfocado en sistemas de <strong>inteligencia artificial generativa</strong> y <strong>machine learning</strong>, incluyendo la integración de modelos de lenguaje (<strong>LLMs</strong>) en flujos de trabajo de productos reales.</p><p>Algunas tecnologías con las que he trabajado recientemente:</p>",
-      "technologies": [
-        { "name": "Ecosistema de React", "icon": "diamond" },
-        { "name": "TypeScript", "icon": "diamond" },
-        { "name": "Node.js", "icon": "diamond" },
-        { "name": "LLMs", "icon": "diamond" },
-        { "name": "Astro", "icon": "diamond" },
-        { "name": "Python", "icon": "diamond" }
-      ],
-      "image": "working.png",
-      "locale": "es",
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "publishedAt": "2025-01-01T00:00:00.000Z",
-      "localizations": {
-        "data": [
-          {
-            "id": 4,
-            "attributes": {
-              "title": "A bit about me",
-              "contentText": "<p>I'm a software engineer with more than 8 years of experience. My main focus is <strong>frontend</strong> development, although I also have experience in <strong>backend</strong> systems and building <strong>CI/CD</strong> pipelines.</p><p>Recently, I've been focused on <strong>generative artificial intelligence</strong> and <strong>machine learning</strong> systems, including integrating language models (<strong>LLMs</strong>) into real product workflows.</p><p>Some technologies I've worked with recently:</p>",
-              "technologies": [
-                { "name": "React Ecosystem", "icon": "diamond" },
-                { "name": "TypeScript", "icon": "diamond" },
-                { "name": "Node.js", "icon": "diamond" },
-                { "name": "LLMs", "icon": "diamond" },
-                { "name": "Astro", "icon": "diamond" },
-                { "name": "Python", "icon": "diamond" }
-              ],
-              "image": "working.png",
-              "locale": "en",
-              "createdAt": "2025-01-01T00:00:00.000Z",
-              "updatedAt": "2025-01-01T00:00:00.000Z",
-              "publishedAt": "2025-01-01T00:00:00.000Z"
-            }
-          }
-        ]
-      }
-    }
+  "es": {
+    "title": "Un poco sobre mi",
+    "contentText": "<p>Soy ingeniero de software con más de 8 años de experiencia. Me enfoco principalmente en desarrollo <strong>frontend</strong>, aunque también tengo experiencia en <strong>backend</strong> y en la creación de pipelines de <strong>CI/CD</strong>.</p><p>Recientemente me he enfocado en sistemas de <strong>inteligencia artificial generativa</strong> y <strong>machine learning</strong>, incluyendo la integración de modelos de lenguaje (<strong>LLMs</strong>) en flujos de trabajo de productos reales.</p><p>Algunas tecnologías con las que he trabajado recientemente:</p>",
+    "technologies": [
+      { "name": "Ecosistema de React", "icon": "diamond" },
+      { "name": "TypeScript", "icon": "diamond" },
+      { "name": "Node.js", "icon": "diamond" },
+      { "name": "LLMs", "icon": "diamond" },
+      { "name": "Astro", "icon": "diamond" },
+      { "name": "Python", "icon": "diamond" }
+    ],
+    "image": "working.png"
+  },
+  "en": {
+    "title": "A bit about me",
+    "contentText": "<p>I'm a software engineer with more than 8 years of experience. My main focus is <strong>frontend</strong> development, although I also have experience in <strong>backend</strong> systems and building <strong>CI/CD</strong> pipelines.</p><p>Recently, I've been focused on <strong>generative artificial intelligence</strong> and <strong>machine learning</strong> systems, including integrating language models (<strong>LLMs</strong>) into real product workflows.</p><p>Some technologies I've worked with recently:</p>",
+    "technologies": [
+      { "name": "React Ecosystem", "icon": "diamond" },
+      { "name": "TypeScript", "icon": "diamond" },
+      { "name": "Node.js", "icon": "diamond" },
+      { "name": "LLMs", "icon": "diamond" },
+      { "name": "Astro", "icon": "diamond" },
+      { "name": "Python", "icon": "diamond" }
+    ],
+    "image": "working.png"
   }
 }

@@ -6,17 +6,7 @@ import readingImg from "../../assets/images/reading.png";
 import playingImg from "../../assets/images/playing.png";
 
 const currentLang = "es";
-
-function getHomeData(lang: "es" | "en") {
-  const root = homeDataRaw.data.attributes;
-  if (root.locale === lang) return root;
-  const loc = (root as any).localizations.data.find(
-    (l: any) => l.attributes.locale === lang,
-  );
-  return loc?.attributes ?? root;
-}
-
-const homeData = getHomeData(currentLang);
+const homeData = homeDataRaw[currentLang];
 
 const avatarMap: Record<string, string> = {
   default: helloImg.src,
@@ -28,8 +18,8 @@ const avatarMap: Record<string, string> = {
 const subtitleHTML = homeData.subtitle.replace(/dev$/, "<strong>dev</strong>");
 
 const embeddedData = {
-  es: { ...getHomeData("es"), avatarPaths: avatarMap },
-  en: { ...getHomeData("en"), avatarPaths: avatarMap },
+  es: { ...homeDataRaw.es, avatarPaths: avatarMap },
+  en: { ...homeDataRaw.en, avatarPaths: avatarMap },
 };
 
 const embeddedDataJson = JSON.stringify(embeddedData);

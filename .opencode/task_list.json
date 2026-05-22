@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 81,
-    "completed": 80,
+    "completed": 81,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -973,7 +973,7 @@
     {
       "id": "FIX-060",
       "name": "Unificar formato de JSON en carpeta data",
-      "status": "pending",
+      "status": "done",
       "description": "Unify all JSON data files in src/data/ to use the same format as blog-post.json: top-level keys 'es' and 'en' with the localized content nested inside. Currently about.json, contact.json, experience.json, home.json, and portafolio.json use the Strapi v4 pattern (data.attributes + localizations). They must be restructured to { 'es': { ... }, 'en': { ... } }.",
       "acceptance": [
         "Restructure about.json to { es: { ... }, en: { ... } } format",

@@ -4,25 +4,15 @@ import workingImg from "../../assets/images/working.png";
 import Diamond from "../icons/Diamond.astro";
 
 const currentLang = "es";
-
-function getAboutData(lang: "es" | "en") {
-  const root = aboutDataRaw.data.attributes;
-  if (root.locale === lang) return root;
-  const loc = (root as any).localizations.data.find(
-    (l: any) => l.attributes.locale === lang,
-  );
-  return loc?.attributes ?? root;
-}
-
-const aboutData = getAboutData(currentLang);
+const aboutData = aboutDataRaw[currentLang];
 
 const avatarMap: Record<string, string> = {
   default: workingImg.src,
 };
 
 const embeddedData = {
-  es: { ...getAboutData("es"), avatarPath: avatarMap.default },
-  en: { ...getAboutData("en"), avatarPath: avatarMap.default },
+  es: { ...aboutDataRaw.es, avatarPath: avatarMap.default },
+  en: { ...aboutDataRaw.en, avatarPath: avatarMap.default },
 };
 
 const embeddedDataJson = JSON.stringify(embeddedData);

@@ -3,21 +3,11 @@ import contactDataRaw from "../../data/contact.json";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 
 const currentLang = "es";
-
-function getContactData(lang: "es" | "en") {
-  const root = contactDataRaw.data.attributes;
-  if (root.locale === lang) return root;
-  const loc = (root as any).localizations.data.find(
-    (l: any) => l.attributes.locale === lang,
-  );
-  return loc?.attributes ?? root;
-}
-
-const data = getContactData(currentLang);
+const data = contactDataRaw[currentLang];
 
 const embeddedData = {
-  es: getContactData("es"),
-  en: getContactData("en"),
+  es: contactDataRaw.es,
+  en: contactDataRaw.en,
 };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---

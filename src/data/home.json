@@ -1,47 +1,29 @@
 {
-  "data": {
-    "id": 1,
-    "attributes": {
-      "intro": "Hola, soy",
-      "title": "Carlos Castañeda",
-      "subtitle": "carloscndev",
-      "content": "<p>Este es mi sitio. Aquí puedes conocer un poco más sobre mí, ver algunos de mis proyectos, en qué estoy trabajando actualmente y, si te interesa, leer algo en el blog.</p><p>Soy ingeniero de software. En mi tiempo libre me gusta <strong data-action=\"running\">correr</strong>. He completado varios maratones y casi siempre estoy preparando el siguiente reto.</p><p>También me interesa el diseño, <strong data-action=\"reading\">leer</strong> y los <strong data-action=\"videogames\">videojuegos</strong>.</p>",
-      "avatar": {
-        "default": "hello.png",
-        "variants": {
-          "running": "running.png",
-          "reading": "reading.png",
-          "videogames": "playing.png"
-        }
-      },
-      "locale": "es",
-      "createdAt": "2025-01-01T00:00:00.000Z",
-      "updatedAt": "2025-01-01T00:00:00.000Z",
-      "publishedAt": "2025-01-01T00:00:00.000Z",
-      "localizations": {
-        "data": [
-          {
-            "id": 2,
-            "attributes": {
-              "intro": "Hi, I'm",
-              "title": "Carlos Castañeda",
-              "subtitle": "carloscndev",
-              "content": "<p>This is my website. Here you can learn a bit more about me, explore some of my projects, see what I'm currently working on and, if you're interested, read something on the blog.</p><p>I'm a software engineer. In my free time I enjoy <strong data-action=\"running\">running</strong>. I've completed several marathons and I'm almost always preparing for the next challenge.</p><p>I'm also interested in design, <strong data-action=\"reading\">reading</strong> and <strong data-action=\"videogames\">videogames</strong>.</p>",
-              "avatar": {
-                "default": "hello.png",
-                "variants": {
-                  "running": "running.png",
-                  "reading": "reading.png",
-                  "videogames": "playing.png"
-                }
-              },
-              "locale": "en",
-              "createdAt": "2025-01-01T00:00:00.000Z",
-              "updatedAt": "2025-01-01T00:00:00.000Z",
-              "publishedAt": "2025-01-01T00:00:00.000Z"
-            }
-          }
-        ]
+  "es": {
+    "intro": "Hola, soy",
+    "title": "Carlos Castañeda",
+    "subtitle": "carloscndev",
+    "content": "<p>Este es mi sitio. Aquí puedes conocer un poco más sobre mí, ver algunos de mis proyectos, en qué estoy trabajando actualmente y, si te interesa, leer algo en el blog.</p><p>Soy ingeniero de software. En mi tiempo libre me gusta <strong data-action=\"running\">correr</strong>. He completado varios maratones y casi siempre estoy preparando el siguiente reto.</p><p>También me interesa el diseño, <strong data-action=\"reading\">leer</strong> y los <strong data-action=\"videogames\">videojuegos</strong>.</p>",
+    "avatar": {
+      "default": "hello.png",
+      "variants": {
+        "running": "running.png",
+        "reading": "reading.png",
+        "videogames": "playing.png"
+      }
+    }
+  },
+  "en": {
+    "intro": "Hi, I'm",
+    "title": "Carlos Castañeda",
+    "subtitle": "carloscndev",
+    "content": "<p>This is my website. Here you can learn a bit more about me, explore some of my projects, see what I'm currently working on and, if you're interested, read something on the blog.</p><p>I'm a software engineer. In my free time I enjoy <strong data-action=\"running\">running</strong>. I've completed several marathons and I'm almost always preparing for the next challenge.</p><p>I'm also interested in design, <strong data-action=\"reading\">reading</strong> and <strong data-action=\"videogames\">videogames</strong>.</p>",
+    "avatar": {
+      "default": "hello.png",
+      "variants": {
+        "running": "running.png",
+        "reading": "reading.png",
+        "videogames": "playing.png"
       }
     }
   }

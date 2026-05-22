@@ -6,7 +6,6 @@ interface ContactAttributes {
   button_text: string;
   mail_to: string;
   footer: string;
-  locale: string;
 }
 
 interface EmbeddedContactData {

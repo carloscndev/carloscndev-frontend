@@ -9,7 +9,6 @@ interface HomeAttributes {
     default: string;
     variants: Record<string, string>;
   };
-  locale: string;
   avatarPaths: Record<string, string>;
 }
 

@@ -9,21 +9,11 @@ import ArrowNext from "../icons/ArrowNext.astro";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 
 const currentLang = "es";
-
-function getPortfolioData(lang: "es" | "en") {
-  const root = portfolioDataRaw.data.attributes;
-  if (root.locale === lang) return root;
-  const loc = (root as any).localizations.data.find(
-    (l: any) => l.attributes.locale === lang,
-  );
-  return loc?.attributes ?? root;
-}
-
-const data = getPortfolioData(currentLang);
+const data = portfolioDataRaw[currentLang];
 
 const embeddedData = {
-  es: getPortfolioData("es"),
-  en: getPortfolioData("en"),
+  es: portfolioDataRaw.es,
+  en: portfolioDataRaw.en,
 };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
