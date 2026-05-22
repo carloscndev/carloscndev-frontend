@@ -226,11 +226,11 @@ const blogDataJson = JSON.stringify(blogData);
 
   .blog-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-card);
   }
 
   :global(.dark) .blog-card:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-card-dark);
   }
 
   .blog-card__image {

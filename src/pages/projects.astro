@@ -214,11 +214,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   .portfolio-grid__card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-card);
   }
 
   :global(.dark) .portfolio-grid__card:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-card-dark);
   }
 
   .portfolio-card__header {

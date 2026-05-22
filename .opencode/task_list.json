@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 88,
-    "completed": 85,
+    "completed": 86,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -1047,7 +1047,7 @@
     {
       "id": "FIX-063",
       "name": "Revisar y normalizar valores CSS sueltos con variables",
-      "status": "pending",
+      "status": "done",
       "description": "Review all CSS across the project for hardcoded values like 1rem, rgba() without variables, etc. Map them to existing CSS variables from global.css or create new variables where needed.",
       "acceptance": [
         "No hardcoded spacing values (rem, px) without CSS variable",
