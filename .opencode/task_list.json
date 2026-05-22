@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 83,
-    "completed": 81,
+    "completed": 82,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -989,7 +989,7 @@
     {
       "id": "FEAT-009",
       "name": "Página /posts con listado completo de blog",
-      "status": "pending",
+      "status": "done",
       "description": "Create the /posts page that lists all blog cards using the same design as the Blog section. blog-section__title must be centered, section__intro must not appear. Scroll must be normal (no snap). If there are more than 6 cards, display a 'Ver más' button that links to this page. Modify the Blog section's 'Ver más' link to redirect to /posts.",
       "acceptance": [
         "Create src/pages/posts.astro with the same card grid layout as Blog.astro",

@@ -558,3 +558,13 @@
 - **Changes**: [Restructured `src/data/home.json` — removed `data.attributes` wrapper and `localizations`, top-level keys now `es` and `en`. Restructured `src/data/about.json` same pattern. Restructured `src/data/experience.json` same pattern. Restructured `src/data/portafolio.json` same pattern. Restructured `src/data/contact.json` same pattern. Updated `src/components/sections/Home.astro` — replaced `getHomeData()` with direct `homeDataRaw[currentLang]` access. Updated `src/components/sections/About.astro` same pattern. Updated `src/components/sections/Experience.astro` same pattern. Updated `src/components/sections/Portfolio.astro` same pattern. Updated `src/components/sections/Contact.astro` same pattern. Removed `locale` field from interfaces in `src/utils/home.ts`, `src/utils/about.ts`, `src/utils/contact.ts`, `src/utils/portfolio.ts`.]
 - **Verification**: Build succeeded (`npm run build`): 14 pages, zero errors. Verified embedded JSON data in output uses new format with correct ES/EN keys.
 - **Closure**: Task [FIX-060] marked as `done`. All 81/81 tasks completed.
+
+---
+
+### 2026-05-22 — [FEAT-009: Página /posts con listado completo de blog]
+
+- **Agent**: Coder #1
+- **Plan**: Create /posts page listing all blog cards with centered title, no intro, normal scroll. Cap Blog.astro at 6 cards and add conditional "Ver más" link to /posts.
+- **Changes**: [Created `src/pages/posts.astro` — uses PostLayout for Header and normal scroll, renders full card grid (1-2-3 columns responsive) + mobile accordion with all blog posts from `blog.json`, title centered via `text-align: center`, no intro text. Updated `src/components/sections/Blog.astro` — imported LinkWrapper and ArrowNext, capped grid and accordion at `.slice(0, 6)`, added conditional "Ver más" block with ArrowNext icon linking to `/posts` (shown only when `posts.length > 6`). Added view-more CSS styles matching Portfolio section pattern.]
+- **Verification**: Build succeeded (`npm run build`): 15 pages including `/posts/index.html`, zero errors.
+- **Closure**: Task [FEAT-009] marked as `done`. 82/83 tasks completed.

@@ -1,197 +1,171 @@
 ---
-import blogData from "../../data/blog.json";
-import wallperImage from "../../assets/images/wallper.jpg";
-import TechIcon from "../icons/TechIcon.astro";
-import RunningIcon from "../icons/RunningIcon.astro";
-import ExternalLink from "../icons/ExternalLink.astro";
-import LinkWrapper from "../ui/LinkWrapper.astro";
-import ArrowNext from "../icons/ArrowNext.astro";
+import PostLayout from "../layouts/PostLayout.astro";
+import blogData from "../data/blog.json";
+import wallperImage from "../assets/images/wallper.jpg";
+import TechIcon from "../components/icons/TechIcon.astro";
+import RunningIcon from "../components/icons/RunningIcon.astro";
+import ExternalLink from "../components/icons/ExternalLink.astro";
+import LinkWrapper from "../components/ui/LinkWrapper.astro";
 
 const lang = "es";
-const data = blogData[lang];
-const posts = data.blog.posts;
+const data = blogData[lang].blog;
+const posts = data.posts;
 const blogDataJson = JSON.stringify(blogData);
 ---
 
-<section id="blog" class="blog-section">
+<PostLayout title="Blog — Posts" lang={lang}>
   <script type="application/json" id="blog-data" set:html={blogDataJson} />
 
-  <header class="blog-section__header">
-    <h2 class="blog-section__title" data-i18n-content="section.blog">Blog</h2>
-  </header>
+  <section class="posts-page">
+    <header class="posts-page__header">
+      <h1 class="posts-page__title" data-i18n-content="section.blog">
+        {data.title}
+      </h1>
+    </header>
 
-  <p class="blog-section__intro" data-blog-intro>{data.blog.intro}</p>
-
-  <div class="blog-grid">
-    {
-      posts.slice(0, 6).map((post) => (
-        <LinkWrapper
-          href={post.link}
-          isExternal={false}
-          class="blog-card"
-          data-post-id={post.id}
-          data-category-theme={post.icon === "tech-icon" ? "tech" : "running"}
-          aria-label={post.title}
-        >
-          <div class="blog-card__image">
-            <img
-              src={wallperImage.src}
-              alt={post.title}
-              class="blog-card__image-img"
-            />
-            <div class="blog-card__overlay">
-              <p class="blog-card__overlay-text">{post.resume || ""}</p>
-            </div>
-          </div>
-          <ExternalLink size="18" class="blog-card__overlay-icon" />
-          <div class="blog-card__content">
-            <h3 class="blog-card__title" data-post-title>
-              {post.title}
-            </h3>
-            <span class="blog-card__read-time" data-post-read-time>
-              {post.read_time}
-            </span>
-            <div class="blog-card__meta">
-              <span class="blog-card__date" data-post-date>
-                {post.date}
-              </span>
-              <span class="blog-card__category" data-post-category>
-                {post.category}
-                {post.icon === "tech-icon" ? (
-                  <TechIcon size="14" class="blog-card__category-icon" />
-                ) : (
-                  <RunningIcon size="14" class="blog-card__category-icon" />
-                )}
-              </span>
-            </div>
-          </div>
-        </LinkWrapper>
-      ))
-    }
-  </div>
-
-  <!-- Mobile Accordion (visible < 768px) -->
-  <div class="blog-accordion" data-blog-accordion>
-    {
-      posts.slice(0, 6).map((post) => (
-        <div
-          class="blog-accordion__item"
-          data-accordion-item
-          data-post-id={post.id}
-          data-category-theme={post.icon === "tech-icon" ? "tech" : "running"}
-        >
-          <button
-            class="blog-accordion__trigger"
-            data-accordion-trigger
-            aria-expanded="false"
-            type="button"
+    <div class="posts-page__grid">
+      {
+        posts.map((post) => (
+          <LinkWrapper
+            href={post.link}
+            isExternal={false}
+            class="blog-card"
+            data-post-id={post.id}
+            data-category-theme={post.icon === "tech-icon" ? "tech" : "running"}
+            aria-label={post.title}
           >
-            {post.icon === "tech-icon" ? (
-              <TechIcon size="20" class="blog-accordion__trigger-icon" />
-            ) : (
-              <RunningIcon size="20" class="blog-accordion__trigger-icon" />
-            )}
-            <h3 class="blog-accordion__trigger-title" data-post-title>
-              {post.title}
-            </h3>
-            <LinkWrapper
-              href={post.link}
-              isExternal={false}
-              class="blog-accordion__trigger-link"
-              rel="noopener"
-              aria-label="Open article"
-            >
-              <ExternalLink size="16" />
-            </LinkWrapper>
-            <svg
-              class="blog-accordion__trigger-chevron"
-              viewBox="0 0 24 24"
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
-          <div class="blog-accordion__panel" data-accordion-panel>
-            <p class="blog-accordion__panel-text" data-post-resume>
-              {post.resume || ""}
-            </p>
-          </div>
-        </div>
-      ))
-    }
-  </div>
+            <div class="blog-card__image">
+              <img
+                src={wallperImage.src}
+                alt={post.title}
+                class="blog-card__image-img"
+              />
+              <div class="blog-card__overlay">
+                <p class="blog-card__overlay-text">{post.resume || ""}</p>
+              </div>
+            </div>
+            <ExternalLink size="18" class="blog-card__overlay-icon" />
+            <div class="blog-card__content">
+              <h3 class="blog-card__title" data-post-title>
+                {post.title}
+              </h3>
+              <span class="blog-card__read-time" data-post-read-time>
+                {post.read_time}
+              </span>
+              <div class="blog-card__meta">
+                <span class="blog-card__date" data-post-date>
+                  {post.date}
+                </span>
+                <span class="blog-card__category" data-post-category>
+                  {post.category}
+                  {post.icon === "tech-icon" ? (
+                    <TechIcon size="14" class="blog-card__category-icon" />
+                  ) : (
+                    <RunningIcon size="14" class="blog-card__category-icon" />
+                  )}
+                </span>
+              </div>
+            </div>
+          </LinkWrapper>
+        ))
+      }
+    </div>
 
-  {
-    posts.length > 6 && (
-      <div class="blog-section__view-more-wrapper">
-        <LinkWrapper
-          href="/posts"
-          isExternal={false}
-          class="blog-section__view-more"
-          data-blog-viewmore
-        >
-          <span>{data.blog.view_more}</span>
-          <ArrowNext size="20" class="blog-section__view-more-icon" />
-        </LinkWrapper>
-      </div>
-    )
-  }
-</section>
+    <div class="posts-page__accordion">
+      {
+        posts.map((post) => (
+          <div
+            class="blog-accordion__item"
+            data-accordion-item
+            data-post-id={post.id}
+            data-category-theme={post.icon === "tech-icon" ? "tech" : "running"}
+          >
+            <button
+              class="blog-accordion__trigger"
+              data-accordion-trigger
+              aria-expanded="false"
+              type="button"
+            >
+              {post.icon === "tech-icon" ? (
+                <TechIcon size="20" class="blog-accordion__trigger-icon" />
+              ) : (
+                <RunningIcon size="20" class="blog-accordion__trigger-icon" />
+              )}
+              <h3 class="blog-accordion__trigger-title" data-post-title>
+                {post.title}
+              </h3>
+              <LinkWrapper
+                href={post.link}
+                isExternal={false}
+                class="blog-accordion__trigger-link"
+                rel="noopener"
+                aria-label="Open article"
+              >
+                <ExternalLink size="16" />
+              </LinkWrapper>
+              <svg
+                class="blog-accordion__trigger-chevron"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="blog-accordion__panel" data-accordion-panel>
+              <p class="blog-accordion__panel-text" data-post-resume>
+                {post.resume || ""}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</PostLayout>
 
 <script>
-  import { initBlogLangSwitch, initBlogAccordion } from "../../utils/blog.ts";
+  import { initBlogLangSwitch, initBlogAccordion } from "../utils/blog.ts";
   initBlogLangSwitch();
   initBlogAccordion();
 </script>
 
 <style>
-  .blog-section {
-    height: 100vh;
-    overflow-y: auto;
-    overflow-anchor: none;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: var(--spacing-lg);
-  }
-
-  .blog-section::-webkit-scrollbar {
-    display: none;
-  }
-
-  .blog-section__header {
-    margin-bottom: var(--spacing-md);
-    text-align: left;
+  .posts-page {
     width: 100%;
-    align-self: flex-start;
+    max-width: 100%;
+    padding: var(--spacing-xl) var(--spacing-lg);
   }
 
-  .blog-section__title {
+  .posts-page__header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .posts-page__title {
     font-family: var(--font-titles);
     font-size: var(--font-size-h2-mobile);
     font-weight: var(--weight-space-semibold);
     color: var(--text-base);
   }
 
-  .blog-section__intro {
-    font-family: var(--font-body);
-    color: var(--text-base);
-    line-height: 1.8;
-    text-align: left;
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .blog-grid {
+  .posts-page__grid {
     display: none;
     gap: var(--spacing-lg);
     padding-bottom: var(--spacing-lg);
     width: 100%;
-    max-width: var(--max-width);
+  }
+
+  .posts-page__accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    width: 100%;
   }
 
   .blog-card {
@@ -210,7 +184,6 @@ const blogDataJson = JSON.stringify(blogData);
   .blog-card[data-category-theme="tech"] {
     background: var(--color-tech-primary-light);
   }
-
   .blog-card[data-category-theme="running"] {
     background: var(--color-running-primary-light);
   }
@@ -218,7 +191,6 @@ const blogDataJson = JSON.stringify(blogData);
   :global(.dark) .blog-card[data-category-theme="tech"] {
     background: var(--color-tech-primary-dark);
   }
-
   :global(.dark) .blog-card[data-category-theme="running"] {
     background: var(--color-running-primary-dark);
   }
@@ -338,7 +310,6 @@ const blogDataJson = JSON.stringify(blogData);
     color: var(--color-word);
   }
 
-  /* Category-themed text colors */
   .blog-card[data-category-theme="tech"] .blog-card__title,
   .blog-card[data-category-theme="tech"] .blog-card__read-time,
   .blog-card[data-category-theme="tech"] .blog-card__meta,
@@ -371,31 +342,20 @@ const blogDataJson = JSON.stringify(blogData);
     color: var(--color-running-secondary-dark);
   }
 
-  /* Mobile Accordion (visible < 768px) */
-  .blog-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    width: 100%;
-  }
-
+  /* Accordion */
   .blog-accordion__item {
     border-radius: var(--border-radius);
     overflow: hidden;
   }
-
   .blog-accordion__item[data-category-theme="tech"] {
     background: var(--color-tech-primary-light);
   }
-
   .blog-accordion__item[data-category-theme="running"] {
     background: var(--color-running-primary-light);
   }
-
   :global(.dark) .blog-accordion__item[data-category-theme="tech"] {
     background: var(--color-tech-primary-dark);
   }
-
   :global(.dark) .blog-accordion__item[data-category-theme="running"] {
     background: var(--color-running-primary-dark);
   }
@@ -420,23 +380,19 @@ const blogDataJson = JSON.stringify(blogData);
     flex: 1;
     color: inherit;
   }
-
   .blog-accordion__item[data-category-theme="tech"]
     .blog-accordion__trigger-title {
     color: var(--color-tech-secondary-light);
   }
-
   .blog-accordion__item[data-category-theme="running"]
     .blog-accordion__trigger-title {
     color: var(--color-running-secondary-light);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="tech"]
     .blog-accordion__trigger-title {
     color: var(--color-tech-secondary-dark);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="running"]
     .blog-accordion__trigger-title {
@@ -447,23 +403,19 @@ const blogDataJson = JSON.stringify(blogData);
     flex-shrink: 0;
     margin-top: 0.3rem;
   }
-
   .blog-accordion__item[data-category-theme="tech"]
     :global(.blog-accordion__trigger-icon) {
     color: var(--color-tech-secondary-light);
   }
-
   .blog-accordion__item[data-category-theme="running"]
     :global(.blog-accordion__trigger-icon) {
     color: var(--color-running-secondary-light);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="tech"]
     :global(.blog-accordion__trigger-icon) {
     color: var(--color-tech-secondary-dark);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="running"]
     :global(.blog-accordion__trigger-icon) {
@@ -476,29 +428,24 @@ const blogDataJson = JSON.stringify(blogData);
     flex-shrink: 0;
     margin-top: 0.3rem;
   }
-
   .blog-accordion__item[data-category-theme="tech"]
     .blog-accordion__trigger-link {
     color: var(--color-tech-secondary-light);
   }
-
   .blog-accordion__item[data-category-theme="running"]
     .blog-accordion__trigger-link {
     color: var(--color-running-secondary-light);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="tech"]
     .blog-accordion__trigger-link {
     color: var(--color-tech-secondary-dark);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="running"]
     .blog-accordion__trigger-link {
     color: var(--color-running-secondary-dark);
   }
-
   .blog-accordion__trigger-link:hover {
     color: var(--color-accent);
   }
@@ -508,29 +455,24 @@ const blogDataJson = JSON.stringify(blogData);
     margin-top: 0.3rem;
     transition: transform 300ms ease;
   }
-
   .blog-accordion__item[data-category-theme="tech"]
     .blog-accordion__trigger-chevron {
     color: var(--color-tech-secondary-light);
   }
-
   .blog-accordion__item[data-category-theme="running"]
     .blog-accordion__trigger-chevron {
     color: var(--color-running-secondary-light);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="tech"]
     .blog-accordion__trigger-chevron {
     color: var(--color-tech-secondary-dark);
   }
-
   :global(.dark)
     .blog-accordion__item[data-category-theme="running"]
     .blog-accordion__trigger-chevron {
     color: var(--color-running-secondary-dark);
   }
-
   .blog-accordion__trigger[aria-expanded="true"]
     .blog-accordion__trigger-chevron {
     transform: rotate(180deg);
@@ -544,7 +486,6 @@ const blogDataJson = JSON.stringify(blogData);
       padding 350ms ease;
     padding: 0 var(--spacing-md);
   }
-
   .blog-accordion__panel--open {
     max-height: 300px;
     padding: 1rem var(--spacing-md) var(--spacing-md);
@@ -558,66 +499,31 @@ const blogDataJson = JSON.stringify(blogData);
   }
 
   @media (min-width: 480px) {
-    .blog-grid {
+    .posts-page__grid {
       grid-template-columns: repeat(2, 1fr);
       display: grid;
     }
-
-    .blog-accordion {
+    .posts-page__accordion {
       display: none;
     }
   }
 
   @media (min-width: 768px) {
-    .blog-section {
-      padding: var(--spacing-lg) calc(var(--spacing-lg) * 2);
+    .posts-page {
+      padding: var(--spacing-xl);
     }
-
-    .blog-section__title {
+    .posts-page__title {
       font-size: var(--font-size-h2-desktop);
     }
-
-    .blog-grid {
+    .posts-page__grid {
       grid-template-columns: repeat(3, 1fr);
       display: grid;
     }
-
-    .blog-accordion {
+    .posts-page__accordion {
       display: none;
     }
-
     .blog-card__title {
       font-size: var(--font-size-h3-desktop);
     }
-  }
-
-  .blog-section__view-more-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding-bottom: var(--spacing-lg);
-  }
-
-  .blog-section__view-more {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-xs);
-    font-family: var(--font-titles);
-    font-size: 0.9rem;
-    color: var(--color-word);
-    transition: color 300ms ease;
-  }
-
-  .blog-section__view-more:hover {
-    color: var(--color-accent);
-  }
-
-  :global(.blog-section__view-more-icon) {
-    transition: transform 300ms ease;
-  }
-
-  .blog-section__view-more:hover :global(.blog-section__view-more-icon) {
-    transform: translateX(4px);
   }
 </style>
