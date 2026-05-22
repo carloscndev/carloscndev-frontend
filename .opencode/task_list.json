@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 88,
+    "total_tasks": 89,
     "completed": 88,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -1089,6 +1089,19 @@
         "Check form inputs have associated labels",
         "Build succeeds with zero errors",
         "No visual regressions"
+      ]
+    },
+    {
+      "id": "FIX-065",
+      "name": "Restaurar colores originales de cards de proyectos en tema dark",
+      "status": "pending",
+      "description": "Restore the original dark theme background colors for the portfolio project cards (both desktop grid and mobile accordion), using the mobile accordion version as reference for the correct dark colors.",
+      "acceptance": [
+        "Desktop portfolio grid cards use the correct dark theme background",
+        "Mobile portfolio accordion items use the correct dark theme background",
+        "Colors match what the mobile version previously displayed",
+        "Build succeeds with zero errors",
+        "No visual regressions in other components"
       ]
     }
   ]

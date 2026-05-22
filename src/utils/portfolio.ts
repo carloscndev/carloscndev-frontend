@@ -39,7 +39,7 @@ const GithubIcon_SVG = `<svg role="img" fill="currentColor" viewBox="0 0 24 24" 
 
 const ExternalLink_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>`;
 
-const FileIcon_SVG = `<svg viewBox="0 0 103.12 122.88" width="16" height="16" fill="currentColor"><path d="M31.98,12.22c8.95,0,16.2,7.25,16.2,16.2c0,8.95-7.25,16.2-16.2,16.2c-8.95,0-16.2-7.25-16.2-16.2 C15.78,19.47,23.03,12.22,31.98,12.22L31.98,12.22z"></path></svg>`;
+const FileIcon_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`;
 
 function updatePortfolioContent(lang: Lang): void {
   if (typeof document === "undefined") return;
