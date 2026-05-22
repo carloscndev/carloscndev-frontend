@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 81,
+    "total_tasks": 83,
     "completed": 81,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -984,6 +984,38 @@
         "Update all components that consume these data files to work with the new format",
         "Build succeeds with zero errors",
         "No visual regressions or broken i18n"
+      ]
+    },
+    {
+      "id": "FEAT-009",
+      "name": "Página /posts con listado completo de blog",
+      "status": "pending",
+      "description": "Create the /posts page that lists all blog cards using the same design as the Blog section. blog-section__title must be centered, section__intro must not appear. Scroll must be normal (no snap). If there are more than 6 cards, display a 'Ver más' button that links to this page. Modify the Blog section's 'Ver más' link to redirect to /posts.",
+      "acceptance": [
+        "Create src/pages/posts.astro with the same card grid layout as Blog.astro",
+        "blog-section__title centered",
+        "section__intro hidden/removed",
+        "Normal scroll (no scroll-snap)",
+        "All blog cards listed without capping at 6",
+        "Update Blog.astro 'Ver más' link to point to /posts",
+        "Build succeeds with zero errors",
+        "Responsive on desktop and mobile"
+      ]
+    },
+    {
+      "id": "FEAT-010",
+      "name": "Página /projects con listado completo de portafolio",
+      "status": "pending",
+      "description": "Create the /projects page that lists all portfolio cards using the same design as the Portfolio section, displayed only when there are more than 6 projects. The title must be centered and the intro must not appear. Modify the Portfolio section's 'Ver más' link to redirect to /projects.",
+      "acceptance": [
+        "Create src/pages/projects.astro with the same card/accordion layout as Portfolio.astro",
+        "Portfolio title centered",
+        "Portfolio intro hidden/removed",
+        "Normal scroll (no scroll-snap)",
+        "All portfolio cards listed without capping at 6",
+        "Update Portfolio.astro 'Ver más' link to point to /projects",
+        "Build succeeds with zero errors",
+        "Responsive on desktop and mobile"
       ]
     }
   ]
