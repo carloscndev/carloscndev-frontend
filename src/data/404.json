@@ -1,0 +1,16 @@
+{
+  "es": {
+    "error_404": {
+      "title": "¡Ups! Tú no deberías estar aquí.",
+      "message": "Parece que la página que buscas no existe o cambió de lugar.",
+      "button_text": "Regresar al inicio"
+    }
+  },
+  "en": {
+    "error_404": {
+      "title": "Oops! You shouldn't be here.",
+      "message": "It looks like the page you are looking for doesn't exist or has moved.",
+      "button_text": "Back to home"
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 79,
+    "total_tasks": 80,
     "completed": 79,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -952,6 +952,22 @@
         "Internal and external links handled correctly",
         "Build succeeds with zero errors",
         "No visual regressions"
+      ]
+    },
+    {
+      "id": "FEAT-008",
+      "name": "Page: 404 Error Page Implementation",
+      "status": "pending",
+      "description": "Implement the custom 404 error page layout. The page must use the 'ScrollLayout' wrapper, integrating the standard navigation header and the vertical social sidebar on desktop. It features a center-aligned 3D sleeping avatar illustration, localized error messaging, and an interactive return button utilizing a custom arrow icon component.",
+      "acceptance": [
+        "Template Creation: Create the custom 404 page template at 'src/pages/404.astro' wrapped entirely inside the existing 'ScrollLayout' component.",
+        "Global Layout Components: Ensure the global navigation header menu is displayed at the top, and the 'socialsidebar' (Instagram, LinkedIn, GitHub vertical line) is pinned to the left margin on desktop viewports.",
+        "Illustration Asset: Render the centered 3D sleeping character illustration using the local asset 'assets/images/sleeping' (supporting appropriate format extensions like .png or .webp).",
+        "Localized Copy: Pull the error text fields dynamically from the localization JSON source ('error_404'). Hardcoded text strings are forbidden.",
+        "Action Button: Implement the 'Regresar al inicio / Back to home' action link. It must render the arrow icon inline using the custom component located at 'components/icons/ArrowNext.astro'.",
+        "Desktop Layout (Ref: visual-specs/Spanish/Desktop/Dark/06-404x.jpg): On viewports >= 768px, display a 2-column or split-center layout where the sleeping illustration sits on the left and the error copy blocks align to its right, properly clearing the fixed social sidebar.",
+        "Mobile Layout (Ref: visual-specs/Spanish/Mobile/06-404.png): On viewports < 768px, hide the 'socialsidebar', use the standard mobile navigation header, and stack the elements vertically (Illustration top, Text content middle, Action button bottom) centered 100% full-width with safe padding.",
+        "Typography Styles: Maintain text consistency using the design system's typography hierarchy. The error headers and body messaging must leverage the correct light tokens over the global dark layout background."
       ]
     }
   ]
