@@ -1,4 +1,5 @@
 import type { Lang } from "./lang";
+import { initLangSwitch } from "./common";
 
 interface ContactAttributes {
   title: string;
@@ -39,19 +40,6 @@ function updateContactContent(lang: Lang): void {
   if (footerEl) footerEl.textContent = data.footer;
 }
 
-function handleLangChange(e: Event): void {
-  const { lang } = (e as CustomEvent<{ lang: Lang }>).detail;
-  updateContactContent(lang);
-}
-
 export function initContactLangSwitch(): void {
-  if (typeof document === "undefined") return;
-
-  window.addEventListener("langchange", handleLangChange);
-
-  document.addEventListener("astro:page-load", () => {
-    window.addEventListener("langchange", handleLangChange);
-    const currentLang = (document.documentElement.lang || "es") as Lang;
-    updateContactContent(currentLang);
-  });
+  initLangSwitch(updateContactContent);
 }

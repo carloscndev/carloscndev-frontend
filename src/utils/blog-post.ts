@@ -1,4 +1,5 @@
 import type { Lang } from "./lang";
+import { initLangSwitch } from "./common";
 
 interface BlogPostContent {
   type: string;
@@ -56,13 +57,9 @@ function updateBlogPostContent(lang: Lang): void {
   const post = posts.find((p) => p.id === slug);
   if (!post) return;
 
-  if (heroTitle) {
-    heroTitle.textContent = post.title;
-  }
-
-  if (heroMeta) {
+  if (heroTitle) heroTitle.textContent = post.title;
+  if (heroMeta)
     heroMeta.textContent = `${post.date}  ${authorPrefix} ${post.author}`;
-  }
 
   contentPs.forEach((p, i) => {
     if (post.content[i]) {
@@ -71,22 +68,6 @@ function updateBlogPostContent(lang: Lang): void {
   });
 }
 
-function bindBlogPostLangSwitch(): void {
-  type LangChangeEvent = CustomEvent<{ lang: Lang }>;
-
-  if (typeof window === "undefined") return;
-
-  window.addEventListener("langchange", (e: Event) => {
-    const { lang } = (e as LangChangeEvent).detail;
-    updateBlogPostContent(lang);
-  });
-}
-
 export function initBlogPostLangSwitch(): void {
-  if (typeof document === "undefined") return;
-  bindBlogPostLangSwitch();
-
-  document.addEventListener("astro:page-load", () => {
-    bindBlogPostLangSwitch();
-  });
+  initLangSwitch(updateBlogPostContent);
 }

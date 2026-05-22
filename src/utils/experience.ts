@@ -1,4 +1,5 @@
 import type { Lang } from "./lang";
+import { cloneAndReplace, initLangSwitch } from "./common";
 
 function updateExperienceContent(lang: Lang): void {
   if (typeof document === "undefined") return;
@@ -35,8 +36,7 @@ function bindCarouselLogic(): void {
   if (!track || !dots.length) return;
 
   dots.forEach((dot, i) => {
-    const cloned = dot.cloneNode(true) as HTMLElement;
-    dot.replaceWith(cloned);
+    const cloned = cloneAndReplace(dot);
 
     cloned.addEventListener("click", () => {
       track.scrollTo({
@@ -66,8 +66,7 @@ function bindTabListeners(): void {
   const tabs = document.querySelectorAll<HTMLElement>("[data-tab]");
 
   tabs.forEach((tab) => {
-    const cloned = tab.cloneNode(true) as HTMLElement;
-    tab.replaceWith(cloned);
+    const cloned = cloneAndReplace(tab);
 
     cloned.addEventListener("click", () => {
       const id = cloned.dataset.tab;
@@ -96,10 +95,7 @@ export function initExperienceCarousel(): void {
 }
 
 export function initExperienceLangSwitch(): void {
-  if (typeof document === "undefined") return;
-  window.addEventListener("langchange", (e: any) =>
-    updateExperienceContent(e.detail.lang),
-  );
+  initLangSwitch(updateExperienceContent);
 }
 
 document.addEventListener("astro:page-load", () => {

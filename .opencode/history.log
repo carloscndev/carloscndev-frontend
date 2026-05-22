@@ -588,3 +588,13 @@
 - **Changes**: [Updated `src/components/sections/Portfolio.astro` — changed `.portfolio-section__title` margin-bottom from `var(--spacing-sm)` to `var(--spacing-md)`. Updated `src/components/sections/Blog.astro` — added `margin-bottom: var(--spacing-md)` to `.blog-section__title`. About section already used `var(--spacing-md)`.]
 - **Verification**: Build succeeded (`npm run build`): 16 pages, zero errors.
 - **Closure**: Task [FIX-061] marked as `done`. 84/87 tasks completed.
+
+---
+
+### 2026-05-22 — [FIX-062: Refactorizar funciones repetidas en utils a common.ts]
+
+- **Agent**: Coder #1
+- **Plan**: Identify repeated patterns across all utility files (langchange handling, clone+replace, closeAllPanelsExcept, accordion binding) and extract them into a shared common.ts utility to reduce duplication.
+- **Changes**: [Created `src/utils/common.ts` with `initLangSwitch()`, `cloneAndReplace()`, `closeAllPanelsExcept()`, `getCurrentLang()`, `parseEmbeddedData()`, and `LangChangeEvent` type. Updated `src/utils/404.ts` — simplified to use `initLangSwitch`. Updated `src/utils/blog-post.ts` — simplified to use `initLangSwitch`. Updated `src/utils/contact.ts` — simplified to use `initLangSwitch`. Updated `src/utils/blog.ts` — uses `initLangSwitch`, `cloneAndReplace`, `closeAllPanelsExcept`. Updated `src/utils/portfolio.ts` — uses `initLangSwitch`, `cloneAndReplace`, `closeAllPanelsExcept`. Updated `src/utils/experience.ts` — uses `initLangSwitch`, `cloneAndReplace`. Updated `src/utils/about.ts` — uses `initLangSwitch`. Updated `src/utils/home.ts` — uses `initLangSwitch`, `getCurrentLang`.]
+- **Verification**: Build succeeded (`npm run build`): 16 pages, zero errors.
+- **Closure**: Task [FIX-062] marked as `done`. 85/87 tasks completed.

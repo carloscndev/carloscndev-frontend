@@ -1,4 +1,5 @@
 import type { Lang } from "./lang";
+import { initLangSwitch } from "./common";
 
 interface TechItem {
   name: string;
@@ -57,21 +58,6 @@ function updateAboutContent(lang: Lang): void {
   }
 }
 
-function handleLangChange(e: Event): void {
-  const { lang } = (e as CustomEvent<{ lang: Lang }>).detail;
-  updateAboutContent(lang);
-}
-
 export function initAboutLangSwitch(): void {
-  if (typeof document === "undefined") return;
-
-  window.addEventListener("langchange", handleLangChange);
-
-  document.addEventListener("astro:page-load", () => {
-    window.removeEventListener("langchange", handleLangChange);
-    window.addEventListener("langchange", handleLangChange);
-
-    const currentLang = (document.documentElement.lang || "es") as Lang;
-    updateAboutContent(currentLang);
-  });
+  initLangSwitch(updateAboutContent);
 }

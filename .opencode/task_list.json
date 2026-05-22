@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": {
     "total_tasks": 88,
-    "completed": 84,
+    "completed": 85,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
   "tasks": [
@@ -1034,7 +1034,7 @@
     {
       "id": "FIX-062",
       "name": "Refactorizar funciones repetidas en utils a common.ts",
-      "status": "pending",
+      "status": "done",
       "description": "Review all .ts utility files and identify repeated functions or patterns. Extract common logic into a shared common.ts utility file to reduce duplication.",
       "acceptance": [
         "Identify repeated functions across home.ts, about.ts, experience.ts, portfolio.ts, contact.ts, blog.ts, blog-post.ts, 404.ts",

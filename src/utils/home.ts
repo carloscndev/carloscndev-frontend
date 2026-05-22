@@ -1,4 +1,5 @@
 import type { Lang } from "./lang";
+import { initLangSwitch, getCurrentLang } from "./common";
 
 interface HomeAttributes {
   intro: string;
@@ -111,22 +112,8 @@ function bindHobbyListeners(avatarPaths: Record<string, string>): void {
   });
 }
 
-function handleLangChange(e: Event): void {
-  const { lang } = (e as CustomEvent<{ lang: Lang }>).detail;
-  updateHomeContent(lang);
-}
-
 export function initHomeLangSwitch(): void {
-  if (typeof document === "undefined") return;
-
-  window.addEventListener("langchange", handleLangChange);
-
-  document.addEventListener("astro:page-load", () => {
-    window.addEventListener("langchange", handleLangChange);
-
-    const currentLang = (document.documentElement.lang || "es") as Lang;
-    updateHomeContent(currentLang);
-  });
+  initLangSwitch(updateHomeContent);
 }
 
 export function initHomeHobbies(): void {
@@ -136,7 +123,7 @@ export function initHomeHobbies(): void {
   if (!dataEl?.textContent) return;
 
   const allData: EmbeddedHomeData = JSON.parse(dataEl.textContent);
-  const currentLang = (document.documentElement.lang || "es") as Lang;
+  const currentLang = getCurrentLang();
   const data = allData[currentLang] || allData.es;
 
   bindHobbyListeners(data.avatarPaths);
@@ -147,7 +134,7 @@ export function initHomeHobbies(): void {
     const updatedAllData: EmbeddedHomeData = JSON.parse(
       updatedDataEl.textContent,
     );
-    const updatedLang = (document.documentElement.lang || "es") as Lang;
+    const updatedLang = getCurrentLang();
     const updatedData = updatedAllData[updatedLang] || updatedAllData.es;
     bindHobbyListeners(updatedData.avatarPaths);
   });

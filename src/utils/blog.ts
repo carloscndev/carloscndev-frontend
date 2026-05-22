@@ -1,4 +1,9 @@
 import type { Lang } from "./lang";
+import {
+  initLangSwitch,
+  cloneAndReplace,
+  closeAllPanelsExcept,
+} from "./common";
 
 interface BlogPost {
   id: string;
@@ -21,10 +26,6 @@ interface BlogData {
   };
 }
 
-/**
- * Reads the embedded blog data JSON from the DOM and updates
- * all blog card elements to reflect the new language.
- */
 export function updateBlogEntries(lang: Lang): void {
   if (typeof document === "undefined") return;
 
@@ -35,13 +36,9 @@ export function updateBlogEntries(lang: Lang): void {
   const blogData = allData[lang];
   if (!blogData) return;
 
-  // Update intro text
   const introEl = document.querySelector("[data-blog-intro]");
-  if (introEl) {
-    introEl.textContent = blogData.blog.intro;
-  }
+  if (introEl) introEl.textContent = blogData.blog.intro;
 
-  // Update each card by matching the data-post-id attribute
   blogData.blog.posts.forEach((post) => {
     const cards = document.querySelectorAll(`[data-post-id="${post.id}"]`);
     cards.forEach((card) => {
@@ -63,58 +60,6 @@ export function updateBlogEntries(lang: Lang): void {
   });
 }
 
-function bindBlogLangSwitch(): void {
-  type LangChangeEvent = CustomEvent<{ lang: Lang }>;
-
-  if (typeof window === "undefined") return;
-
-  window.addEventListener("langchange", (e: Event) => {
-    const { lang } = (e as LangChangeEvent).detail;
-    updateBlogEntries(lang);
-  });
-}
-
-/**
- * Initialize the blog language switch listener.
- * Re-binds on astro:page-load to handle Astro's DOM swapping.
- */
-export function initBlogLangSwitch(): void {
-  bindBlogLangSwitch();
-
-  document.addEventListener("astro:page-load", () => {
-    bindBlogLangSwitch();
-    bindBlogAccordion();
-  });
-}
-
-/* ------------------------------------------------------------------ */
-/*  Blog accordion logic (mobile)                                     */
-/* ------------------------------------------------------------------ */
-
-function closeAllPanelsExcept(activePanel: HTMLElement | null): void {
-  const allPanels = document.querySelectorAll<HTMLElement>(
-    "[data-blog-accordion] [data-accordion-panel]",
-  );
-  const allTriggers = document.querySelectorAll<HTMLElement>(
-    "[data-blog-accordion] [data-accordion-trigger]",
-  );
-
-  allPanels.forEach((panel) => {
-    if (panel !== activePanel) {
-      panel.classList.remove("blog-accordion__panel--open");
-    }
-  });
-
-  allTriggers.forEach((trigger) => {
-    const panel = trigger
-      .closest("[data-accordion-item]")
-      ?.querySelector<HTMLElement>("[data-accordion-panel]");
-    if (panel && panel !== activePanel) {
-      trigger.setAttribute("aria-expanded", "false");
-    }
-  });
-}
-
 function bindBlogAccordion(): void {
   if (typeof document === "undefined") return;
 
@@ -123,8 +68,7 @@ function bindBlogAccordion(): void {
   );
 
   triggers.forEach((trigger) => {
-    const cloned = trigger.cloneNode(true) as HTMLElement;
-    trigger.replaceWith(cloned);
+    const cloned = cloneAndReplace(trigger);
 
     cloned.addEventListener("click", (e) => {
       const target = e.target as HTMLElement;
@@ -142,7 +86,13 @@ function bindBlogAccordion(): void {
         panel.classList.remove("blog-accordion__panel--open");
         cloned.setAttribute("aria-expanded", "false");
       } else {
-        closeAllPanelsExcept(panel);
+        closeAllPanelsExcept(
+          panel,
+          "[data-blog-accordion]",
+          "[data-accordion-panel]",
+          "[data-accordion-trigger]",
+          "blog-accordion__panel--open",
+        );
         panel.classList.add("blog-accordion__panel--open");
         cloned.setAttribute("aria-expanded", "true");
       }
@@ -150,7 +100,14 @@ function bindBlogAccordion(): void {
   });
 }
 
+export function initBlogLangSwitch(): void {
+  initLangSwitch(updateBlogEntries);
+}
+
 export function initBlogAccordion(): void {
   if (typeof document === "undefined") return;
   bindBlogAccordion();
+  document.addEventListener("astro:page-load", () => {
+    bindBlogAccordion();
+  });
 }

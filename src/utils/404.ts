@@ -1,4 +1,4 @@
-import type { Lang } from "./lang";
+import { initLangSwitch } from "./common";
 
 interface Error404Data {
   title: string;
@@ -15,7 +15,7 @@ interface Full404Data {
   en: Locale404Data;
 }
 
-function update404Content(lang: Lang): void {
+function update404Content(lang: string): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("error-404-data");
@@ -37,22 +37,6 @@ function update404Content(lang: Lang): void {
   }
 }
 
-function bind404LangSwitch(): void {
-  type LangChangeEvent = CustomEvent<{ lang: Lang }>;
-
-  if (typeof window === "undefined") return;
-
-  window.addEventListener("langchange", (e: Event) => {
-    const { lang } = (e as LangChangeEvent).detail;
-    update404Content(lang);
-  });
-}
-
 export function init404LangSwitch(): void {
-  if (typeof document === "undefined") return;
-  bind404LangSwitch();
-
-  document.addEventListener("astro:page-load", () => {
-    bind404LangSwitch();
-  });
+  initLangSwitch(update404Content);
 }
