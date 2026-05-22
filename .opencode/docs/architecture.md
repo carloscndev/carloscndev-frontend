@@ -16,7 +16,7 @@ A strict modular organization is required to maintain a separation of concerns:
 - `src/components/icons/`: Astro components for social and UI elements.
 - `src/components/ui/`: Atomic, reusable elements (Buttons, Badges, Inputs).
 - `src/components/sections/`: High-level page modules (Hero, Experience, BlogGrid).
-- `src/layouts/`: Structural wrappers (MainLayout, PostLayout).
+- `src/layouts/`: Structural wrappers (MainLayout, ScrollLayout).
 - `src/pages/`: File-based routing (Index, Blog, Portfolio Detail).
 
 ## 2. Technical Execution Strategy

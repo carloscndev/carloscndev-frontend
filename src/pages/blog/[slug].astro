@@ -1,5 +1,5 @@
 ---
-import PostLayout from "../../layouts/PostLayout.astro";
+import ScrollLayout from "../../layouts/ScrollLayout.astro";
 import blogPostData from "../../data/blog-post.json";
 
 export function getStaticPaths() {
@@ -34,7 +34,7 @@ if (!post) {
 }
 ---
 
-<PostLayout title={post.title} lang={lang}>
+<ScrollLayout title={post.title} lang={lang}>
   <div slot="header-image" class="header-image-placeholder">
     <span class="header-image-placeholder__text">Header Image</span>
   </div>
@@ -55,7 +55,7 @@ if (!post) {
       return null;
     })
   }
-</PostLayout>
+</ScrollLayout>
 
 <style>
   .header-image-placeholder {

@@ -19,7 +19,7 @@ const { title, lang = "es" } = Astro.props;
     </div>
   </header>
 
-  <article class="PostLayout">
+  <article class="ScrollLayout">
     <slot />
   </article>
 </BaseLayout>
@@ -54,7 +54,7 @@ const { title, lang = "es" } = Astro.props;
     }
   }
 
-  .PostLayout {
+  .ScrollLayout {
     min-height: 100vh;
     padding: var(--spacing-lg);
     padding-top: calc(var(--header-desktop-height) + var(--spacing-lg));
@@ -68,7 +68,7 @@ const { title, lang = "es" } = Astro.props;
       padding: 0 var(--spacing-xl);
     }
 
-    .PostLayout {
+    .ScrollLayout {
       padding: var(--spacing-xl);
       padding-top: calc(var(--header-desktop-height) + var(--spacing-xl));
     }
