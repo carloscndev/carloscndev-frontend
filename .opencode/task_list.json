@@ -2,7 +2,7 @@
   "project": "Carlos CN Portfolio",
   "version": "1.0.0",
   "status": {
-    "total_tasks": 76,
+    "total_tasks": 77,
     "completed": 76,
     "current_sprint": "Phase 1: Zero-State & Foundation — Complete"
   },
@@ -911,6 +911,24 @@
         "Link points to https://carloscndev.github.io",
         "Icon uses the existing CV.astro component",
         "Mobile and desktop layouts both updated"
+      ]
+    },
+    {
+      "id": "FEAT-006",
+      "name": "Page: BlogPost Dynamic Layout and Styling",
+      "status": "pending",
+      "description": "Implement the individual blog post detail page template. The component must integrate into a 'ScrollLayout' that wraps the common site header menu and the vertical social sidebar. The page must support conditional background colors based on the post category (tech or running), display a full-width hero image banner, and structure article typography cleanly across desktop and mobile viewports.",
+      "acceptance": [
+        "Template Integration: Build or refactor the single post template (e.g., pages/blog/[slug].astro) so it renders wrapped inside the existing ScrollLayout component.",
+        "Global Layout Components: Ensure the page explicitly displays the global navigation header menu at the top and the 'socialsidebar' (Instagram, LinkedIn, GitHub vertical line) pinned to the left margin on desktop as shown in the reference.",
+        "Hero Banner Structure: Implement a top Hero section containing a full-width wallpaper image backdrop overlayed with the main post title ('Arquitectura de un blog estático moderno.') aligned centrally.",
+        "Conditional Category Backgrounds: The main content container background color must change dynamically based on the post category from the data source: use the specific dark background token corresponding to the 'tech' card or 'running' card style used in the blog listing.",
+        "Typography Alignment: Post body paragraphs and copy must strictly use the design system's '--text-base' color token for clear, high-contrast readability over the dark background.",
+        "Metadata Row: Display a metadata line right below the hero banner showing the publication date and author string (e.g., 'Marzo 7 2026 Autor: carloscndev') styled in italics with light text sizing.",
+        "Desktop Responsiveness (Ref: visual-specs/Spanish/Desktop/Dark/05-blog-detail.png): On screens >= 768px, center the article main body text container, leaving readable wide margins that separate the content from the fixed social sidebar on the left.",
+        "Mobile Responsiveness (Ref: visual-specs/Spanish/Mobile/05-blog-detail.png): On mobile viewports (< 768px), hide the desktop social sidebar, swap the top menu for the standard hamburger mobile drawer button, and expand the post body text container to occupy full width with safe padding.",
+        "No Hardcoded Body Strings: The post content, author metadata, titles, and category parameters must map entirely from the Astro collection entry or markdown/JSON data source.",
+        "Dynamic Localization: Ensure the layout supports reactive content switching (Es/En) for both the boilerplate text (e.g., 'Autor:') and the main article Markdown/HTML body context."
       ]
     }
   ]
