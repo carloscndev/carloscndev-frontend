@@ -40,6 +40,7 @@ const blogDataJson = JSON.stringify(blogData);
                 src={wallperImage}
                 alt={post.title}
                 class="blog-card__image-img"
+                loading="lazy"
               />
               <div class="blog-card__overlay">
                 <p class="blog-card__overlay-text">{post.resume || ""}</p>
