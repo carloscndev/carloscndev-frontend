@@ -42,7 +42,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
         id="home-avatar"
         src={helloImg}
         alt={`${homeData.intro} ${homeData.title}`}
-        loading="lazy"
+        loading="eager"
+        fetchpriority="high"
       />
     </div>
 
