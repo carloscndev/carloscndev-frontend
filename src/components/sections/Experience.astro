@@ -144,6 +144,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             ]}
             data-dot={String(idx)}
             type="button"
+            aria-label={`Slide ${idx + 1} of ${data.jobs.length}`}
           />
         ))
       }
@@ -342,15 +343,18 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     .experience-carousel__dots {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 12px;
       margin-top: 1rem;
     }
     .experience-carousel__dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
+      padding: 12px;
       border-radius: 50%;
       border: none;
       background: var(--color-word);
+      background-clip: content-box;
+      cursor: pointer;
     }
     .experience-carousel__dot--active {
       background: var(--color-accent);
