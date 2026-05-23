@@ -278,7 +278,7 @@ strong {
   font-weight: var(--weight-space-medium);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
   body {
     font-size: var(--font-size-body-desktop);
   }
