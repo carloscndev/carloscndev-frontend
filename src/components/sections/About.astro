@@ -20,7 +20,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 
 <section id="about" class="about-section">
-  <script type="application/json" id="about-data" set:html={embeddedDataJson} />
+  <script
+    is:inline
+    is:inline
+    type="application/json"
+    id="about-data"
+    set:html={embeddedDataJson}
+  />
   <template id="tech-chip-template">
     <span class="about-section__tech-chip">
       <Diamond size="16" class="about-section__tech-icon" />

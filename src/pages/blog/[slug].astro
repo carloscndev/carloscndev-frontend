@@ -4,14 +4,30 @@ import blogPostData from "../../data/blog-post.json";
 import { Image } from "astro:assets";
 import wallperImage from "../../assets/images/wallper.jpg";
 import uiDict from "../../i18n/ui.json";
+import type { Lang } from "../../utils/lang";
+
+interface ContentBlock {
+  type: string;
+  text: string;
+}
+
+interface BlogPost {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  category: string;
+  icon: string;
+  content: ContentBlock[];
+}
 
 export function getStaticPaths() {
-  const esPosts = blogPostData.es.posts;
-  const enPosts = blogPostData.en.posts;
+  const esPosts = blogPostData.es.posts as BlogPost[];
+  const enPosts = blogPostData.en.posts as BlogPost[];
 
   const paths: Array<{
     params: { slug: string };
-    props: { lang: string; postId: string };
+    props: { lang: Lang; postId: string };
   }> = [];
 
   esPosts.forEach((post) => {
@@ -32,8 +48,8 @@ export function getStaticPaths() {
 }
 
 const { lang, postId } = Astro.props;
-const data = blogPostData[lang];
-const post = data.posts.find((p) => p.id === postId);
+const data = blogPostData[lang] as { posts: BlogPost[] };
+const post = data.posts.find((p: BlogPost) => p.id === postId);
 
 if (!post) {
   return Astro.redirect("/404");
@@ -48,11 +64,18 @@ const uiDictJson = JSON.stringify(uiDict);
 
 <PostLayout title={post.title} lang={lang} categoryTheme={categoryTheme}>
   <script
+    is:inline
     type="application/json"
     id="blog-post-data"
     set:html={blogPostDataJson}
   />
-  <script type="application/json" id="blog-post-dict" set:html={uiDictJson} />
+  <script
+    is:inline
+    is:inline
+    type="application/json"
+    id="blog-post-dict"
+    set:html={uiDictJson}
+  />
 
   <div class="post-hero">
     <Image

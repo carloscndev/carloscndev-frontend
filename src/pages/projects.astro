@@ -20,6 +20,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
 <PostLayout title="Portfolio — Projects" lang={currentLang}>
   <script
+    is:inline
     type="application/json"
     id="portfolio-data"
     set:html={embeddedDataJson}

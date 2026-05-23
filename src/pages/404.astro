@@ -13,6 +13,7 @@ const errorDataJson = JSON.stringify(errorData);
 
 <PostLayout title="404 — Not Found" lang={lang} noindex>
   <script
+    is:inline
     type="application/json"
     id="error-404-data"
     set:html={errorDataJson}

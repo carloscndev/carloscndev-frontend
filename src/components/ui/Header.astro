@@ -12,7 +12,7 @@ interface Props {
   lang?: "es" | "en";
 }
 
-const { lang = config.defaultLocale } = Astro.props;
+const lang = (Astro.props.lang ?? config.defaultLocale) as "es" | "en";
 const navLinks = config.navigation as Array<{
   href: string;
   key: keyof typeof NAV_LABELS;

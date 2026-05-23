@@ -8,14 +8,31 @@ import RunningIcon from "../components/icons/RunningIcon.astro";
 import ExternalLink from "../components/icons/ExternalLink.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
 
+interface BlogPost {
+  id: string;
+  title: string;
+  link: string;
+  icon: string;
+  category: string;
+  date: string;
+  read_time: string;
+  resume: string;
+}
+
 const lang = "es";
 const data = blogData[lang].blog;
-const posts = data.posts;
+const posts = data.posts as BlogPost[];
 const blogDataJson = JSON.stringify(blogData);
 ---
 
 <PostLayout title="Blog — Posts" lang={lang}>
-  <script type="application/json" id="blog-data" set:html={blogDataJson} />
+  <script
+    is:inline
+    is:inline
+    type="application/json"
+    id="blog-data"
+    set:html={blogDataJson}
+  />
 
   <section class="posts-page">
     <header class="posts-page__header">

@@ -8,14 +8,31 @@ import ExternalLink from "../icons/ExternalLink.astro";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 import ArrowNext from "../icons/ArrowNext.astro";
 
+interface BlogPost {
+  id: string;
+  title: string;
+  link: string;
+  icon: string;
+  category: string;
+  date: string;
+  read_time: string;
+  resume: string;
+}
+
 const lang = "es";
 const data = blogData[lang];
-const posts = data.blog.posts;
+const posts = data.blog.posts as BlogPost[];
 const blogDataJson = JSON.stringify(blogData);
 ---
 
 <section id="blog" class="blog-section">
-  <script type="application/json" id="blog-data" set:html={blogDataJson} />
+  <script
+    is:inline
+    is:inline
+    type="application/json"
+    id="blog-data"
+    set:html={blogDataJson}
+  />
 
   <header class="blog-section__header">
     <h2 class="blog-section__title" data-i18n-content="section.blog">Blog</h2>

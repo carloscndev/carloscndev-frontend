@@ -27,7 +27,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 
 <section id="home" class="home-section">
-  <script type="application/json" id="home-data" set:html={embeddedDataJson} />
+  <script
+    is:inline
+    is:inline
+    type="application/json"
+    id="home-data"
+    set:html={embeddedDataJson}
+  />
 
   <div class="home-section__grid">
     <div class="home-section__avatar">
