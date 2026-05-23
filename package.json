@@ -58,5 +58,11 @@
     "*.{json,css,md}": [
       "prettier --write"
     ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
