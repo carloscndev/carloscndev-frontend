@@ -4,74 +4,7 @@
       "title": "Mi Blog",
       "intro": "Aquí comparto un poco más a fondo mis proyectos e ideas. También hay un poco de todo: entrenamientos, viajes, pensamientos y lo que voy aprendiendo en el camino.",
       "view_more": "Ver más",
-      "posts": [
-        {
-          "id": "post-01",
-          "title": "Como crear un portafolio moderno.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min de lectura",
-          "date": "Marzo 10 2025",
-          "category": "Tecnología",
-          "icon": "tech-icon",
-          "image": "blog-portfolio.png",
-          "link": "/blog/modern-portfolio"
-        },
-        {
-          "id": "post-02",
-          "title": "UTMB Vallarta, preparación y viaje.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min de lectura",
-          "date": "Marzo 10 2025",
-          "category": "Running & Travel",
-          "icon": "travel-icon",
-          "image": "blog-utmb.png",
-          "link": "/blog/utmb-vallarta"
-        },
-        {
-          "id": "post-03",
-          "title": "Cuantos días entrenar a la semana.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min de lectura",
-          "date": "Marzo 10 2025",
-          "category": "Running & Travel",
-          "icon": "travel-icon",
-          "image": "blog-training.png",
-          "link": "/blog/training-days"
-        },
-        {
-          "id": "post-04",
-          "title": "Crea tu propio React.js y aprende como funciona.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min de lectura",
-          "date": "Marzo 10 2025",
-          "category": "Tecnología",
-          "icon": "tech-icon",
-          "image": "blog-own-react.png",
-          "link": "/blog/own-react"
-        },
-        {
-          "id": "post-05",
-          "title": "En que pienso cuando corro, reflexión.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min de lectura",
-          "date": "Marzo 10 2025",
-          "category": "Running & Travel",
-          "icon": "travel-icon",
-          "image": "blog-running-thoughts.png",
-          "link": "/blog/running-reflection"
-        },
-        {
-          "id": "post-06",
-          "title": "Arquitectura de un blog estatico moderno.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min de lectura",
-          "date": "Marzo 10 2025",
-          "category": "Tecnología",
-          "icon": "tech-icon",
-          "image": "blog-static-arch.png",
-          "link": "/blog/static-architecture"
-        }
-      ]
+      "posts": []
     }
   },
   "en": {
@@ -79,74 +12,7 @@
       "title": "My Blog",
       "intro": "In this space, I share a more detailed look at my projects and ideas. You will also find a variety of topics, including my training, travels, personal thoughts, and the things I am learning along the way.",
       "view_more": "View more",
-      "posts": [
-        {
-          "id": "post-01",
-          "title": "How to build a modern portfolio.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min read",
-          "date": "March 10 2025",
-          "category": "Technology",
-          "icon": "tech-icon",
-          "image": "blog-portfolio.png",
-          "link": "/blog/modern-portfolio"
-        },
-        {
-          "id": "post-02",
-          "title": "UTMB Vallarta, preparation and travel.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min read",
-          "date": "March 10 2025",
-          "category": "Running & Travel",
-          "icon": "travel-icon",
-          "image": "blog-utmb.png",
-          "link": "/blog/utmb-vallarta"
-        },
-        {
-          "id": "post-03",
-          "title": "How many days to train per week.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min read",
-          "date": "March 10 2025",
-          "category": "Running & Travel",
-          "icon": "travel-icon",
-          "image": "blog-training.png",
-          "link": "/blog/training-days"
-        },
-        {
-          "id": "post-04",
-          "title": "Build your own React.js and learn how it works.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min read",
-          "date": "March 10 2025",
-          "category": "Technology",
-          "icon": "tech-icon",
-          "image": "blog-own-react.png",
-          "link": "/blog/own-react"
-        },
-        {
-          "id": "post-05",
-          "title": "What I think about when I run, reflection.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min read",
-          "date": "March 10 2025",
-          "category": "Running & Travel",
-          "icon": "travel-icon",
-          "image": "blog-running-thoughts.png",
-          "link": "/blog/running-reflection"
-        },
-        {
-          "id": "post-06",
-          "title": "Architecture of a modern static blog.",
-          "resume": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "read_time": "8 min read",
-          "date": "March 10 2025",
-          "category": "Technology",
-          "icon": "tech-icon",
-          "image": "blog-static-arch.png",
-          "link": "/blog/static-architecture"
-        }
-      ]
+      "posts": []
     }
   }
 }

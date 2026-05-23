@@ -3,122 +3,12 @@
     "title": "Mi Portafolio",
     "intro": "Aquí puedes ver algunos de los proyectos en los que he estado trabajando últimamente, junto con uno que otro experimento.",
     "view_more": "Ver más",
-    "projects": [
-      {
-        "id": "gen-ai",
-        "title": "Generative AI Project",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "technologies": [
-          "React",
-          "Generative AI",
-          "TypeScript",
-          "Python",
-          "ChatGPT"
-        ],
-        "links": { "repo": "#", "demo": "#", "article": "#" }
-      },
-      {
-        "id": "insta-clone",
-        "title": "Instagram Clone",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "technologies": ["React", "TypeScript", "StoryBook", "ReactTesting"],
-        "links": { "repo": "#", "demo": "#" }
-      },
-      {
-        "id": "rag-app",
-        "title": "RAG Application",
-        "description": "AI framework that improves Large Language Model (LLM) accuracy by retrieving data from external, trusted knowledge bases before generating a response",
-        "technologies": ["Generative AI", "TypeScript", "Python", "ChatGPT"],
-        "links": { "demo": "#", "article": "#" }
-      },
-      {
-        "id": "spotify-clone",
-        "title": "Spotify Clone",
-        "description": "A Spotify clone project is a full-stack or front-end web application replicating music streaming features, typically built using React, Node.js, and SQL/MongoDB.",
-        "technologies": ["React", "TypeScript", "ChatGPT", "Mongoose"],
-        "links": { "demo": "#", "article": "#" }
-      },
-      {
-        "id": "water-app",
-        "title": "Water App",
-        "description": "Water tracker apps, such as Waterllama, My Water, and WaterMinder, help users maintain proper hydration by calculating personalized daily water goals based on weight, activity, and climate.",
-        "technologies": [
-          "React",
-          "Generative AI",
-          "TypeScript",
-          "Python",
-          "ChatGPT"
-        ],
-        "links": { "repo": "#", "demo": "#", "article": "#" }
-      },
-      {
-        "id": "own-react",
-        "title": "Own React",
-        "description": "Creating a custom React component library involves setting up a project with modern tooling for reusability, consistency, and efficient development.",
-        "technologies": ["React", "TypeScript", "Unit Testing", "Webpack"],
-        "links": { "demo": "#" }
-      }
-    ]
+    "projects": []
   },
   "en": {
     "title": "My Portfolio",
     "intro": "A selection of recent work, including production projects, technical challenges, and a few experiments.",
     "view_more": "View more",
-    "projects": [
-      {
-        "id": "gen-ai",
-        "title": "Generative AI Project",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "technologies": [
-          "React",
-          "Generative AI",
-          "TypeScript",
-          "Python",
-          "ChatGPT"
-        ],
-        "links": { "repo": "#", "demo": "#", "article": "#" }
-      },
-      {
-        "id": "insta-clone",
-        "title": "Instagram Clone",
-        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        "technologies": ["React", "TypeScript", "StoryBook", "ReactTesting"],
-        "links": { "repo": "#", "demo": "#" }
-      },
-      {
-        "id": "rag-app",
-        "title": "RAG Application",
-        "description": "AI framework that improves Large Language Model (LLM) accuracy by retrieving data from external, trusted knowledge bases before generating a response",
-        "technologies": ["Generative AI", "TypeScript", "Python", "ChatGPT"],
-        "links": { "demo": "#", "article": "#" }
-      },
-      {
-        "id": "spotify-clone",
-        "title": "Spotify Clone",
-        "description": "A Spotify clone project is a full-stack or front-end web application replicating music streaming features, typically built using React, Node.js, and SQL/MongoDB.",
-        "technologies": ["React", "TypeScript", "ChatGPT", "Mongoose"],
-        "links": { "demo": "#", "article": "#" }
-      },
-      {
-        "id": "water-app",
-        "title": "Water App",
-        "description": "Water tracker apps, such as Waterllama, My Water, and WaterMinder, help users maintain proper hydration by calculating personalized daily water goals based on weight, activity, and climate.",
-        "technologies": [
-          "React",
-          "Generative AI",
-          "TypeScript",
-          "Python",
-          "ChatGPT"
-        ],
-        "links": { "repo": "#", "demo": "#", "article": "#" }
-      },
-      {
-        "id": "own-react",
-        "title": "Own React",
-        "description": "Creating a custom React component library involves setting up a project with modern tooling for reusability, consistency, and efficient development.",
-        "technologies": ["React", "TypeScript", "Unit Testing", "Webpack"],
-        "links": { "demo": "#" }
-      }
-    ]
+    "projects": []
   }
 }
