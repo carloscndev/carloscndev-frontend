@@ -2,7 +2,6 @@
 import PostLayout from "../layouts/PostLayout.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
 import ArrowNext from "../components/icons/ArrowNext.astro";
-import { Image } from "astro:assets";
 import sleepingImage from "../assets/images/slepping.webp";
 import errorData from "../data/404.json";
 
@@ -20,8 +19,8 @@ const errorDataJson = JSON.stringify(errorData);
 
   <div class="not-found">
     <div class="not-found__illustration">
-      <Image
-        src={sleepingImage}
+      <img
+        src={sleepingImage.src}
         alt="Sleeping character illustration"
         class="not-found__image"
         loading="lazy"

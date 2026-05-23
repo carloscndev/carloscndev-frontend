@@ -1,6 +1,5 @@
 ---
 import aboutDataRaw from "../../data/about.json";
-import { Image } from "astro:assets";
 import workingImg from "../../assets/images/working.webp";
 import Diamond from "../icons/Diamond.astro";
 
@@ -57,10 +56,10 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     </div>
 
     <div class="about-section__avatar">
-      <Image
+      <img
         class="about-section__avatar-img"
         id="about-avatar"
-        src={workingImg}
+        src={workingImg.src}
         alt={aboutData.title}
         loading="lazy"
       />
