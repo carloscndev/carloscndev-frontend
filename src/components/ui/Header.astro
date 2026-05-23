@@ -13,7 +13,10 @@ interface Props {
 }
 
 const { lang = config.defaultLocale } = Astro.props;
-const navLinks = config.navigation;
+const navLinks = config.navigation as Array<{
+  href: string;
+  key: keyof typeof NAV_LABELS;
+}>;
 
 const currentPath = Astro.url.pathname;
 const currentHash = Astro.url.hash || "";
@@ -123,7 +126,6 @@ const fullPath = currentPath + currentHash;
 <script>
   import { initThemeListener } from "../../utils/theme.ts";
   import { initMobileMenuListener } from "../../utils/mobile-menu.ts";
-
   initThemeListener();
   initMobileMenuListener();
 </script>
