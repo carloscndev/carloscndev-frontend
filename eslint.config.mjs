@@ -10,7 +10,7 @@ const astroConfigs = astroPlugin.configs["flat/recommended"].filter(
 
 export default [
   {
-    ignores: ["node_modules/", "dist/", ".astro/", "public/"],
+    ignores: ["node_modules/", "dist/", ".astro/", "public/", ".vercel/"],
   },
   js.configs.recommended,
   ...astroConfigs,
