@@ -1,4 +1,5 @@
 import { initLangSwitch } from "./common";
+import type { Lang } from "./lang";
 
 interface Error404Data {
   title: string;
@@ -15,7 +16,7 @@ interface Full404Data {
   en: Locale404Data;
 }
 
-export function update404Content(lang: string): void {
+export function update404Content(lang: Lang): void {
   if (typeof document === "undefined") return;
 
   const dataEl = document.getElementById("error-404-data");
