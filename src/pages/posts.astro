@@ -1,6 +1,7 @@
 ---
 import PostLayout from "../layouts/PostLayout.astro";
 import blogData from "../data/blog.json";
+import { Image } from "astro:assets";
 import wallperImage from "../assets/images/wallper.jpg";
 import TechIcon from "../components/icons/TechIcon.astro";
 import RunningIcon from "../components/icons/RunningIcon.astro";
@@ -35,8 +36,8 @@ const blogDataJson = JSON.stringify(blogData);
             aria-label={post.title}
           >
             <div class="blog-card__image">
-              <img
-                src={wallperImage.src}
+              <Image
+                src={wallperImage}
                 alt={post.title}
                 class="blog-card__image-img"
                 loading="lazy"

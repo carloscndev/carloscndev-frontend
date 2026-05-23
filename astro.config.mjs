@@ -1,23 +1,25 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel";
+import compress from "astro-compress";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://carloscndev.com",
 
-  output: "server",
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
+  output: "static",
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap(),
+    compress(),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  image: {
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+    },
   },
 });

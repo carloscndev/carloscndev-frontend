@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import { getPreferredTheme, applyTheme } from "@utils/theme";
+import Analytics from "@vercel/analytics/astro";
 import BaseSEO from "@components/BaseSEO.astro";
 import config from "../data/config.json";
 import "../styles/global.css";
@@ -69,6 +70,7 @@ const inlineThemeScript = `
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <slot />
+    <Analytics />
   </body>
 </html>
 

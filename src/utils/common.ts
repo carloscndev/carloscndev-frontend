@@ -12,7 +12,8 @@ export function cloneAndReplace(el: HTMLElement): HTMLElement {
   return cloned;
 }
 
-export function initLangSwitch(updateFn: (l: Lang) => void): void {
+// eslint-disable-next-line no-unused-vars -- callback type parameter is documentation-only
+export function initLangSwitch(updateFn: (_lang: Lang) => void): void {
   if (typeof document === "undefined") return;
 
   function handler(e: Event): void {
