@@ -343,21 +343,22 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     .experience-carousel__dots {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 8px;
       margin-top: 1rem;
     }
     .experience-carousel__dot {
-      width: 12px;
-      height: 12px;
-      padding: 12px;
+      width: 6px;
+      height: 6px;
+      padding: 7px;
       border-radius: 50%;
-      border: none;
-      background: var(--color-word);
-      background-clip: content-box;
+      border: 2px solid var(--color-word);
+      background: transparent;
+      box-sizing: content-box;
       cursor: pointer;
     }
     .experience-carousel__dot--active {
       background: var(--color-accent);
+      border-color: var(--color-accent);
     }
     .experience-tabs__heading {
       display: flex;
