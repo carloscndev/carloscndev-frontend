@@ -11,6 +11,8 @@
 export function scrollToHash(hash: string): void {
   if (typeof document === "undefined") return;
 
+  suppressObserver = true;
+
   const cleanHash = hash.replace(/^#/, "");
 
   if (!cleanHash || cleanHash === "/") {
@@ -19,6 +21,10 @@ export function scrollToHash(hash: string): void {
       homeSection.scrollIntoView({ block: "center" });
     }
     updateActiveNavLink("");
+
+    setTimeout(() => {
+      suppressObserver = false;
+    }, 800);
     return;
   }
 
@@ -49,6 +55,10 @@ export function scrollToHash(hash: string): void {
       }, 300);
     }
   }
+
+  setTimeout(() => {
+    suppressObserver = false;
+  }, 800);
 }
 
 /**
@@ -134,13 +144,81 @@ function bindHashLinkListeners(): void {
  * - Re-scrolling after Astro ClientRouter navigation (astro:after-swap)
  * - Re-binding listeners after Astro page transitions (astro:page-load)
  */
+let scrollHandlerAttached = false;
+let suppressObserver = false;
+
+function bindScrollObserver(): void {
+  if (typeof document === "undefined") return;
+  if (typeof window === "undefined") return;
+
+  const pathname = window.location.pathname;
+  if (pathname !== "/" && pathname !== "/index.html") return;
+
+  const container = document.querySelector<HTMLElement>(".main-content");
+  if (!container) return;
+
+  if (scrollHandlerAttached) return;
+
+  let ticking = false;
+
+  container.addEventListener(
+    "scroll",
+    () => {
+      if (ticking || suppressObserver) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        ticking = false;
+
+        if (suppressObserver) return;
+
+        const containerCenter =
+          container.scrollTop + container.clientHeight / 2;
+        const sections = container.querySelectorAll<HTMLElement>("section[id]");
+
+        let closestId = "";
+        let closestDistance = Infinity;
+
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const containerRect = container.getBoundingClientRect();
+          const sectionCenter =
+            rect.top +
+            rect.height / 2 -
+            containerRect.top +
+            container.scrollTop;
+          const distance = Math.abs(sectionCenter - containerCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestId = section.id;
+          }
+        });
+
+        if (closestId) {
+          const sectionId = closestId === "home" ? "" : closestId;
+          updateActiveNavLink(sectionId);
+          const newUrl = closestId === "home" ? "/" : `/#${closestId}`;
+          window.history.replaceState(null, "", newUrl);
+        }
+      });
+    },
+    { passive: true },
+  );
+
+  scrollHandlerAttached = true;
+}
+
 export function initAnchorRouting(): void {
   if (typeof document === "undefined") return;
 
   bindHashLinkListeners();
+  bindScrollObserver();
 
   document.addEventListener("astro:page-load", () => {
+    scrollHandlerAttached = false;
     bindHashLinkListeners();
+    bindScrollObserver();
 
     if (typeof window !== "undefined") {
       const pathname = window.location.pathname;
