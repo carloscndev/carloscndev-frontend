@@ -60,7 +60,7 @@ const { title, lang } = Astro.props;
     }
   }
 
-  @media (min-width: 1025px) {
+  @media (min-width: 768px) {
     .main-content {
       grid-template-areas: "social-sidebar main-section";
       grid-template-columns: auto 1fr;
@@ -68,6 +68,42 @@ const { title, lang } = Astro.props;
       article {
         padding: 0 60px;
       }
+    }
+  }
+
+  @media (max-width: 1023px) and (orientation: landscape) {
+    :global(section) {
+      height: auto;
+      min-height: 100vh;
+      padding: var(--spacing-sm);
+    }
+
+    :global(.home-section__grid),
+    :global(.about-section__grid) {
+      gap: var(--spacing-sm);
+    }
+
+    :global(.home-section__title),
+    :global(.home-section__subtitle),
+    :global(.home-section__subtitle strong) {
+      font-size: 1.5rem !important;
+    }
+
+    :global(.social-sidebar) {
+      margin-left: var(--spacing-md) !important;
+    }
+
+    :global(.social-sidebar-list-item svg) {
+      width: 16px;
+      height: 16px;
+    }
+
+    :global(.social-sidebar-list-item) {
+      padding: var(--spacing-xs) !important;
+    }
+
+    :global(.social-sidebar-list) {
+      gap: var(--spacing-xs);
     }
   }
 </style>

@@ -352,9 +352,9 @@ const fullPath = currentPath + currentHash;
     }
   }
 
-  @media (min-width: 1025px) {
+  @media (min-width: 768px) {
     .header {
-      padding: 0;
+      padding: 0 var(--spacing-md);
 
       .mobile-menu-toggle {
         display: none;
@@ -364,12 +364,46 @@ const fullPath = currentPath + currentHash;
       .header-menu {
         .header-nav {
           display: inline-block;
+
+          .header-nav-list {
+            .header-nav-item {
+              margin-right: var(--spacing-sm);
+            }
+          }
         }
       }
     }
 
     .mobile-menu-overlay {
       display: none;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .header {
+      .header-menu {
+        .header-nav {
+          .header-nav-list {
+            .header-nav-item {
+              margin-right: var(--spacing-md);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1023px) and (orientation: landscape) {
+    :global(.header-icon svg),
+    :global(.mobile-menu-toggle__icon) {
+      width: 28px;
+      height: 28px;
+    }
+
+    :global(.theme-button-image),
+    :global(.icon-wrapper svg) {
+      width: 18px;
+      height: 18px;
     }
   }
 </style>
