@@ -328,11 +328,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       transition: none;
     }
 
-    .experience-carousel__description p {
-      margin-bottom: var(--spacing-sm);
+    :global(.experience-carousel__description p) {
+      margin-bottom: var(--spacing-md);
     }
 
-    .experience-carousel__description p:last-child {
+    :global(.experience-carousel__description p:last-child) {
       margin-bottom: 0;
     }
 
