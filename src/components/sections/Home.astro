@@ -44,6 +44,9 @@ const embeddedDataJson = JSON.stringify(embeddedData);
         alt={`${homeData.intro} ${homeData.title}`}
         loading="eager"
         fetchpriority="high"
+        widths={[200, 400, 800, helloImg.width]}
+        sizes="(max-width: 767px) 200px, 350px"
+        format="webp"
       />
     </div>
 

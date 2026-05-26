@@ -69,6 +69,9 @@ const embeddedDataJson = JSON.stringify(embeddedData);
         src={workingImg}
         alt={aboutData.title}
         loading="lazy"
+        widths={[200, 400, 800, workingImg.width]}
+        sizes="(max-width: 767px) 180px, 350px"
+        format="webp"
       />
     </div>
   </div>
