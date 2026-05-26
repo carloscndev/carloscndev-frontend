@@ -4,20 +4,19 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://carloscndev.com",
-
   output: "static",
-
   integrations: [
     sitemap(),
   ],
-
   vite: {
     plugins: [tailwindcss()],
   },
-
   image: {
     service: {
       entrypoint: "astro/assets/services/sharp",
     },
+  },
+  build: {
+    inlineStylesheets: 'always',
   },
 });
