@@ -1,19 +1,32 @@
 ---
-import aboutDataRaw from "../../data/about.json";
 import { Image } from "astro:assets";
 import workingImg from "../../assets/images/working.webp";
 import Diamond from "../icons/Diamond.astro";
 
-const currentLang = "es";
-const aboutData = aboutDataRaw[currentLang];
+interface TechItem {
+  name: string;
+  icon: string;
+}
 
-const avatarMap: Record<string, string> = {
-  default: workingImg.src,
-};
+interface AboutData {
+  title: string;
+  contentText: string;
+  technologies: TechItem[];
+}
+
+interface Props {
+  es: AboutData;
+  en: AboutData;
+}
+
+const { es, en } = Astro.props;
+const aboutData = es;
+
+const avatarPath = workingImg.src;
 
 const embeddedData = {
-  es: { ...aboutDataRaw.es, avatarPath: avatarMap.default },
-  en: { ...aboutDataRaw.en, avatarPath: avatarMap.default },
+  es: { ...es, avatarPath },
+  en: { ...en, avatarPath },
 };
 
 const embeddedDataJson = JSON.stringify(embeddedData);

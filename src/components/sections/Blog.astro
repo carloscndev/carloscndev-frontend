@@ -1,5 +1,4 @@
 ---
-import blogData from "../../data/blog.json";
 import { Image } from "astro:assets";
 import wallperImage from "../../assets/images/wallper.jpg";
 import TechIcon from "../icons/TechIcon.astro";
@@ -19,10 +18,24 @@ interface BlogPost {
   resume: string;
 }
 
-const lang = "es";
-const data = blogData[lang];
-const posts = data.blog.posts as BlogPost[];
-const blogDataJson = JSON.stringify(blogData);
+interface BlogData {
+  title: string;
+  intro: string;
+  view_more: string;
+  posts: BlogPost[];
+}
+
+interface Props {
+  es: BlogData;
+  en: BlogData;
+}
+
+const { es, en } = Astro.props;
+const data = es;
+const posts = data.posts;
+
+const embeddedData = { es, en };
+const blogDataJson = JSON.stringify(embeddedData);
 ---
 
 <section id="blog" class="blog-section">
@@ -37,7 +50,7 @@ const blogDataJson = JSON.stringify(blogData);
     <h2 class="blog-section__title" data-i18n-content="section.blog">Blog</h2>
   </header>
 
-  <p class="blog-section__intro" data-blog-intro>{data.blog.intro}</p>
+  <p class="blog-section__intro" data-blog-intro>{data.intro}</p>
 
   <div class="blog-grid">
     {
@@ -154,7 +167,7 @@ const blogDataJson = JSON.stringify(blogData);
           class="blog-section__view-more"
           data-blog-viewmore
         >
-          <span>{data.blog.view_more}</span>
+          <span>{data.view_more}</span>
           <ArrowNext size="20" class="blog-section__view-more-icon" />
         </LinkWrapper>
       </div>

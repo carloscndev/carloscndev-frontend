@@ -2,6 +2,10 @@
 import { fetchSingleType } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
 import type { HomePageAttributes } from "../types/home-page";
+import type { AboutPageAttributes } from "../types/about-page";
+import type { ExperiencePageAttributes } from "../types/experience-page";
+import type { PortfolioPageAttributes } from "../types/portfolio-page";
+import type { BlogPageAttributes } from "../types/blog-page";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
 import About from "../components/sections/About.astro";
@@ -32,6 +36,17 @@ const sameAs = globalConfig.social
   .filter((s) => ["github", "linkedin", "instagram"].includes(s.platform))
   .map((s) => s.url);
 
+const aboutEs = await fetchSingleType<AboutPageAttributes>("about-page", "es", {
+  populate: "*",
+});
+const aboutEn = await fetchSingleType<AboutPageAttributes>("about-page", "en", {
+  populate: "*",
+});
+
+if (!aboutEs || !aboutEn) {
+  throw new Error("Failed to fetch about-page from Strapi");
+}
+
 const homeData = {
   es: {
     intro: homeEs.intro,
@@ -44,6 +59,163 @@ const homeData = {
     title: homeEn.title,
     subtitle: homeEn.subtitle,
     content: homeEn.content,
+  },
+};
+
+const expEs = await fetchSingleType<ExperiencePageAttributes>(
+  "experience-page",
+  "es",
+  { populate: "*" },
+);
+const expEn = await fetchSingleType<ExperiencePageAttributes>(
+  "experience-page",
+  "en",
+  { populate: "*" },
+);
+
+if (!expEs || !expEn) {
+  throw new Error("Failed to fetch experience-page from Strapi");
+}
+
+const aboutData = {
+  es: {
+    title: aboutEs.title,
+    contentText: aboutEs.contentText,
+    technologies: aboutEs.technologies.map((t) => ({
+      name: t.name,
+      icon: t.icon,
+    })),
+  },
+  en: {
+    title: aboutEn.title,
+    contentText: aboutEn.contentText,
+    technologies: aboutEn.technologies.map((t) => ({
+      name: t.name,
+      icon: t.icon,
+    })),
+  },
+};
+
+const expData = {
+  es: {
+    title: expEs.title,
+    intro: expEs.intro,
+    jobs: expEs.jobs.map((j) => ({
+      id: j.id,
+      company: j.company,
+      company_url: j.company_url,
+      role: j.role,
+      period: j.period,
+      description: j.description,
+      technologies: j.technologies,
+    })),
+  },
+  en: {
+    title: expEn.title,
+    intro: expEn.intro,
+    jobs: expEn.jobs.map((j) => ({
+      id: j.id,
+      company: j.company,
+      company_url: j.company_url,
+      role: j.role,
+      period: j.period,
+      description: j.description,
+      technologies: j.technologies,
+    })),
+  },
+};
+
+const portfolioEs = await fetchSingleType<PortfolioPageAttributes>(
+  "portfolio-page",
+  "es",
+  { populate: "*" },
+);
+const portfolioEn = await fetchSingleType<PortfolioPageAttributes>(
+  "portfolio-page",
+  "en",
+  { populate: "*" },
+);
+
+if (!portfolioEs || !portfolioEn) {
+  throw new Error("Failed to fetch portfolio-page from Strapi");
+}
+
+const portfolioData = {
+  es: {
+    title: portfolioEs.title,
+    intro: portfolioEs.intro,
+    view_more: portfolioEs.view_more,
+    projects: (portfolioEs.projects ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      technologies: p.technologies,
+      links: {
+        repo: p.links?.repo,
+        demo: p.links?.demo,
+        article: p.links?.article,
+      },
+    })),
+  },
+  en: {
+    title: portfolioEn.title,
+    intro: portfolioEn.intro,
+    view_more: portfolioEn.view_more,
+    projects: (portfolioEn.projects ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      technologies: p.technologies,
+      links: {
+        repo: p.links?.repo,
+        demo: p.links?.demo,
+        article: p.links?.article,
+      },
+    })),
+  },
+};
+
+const blogEs = await fetchSingleType<BlogPageAttributes>("blog-page", "es", {
+  populate: "*",
+});
+const blogEn = await fetchSingleType<BlogPageAttributes>("blog-page", "en", {
+  populate: "*",
+});
+
+if (!blogEs || !blogEn) {
+  throw new Error("Failed to fetch blog-page from Strapi");
+}
+
+const blogData = {
+  es: {
+    title: blogEs.title,
+    intro: blogEs.intro,
+    view_more: blogEs.view_more,
+    posts: (blogEs.posts ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      link: p.link,
+      icon: p.icon,
+      category: p.category,
+      date: p.date,
+      read_time: p.read_time,
+      resume: p.resume,
+    })),
+  },
+  en: {
+    title: blogEn.title,
+    intro: blogEn.intro,
+    view_more: blogEn.view_more,
+    posts: (blogEn.posts ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      link: p.link,
+      icon: p.icon,
+      category: p.category,
+      date: p.date,
+      read_time: p.read_time,
+      resume: p.resume,
+    })),
   },
 };
 ---
@@ -71,9 +243,9 @@ const homeData = {
     })}
   />
   <Home es={homeData.es} en={homeData.en} />
-  <About />
-  <Experience />
-  <Portfolio />
-  <Blog />
+  <About es={aboutData.es} en={aboutData.en} />
+  <Experience es={expData.es} en={expData.en} />
+  <Portfolio es={portfolioData.es} en={portfolioData.en} />
+  <Blog es={blogData.es} en={blogData.en} />
   <Contact />
 </MainLayout>

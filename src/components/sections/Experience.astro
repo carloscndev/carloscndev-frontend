@@ -1,16 +1,33 @@
 ---
-import experienceDataRaw from "../../data/experience.json";
 import Chevron from "../icons/Chevron.astro";
 import TechPill from "../ui/TechPill.astro";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 
-const currentLang = "es";
-const data = experienceDataRaw[currentLang];
+interface Job {
+  id: string;
+  company: string;
+  company_url: string;
+  role: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+}
 
-const embeddedData = {
-  es: experienceDataRaw.es,
-  en: experienceDataRaw.en,
-};
+interface ExperienceData {
+  title: string;
+  intro: string;
+  jobs: Job[];
+}
+
+interface Props {
+  es: ExperienceData;
+  en: ExperienceData;
+}
+
+const { es, en } = Astro.props;
+const data = es;
+
+const embeddedData = { es, en };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 

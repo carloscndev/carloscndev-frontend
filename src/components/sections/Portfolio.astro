@@ -1,5 +1,4 @@
 ---
-import portfolioDataRaw from "../../data/portafolio.json";
 import Diamond from "../icons/Diamond.astro";
 import TechPill from "../ui/TechPill.astro";
 import GithubIcon from "../icons/GithubIcon.astro";
@@ -8,13 +7,36 @@ import FileIcon from "../icons/FileIcon.astro";
 import ArrowNext from "../icons/ArrowNext.astro";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 
-const currentLang = "es";
-const data = portfolioDataRaw[currentLang];
+interface ProjectLink {
+  repo?: string;
+  demo?: string;
+  article?: string;
+}
 
-const embeddedData = {
-  es: portfolioDataRaw.es,
-  en: portfolioDataRaw.en,
-};
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  links: ProjectLink;
+}
+
+interface PortfolioData {
+  title: string;
+  intro: string;
+  view_more: string;
+  projects: Project[];
+}
+
+interface Props {
+  es: PortfolioData;
+  en: PortfolioData;
+}
+
+const { es, en } = Astro.props;
+const data = es;
+
+const embeddedData = { es, en };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 
@@ -40,7 +62,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   <!-- Desktop Grid (visible >= 480px) -->
   <div class="portfolio-grid" data-portfolio-grid>
     {
-      data.projects.slice(0, 6).map((project: any) => (
+      data.projects.slice(0, 6).map((project) => (
         <div class="portfolio-grid__card" data-project-id={project.id}>
           <div class="portfolio-card__header">
             <Diamond size="22" class="portfolio-card__diamond" />
@@ -93,7 +115,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   <!-- Mobile Accordion (visible < 480px) -->
   <div class="portfolio-accordion" data-portfolio-accordion>
     {
-      data.projects.slice(0, 6).map((project: any) => (
+      data.projects.slice(0, 6).map((project) => (
         <div
           class="portfolio-accordion__item"
           data-accordion-item

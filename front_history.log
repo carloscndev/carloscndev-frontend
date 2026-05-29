@@ -1,0 +1,42 @@
+# Migration History Log
+
+## MIG-007: Create About Page Types
+- Created src/types/about-page.ts with Technology and AboutPageAttributes types
+- Created src/__tests__/types/about-page.test.ts with 2 type tests
+
+## MIG-008: Migrate About Section to Strapi
+- Updated src/components/sections/About.astro to receive es/en props
+- Updated src/pages/index.astro to fetch about-page from Strapi
+- Removed dependency on src/data/about.json
+
+## MIG-009: Create Experience Page Types
+- Created src/types/experience-page.ts with Job and ExperiencePageAttributes types
+- Created src/__tests__/types/experience-page.test.ts with 2 type tests
+
+## MIG-010: Migrate Experience Section to Strapi
+- Updated src/components/sections/Experience.astro to receive es/en props
+- Updated src/pages/index.astro to fetch experience-page from Strapi
+- Removed dependency on src/data/experience.json
+
+## MIG-011: Create Portfolio Page Types
+- Created src/types/portfolio-page.ts with ProjectLink, Project, and PortfolioPageAttributes types
+- Created src/__tests__/types/portfolio-page.test.ts with 3 type tests
+
+## MIG-012: Migrate Portfolio Section to Strapi
+- Updated src/components/sections/Portfolio.astro to receive es/en props
+- Updated src/pages/index.astro to fetch portfolio-page from Strapi
+- Removed dependency on src/data/portafolio.json
+
+## MIG-013: Create Blog Page Types
+- Created src/types/blog-page.ts with BlogPost and BlogPageAttributes types
+- Created src/__tests__/types/blog-page.test.ts with 3 type tests
+
+## MIG-014: Migrate Blog Section to Strapi
+- Updated src/components/sections/Blog.astro to receive es/en props
+- Updated src/pages/index.astro to fetch blog-page from Strapi
+- Removed dependency on src/data/blog.json
+
+## 2024-01-XX
+- All tests passing: 172 tests in 28 files
+- Lint clean with 0 errors (1 pre-existing warning in scroll-observer.test.ts)
+- Build blocked by Strapi connectivity (HTTP 000) — expected, confirms 100% SSG
