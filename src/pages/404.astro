@@ -1,4 +1,6 @@
 ---
+import { fetchSingleType } from "../services/strapi";
+import type { GlobalConfigAttributes } from "../types/global-config";
 import PostLayout from "../layouts/PostLayout.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
 import ArrowNext from "../components/icons/ArrowNext.astro";
@@ -6,12 +8,28 @@ import { Image } from "astro:assets";
 import sleepingImage from "../assets/images/slepping.webp";
 import errorData from "../data/404.json";
 
+const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
+  "global-config",
+  "es",
+  { populate: ["navigation", "social"] },
+);
+
+if (!globalConfig) {
+  throw new Error("Failed to fetch global-config from Strapi");
+}
+
 const lang = "es";
 const data = errorData[lang].error_404;
 const errorDataJson = JSON.stringify(errorData);
 ---
 
-<PostLayout title="404 — Not Found" lang={lang} noindex>
+<PostLayout
+  title="404 — Not Found"
+  lang={lang}
+  noindex
+  navigation={globalConfig.navigation}
+  defaultLocale={globalConfig.defaultLocale}
+>
   <script
     is:inline
     type="application/json"

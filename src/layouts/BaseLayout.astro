@@ -3,7 +3,6 @@ import { ClientRouter } from "astro:transitions";
 import { getPreferredTheme, applyTheme } from "@utils/theme";
 import Analytics from "@vercel/analytics/astro";
 import BaseSEO from "@components/BaseSEO.astro";
-import config from "../data/config.json";
 import "../styles/global.css";
 
 interface Props {
@@ -18,11 +17,13 @@ interface Props {
 const {
   title,
   lang = "es",
-  description = config.site.description,
+  description = "Carlos Castañeda — Software Engineer. Portfolio, blog, and projects.",
   categoryTheme,
   image,
   noindex,
 } = Astro.props;
+
+const canonicalUrl = `${Astro.site?.origin ?? "https://carloscndev.com"}${Astro.url.pathname}`;
 
 const inlineThemeScript = `
   const STORAGE_KEY = "carloscndev-theme";
@@ -58,7 +59,7 @@ const inlineThemeScript = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="canonical" href={`${config.site.url}${Astro.url.pathname}`} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {noindex && <meta name="robots" content="noindex, follow" />}

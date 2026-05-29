@@ -1,4 +1,6 @@
 ---
+import { fetchSingleType } from "../services/strapi";
+import type { GlobalConfigAttributes } from "../types/global-config";
 import PostLayout from "../layouts/PostLayout.astro";
 import portfolioDataRaw from "../data/portafolio.json";
 import Diamond from "../components/icons/Diamond.astro";
@@ -7,6 +9,16 @@ import GithubIcon from "../components/icons/GithubIcon.astro";
 import ExternalLink from "../components/icons/ExternalLink.astro";
 import FileIcon from "../components/icons/FileIcon.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
+
+const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
+  "global-config",
+  "es",
+  { populate: ["navigation", "social"] },
+);
+
+if (!globalConfig) {
+  throw new Error("Failed to fetch global-config from Strapi");
+}
 
 const currentLang = "es";
 const data = portfolioDataRaw[currentLang];
@@ -18,7 +30,12 @@ const embeddedData = {
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 
-<PostLayout title="Portfolio — Projects" lang={currentLang}>
+<PostLayout
+  title="Portfolio — Projects"
+  lang={currentLang}
+  navigation={globalConfig.navigation}
+  defaultLocale={globalConfig.defaultLocale}
+>
   <script
     is:inline
     type="application/json"

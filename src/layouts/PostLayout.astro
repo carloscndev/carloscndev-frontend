@@ -1,15 +1,27 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Header from "../components/ui/Header.astro";
+import type { NavigationItem } from "../types/global-config";
 
 interface Props {
   title: string;
   lang?: "es" | "en";
   categoryTheme?: string;
   noindex?: boolean;
+  description?: string;
+  navigation: NavigationItem[];
+  defaultLocale?: string;
 }
 
-const { title, lang = "es", categoryTheme, noindex } = Astro.props;
+const {
+  title,
+  lang = "es",
+  categoryTheme,
+  noindex,
+  description,
+  navigation,
+  defaultLocale,
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -17,9 +29,9 @@ const { title, lang = "es", categoryTheme, noindex } = Astro.props;
   lang={lang}
   categoryTheme={categoryTheme}
   noindex={noindex}
-  description="Blog post"
+  description={description}
 >
-  <Header lang={lang} />
+  <Header lang={lang} navigation={navigation} defaultLocale={defaultLocale} />
   <div class="post-layout">
     <article id="main" class="post-layout__article">
       <slot />

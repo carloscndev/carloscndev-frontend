@@ -5,40 +5,51 @@ import LinkedInIcon from "@components/icons/LinkedInIcon.astro";
 import MailIcon from "@components/icons/MailIcon.astro";
 import CVIcon from "@components/icons/CV.astro";
 import LinkWrapper from "./LinkWrapper.astro";
-import config from "../../data/config.json";
+import type { SocialLink } from "../../types/global-config";
+
+interface Props {
+  social: SocialLink[];
+}
+
+const { social } = Astro.props;
+
+const iconMap: Record<string, typeof GithubIcon> = {
+  github: GithubIcon,
+  instagram: InstagramIcon,
+  linkedin: LinkedInIcon,
+  email: MailIcon,
+  cv: CVIcon,
+};
+
+const labelMap: Record<string, string> = {
+  github: "GitHub",
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  email: "Email",
+  cv: "Resume",
+};
 ---
 
 <aside class="social-sidebar">
   <ul class="social-sidebar-list" role="list">
-    <li class="social-sidebar-list-item">
-      <LinkWrapper href={config.social.github} tooltip="GitHub">
-        <GithubIcon />
-      </LinkWrapper>
-    </li>
-    <li class="social-sidebar-list-item">
-      <LinkWrapper href={config.social.instagram} tooltip="Instagram">
-        <InstagramIcon />
-      </LinkWrapper>
-    </li>
-    <li class="social-sidebar-list-item">
-      <LinkWrapper href={config.social.cv} tooltip="Resume">
-        <CVIcon />
-      </LinkWrapper>
-    </li>
-    <li class="social-sidebar-list-item">
-      <LinkWrapper href={config.social.linkedin} tooltip="LinkedIn">
-        <LinkedInIcon />
-      </LinkWrapper>
-    </li>
-    <li class="social-sidebar-list-item">
-      <LinkWrapper
-        href={config.social.email}
-        isExternal={false}
-        tooltip="Email"
-      >
-        <MailIcon />
-      </LinkWrapper>
-    </li>
+    {
+      social.map((link) => {
+        const Icon = iconMap[link.platform] ?? GithubIcon;
+        const label = labelMap[link.platform] ?? link.platform;
+        const isExternal = !link.url.startsWith("mailto:");
+        return (
+          <li class="social-sidebar-list-item">
+            <LinkWrapper
+              href={link.url}
+              isExternal={isExternal}
+              tooltip={label}
+            >
+              <Icon />
+            </LinkWrapper>
+          </li>
+        );
+      })
+    }
   </ul>
   <div class="social-sidebar-line"></div>
 </aside>

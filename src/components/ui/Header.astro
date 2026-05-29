@@ -6,14 +6,18 @@ import CloseIcon from "@components/icons/CloseIcon.astro";
 import ThemeButton from "./ThemeButton.astro";
 import LanguageButton from "./LanguageButton.astro";
 import { NAV_LABELS } from "../../utils/lang";
-import config from "../../data/config.json";
+import type { NavigationItem } from "../../types/global-config";
 
 interface Props {
   lang?: "es" | "en";
+  navigation: NavigationItem[];
+  defaultLocale?: string;
 }
 
-const lang = (Astro.props.lang ?? config.defaultLocale) as "es" | "en";
-const navLinks = config.navigation as Array<{
+const { lang: propLang, navigation, defaultLocale = "es" } = Astro.props;
+
+const lang = (propLang ?? defaultLocale) as "es" | "en";
+const navLinks = navigation as Array<{
   href: string;
   key: keyof typeof NAV_LABELS;
 }>;
