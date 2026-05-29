@@ -1,6 +1,7 @@
 ---
 import { fetchSingleType } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
+import type { HomePageAttributes } from "../types/home-page";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
 import About from "../components/sections/About.astro";
@@ -19,10 +20,32 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
+const homeEs = await fetchSingleType<HomePageAttributes>("home-page", "es");
+const homeEn = await fetchSingleType<HomePageAttributes>("home-page", "en");
+
+if (!homeEs || !homeEn) {
+  throw new Error("Failed to fetch home-page from Strapi");
+}
+
 const siteUrl = Astro.site?.origin ?? "https://carloscndev.com";
 const sameAs = globalConfig.social
   .filter((s) => ["github", "linkedin", "instagram"].includes(s.platform))
   .map((s) => s.url);
+
+const homeData = {
+  es: {
+    intro: homeEs.intro,
+    title: homeEs.title,
+    subtitle: homeEs.subtitle,
+    content: homeEs.content,
+  },
+  en: {
+    intro: homeEn.intro,
+    title: homeEn.title,
+    subtitle: homeEn.subtitle,
+    content: homeEn.content,
+  },
+};
 ---
 
 <MainLayout
@@ -47,7 +70,7 @@ const sameAs = globalConfig.social
       sameAs,
     })}
   />
-  <Home />
+  <Home es={homeData.es} en={homeData.en} />
   <About />
   <Experience />
   <Portfolio />

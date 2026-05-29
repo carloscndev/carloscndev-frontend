@@ -1,13 +1,24 @@
 ---
-import homeDataRaw from "../../data/home.json";
 import { Image } from "astro:assets";
 import helloImg from "../../assets/images/hello.webp";
 import runningImg from "../../assets/images/running.webp";
 import readingImg from "../../assets/images/reading.webp";
 import playingImg from "../../assets/images/playing.webp";
 
-const currentLang = "es";
-const homeData = homeDataRaw[currentLang];
+interface HomeData {
+  intro: string;
+  title: string;
+  subtitle: string;
+  content: string;
+}
+
+interface Props {
+  es: HomeData;
+  en: HomeData;
+}
+
+const { es, en } = Astro.props;
+const homeData = es;
 
 const avatarMap: Record<string, string> = {
   default: helloImg.src,
@@ -19,10 +30,9 @@ const avatarMap: Record<string, string> = {
 const subtitleHTML = homeData.subtitle.replace(/dev$/, "<strong>dev</strong>");
 
 const embeddedData = {
-  es: { ...homeDataRaw.es, avatarPaths: avatarMap },
-  en: { ...homeDataRaw.en, avatarPaths: avatarMap },
+  es: { ...es, avatarPaths: avatarMap },
+  en: { ...en, avatarPaths: avatarMap },
 };
-
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 
@@ -126,17 +136,10 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   .home-section__subtitle {
     font-family: var(--font-titles);
-    font-size: var(--font-size-h3-mobile);
-    color: var(--text-base);
-    margin-top: 0;
-    margin-bottom: var(--spacing-md);
-  }
-
-  .home-section__subtitle {
-    font-family: var(--font-titles);
     font-size: var(--font-size-h1-mobile);
     font-weight: var(--weight-space-semibold);
     color: var(--text-base);
+    margin-top: 0;
     margin-bottom: var(--spacing-md);
   }
 
@@ -184,12 +187,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     }
 
     .home-section__avatar {
-      justify-content: flex-start;
-      order: 0;
-    }
-
-    .home-section__avatar {
       justify-content: flex-end;
+      order: 0;
     }
 
     .home-section__avatar-img {
