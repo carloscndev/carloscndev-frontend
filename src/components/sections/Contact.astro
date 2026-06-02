@@ -3,9 +3,9 @@ import LinkWrapper from "../ui/LinkWrapper.astro";
 
 interface ContactData {
   title: string;
-  status_message: string;
-  button_text: string;
-  mail_to: string;
+  statusMessage: string;
+  buttonText: string;
+  mailTo: string;
   footer: string;
 }
 
@@ -35,15 +35,15 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     </h2>
 
     <p class="contact-section__status" data-contact-status>
-      {data.status_message}
+      {data.statusMessage}
     </p>
 
     <LinkWrapper
-      href={data.mail_to}
+      href={data.mailTo}
       class="contact-section__button"
       data-contact-button
     >
-      {data.button_text}
+      {data.buttonText}
     </LinkWrapper>
   </div>
 

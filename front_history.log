@@ -88,6 +88,12 @@
 - Updated src/components/BaseSEO.astro to use Astro.site?.origin
 - Removed dependency on src/data/config.json
 
+## Fix: Contact Page Field Names
+- Fixed camelCase vs snake_case mismatch with Strapi
+- Strapi uses: statusMessage, buttonText, mailTo (camelCase)
+- Added normalizeMailTo() helper to ensure mailto: prefix
+- Updated types, component, utils, tests, and page mapping
+
 ## Blocked: Blog Post Detail Pages (blog/[slug].astro)
 - src/pages/blog/[slug].astro still uses src/data/blog-post.json
 - Requires blog-posts collection type in Strapi (does not exist yet)

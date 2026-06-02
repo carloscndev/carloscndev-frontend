@@ -235,19 +235,25 @@ if (!contactEs || !contactEn) {
   throw new Error("Failed to fetch contact-page from Strapi");
 }
 
+function normalizeMailTo(email: string): string {
+  if (!email) return "#";
+  if (email.startsWith("mailto:")) return email;
+  return `mailto:${email}`;
+}
+
 const contactData = {
   es: {
     title: contactEs.title,
-    status_message: contactEs.status_message,
-    button_text: contactEs.button_text,
-    mail_to: contactEs.mail_to,
+    statusMessage: contactEs.statusMessage,
+    buttonText: contactEs.buttonText,
+    mailTo: normalizeMailTo(contactEs.mailTo),
     footer: contactEs.footer,
   },
   en: {
     title: contactEn.title,
-    status_message: contactEn.status_message,
-    button_text: contactEn.button_text,
-    mail_to: contactEn.mail_to,
+    statusMessage: contactEn.statusMessage,
+    buttonText: contactEn.buttonText,
+    mailTo: normalizeMailTo(contactEn.mailTo),
     footer: contactEn.footer,
   },
 };

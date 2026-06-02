@@ -6,16 +6,16 @@ describe("contact", () => {
     const data = {
       es: {
         title: "Hablemos",
-        status_message: "Abierto",
-        button_text: "Escribe",
-        mail_to: "mailto:test@test.com",
+        statusMessage: "Abierto",
+        buttonText: "Escribe",
+        mailTo: "mailto:test@test.com",
         footer: "Footer ES",
       },
       en: {
         title: "Let's talk",
-        status_message: "Open",
-        button_text: "Write",
-        mail_to: "mailto:test@test.com",
+        statusMessage: "Open",
+        buttonText: "Write",
+        mailTo: "mailto:test@test.com",
         footer: "Footer EN",
       },
     };

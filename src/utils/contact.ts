@@ -3,9 +3,9 @@ import { initLangSwitch } from "./common";
 
 interface ContactAttributes {
   title: string;
-  status_message: string;
-  button_text: string;
-  mail_to: string;
+  statusMessage: string;
+  buttonText: string;
+  mailTo: string;
   footer: string;
 }
 
@@ -28,12 +28,12 @@ export function updateContactContent(lang: Lang): void {
   if (titleEl) titleEl.textContent = data.title;
 
   const statusEl = document.querySelector<HTMLElement>("[data-contact-status]");
-  if (statusEl) statusEl.textContent = data.status_message;
+  if (statusEl) statusEl.textContent = data.statusMessage;
 
   const btnEl = document.querySelector<HTMLElement>("[data-contact-button]");
   if (btnEl) {
-    btnEl.textContent = data.button_text;
-    btnEl.setAttribute("href", data.mail_to);
+    btnEl.textContent = data.buttonText;
+    btnEl.setAttribute("href", data.mailTo);
   }
 
   const footerEl = document.querySelector<HTMLElement>("[data-contact-footer]");
