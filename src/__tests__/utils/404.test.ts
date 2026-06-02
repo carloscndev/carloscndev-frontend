@@ -9,18 +9,14 @@ describe("404", () => {
   it("should update 404 content from embedded JSON", () => {
     const data = {
       es: {
-        error_404: {
-          title: "Ups!",
-          message: "No existe",
-          button_text: "Volver",
-        },
+        title: "Ups!",
+        message: "No existe",
+        button_text: "Volver",
       },
       en: {
-        error_404: {
-          title: "Oops!",
-          message: "Not found",
-          button_text: "Go back",
-        },
+        title: "Oops!",
+        message: "Not found",
+        button_text: "Go back",
       },
     };
     const el = document.createElement("script");

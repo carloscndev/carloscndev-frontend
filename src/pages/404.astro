@@ -1,12 +1,12 @@
 ---
 import { fetchSingleType } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
+import type { ErrorPageAttributes } from "../types/error-page";
 import PostLayout from "../layouts/PostLayout.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
 import ArrowNext from "../components/icons/ArrowNext.astro";
 import { Image } from "astro:assets";
 import sleepingImage from "../assets/images/slepping.webp";
-import errorData from "../data/404.json";
 
 const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
   "global-config",
@@ -18,9 +18,34 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
+const errorEs = await fetchSingleType<ErrorPageAttributes>("error-page", "es", {
+  populate: "*",
+});
+const errorEn = await fetchSingleType<ErrorPageAttributes>("error-page", "en", {
+  populate: "*",
+});
+
+if (!errorEs || !errorEn) {
+  throw new Error("Failed to fetch error-page from Strapi");
+}
+
 const lang = "es";
-const data = errorData[lang].error_404;
-const errorDataJson = JSON.stringify(errorData);
+
+const embeddedData = {
+  es: {
+    title: errorEs.title,
+    message: errorEs.message,
+    button_text: errorEs.button_text,
+  },
+  en: {
+    title: errorEn.title,
+    message: errorEn.message,
+    button_text: errorEn.button_text,
+  },
+};
+
+const data = embeddedData[lang];
+const errorDataJson = JSON.stringify(embeddedData);
 ---
 
 <PostLayout

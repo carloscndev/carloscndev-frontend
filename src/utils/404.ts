@@ -7,13 +7,9 @@ interface Error404Data {
   button_text: string;
 }
 
-interface Locale404Data {
-  error_404: Error404Data;
-}
-
 interface Full404Data {
-  es: Locale404Data;
-  en: Locale404Data;
+  es: Error404Data;
+  en: Error404Data;
 }
 
 export function update404Content(lang: Lang): void {
@@ -23,7 +19,7 @@ export function update404Content(lang: Lang): void {
   if (!dataEl?.textContent) return;
 
   const allData: Full404Data = JSON.parse(dataEl.textContent);
-  const data = allData[lang]?.error_404;
+  const data = allData[lang];
   if (!data) return;
 
   const titleEl = document.querySelector("[data-404-title]");
