@@ -32,8 +32,8 @@ describe("pages", () => {
       expect(content).toContain("PostLayout");
     });
 
-    it("should have sleeping image and error text", () => {
-      expect(content).toContain("slepping");
+    it("should use StrapiImage and have error text", () => {
+      expect(content).toContain("StrapiImage");
       expect(content).toContain("not-found");
     });
   });

@@ -1,10 +1,10 @@
 ---
-import { fetchSingleType } from "../services/strapi";
+import { fetchSingleType, fetchCollection } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
 import type { BlogPageAttributes } from "../types/blog-page";
+import type { BlogPostAttributes } from "../types/blog-post";
 import PostLayout from "../layouts/PostLayout.astro";
-import { Image } from "astro:assets";
-import wallperImage from "../assets/images/wallper.jpg";
+import StrapiImage from "../components/ui/StrapiImage.astro";
 import TechIcon from "../components/icons/TechIcon.astro";
 import RunningIcon from "../components/icons/RunningIcon.astro";
 import ExternalLink from "../components/icons/ExternalLink.astro";
@@ -31,38 +31,51 @@ if (!blogEs || !blogEn) {
   throw new Error("Failed to fetch blog-page from Strapi");
 }
 
+const blogPostsEs = await fetchCollection<BlogPostAttributes>(
+  "blog-posts",
+  "es",
+  { populate: { category: true, featuredImage: true } },
+);
+const blogPostsEn = await fetchCollection<BlogPostAttributes>(
+  "blog-posts",
+  "en",
+  { populate: { category: true, featuredImage: true } },
+);
+
 const lang = "es";
-const posts = blogEs.posts ?? [];
+const posts = (blogPostsEs ?? []).map((p) => ({
+  id: p.documentId,
+  title: p.title,
+  link: `/blog/${p.slug}`,
+  icon: p.icon,
+  category: p.category?.name || "",
+  date: p.date,
+  read_time: p.readTime,
+  resume: p.resume,
+  featuredImage: p.featuredImage,
+}));
 
 const embeddedData = {
   es: {
     title: blogEs.title,
     intro: blogEs.intro,
     view_more: blogEs.view_more,
-    posts: (blogEs.posts ?? []).map((p) => ({
-      id: p.id,
-      title: p.title,
-      link: p.link,
-      icon: p.icon,
-      category: p.category,
-      date: p.date,
-      read_time: p.read_time,
-      resume: p.resume,
-    })),
+    posts: posts,
   },
   en: {
     title: blogEn.title,
     intro: blogEn.intro,
     view_more: blogEn.view_more,
-    posts: (blogEn.posts ?? []).map((p) => ({
-      id: p.id,
+    posts: (blogPostsEn ?? []).map((p) => ({
+      id: p.documentId,
       title: p.title,
-      link: p.link,
+      link: `/blog/${p.slug}`,
       icon: p.icon,
-      category: p.category,
+      category: p.category?.name || "",
       date: p.date,
-      read_time: p.read_time,
+      read_time: p.readTime,
       resume: p.resume,
+      featuredImage: p.featuredImage,
     })),
   },
 };
@@ -101,12 +114,16 @@ const blogDataJson = JSON.stringify(embeddedData);
             aria-label={post.title}
           >
             <div class="blog-card__image">
-              <Image
-                src={wallperImage}
-                alt={post.title}
-                class="blog-card__image-img"
-                loading="lazy"
-              />
+              {post.featuredImage ? (
+                <StrapiImage
+                  image={post.featuredImage}
+                  alt={post.title}
+                  class="blog-card__image-img"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="blog-card__image-placeholder" />
+              )}
               <div class="blog-card__overlay">
                 <p class="blog-card__overlay-text">{post.resume || ""}</p>
               </div>
@@ -277,14 +294,21 @@ const blogDataJson = JSON.stringify(embeddedData);
     position: relative;
   }
 
-  .blog-card__image-img {
+  .blog-card__image-img,
+  .blog-card__image-placeholder {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: opacity 300ms ease;
   }
 
-  .blog-card:hover .blog-card__image-img {
+  .blog-card__image-placeholder {
+    background: var(--color-word);
+    opacity: 0.15;
+  }
+
+  .blog-card:hover .blog-card__image-img,
+  .blog-card:hover .blog-card__image-placeholder {
     opacity: 0.2;
   }
 

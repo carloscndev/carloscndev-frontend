@@ -1,9 +1,9 @@
 ---
-import type { StrapiMediaAttributes } from "../types/strapi-media";
+import type { StrapiMedia } from "../../types/strapi";
 import { getStrapiMediaUrl } from "../../services/strapi";
 
 export interface Props {
-  image: StrapiMediaAttributes;
+  image: StrapiMedia;
   alt?: string;
   class?: string;
   sizes?: string;

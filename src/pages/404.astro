@@ -4,9 +4,8 @@ import type { GlobalConfigAttributes } from "../types/global-config";
 import type { ErrorPageAttributes } from "../types/error-page";
 import PostLayout from "../layouts/PostLayout.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
+import StrapiImage from "../components/ui/StrapiImage.astro";
 import ArrowNext from "../components/icons/ArrowNext.astro";
-import { Image } from "astro:assets";
-import sleepingImage from "../assets/images/slepping.webp";
 
 const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
   "global-config",
@@ -64,15 +63,18 @@ const errorDataJson = JSON.stringify(embeddedData);
 
   <div class="not-found">
     <div class="not-found__illustration">
-      <Image
-        src={sleepingImage}
-        alt="Sleeping character illustration"
-        class="not-found__image"
-        loading="lazy"
-        widths={[300, 400, 800, sleepingImage.width]}
-        sizes="(max-width: 767px) 280px, 340px"
-        format="webp"
-      />
+      {
+        errorEs.image ? (
+          <StrapiImage
+            image={errorEs.image}
+            alt="Sleeping character illustration"
+            class="not-found__image"
+            loading="lazy"
+          />
+        ) : (
+          <div class="not-found__image-placeholder" />
+        )
+      }
     </div>
 
     <div class="not-found__content">
@@ -113,10 +115,19 @@ const errorDataJson = JSON.stringify(embeddedData);
     width: 100%;
   }
 
-  .not-found__image {
+  .not-found__image,
+  :global(.not-found__image img) {
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  .not-found__image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--color-word);
+    opacity: 0.15;
+    border-radius: var(--border-radius);
   }
 
   .not-found__title {

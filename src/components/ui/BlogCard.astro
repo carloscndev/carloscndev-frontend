@@ -1,5 +1,5 @@
 ---
-import type { StrapiMediaAttributes } from "../../types/strapi-media";
+import type { StrapiMedia } from "../../types/strapi";
 import StrapiImage from "./StrapiImage.astro";
 import TechIcon from "../icons/TechIcon.astro";
 import RunningIcon from "../icons/RunningIcon.astro";
@@ -15,7 +15,7 @@ export interface Props {
   date: string;
   readTime: string;
   resume: string;
-  featuredImage?: StrapiMediaAttributes;
+  featuredImage?: StrapiMedia;
 }
 
 const {

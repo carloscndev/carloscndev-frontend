@@ -26,8 +26,12 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
-const homeEs = await fetchSingleType<HomePageAttributes>("home-page", "es");
-const homeEn = await fetchSingleType<HomePageAttributes>("home-page", "en");
+const homeEs = await fetchSingleType<HomePageAttributes>("home-page", "es", {
+  populate: "*",
+});
+const homeEn = await fetchSingleType<HomePageAttributes>("home-page", "en", {
+  populate: "*",
+});
 
 if (!homeEs || !homeEn) {
   throw new Error("Failed to fetch home-page from Strapi");
@@ -55,12 +59,20 @@ const homeData = {
     title: homeEs.title,
     subtitle: homeEs.subtitle,
     content: homeEs.content,
+    avatarDefault: homeEs.avatarDefault,
+    avatarRunning: homeEs.avatarRunning,
+    avatarReading: homeEs.avatarReading,
+    avatarVideogames: homeEs.avatarVideogames,
   },
   en: {
     intro: homeEn.intro,
     title: homeEn.title,
     subtitle: homeEn.subtitle,
     content: homeEn.content,
+    avatarDefault: homeEn.avatarDefault,
+    avatarRunning: homeEn.avatarRunning,
+    avatarReading: homeEn.avatarReading,
+    avatarVideogames: homeEn.avatarVideogames,
   },
 };
 
@@ -87,6 +99,7 @@ const aboutData = {
       name: t.name,
       icon: t.icon,
     })),
+    image: aboutEs.image,
   },
   en: {
     title: aboutEn.title,
@@ -95,6 +108,7 @@ const aboutData = {
       name: t.name,
       icon: t.icon,
     })),
+    image: aboutEn.image,
   },
 };
 

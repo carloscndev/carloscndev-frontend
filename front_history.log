@@ -173,8 +173,30 @@
   - Verified: blog detail page renders <picture> with source elements for large/medium/small
   - Card placeholder renders when featuredImage is null (Strapi admin can populate later)
 
+## MIG-024: Apply StrapiImage to All Sections
+- Removed redundant src/types/strapi-media.ts (StrapiMedia already in src/types/strapi.ts)
+- Updated all types to use StrapiMedia from strapi.ts
+- Updated src/pages/index.astro to populate images from Strapi
+  - home-page: added populate "*" for avatarDefault, avatarRunning, avatarReading, avatarVideogames
+  - about-page: added image field to aboutData mapping
+- Updated src/components/sections/Home.astro
+  - Replaced local avatar imports with StrapiImage using StrapiMedia from props
+  - Avatar map now uses StrapiMedia objects instead of local imports
+  - Embedded data uses image URLs for client-side language switching
+- Updated src/components/sections/About.astro
+  - Replaced local working.webp import with StrapiImage using StrapiMedia from props
+  - Added placeholder fallback when image is missing
+- Updated src/pages/404.astro
+  - Replaced local sleeping.webp import with StrapiImage using error-page image from Strapi
+  - Added placeholder fallback when image is missing
+- Updated src/pages/posts.astro
+  - Replaced local wallper.jpg import with StrapiImage using featuredImage from blog-posts collection
+  - Now fetches blog-posts collection via fetchCollection (same as index.astro)
+- Fixed src/__tests__/components/pages.test.ts for 404.astro (slepping → StrapiImage)
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors
 - 6 pages generated (including /blog/test-post for es + en) + 12 optimized WebP images
+- All images now served from Strapi with native responsive formats (thumbnail, small, medium, large)
 - 100% SSG confirmed (build fails when Strapi is down)

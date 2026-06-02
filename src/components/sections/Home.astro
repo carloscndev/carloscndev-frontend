@@ -1,15 +1,16 @@
 ---
-import { Image } from "astro:assets";
-import helloImg from "../../assets/images/hello.webp";
-import runningImg from "../../assets/images/running.webp";
-import readingImg from "../../assets/images/reading.webp";
-import playingImg from "../../assets/images/playing.webp";
+import type { StrapiMedia } from "../../types/strapi";
+import StrapiImage from "../ui/StrapiImage.astro";
 
 interface HomeData {
   intro: string;
   title: string;
   subtitle: string;
   content: string;
+  avatarDefault: StrapiMedia;
+  avatarRunning: StrapiMedia;
+  avatarReading: StrapiMedia;
+  avatarVideogames: StrapiMedia;
 }
 
 interface Props {
@@ -20,18 +21,28 @@ interface Props {
 const { es, en } = Astro.props;
 const homeData = es;
 
-const avatarMap: Record<string, string> = {
-  default: helloImg.src,
-  running: runningImg.src,
-  reading: readingImg.src,
-  videogames: playingImg.src,
+const avatarMap: Record<string, StrapiMedia> = {
+  default: homeData.avatarDefault,
+  running: homeData.avatarRunning,
+  reading: homeData.avatarReading,
+  videogames: homeData.avatarVideogames,
 };
 
 const subtitleHTML = homeData.subtitle.replace(/dev$/, "<strong>dev</strong>");
 
 const embeddedData = {
-  es: { ...es, avatarPaths: avatarMap },
-  en: { ...en, avatarPaths: avatarMap },
+  es: {
+    ...es,
+    avatarPaths: Object.fromEntries(
+      Object.entries(avatarMap).map(([k, v]) => [k, v.url]),
+    ),
+  },
+  en: {
+    ...en,
+    avatarPaths: Object.fromEntries(
+      Object.entries(avatarMap).map(([k, v]) => [k, v.url]),
+    ),
+  },
 };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
@@ -46,16 +57,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
   <div class="home-section__grid">
     <div class="home-section__avatar">
-      <Image
-        class="home-section__avatar-img"
-        id="home-avatar"
-        src={helloImg}
+      <StrapiImage
+        image={avatarMap.default}
         alt={`${homeData.intro} ${homeData.title}`}
+        class="home-section__avatar-img"
         loading="eager"
-        fetchpriority="high"
-        widths={[200, 400, 800, helloImg.width]}
-        sizes="(max-width: 767px) 200px, 350px"
-        format="webp"
       />
     </div>
 
@@ -106,7 +112,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     justify-content: center;
   }
 
-  .home-section__avatar-img {
+  .home-section__avatar-img,
+  :global(.home-section__avatar-img img) {
     width: 200px;
     height: auto;
     transition:
@@ -114,7 +121,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       transform 300ms ease;
   }
 
-  .home-section__avatar-img--swapping {
+  .home-section__avatar-img--swapping,
+  :global(.home-section__avatar-img--swapping img) {
     opacity: 0;
     transform: scale(0.95);
   }
@@ -171,7 +179,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
   }
 
   @media (max-height: 667px) {
-    .home-section__avatar-img {
+    .home-section__avatar-img,
+    :global(.home-section__avatar-img img) {
       width: 140px;
     }
   }
@@ -191,7 +200,8 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       order: 0;
     }
 
-    .home-section__avatar-img {
+    .home-section__avatar-img,
+    :global(.home-section__avatar-img img) {
       width: 350px;
     }
 

@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import workingImg from "../../assets/images/working.webp";
+import type { StrapiMedia } from "../../types/strapi";
+import StrapiImage from "../ui/StrapiImage.astro";
 import Diamond from "../icons/Diamond.astro";
 
 interface TechItem {
@@ -12,6 +12,7 @@ interface AboutData {
   title: string;
   contentText: string;
   technologies: TechItem[];
+  image: StrapiMedia;
 }
 
 interface Props {
@@ -22,7 +23,7 @@ interface Props {
 const { es, en } = Astro.props;
 const aboutData = es;
 
-const avatarPath = workingImg.src;
+const avatarPath = aboutData.image?.url || "";
 
 const embeddedData = {
   es: { ...es, avatarPath },
@@ -75,16 +76,18 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     </div>
 
     <div class="about-section__avatar">
-      <Image
-        class="about-section__avatar-img"
-        id="about-avatar"
-        src={workingImg}
-        alt={aboutData.title}
-        loading="lazy"
-        widths={[200, 400, 800, workingImg.width]}
-        sizes="(max-width: 767px) 180px, 350px"
-        format="webp"
-      />
+      {
+        aboutData.image ? (
+          <StrapiImage
+            image={aboutData.image}
+            alt={aboutData.title}
+            class="about-section__avatar-img"
+            loading="lazy"
+          />
+        ) : (
+          <div class="about-section__avatar-placeholder" />
+        )
+      }
     </div>
   </div>
 </section>
@@ -119,10 +122,17 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     order: -1;
   }
 
-  .about-section__avatar-img {
+  .about-section__avatar-img,
+  .about-section__avatar-placeholder {
     width: 180px;
     height: auto;
     border-radius: var(--border-radius);
+  }
+
+  .about-section__avatar-placeholder {
+    background: var(--color-word);
+    opacity: 0.15;
+    aspect-ratio: 1 / 1;
   }
 
   .about-section__content {
