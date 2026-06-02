@@ -129,8 +129,35 @@
 - Deleted src/__tests__/data/validation.test.ts (tested deleted JSON data files)
 - src/__tests__/data/ now only contains .gitkeep
 
+## REFACTOR-001: Extract Blog Card & Accordion Components
+- Created src/components/ui/BlogCard.astro with all card markup and styles
+  - Props: id, title, link, icon, category, date, readTime, resume
+  - Includes image overlay, category theme support, hover effects
+- Created src/components/ui/BlogAccordionItem.astro with accordion item markup
+  - Props: id, title, link, icon, resume
+  - Includes trigger button, chevron rotation, expand panel
+- Refactored src/components/sections/Blog.astro from 656 to ~170 lines
+  - Now imports BlogCard and BlogAccordionItem components
+  - Only retains section-level layout styles
+- Added src/__tests__/components/ui.test.ts with 10 component assertions
+  - Tests BlogCard props, markup, metadata, themes, LinkWrapper usage
+  - Tests BlogAccordionItem props, accordion structure, link, themes
+- 29 test files, 155 tests passing, 0 lint errors
+- 6 pages generated + 13 optimized WebP images
+
+## Fix: Blog Section Empty Cards
+- Root cause: `blog-page` single type in Strapi no longer has a `posts` relation
+  - Posts were migrated to the separate `blog-posts` collection type
+  - `index.astro` was still trying to read `posts` from `blog-page` → empty array
+- Fix: Updated `src/pages/index.astro` to fetch `blog-posts` collection via `fetchCollection`
+  - Maps collection fields to component props: `documentId→id`, `slug→link`, `category.name→category`, `readTime→read_time`
+  - Both `es` and `en` locales fetched and mapped
+- Verified: Blog card now renders in dist HTML with real Strapi data
+  - Title: "Post de Prueba", date, read time, category, resume all present
+  - Accordion item also renders correctly
+
 ## Final Status
 - All pages build successfully with Strapi running
-- 28 test files, 145 tests passing, 0 lint errors
+- 29 test files, 155 tests passing, 0 lint errors
 - 6 pages generated (including /blog/test-post for es + en) + 13 optimized WebP images
 - 100% SSG confirmed (build fails when Strapi is down)

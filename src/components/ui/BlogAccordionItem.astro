@@ -1,0 +1,249 @@
+---
+import TechIcon from "../icons/TechIcon.astro";
+import RunningIcon from "../icons/RunningIcon.astro";
+import ExternalLink from "../icons/ExternalLink.astro";
+import LinkWrapper from "./LinkWrapper.astro";
+
+export interface Props {
+  id: string;
+  title: string;
+  link: string;
+  icon: string;
+  resume: string;
+}
+
+const { id, title, link, icon, resume } = Astro.props;
+const categoryTheme = icon === "tech-icon" ? "tech" : "running";
+---
+
+<div
+  class="blog-accordion__item"
+  data-accordion-item
+  data-post-id={id}
+  data-category-theme={categoryTheme}
+>
+  <button
+    class="blog-accordion__trigger"
+    data-accordion-trigger
+    aria-expanded="false"
+    type="button"
+  >
+    {
+      icon === "tech-icon" ? (
+        <TechIcon size="20" class="blog-accordion__trigger-icon" />
+      ) : (
+        <RunningIcon size="20" class="blog-accordion__trigger-icon" />
+      )
+    }
+    <h3 class="blog-accordion__trigger-title" data-post-title>
+      {title}
+    </h3>
+    <LinkWrapper
+      href={link}
+      isExternal={false}
+      class="blog-accordion__trigger-link"
+      rel="noopener"
+      aria-label="Open article"
+    >
+      <ExternalLink size="16" />
+    </LinkWrapper>
+    <svg
+      class="blog-accordion__trigger-chevron"
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="blog-accordion__panel" data-accordion-panel>
+    <p class="blog-accordion__panel-text" data-post-resume>
+      {resume || ""}
+    </p>
+  </div>
+</div>
+
+<style>
+  .blog-accordion__item {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+
+  .blog-accordion__item[data-category-theme="tech"] {
+    background: var(--color-tech-primary-light);
+  }
+
+  .blog-accordion__item[data-category-theme="running"] {
+    background: var(--color-running-primary-light);
+  }
+
+  :global(.dark) .blog-accordion__item[data-category-theme="tech"] {
+    background: var(--color-tech-primary-dark);
+  }
+
+  :global(.dark) .blog-accordion__item[data-category-theme="running"] {
+    background: var(--color-running-primary-dark);
+  }
+
+  .blog-accordion__trigger {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    width: 100%;
+    padding: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--text-base);
+    font-family: var(--font-titles);
+    font-size: var(--font-size-h3-mobile);
+    font-weight: var(--weight-space-medium);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .blog-accordion__trigger-title {
+    flex: 1;
+    color: inherit;
+  }
+
+  .blog-accordion__item[data-category-theme="tech"]
+    .blog-accordion__trigger-title {
+    color: var(--color-tech-secondary-light);
+  }
+
+  .blog-accordion__item[data-category-theme="running"]
+    .blog-accordion__trigger-title {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="tech"]
+    .blog-accordion__trigger-title {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="running"]
+    .blog-accordion__trigger-title {
+    color: var(--color-running-secondary-dark);
+  }
+
+  :global(.blog-accordion__trigger-icon) {
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+
+  .blog-accordion__item[data-category-theme="tech"]
+    :global(.blog-accordion__trigger-icon) {
+    color: var(--color-tech-secondary-light);
+  }
+
+  .blog-accordion__item[data-category-theme="running"]
+    :global(.blog-accordion__trigger-icon) {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="tech"]
+    :global(.blog-accordion__trigger-icon) {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="running"]
+    :global(.blog-accordion__trigger-icon) {
+    color: var(--color-running-secondary-dark);
+  }
+
+  .blog-accordion__trigger-link {
+    display: inline-flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+
+  .blog-accordion__item[data-category-theme="tech"]
+    .blog-accordion__trigger-link {
+    color: var(--color-tech-secondary-light);
+  }
+
+  .blog-accordion__item[data-category-theme="running"]
+    .blog-accordion__trigger-link {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="tech"]
+    .blog-accordion__trigger-link {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="running"]
+    .blog-accordion__trigger-link {
+    color: var(--color-running-secondary-dark);
+  }
+
+  .blog-accordion__trigger-link:hover {
+    color: var(--color-accent);
+  }
+
+  .blog-accordion__trigger-chevron {
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    transition: transform 300ms ease;
+  }
+
+  .blog-accordion__item[data-category-theme="tech"]
+    .blog-accordion__trigger-chevron {
+    color: var(--color-tech-secondary-light);
+  }
+
+  .blog-accordion__item[data-category-theme="running"]
+    .blog-accordion__trigger-chevron {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="tech"]
+    .blog-accordion__trigger-chevron {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(.dark)
+    .blog-accordion__item[data-category-theme="running"]
+    .blog-accordion__trigger-chevron {
+    color: var(--color-running-secondary-dark);
+  }
+
+  .blog-accordion__trigger[aria-expanded="true"]
+    .blog-accordion__trigger-chevron {
+    transform: rotate(180deg);
+  }
+
+  .blog-accordion__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 350ms ease,
+      padding 350ms ease;
+    padding: 0 var(--spacing-md);
+  }
+
+  .blog-accordion__panel--open {
+    max-height: 300px;
+    padding: 1rem var(--spacing-md) var(--spacing-md);
+  }
+
+  .blog-accordion__panel-text {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    line-height: 1.6;
+  }
+</style>

@@ -1,11 +1,12 @@
 ---
-import { fetchSingleType } from "../services/strapi";
+import { fetchSingleType, fetchCollection } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
 import type { HomePageAttributes } from "../types/home-page";
 import type { AboutPageAttributes } from "../types/about-page";
 import type { ExperiencePageAttributes } from "../types/experience-page";
 import type { PortfolioPageAttributes } from "../types/portfolio-page";
 import type { BlogPageAttributes } from "../types/blog-page";
+import type { BlogPostAttributes } from "../types/blog-post";
 import type { ContactPageAttributes } from "../types/contact-page";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
@@ -187,19 +188,30 @@ if (!blogEs || !blogEn) {
   throw new Error("Failed to fetch blog-page from Strapi");
 }
 
+const blogPostsEs = await fetchCollection<BlogPostAttributes>(
+  "blog-posts",
+  "es",
+  { populate: ["category"] },
+);
+const blogPostsEn = await fetchCollection<BlogPostAttributes>(
+  "blog-posts",
+  "en",
+  { populate: ["category"] },
+);
+
 const blogData = {
   es: {
     title: blogEs.title,
     intro: blogEs.intro,
     view_more: blogEs.view_more,
-    posts: (blogEs.posts ?? []).map((p) => ({
-      id: p.id,
+    posts: (blogPostsEs ?? []).map((p) => ({
+      id: p.documentId,
       title: p.title,
-      link: p.link,
+      link: `/blog/${p.slug}`,
       icon: p.icon,
-      category: p.category,
+      category: p.category?.name || "",
       date: p.date,
-      read_time: p.read_time,
+      read_time: p.readTime,
       resume: p.resume,
     })),
   },
@@ -207,14 +219,14 @@ const blogData = {
     title: blogEn.title,
     intro: blogEn.intro,
     view_more: blogEn.view_more,
-    posts: (blogEn.posts ?? []).map((p) => ({
-      id: p.id,
+    posts: (blogPostsEn ?? []).map((p) => ({
+      id: p.documentId,
       title: p.title,
-      link: p.link,
+      link: `/blog/${p.slug}`,
       icon: p.icon,
-      category: p.category,
+      category: p.category?.name || "",
       date: p.date,
-      read_time: p.read_time,
+      read_time: p.readTime,
       resume: p.resume,
     })),
   },
