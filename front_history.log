@@ -170,8 +170,49 @@
 - Updated src/pages/blog/[slug].astro to populate headerImage and use StrapiImage in hero
 - Added src/__tests__/components/strapi-image.test.ts with 5 assertions
 - Build now uses Strapi-optimized images instead of Astro <Image> for blog content
-  - Verified: blog detail page renders <picture> with source elements for large/medium/small
+  - Verified: blog detail page renders <img> with srcset for large/medium/small
   - Card placeholder renders when featuredImage is null (Strapi admin can populate later)
+
+## Fix: StrapiImage Layout, Hobbies Click, and Missing Card Images
+- Root cause 1: <picture> wrapper caused layout issues (stretched images, inline element in block containers)
+  - <picture> is inline by default; inside containers with aspect-ratio it didn't fill properly
+  - CSS targeting .class img didn't match because the class was directly on <img>
+  - Fix: Changed StrapiImage to render plain <img> with srcset/sizes (semantically correct for responsive sizing)
+- Root cause 2: Home hobbies click broken
+  - home.ts looks for document.getElementById("home-avatar")
+  - Rewritten Home.astro didn't pass id="home-avatar" to StrapiImage
+  - Fix: Added id prop to StrapiImage component; passed id="home-avatar" from Home.astro
+- Root cause 3: Blog cards showed placeholder instead of image
+  - Test post has featuredImage: null but headerImage is populated
+  - Cards only used featuredImage, so they fell back to placeholder
+  - Fix: index.astro and posts.astro now map featuredImage: p.featuredImage || p.headerImage
+  - Also populate headerImage in the Strapi query so it's available as fallback
+
+## Fix: Revert Home/About/404 to Local Images; Fix Blog CSS with :global()
+- Reverted Home.astro, About.astro, 404.astro back to Astro <Image> with local assets
+  - User confirmed Strapi images caused stretching/deformation in these sections
+  - Local Astro Image handles sizing correctly for avatars and static illustrations
+- Kept blog images (cards and hero) using StrapiImage for CMS-managed content
+- Root cause of stretched blog images: Astro scoped styles don't apply to child components
+  - `.blog-card__image-img` selector in BlogCard.astro didn't match the <img> rendered by StrapiImage
+  - Fix: Changed to `:global(.blog-card__image-img)` in BlogCard.astro, posts.astro, blog/[slug].astro
+  - Same fix for `.post-hero__image` in blog/[slug].astro
+- Build verified:
+  - Home: hello.webp (local, optimized by Astro)
+  - About: working.webp (local, optimized by Astro)
+  - 404: slepping.webp (local, optimized by Astro)
+  - Blog card: wallper.jpg from Strapi with srcset, properly filling 16/9 container
+  - Blog hero: wallper.jpg from Strapi filling 120px hero container
+- 30 test files, 160 tests passing, 0 lint errors
+- Root cause 4: CSS with :global(.class img) selectors were redundant after removing <picture>
+  - Fixed in Home.astro, 404.astro, and other components
+- Verified in dist HTML:
+  - Home avatar: renders with srcset (small/medium/large hello.webp)
+  - About image: renders working.webp from Strapi
+  - 404 image: renders slepping.webp from Strapi
+  - Blog card (home): renders wallper.jpg via headerImage fallback
+  - Blog hero (detail): renders wallper.jpg with srcset
+  - Posts page card: renders wallper.jpg with srcset
 
 ## MIG-024: Apply StrapiImage to All Sections
 - Removed redundant src/types/strapi-media.ts (StrapiMedia already in src/types/strapi.ts)

@@ -34,12 +34,12 @@ if (!blogEs || !blogEn) {
 const blogPostsEs = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "es",
-  { populate: { category: true, featuredImage: true } },
+  { populate: { category: true, featuredImage: true, headerImage: true } },
 );
 const blogPostsEn = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "en",
-  { populate: { category: true, featuredImage: true } },
+  { populate: { category: true, featuredImage: true, headerImage: true } },
 );
 
 const lang = "es";
@@ -52,7 +52,7 @@ const posts = (blogPostsEs ?? []).map((p) => ({
   date: p.date,
   read_time: p.readTime,
   resume: p.resume,
-  featuredImage: p.featuredImage,
+  featuredImage: p.featuredImage || p.headerImage || undefined,
 }));
 
 const embeddedData = {
@@ -75,7 +75,7 @@ const embeddedData = {
       date: p.date,
       read_time: p.readTime,
       resume: p.resume,
-      featuredImage: p.featuredImage,
+      featuredImage: p.featuredImage || p.headerImage || undefined,
     })),
   },
 };
@@ -294,7 +294,7 @@ const blogDataJson = JSON.stringify(embeddedData);
     position: relative;
   }
 
-  .blog-card__image-img,
+  :global(.blog-card__image-img),
   .blog-card__image-placeholder {
     width: 100%;
     height: 100%;
@@ -307,7 +307,7 @@ const blogDataJson = JSON.stringify(embeddedData);
     opacity: 0.15;
   }
 
-  .blog-card:hover .blog-card__image-img,
+  .blog-card:hover :global(.blog-card__image-img),
   .blog-card:hover .blog-card__image-placeholder {
     opacity: 0.2;
   }

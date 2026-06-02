@@ -59,20 +59,12 @@ const homeData = {
     title: homeEs.title,
     subtitle: homeEs.subtitle,
     content: homeEs.content,
-    avatarDefault: homeEs.avatarDefault,
-    avatarRunning: homeEs.avatarRunning,
-    avatarReading: homeEs.avatarReading,
-    avatarVideogames: homeEs.avatarVideogames,
   },
   en: {
     intro: homeEn.intro,
     title: homeEn.title,
     subtitle: homeEn.subtitle,
     content: homeEn.content,
-    avatarDefault: homeEn.avatarDefault,
-    avatarRunning: homeEn.avatarRunning,
-    avatarReading: homeEn.avatarReading,
-    avatarVideogames: homeEn.avatarVideogames,
   },
 };
 
@@ -99,7 +91,6 @@ const aboutData = {
       name: t.name,
       icon: t.icon,
     })),
-    image: aboutEs.image,
   },
   en: {
     title: aboutEn.title,
@@ -108,7 +99,6 @@ const aboutData = {
       name: t.name,
       icon: t.icon,
     })),
-    image: aboutEn.image,
   },
 };
 
@@ -205,12 +195,12 @@ if (!blogEs || !blogEn) {
 const blogPostsEs = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "es",
-  { populate: { category: true, featuredImage: true } },
+  { populate: { category: true, featuredImage: true, headerImage: true } },
 );
 const blogPostsEn = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "en",
-  { populate: { category: true, featuredImage: true } },
+  { populate: { category: true, featuredImage: true, headerImage: true } },
 );
 
 const blogData = {
@@ -227,7 +217,7 @@ const blogData = {
       date: p.date,
       read_time: p.readTime,
       resume: p.resume,
-      featuredImage: p.featuredImage,
+      featuredImage: p.featuredImage || p.headerImage || undefined,
     })),
   },
   en: {
@@ -243,7 +233,7 @@ const blogData = {
       date: p.date,
       read_time: p.readTime,
       resume: p.resume,
-      featuredImage: p.featuredImage,
+      featuredImage: p.featuredImage || p.headerImage || undefined,
     })),
   },
 };

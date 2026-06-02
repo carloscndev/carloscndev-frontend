@@ -32,8 +32,9 @@ describe("pages", () => {
       expect(content).toContain("PostLayout");
     });
 
-    it("should use StrapiImage and have error text", () => {
-      expect(content).toContain("StrapiImage");
+    it("should use Astro Image and have error text", () => {
+      expect(content).toContain("Image");
+      expect(content).toContain("slepping");
       expect(content).toContain("not-found");
     });
   });

@@ -6,6 +6,7 @@ export interface Props {
   image: StrapiMedia;
   alt?: string;
   class?: string;
+  id?: string;
   sizes?: string;
   loading?: "lazy" | "eager";
   decoding?: "async" | "sync" | "auto";
@@ -15,6 +16,7 @@ const {
   image,
   alt = "",
   class: className,
+  id,
   sizes = "(max-width: 600px) 480px, (max-width: 1000px) 750px, 1000px",
   loading = "lazy",
   decoding = "async",
@@ -39,40 +41,15 @@ const defaultSrc = formats.medium
   : getStrapiMediaUrl(image.url);
 ---
 
-<picture>
-  {
-    formats.large && (
-      <source
-        media="(min-width: 1000px)"
-        srcset={getStrapiMediaUrl(formats.large.url)}
-      />
-    )
-  }
-  {
-    formats.medium && (
-      <source
-        media="(min-width: 600px)"
-        srcset={getStrapiMediaUrl(formats.medium.url)}
-      />
-    )
-  }
-  {
-    formats.small && (
-      <source
-        media="(max-width: 599px)"
-        srcset={getStrapiMediaUrl(formats.small.url)}
-      />
-    )
-  }
-  <img
-    src={defaultSrc}
-    srcset={srcSet || undefined}
-    sizes={srcSet ? sizes : undefined}
-    alt={alt}
-    class={className}
-    loading={loading}
-    decoding={decoding}
-    width={image.width}
-    height={image.height}
-  />
-</picture>
+<img
+  src={defaultSrc}
+  srcset={srcSet || undefined}
+  sizes={srcSet ? sizes : undefined}
+  alt={alt}
+  class={className}
+  id={id}
+  loading={loading}
+  decoding={decoding}
+  width={image.width}
+  height={image.height}
+/>

@@ -16,10 +16,9 @@ describe("ui components", () => {
       expect(content).toContain("alt");
     });
 
-    it("should use <picture> with <source> elements", () => {
-      expect(content).toContain("<picture>");
-      expect(content).toContain("<source");
+    it("should render an <img> with srcset", () => {
       expect(content).toContain("<img");
+      expect(content).toContain("srcset");
     });
 
     it("should generate srcset from Strapi formats", () => {
