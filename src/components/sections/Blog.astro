@@ -3,6 +3,7 @@ import BlogCard from "../ui/BlogCard.astro";
 import BlogAccordionItem from "../ui/BlogAccordionItem.astro";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 import ArrowNext from "../icons/ArrowNext.astro";
+import type { StrapiMediaAttributes } from "../../types/strapi-media";
 
 interface BlogPost {
   id: string;
@@ -13,6 +14,7 @@ interface BlogPost {
   date: string;
   read_time: string;
   resume: string;
+  featuredImage?: StrapiMediaAttributes;
 }
 
 interface BlogData {
@@ -63,6 +65,7 @@ const blogDataJson = JSON.stringify(embeddedData);
             date={post.date}
             readTime={post.read_time}
             resume={post.resume}
+            featuredImage={post.featuredImage}
           />
         ))
     }

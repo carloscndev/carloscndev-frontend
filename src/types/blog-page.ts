@@ -1,3 +1,5 @@
+import type { StrapiMediaAttributes } from "./strapi-media";
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -7,6 +9,7 @@ export interface BlogPost {
   date: string;
   read_time: string;
   resume: string;
+  featuredImage?: StrapiMediaAttributes;
 }
 
 export interface BlogPageAttributes {

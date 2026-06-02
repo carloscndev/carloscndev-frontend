@@ -156,8 +156,25 @@
   - Title: "Post de Prueba", date, read time, category, resume all present
   - Accordion item also renders correctly
 
+## MIG-023: Add StrapiImage Component with Native Responsive Formats
+- Created src/components/ui/StrapiImage.astro
+  - Uses native <picture> + <source> + <img> with srcset/sizes
+  - Reads Strapi's pre-generated formats: thumbnail, small, medium, large
+  - Uses getStrapiMediaUrl() for absolute URLs (respects STRAPI_URL env)
+  - Props: image, alt, class, sizes, loading, decoding
+- Created src/types/strapi-media.ts with StrapiImageFormat and StrapiMediaAttributes
+- Updated src/types/blog-post.ts to include optional headerImage and featuredImage
+- Updated src/types/blog-page.ts BlogPost to include optional featuredImage
+- Updated src/pages/index.astro to populate featuredImage from blog-posts collection
+- Updated src/components/ui/BlogCard.astro to use StrapiImage (fallback placeholder if no image)
+- Updated src/pages/blog/[slug].astro to populate headerImage and use StrapiImage in hero
+- Added src/__tests__/components/strapi-image.test.ts with 5 assertions
+- Build now uses Strapi-optimized images instead of Astro <Image> for blog content
+  - Verified: blog detail page renders <picture> with source elements for large/medium/small
+  - Card placeholder renders when featuredImage is null (Strapi admin can populate later)
+
 ## Final Status
 - All pages build successfully with Strapi running
-- 29 test files, 155 tests passing, 0 lint errors
-- 6 pages generated (including /blog/test-post for es + en) + 13 optimized WebP images
+- 30 test files, 160 tests passing, 0 lint errors
+- 6 pages generated (including /blog/test-post for es + en) + 12 optimized WebP images
 - 100% SSG confirmed (build fails when Strapi is down)

@@ -1,6 +1,6 @@
 ---
-import { Image } from "astro:assets";
-import wallperImage from "../../assets/images/wallper.jpg";
+import type { StrapiMediaAttributes } from "../../types/strapi-media";
+import StrapiImage from "./StrapiImage.astro";
 import TechIcon from "../icons/TechIcon.astro";
 import RunningIcon from "../icons/RunningIcon.astro";
 import ExternalLink from "../icons/ExternalLink.astro";
@@ -15,9 +15,20 @@ export interface Props {
   date: string;
   readTime: string;
   resume: string;
+  featuredImage?: StrapiMediaAttributes;
 }
 
-const { id, title, link, icon, category, date, readTime, resume } = Astro.props;
+const {
+  id,
+  title,
+  link,
+  icon,
+  category,
+  date,
+  readTime,
+  resume,
+  featuredImage,
+} = Astro.props;
 const categoryTheme = icon === "tech-icon" ? "tech" : "running";
 ---
 
@@ -30,12 +41,18 @@ const categoryTheme = icon === "tech-icon" ? "tech" : "running";
   aria-label={title}
 >
   <div class="blog-card__image">
-    <Image
-      src={wallperImage}
-      alt={title}
-      class="blog-card__image-img"
-      loading="lazy"
-    />
+    {
+      featuredImage ? (
+        <StrapiImage
+          image={featuredImage}
+          alt={title}
+          class="blog-card__image-img"
+          loading="lazy"
+        />
+      ) : (
+        <div class="blog-card__image-placeholder" />
+      )
+    }
     <div class="blog-card__overlay">
       <p class="blog-card__overlay-text">{resume || ""}</p>
     </div>
@@ -111,14 +128,21 @@ const categoryTheme = icon === "tech-icon" ? "tech" : "running";
     position: relative;
   }
 
-  .blog-card__image-img {
+  .blog-card__image-img,
+  .blog-card__image-placeholder {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: opacity 300ms ease;
   }
 
-  .blog-card:hover .blog-card__image-img {
+  .blog-card__image-placeholder {
+    background: var(--color-word);
+    opacity: 0.15;
+  }
+
+  .blog-card:hover .blog-card__image-img,
+  .blog-card:hover .blog-card__image-placeholder {
     opacity: 0.2;
   }
 

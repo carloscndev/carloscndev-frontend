@@ -1,0 +1,78 @@
+---
+import type { StrapiMediaAttributes } from "../types/strapi-media";
+import { getStrapiMediaUrl } from "../../services/strapi";
+
+export interface Props {
+  image: StrapiMediaAttributes;
+  alt?: string;
+  class?: string;
+  sizes?: string;
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "sync" | "auto";
+}
+
+const {
+  image,
+  alt = "",
+  class: className,
+  sizes = "(max-width: 600px) 480px, (max-width: 1000px) 750px, 1000px",
+  loading = "lazy",
+  decoding = "async",
+} = Astro.props;
+
+const formats = image.formats ?? {};
+
+const srcSetParts: string[] = [];
+if (formats.small) {
+  srcSetParts.push(`${getStrapiMediaUrl(formats.small.url)} 500w`);
+}
+if (formats.medium) {
+  srcSetParts.push(`${getStrapiMediaUrl(formats.medium.url)} 750w`);
+}
+if (formats.large) {
+  srcSetParts.push(`${getStrapiMediaUrl(formats.large.url)} 1000w`);
+}
+
+const srcSet = srcSetParts.join(", ");
+const defaultSrc = formats.medium
+  ? getStrapiMediaUrl(formats.medium.url)
+  : getStrapiMediaUrl(image.url);
+---
+
+<picture>
+  {
+    formats.large && (
+      <source
+        media="(min-width: 1000px)"
+        srcset={getStrapiMediaUrl(formats.large.url)}
+      />
+    )
+  }
+  {
+    formats.medium && (
+      <source
+        media="(min-width: 600px)"
+        srcset={getStrapiMediaUrl(formats.medium.url)}
+      />
+    )
+  }
+  {
+    formats.small && (
+      <source
+        media="(max-width: 599px)"
+        srcset={getStrapiMediaUrl(formats.small.url)}
+      />
+    )
+  }
+  <img
+    src={defaultSrc}
+    srcset={srcSet || undefined}
+    sizes={srcSet ? sizes : undefined}
+    alt={alt}
+    class={className}
+    loading={loading}
+    decoding={decoding}
+    width={image.width}
+    height={image.height}
+  />
+</picture>

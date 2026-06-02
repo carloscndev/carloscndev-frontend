@@ -1,3 +1,5 @@
+import type { StrapiMediaAttributes } from "./strapi-media";
+
 export interface BlogPostAttributes {
   documentId: string;
   title: string;
@@ -14,4 +16,6 @@ export interface BlogPostAttributes {
     slug: string;
     icon: string;
   };
+  headerImage?: StrapiMediaAttributes;
+  featuredImage?: StrapiMediaAttributes;
 }

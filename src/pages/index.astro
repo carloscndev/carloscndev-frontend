@@ -191,12 +191,12 @@ if (!blogEs || !blogEn) {
 const blogPostsEs = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "es",
-  { populate: ["category"] },
+  { populate: { category: true, featuredImage: true } },
 );
 const blogPostsEn = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "en",
-  { populate: ["category"] },
+  { populate: { category: true, featuredImage: true } },
 );
 
 const blogData = {
@@ -213,6 +213,7 @@ const blogData = {
       date: p.date,
       read_time: p.readTime,
       resume: p.resume,
+      featuredImage: p.featuredImage,
     })),
   },
   en: {
@@ -228,6 +229,7 @@ const blogData = {
       date: p.date,
       read_time: p.readTime,
       resume: p.resume,
+      featuredImage: p.featuredImage,
     })),
   },
 };
