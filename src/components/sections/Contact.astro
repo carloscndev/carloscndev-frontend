@@ -1,14 +1,23 @@
 ---
-import contactDataRaw from "../../data/contact.json";
 import LinkWrapper from "../ui/LinkWrapper.astro";
 
-const currentLang = "es";
-const data = contactDataRaw[currentLang];
+interface ContactData {
+  title: string;
+  status_message: string;
+  button_text: string;
+  mail_to: string;
+  footer: string;
+}
 
-const embeddedData = {
-  es: contactDataRaw.es,
-  en: contactDataRaw.en,
-};
+interface Props {
+  es: ContactData;
+  en: ContactData;
+}
+
+const { es, en } = Astro.props;
+const data = es;
+
+const embeddedData = { es, en };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
 

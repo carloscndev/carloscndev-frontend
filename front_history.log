@@ -54,3 +54,13 @@
   - Updated src/types/global-config.ts (optional fields)
   - Fixed LinkWrapper.astro crash on undefined href
 - Build now succeeds with Strapi running — 4 pages + 12 optimized images
+
+## MIG-015: Create Contact Page Types
+- Created src/types/contact-page.ts with ContactPageAttributes type
+- Created src/__tests__/types/contact-page.test.ts with 1 type test
+
+## MIG-016: Migrate Contact Section to Strapi
+- Updated src/components/sections/Contact.astro to receive es/en props
+- Updated src/pages/index.astro to fetch contact-page from Strapi
+- Removed dependency on src/data/contact.json
+- 173 tests passing, 0 lint errors, build successful

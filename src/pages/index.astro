@@ -6,6 +6,7 @@ import type { AboutPageAttributes } from "../types/about-page";
 import type { ExperiencePageAttributes } from "../types/experience-page";
 import type { PortfolioPageAttributes } from "../types/portfolio-page";
 import type { BlogPageAttributes } from "../types/blog-page";
+import type { ContactPageAttributes } from "../types/contact-page";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
 import About from "../components/sections/About.astro";
@@ -218,6 +219,38 @@ const blogData = {
     })),
   },
 };
+
+const contactEs = await fetchSingleType<ContactPageAttributes>(
+  "contact-page",
+  "es",
+  { populate: "*" },
+);
+const contactEn = await fetchSingleType<ContactPageAttributes>(
+  "contact-page",
+  "en",
+  { populate: "*" },
+);
+
+if (!contactEs || !contactEn) {
+  throw new Error("Failed to fetch contact-page from Strapi");
+}
+
+const contactData = {
+  es: {
+    title: contactEs.title,
+    status_message: contactEs.status_message,
+    button_text: contactEs.button_text,
+    mail_to: contactEs.mail_to,
+    footer: contactEs.footer,
+  },
+  en: {
+    title: contactEn.title,
+    status_message: contactEn.status_message,
+    button_text: contactEn.button_text,
+    mail_to: contactEn.mail_to,
+    footer: contactEn.footer,
+  },
+};
 ---
 
 <MainLayout
@@ -247,5 +280,5 @@ const blogData = {
   <Experience es={expData.es} en={expData.en} />
   <Portfolio es={portfolioData.es} en={portfolioData.en} />
   <Blog es={blogData.es} en={blogData.en} />
-  <Contact />
+  <Contact es={contactData.es} en={contactData.en} />
 </MainLayout>
