@@ -94,7 +94,19 @@
 - Added normalizeMailTo() helper to ensure mailto: prefix
 - Updated types, component, utils, tests, and page mapping
 
+## Cleanup: Remove Unused JSON Data Files
+- Deleted src/data/about.json, contact.json, experience.json, home.json
+- Deleted src/data/config.json, 404.json, portafolio.json, blog.json
+- All data now fetched from Strapi at build time
+- Only src/data/blog-post.json remains (empty, used by blog/[slug].astro)
+
 ## Blocked: Blog Post Detail Pages (blog/[slug].astro)
 - src/pages/blog/[slug].astro still uses src/data/blog-post.json
 - Requires blog-posts collection type in Strapi (does not exist yet)
 - blog-post.json is empty (no posts), so pages are not generated anyway
+
+## Final Status
+- All pages build successfully with Strapi running
+- 174 tests passing, 0 lint errors
+- 4 pages generated + 12 optimized WebP images
+- 100% SSG confirmed (build fails when Strapi is down)
