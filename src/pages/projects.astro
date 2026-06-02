@@ -1,8 +1,8 @@
 ---
 import { fetchSingleType } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
+import type { PortfolioPageAttributes } from "../types/portfolio-page";
 import PostLayout from "../layouts/PostLayout.astro";
-import portfolioDataRaw from "../data/portafolio.json";
 import Diamond from "../components/icons/Diamond.astro";
 import TechPill from "../components/ui/TechPill.astro";
 import GithubIcon from "../components/icons/GithubIcon.astro";
@@ -20,12 +20,57 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
+const portfolioEs = await fetchSingleType<PortfolioPageAttributes>(
+  "portfolio-page",
+  "es",
+  { populate: "*" },
+);
+const portfolioEn = await fetchSingleType<PortfolioPageAttributes>(
+  "portfolio-page",
+  "en",
+  { populate: "*" },
+);
+
+if (!portfolioEs || !portfolioEn) {
+  throw new Error("Failed to fetch portfolio-page from Strapi");
+}
+
 const currentLang = "es";
-const data = portfolioDataRaw[currentLang];
+const data = portfolioEs;
 
 const embeddedData = {
-  es: portfolioDataRaw.es,
-  en: portfolioDataRaw.en,
+  es: {
+    title: portfolioEs.title,
+    intro: portfolioEs.intro,
+    view_more: portfolioEs.view_more,
+    projects: (portfolioEs.projects ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      technologies: p.technologies,
+      links: {
+        repo: p.links?.repo,
+        demo: p.links?.demo,
+        article: p.links?.article,
+      },
+    })),
+  },
+  en: {
+    title: portfolioEn.title,
+    intro: portfolioEn.intro,
+    view_more: portfolioEn.view_more,
+    projects: (portfolioEn.projects ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      technologies: p.technologies,
+      links: {
+        repo: p.links?.repo,
+        demo: p.links?.demo,
+        article: p.links?.article,
+      },
+    })),
+  },
 };
 const embeddedDataJson = JSON.stringify(embeddedData);
 ---
@@ -50,12 +95,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
     <div class="portfolio-grid">
       {
-        data.projects.map((project: any) => (
+        (data.projects ?? []).map((project) => (
           <div class="portfolio-grid__card" data-project-id={project.id}>
             <div class="portfolio-card__header">
               <Diamond size="22" class="portfolio-card__diamond" />
               <div class="portfolio-card__links" data-project-links>
-                {project.links.repo && (
+                {project.links?.repo && (
                   <LinkWrapper
                     href={project.links.repo}
                     class="portfolio-card__link"
@@ -64,7 +109,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                     <GithubIcon size="18" />
                   </LinkWrapper>
                 )}
-                {project.links.demo && (
+                {project.links?.demo && (
                   <LinkWrapper
                     href={project.links.demo}
                     class="portfolio-card__link"
@@ -73,7 +118,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                     <ExternalLink size="18" />
                   </LinkWrapper>
                 )}
-                {project.links.article && (
+                {project.links?.article && (
                   <LinkWrapper
                     href={project.links.article}
                     class="portfolio-card__link"
@@ -102,7 +147,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
     <div class="portfolio-accordion" data-portfolio-accordion>
       {
-        data.projects.map((project: any) => (
+        (data.projects ?? []).map((project) => (
           <div
             class="portfolio-accordion__item"
             data-accordion-item
@@ -145,7 +190,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                 ))}
               </div>
               <div class="portfolio-accordion__links" data-project-links>
-                {project.links.repo && (
+                {project.links?.repo && (
                   <LinkWrapper
                     href={project.links.repo}
                     class="portfolio-accordion__link"
@@ -154,7 +199,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                     <GithubIcon size="16" />
                   </LinkWrapper>
                 )}
-                {project.links.demo && (
+                {project.links?.demo && (
                   <LinkWrapper
                     href={project.links.demo}
                     class="portfolio-accordion__link"
@@ -163,7 +208,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                     <ExternalLink size="16" />
                   </LinkWrapper>
                 )}
-                {project.links.article && (
+                {project.links?.article && (
                   <LinkWrapper
                     href={project.links.article}
                     class="portfolio-accordion__link"

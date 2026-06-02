@@ -1,25 +1,14 @@
 ---
 import { fetchSingleType } from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
+import type { BlogPageAttributes } from "../types/blog-page";
 import PostLayout from "../layouts/PostLayout.astro";
-import blogData from "../data/blog.json";
 import { Image } from "astro:assets";
 import wallperImage from "../assets/images/wallper.jpg";
 import TechIcon from "../components/icons/TechIcon.astro";
 import RunningIcon from "../components/icons/RunningIcon.astro";
 import ExternalLink from "../components/icons/ExternalLink.astro";
 import LinkWrapper from "../components/ui/LinkWrapper.astro";
-
-interface BlogPost {
-  id: string;
-  title: string;
-  link: string;
-  icon: string;
-  category: string;
-  date: string;
-  read_time: string;
-  resume: string;
-}
 
 const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
   "global-config",
@@ -31,10 +20,53 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
+const blogEs = await fetchSingleType<BlogPageAttributes>("blog-page", "es", {
+  populate: "*",
+});
+const blogEn = await fetchSingleType<BlogPageAttributes>("blog-page", "en", {
+  populate: "*",
+});
+
+if (!blogEs || !blogEn) {
+  throw new Error("Failed to fetch blog-page from Strapi");
+}
+
 const lang = "es";
-const data = blogData[lang].blog;
-const posts = data.posts as BlogPost[];
-const blogDataJson = JSON.stringify(blogData);
+const posts = blogEs.posts ?? [];
+
+const embeddedData = {
+  es: {
+    title: blogEs.title,
+    intro: blogEs.intro,
+    view_more: blogEs.view_more,
+    posts: (blogEs.posts ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      link: p.link,
+      icon: p.icon,
+      category: p.category,
+      date: p.date,
+      read_time: p.read_time,
+      resume: p.resume,
+    })),
+  },
+  en: {
+    title: blogEn.title,
+    intro: blogEn.intro,
+    view_more: blogEn.view_more,
+    posts: (blogEn.posts ?? []).map((p) => ({
+      id: p.id,
+      title: p.title,
+      link: p.link,
+      icon: p.icon,
+      category: p.category,
+      date: p.date,
+      read_time: p.read_time,
+      resume: p.resume,
+    })),
+  },
+};
+const blogDataJson = JSON.stringify(embeddedData);
 ---
 
 <PostLayout
@@ -53,7 +85,7 @@ const blogDataJson = JSON.stringify(blogData);
   <section class="posts-page">
     <header class="posts-page__header">
       <h1 class="posts-page__title" data-i18n-content="section.blog">
-        {data.title}
+        {blogEs.title}
       </h1>
     </header>
 

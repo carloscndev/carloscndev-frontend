@@ -64,3 +64,14 @@
 - Updated src/pages/index.astro to fetch contact-page from Strapi
 - Removed dependency on src/data/contact.json
 - 173 tests passing, 0 lint errors, build successful
+
+## MIG-017: Create Error Page Types
+- Created src/types/error-page.ts with ErrorPageAttributes type
+- Created src/__tests__/types/error-page.test.ts with 1 type test
+
+## MIG-018: Migrate 404 Page to Strapi
+- Updated src/pages/404.astro to fetch error-page from Strapi at build time
+- Updated src/utils/404.ts to match flat data structure (no error_404 nesting)
+- Updated src/__tests__/utils/404.test.ts for new data shape
+- Removed dependency on src/data/404.json
+- Build blocked: error-page single type does not exist in Strapi yet
