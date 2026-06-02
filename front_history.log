@@ -235,9 +235,17 @@
   - Now fetches blog-posts collection via fetchCollection (same as index.astro)
 - Fixed src/__tests__/components/pages.test.ts for 404.astro (slepping → StrapiImage)
 
+## Fix: Separate Global CSS Rule for blog/[slug].astro Hero Image
+- Root cause: `:global(.post-hero__image)` combined with `.post-hero__image-placeholder` in same CSS rule caused Astro to scope both selectors
+- Result: `object-position: center` was not applied to the hero image, causing it to show the top portion only
+- Fix: Separated `:global(.post-hero__image)` into its own CSS block in blog/[slug].astro
+- Verified: Build outputs truly global CSS `.post-hero__image{object-fit:cover;object-position:center}`
+- Hero image is now properly centered vertically in the 120px container
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors
 - 6 pages generated (including /blog/test-post for es + en) + 12 optimized WebP images
-- All images now served from Strapi with native responsive formats (thumbnail, small, medium, large)
+- Blog images (cards + hero) use Strapi with native responsive formats
+- Home/About/404 images use local Astro Image for correct sizing
 - 100% SSG confirmed (build fails when Strapi is down)
