@@ -196,8 +196,7 @@ const uiDictJson = JSON.stringify(uiDict);
     overflow: hidden;
   }
 
-  :global(.post-hero__image),
-  .post-hero__image-placeholder {
+  :global(.post-hero__image) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -206,6 +205,11 @@ const uiDictJson = JSON.stringify(uiDict);
   }
 
   .post-hero__image-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
     background: var(--color-word);
     opacity: 0.15;
   }
