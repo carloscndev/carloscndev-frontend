@@ -75,3 +75,20 @@
 - Updated src/__tests__/utils/404.test.ts for new data shape
 - Removed dependency on src/data/404.json
 - Build blocked: error-page single type does not exist in Strapi yet
+
+## MIG-019: Migrate Projects Page to Strapi
+- Updated src/pages/projects.astro to fetch portfolio-page from Strapi
+- Removed dependency on src/data/portafolio.json
+
+## MIG-020: Migrate Posts Page to Strapi
+- Updated src/pages/posts.astro to fetch blog-page from Strapi
+- Removed dependency on src/data/blog.json
+
+## MIG-021: Migrate BaseSEO Component
+- Updated src/components/BaseSEO.astro to use Astro.site?.origin
+- Removed dependency on src/data/config.json
+
+## Blocked: Blog Post Detail Pages (blog/[slug].astro)
+- src/pages/blog/[slug].astro still uses src/data/blog-post.json
+- Requires blog-posts collection type in Strapi (does not exist yet)
+- blog-post.json is empty (no posts), so pages are not generated anyway
