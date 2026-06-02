@@ -105,8 +105,32 @@
 - Requires blog-posts collection type in Strapi (does not exist yet)
 - blog-post.json is empty (no posts), so pages are not generated anyway
 
+## MIG-022: Migrate Blog Post Detail Pages
+- Rewrote src/pages/blog/[slug].astro to use Strapi blog-posts collection
+- Uses getStaticPaths with fetchCollection for es + en locales
+- Per-page data fetch via fetchCollectionEntry by documentId
+- Renders HTML content with set:html (Strapi returns HTML string)
+- Client-side language switching fetches other locale version at build time
+- Added missing fetchSingleType import for global-config fetch
+
+## Fix: Blog Post Utility & Tests
+- Updated src/utils/blog-post.ts to match new embedded data shape
+  - Data is now a single post object under es/en keys (not posts array)
+  - Content is HTML string; updates innerHTML on data-post-content
+  - Removed slug matching and content block iteration
+- Updated src/__tests__/utils/blog-post.test.ts for new shape and selectors
+
+## Cleanup: Remove blog-post.json
+- Deleted src/data/blog-post.json (last orphaned JSON file)
+- All data now fetched from Strapi at build time
+
+## Fix: Remove Obsolete Data Tests
+- Deleted src/__tests__/data/config.test.ts (tested deleted config.json)
+- Deleted src/__tests__/data/validation.test.ts (tested deleted JSON data files)
+- src/__tests__/data/ now only contains .gitkeep
+
 ## Final Status
 - All pages build successfully with Strapi running
-- 174 tests passing, 0 lint errors
-- 4 pages generated + 12 optimized WebP images
+- 28 test files, 145 tests passing, 0 lint errors
+- 6 pages generated (including /blog/test-post for es + en) + 13 optimized WebP images
 - 100% SSG confirmed (build fails when Strapi is down)

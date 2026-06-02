@@ -7,29 +7,23 @@ describe("blog-post", () => {
     document.documentElement.lang = "es";
   });
 
-  it("should update blog post content from embedded JSON by URL slug", () => {
+  it("should update blog post content from embedded JSON", () => {
     const data = {
       es: {
-        posts: [
-          {
-            id: "test-post",
-            title: "Test Title",
-            date: "2025",
-            author: "dev",
-            content: [{ type: "paragraph", text: "Hello" }],
-          },
-        ],
+        title: "Test Title",
+        date: "2025",
+        author: "dev",
+        category: "tech",
+        icon: "tech-icon",
+        content: "<p>Hello ES</p>",
       },
       en: {
-        posts: [
-          {
-            id: "test-post",
-            title: "Test EN",
-            date: "2025",
-            author: "dev",
-            content: [{ type: "paragraph", text: "Hello EN" }],
-          },
-        ],
+        title: "Test EN",
+        date: "2025",
+        author: "dev",
+        category: "tech",
+        icon: "tech-icon",
+        content: "<p>Hello EN</p>",
       },
     };
     const dict = {
@@ -50,14 +44,8 @@ describe("blog-post", () => {
     document.body.innerHTML += `
       <h1 data-post-hero-title></h1>
       <p data-post-hero-meta></p>
-      <p data-post-content-p></p>
+      <div data-post-content></div>
     `;
-
-    // Mock URL pathname
-    Object.defineProperty(window, "location", {
-      value: { pathname: "/blog/test-post" },
-      writable: true,
-    });
 
     updateBlogPostContent("es");
 
@@ -66,5 +54,8 @@ describe("blog-post", () => {
     const meta = document.querySelector("[data-post-hero-meta]")!;
     expect(meta.textContent).toContain("2025");
     expect(meta.textContent).toContain("Autor:");
+    expect(meta.textContent).toContain("dev");
+    const content = document.querySelector("[data-post-content]")!;
+    expect(content.innerHTML).toBe("<p>Hello ES</p>");
   });
 });

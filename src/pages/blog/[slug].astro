@@ -1,57 +1,59 @@
 ---
-import { fetchSingleType } from "../../services/strapi";
+import {
+  fetchCollection,
+  fetchCollectionEntry,
+  fetchSingleType,
+} from "../../services/strapi";
 import type { GlobalConfigAttributes } from "../../types/global-config";
+import type { BlogPostAttributes } from "../../types/blog-post";
 import PostLayout from "../../layouts/PostLayout.astro";
-import blogPostData from "../../data/blog-post.json";
 import { Image } from "astro:assets";
 import wallperImage from "../../assets/images/wallper.jpg";
 import uiDict from "../../i18n/ui.json";
 import type { Lang } from "../../utils/lang";
 
-interface ContentBlock {
-  type: string;
-  text: string;
-}
-
-interface BlogPost {
-  id: string;
-  title: string;
-  author: string;
-  date: string;
-  category: string;
-  icon: string;
-  content: ContentBlock[];
-}
-
-export function getStaticPaths() {
-  const esPosts = blogPostData.es.posts as BlogPost[];
-  const enPosts = blogPostData.en.posts as BlogPost[];
+export async function getStaticPaths() {
+  const esPosts = await fetchCollection<BlogPostAttributes>(
+    "blog-posts",
+    "es",
+    { populate: ["category"] },
+  );
+  const enPosts = await fetchCollection<BlogPostAttributes>(
+    "blog-posts",
+    "en",
+    { populate: ["category"] },
+  );
 
   const paths: Array<{
     params: { slug: string };
-    props: { lang: Lang; postId: string };
+    props: { lang: Lang; documentId: string };
   }> = [];
 
   esPosts.forEach((post) => {
     paths.push({
-      params: { slug: post.id },
-      props: { lang: "es", postId: post.id },
+      params: { slug: post.slug },
+      props: { lang: "es", documentId: post.documentId },
     });
   });
 
   enPosts.forEach((post) => {
     paths.push({
-      params: { slug: post.id },
-      props: { lang: "en", postId: post.id },
+      params: { slug: post.slug },
+      props: { lang: "en", documentId: post.documentId },
     });
   });
 
   return paths;
 }
 
-const { lang, postId } = Astro.props;
-const data = blogPostData[lang] as { posts: BlogPost[] };
-const post = data.posts.find((p: BlogPost) => p.id === postId);
+const { lang, documentId } = Astro.props;
+
+const post = await fetchCollectionEntry<BlogPostAttributes>(
+  "blog-posts",
+  documentId,
+  lang,
+  { populate: ["category"] },
+);
 
 if (!post) {
   return Astro.redirect("/404");
@@ -70,7 +72,59 @@ if (!globalConfig) {
 const categoryTheme = post.icon === "running-icon" ? "running" : "tech";
 const authorPrefix = uiDict[lang]["post.author_prefix"];
 
-const blogPostDataJson = JSON.stringify(blogPostData);
+// Fetch other locale post for client-side language switching
+const otherLang = lang === "es" ? "en" : "es";
+const otherPost = await fetchCollectionEntry<BlogPostAttributes>(
+  "blog-posts",
+  documentId,
+  otherLang,
+  { populate: ["category"] },
+);
+
+const embeddedData = {
+  es:
+    lang === "es"
+      ? {
+          title: post.title,
+          date: post.date,
+          author: post.author || "",
+          category: post.category?.name || "",
+          icon: post.icon,
+          content: post.content,
+        }
+      : otherPost
+        ? {
+            title: otherPost.title,
+            date: otherPost.date,
+            author: otherPost.author || "",
+            category: otherPost.category?.name || "",
+            icon: otherPost.icon,
+            content: otherPost.content,
+          }
+        : null,
+  en:
+    lang === "en"
+      ? {
+          title: post.title,
+          date: post.date,
+          author: post.author || "",
+          category: post.category?.name || "",
+          icon: post.icon,
+          content: post.content,
+        }
+      : otherPost
+        ? {
+            title: otherPost.title,
+            date: otherPost.date,
+            author: otherPost.author || "",
+            category: otherPost.category?.name || "",
+            icon: otherPost.icon,
+            content: otherPost.content,
+          }
+        : null,
+};
+
+const blogPostDataJson = JSON.stringify(embeddedData);
 const uiDictJson = JSON.stringify(uiDict);
 ---
 
@@ -113,19 +167,14 @@ const uiDictJson = JSON.stringify(uiDict);
     <div class="post-body__inner">
       <p class="post-body__meta" data-post-hero-meta>
         {post.date} &nbsp;{authorPrefix}
-        {post.author}
+        {post.author || ""}
       </p>
 
-      <div class="post-body__content">
-        {
-          post.content.map((block) => {
-            if (block.type === "paragraph") {
-              return <p data-post-content-p>{block.text}</p>;
-            }
-            return null;
-          })
-        }
-      </div>
+      <div
+        class="post-body__content"
+        data-post-content
+        set:html={post.content}
+      />
     </div>
   </div>
 </PostLayout>
@@ -292,7 +341,7 @@ const uiDictJson = JSON.stringify(uiDict);
     gap: var(--spacing-md-lg);
   }
 
-  .post-body__content p {
+  .post-body__content :global(p) {
     font-family: var(--font-body);
     font-size: var(--font-size-body-mobile);
     color: var(--text-base);
@@ -320,7 +369,7 @@ const uiDictJson = JSON.stringify(uiDict);
       gap: var(--spacing-lg);
     }
 
-    .post-body__content p {
+    .post-body__content :global(p) {
       font-size: var(--font-size-body-desktop);
     }
   }
