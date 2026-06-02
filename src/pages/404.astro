@@ -27,7 +27,7 @@ const errorDataJson = JSON.stringify(errorData);
   title="404 — Not Found"
   lang={lang}
   noindex
-  navigation={globalConfig.navigation}
+  navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
 >
   <script

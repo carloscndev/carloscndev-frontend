@@ -4,6 +4,7 @@ import {
   fetchSingleType,
   fetchCollection,
   fetchCollectionEntry,
+  type StrapiSingleResponse,
 } from "../../services/strapi";
 
 describe("strapi service", () => {
@@ -102,7 +103,7 @@ describe("strapi service", () => {
 
       mockFetch({ data: { id: 1, title: "Hello" }, meta: {} });
 
-      const result = await queryStrapi<Article>(
+      const result = await queryStrapi<StrapiSingleResponse<Article>>(
         "articles",
         {},
         {

@@ -12,7 +12,7 @@ describe("experience-page types", () => {
       company_url: "https://c3.ai",
       role: "Mid Software Engineer",
       period: "Ene 2023 - May 2025",
-      description: ["Worked on full stack applications."],
+      description: "<p>Worked on full stack applications.</p>",
       technologies: ["React", "TypeScript"],
     };
     expect(job.id).toBe("c3ai");
@@ -31,7 +31,7 @@ describe("experience-page types", () => {
           company_url: "https://c3.ai",
           role: "Mid Software Engineer",
           period: "Ene 2023 - May 2025",
-          description: ["Worked on full stack applications."],
+          description: "<p>Worked on full stack applications.</p>",
           technologies: ["React", "TypeScript"],
         },
       ],

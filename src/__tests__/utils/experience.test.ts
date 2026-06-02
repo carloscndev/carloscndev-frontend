@@ -10,7 +10,7 @@ describe("experience", () => {
           {
             id: "c3ai",
             role: "Engineer",
-            description: ["Paragraph 1", "Paragraph 2"],
+            description: "<p>Paragraph 1</p><p>Paragraph 2</p>",
           },
         ],
       },
@@ -20,7 +20,7 @@ describe("experience", () => {
           {
             id: "c3ai",
             role: "Engineer EN",
-            description: ["Paragraph 1 EN", "Paragraph 2 EN"],
+            description: "<p>Paragraph 1 EN</p><p>Paragraph 2 EN</p>",
           },
         ],
       },

@@ -40,3 +40,17 @@
 - All tests passing: 172 tests in 28 files
 - Lint clean with 0 errors (1 pre-existing warning in scroll-observer.test.ts)
 - Build blocked by Strapi connectivity (HTTP 000) — expected, confirms 100% SSG
+
+## Fixes: Build & Runtime Errors
+- Fixed Job.description type: Strapi returns HTML string, not string[]
+  - Updated src/types/experience-page.ts (description: string)
+  - Updated src/components/sections/Experience.astro (use set:html)
+  - Updated src/utils/experience.ts (handle string instead of array)
+  - Updated src/__tests__/utils/experience.test.ts and type tests
+- Fixed TypeScript errors in src/services/strapi.ts (queryStrapi<T> return type)
+  - Fixed test in src/__tests__/services/strapi.test.ts
+- Fixed runtime errors when global-config lacks navigation/social fields
+  - Added defensive fallbacks (?? []) in all pages using globalConfig
+  - Updated src/types/global-config.ts (optional fields)
+  - Fixed LinkWrapper.astro crash on undefined href
+- Build now succeeds with Strapi running — 4 pages + 12 optimized images

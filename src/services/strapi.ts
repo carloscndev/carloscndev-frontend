@@ -41,7 +41,7 @@ export async function queryStrapi<T>(
   endpoint: string,
   queryObj: Record<string, unknown> = {},
   options: RequestInit & { config?: StrapiClientConfig } = {},
-): Promise<StrapiResponse<T>> {
+): Promise<T> {
   const defaultConfig = getDefaultConfig();
   const baseUrl = options.config?.baseUrl ?? defaultConfig.baseUrl;
   const token = options.config?.token ?? defaultConfig.token;
@@ -67,7 +67,7 @@ export async function queryStrapi<T>(
     );
   }
 
-  return (await response.json()) as StrapiResponse<T>;
+  return (await response.json()) as T;
 }
 
 export async function fetchSingleType<T>(

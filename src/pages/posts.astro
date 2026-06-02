@@ -40,7 +40,7 @@ const blogDataJson = JSON.stringify(blogData);
 <PostLayout
   title="Blog — Posts"
   lang={lang}
-  navigation={globalConfig.navigation}
+  navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
 >
   <script

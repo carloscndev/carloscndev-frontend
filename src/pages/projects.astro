@@ -33,7 +33,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 <PostLayout
   title="Portfolio — Projects"
   lang={currentLang}
-  navigation={globalConfig.navigation}
+  navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
 >
   <script

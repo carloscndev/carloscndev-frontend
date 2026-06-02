@@ -18,6 +18,6 @@ export interface GlobalConfigAttributes extends StrapiEntity {
   siteDescription: string;
   siteAuthor: string;
   defaultLocale: string;
-  navigation: NavigationItem[];
-  social: SocialLink[];
+  navigation?: NavigationItem[];
+  social?: SocialLink[];
 }

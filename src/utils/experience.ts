@@ -18,10 +18,8 @@ export function updateExperienceContent(lang: Lang): void {
       const role = p.querySelector("[data-job-role]");
       if (role) role.textContent = job.role;
       const desc = p.querySelector("[data-job-description]");
-      if (desc && Array.isArray(job.description))
-        desc.innerHTML = job.description
-          .map((paragraph: string) => `<p>${paragraph}</p>`)
-          .join("");
+      if (desc && typeof job.description === "string")
+        desc.innerHTML = job.description;
     });
   });
 }

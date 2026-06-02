@@ -78,7 +78,7 @@ const uiDictJson = JSON.stringify(uiDict);
   title={post.title}
   lang={lang}
   categoryTheme={categoryTheme}
-  navigation={globalConfig.navigation}
+  navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
 >
   <script

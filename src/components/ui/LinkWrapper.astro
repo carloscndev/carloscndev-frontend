@@ -17,7 +17,8 @@ const {
   ...rest
 } = Astro.props;
 
-const isMail = href.startsWith("mailto:");
+const safeHref = href ?? "#";
+const isMail = safeHref.startsWith("mailto:");
 const useTargetBlank = isExternal && !isMail;
 ---
 

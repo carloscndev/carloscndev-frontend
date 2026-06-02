@@ -9,7 +9,7 @@ interface Job {
   company_url: string;
   role: string;
   period: string;
-  description: string[];
+  description: string;
   technologies: string[];
 }
 
@@ -94,11 +94,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             <p class="experience-tabs__period" data-job-period>
               {job.period}
             </p>
-            <div class="experience-tabs__description" data-job-description>
-              {job.description.map((paragraph: string) => (
-                <p>{paragraph}</p>
-              ))}
-            </div>
+            <div
+              class="experience-tabs__description"
+              data-job-description
+              set:html={job.description}
+            />
             <div class="experience-tabs__tags" data-job-tags>
               {job.technologies.map((tech) => (
                 <TechPill label={tech} />
@@ -137,11 +137,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
             <p class="experience-carousel__period" data-job-period>
               {job.period}
             </p>
-            <div class="experience-carousel__description" data-job-description>
-              {job.description.map((paragraph: string) => (
-                <p>{paragraph}</p>
-              ))}
-            </div>
+            <div
+              class="experience-carousel__description"
+              data-job-description
+              set:html={job.description}
+            />
             <div class="experience-carousel__tags" data-job-tags>
               {job.technologies.map((tech) => (
                 <TechPill label={tech} />

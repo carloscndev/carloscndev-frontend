@@ -32,7 +32,7 @@ if (!homeEs || !homeEn) {
 }
 
 const siteUrl = Astro.site?.origin ?? "https://carloscndev.com";
-const sameAs = globalConfig.social
+const sameAs = (globalConfig.social ?? [])
   .filter((s) => ["github", "linkedin", "instagram"].includes(s.platform))
   .map((s) => s.url);
 
@@ -224,8 +224,8 @@ const blogData = {
   title={globalConfig.siteTitle}
   lang="es"
   description={globalConfig.siteDescription}
-  navigation={globalConfig.navigation}
-  social={globalConfig.social}
+  navigation={globalConfig.navigation ?? []}
+  social={globalConfig.social ?? []}
   defaultLocale={globalConfig.defaultLocale}
 >
   <script
