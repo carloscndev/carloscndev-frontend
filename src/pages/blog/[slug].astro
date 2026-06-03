@@ -8,9 +8,34 @@ import type { GlobalConfigAttributes } from "../../types/global-config";
 import type { BlogPostAttributes } from "../../types/blog-post";
 import PostLayout from "../../layouts/PostLayout.astro";
 import StrapiImage from "../../components/ui/StrapiImage.astro";
-import { marked } from "marked";
+import { Marked } from "marked";
+import markedShiki from "marked-shiki";
+import { createHighlighter } from "shiki";
 import uiDict from "../../i18n/ui.json";
 import type { Lang } from "../../utils/lang";
+
+// 1. Initialize Shiki highlighter
+const highlighter = await createHighlighter({
+  themes: ["github-dark"],
+  langs: [
+    "javascript",
+    "typescript",
+    "css",
+    "html",
+    "bash",
+    "json",
+    "markdown",
+  ],
+});
+
+// 2. Create a Marked instance with Shiki plugin
+const marked = new Marked().use(
+  markedShiki({
+    highlight(code, lang) {
+      return highlighter.codeToHtml(code, { lang, theme: "github-dark" });
+    },
+  }),
+);
 
 export async function getStaticPaths() {
   const esPosts = await fetchCollection<BlogPostAttributes>(
@@ -69,8 +94,8 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
-// Parse Markdown content to HTML for both locales
-const postContentHtml = marked.parse(post.content) as string;
+// Parse Markdown content to HTML for both locales (await because marked-shiki uses async highlight)
+const postContentHtml = (await marked.parse(post.content)) as string;
 
 const categoryTheme = post.icon === "running-icon" ? "running" : "tech";
 const authorPrefix = uiDict[lang]["post.author_prefix"];
@@ -85,7 +110,7 @@ const otherPost = await fetchCollectionEntry<BlogPostAttributes>(
 );
 
 const otherContentHtml = otherPost
-  ? (marked.parse(otherPost.content) as string)
+  ? ((await marked.parse(otherPost.content)) as string)
   : "";
 
 const embeddedData = {
@@ -514,5 +539,26 @@ const uiDictJson = JSON.stringify(uiDict);
     .post-body__content :global(table) {
       font-size: var(--font-size-body-desktop);
     }
+  }
+
+  /* Shiki syntax highlighted code blocks */
+  .post-body__content :global(pre.shiki) {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin: var(--spacing-md) 0;
+  }
+
+  /* Inline code (not inside pre) */
+  .post-body__content :global(code:not(pre code)) {
+    background-color: rgba(140, 136, 247, 0.15);
+    color: var(--color-accent);
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
   }
 </style>

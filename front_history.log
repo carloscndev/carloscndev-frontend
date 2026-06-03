@@ -268,11 +268,26 @@
 - 30 test files, 160 tests passing, 0 lint errors
 - Build: 6 pages generated + 12 optimized WebP images
 
+## MIG-026: Add Shiki Syntax Highlighting for Code Blocks
+- Root cause: `marked` alone renders code blocks as plain `<pre><code>` without syntax highlighting
+- Result: code snippets in blog posts appeared as monochrome text
+- Fix: Installed `shiki` and `marked-shiki` packages
+  - Created `Marked` instance with `markedShiki` plugin using `createHighlighter`
+  - Theme: `github-dark`; languages: javascript, typescript, css, html, bash, json, markdown
+  - `marked.parse()` now returns HTML with `<pre class="shiki github-dark">` and colored spans
+  - Both `post.content` and `otherPost.content` parsed with Shiki highlighting
+- Added Shiki-specific CSS in `blog/[slug].astro`
+  - `pre.shiki`: padding, border-radius, `Fira Code` font, overflow-x auto, shadow
+  - `code:not(pre code)`: inline code styling with accent background and color
+- Verified: dist HTML contains `<pre class="shiki github-dark" style="background-color:#24292e">` with colored spans
+- 30 test files, 160 tests passing, 0 lint errors
+- Build: 6 pages generated + 12 optimized WebP images
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors
 - 6 pages generated (including /blog/test-post for es + en) + 12 optimized WebP images
 - Blog images (cards + hero) use Strapi with native responsive formats
-- Blog post content renders Markdown to HTML via `marked`
+- Blog post content renders Markdown to HTML via `marked` with Shiki syntax highlighting
 - Home/About/404 images use local Astro Image for correct sizing
 - 100% SSG confirmed (build fails when Strapi is down)

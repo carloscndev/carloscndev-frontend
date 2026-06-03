@@ -24,7 +24,9 @@
     "@vercel/analytics": "^2.0.1",
     "astro": "^5.16.11",
     "marked": "^18.0.4",
-    "sharp": "^0.34.5"
+    "marked-shiki": "^1.2.1",
+    "sharp": "^0.34.5",
+    "shiki": "^4.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.1",
