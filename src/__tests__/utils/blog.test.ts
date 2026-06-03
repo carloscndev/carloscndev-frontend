@@ -9,32 +9,32 @@ describe("blog", () => {
   it("should update blog entries from embedded JSON", () => {
     const data = {
       es: {
-        blog: {
-          intro: "Blog ES",
-          posts: [
-            {
-              id: "post-01",
-              title: "Titulo",
-              category: "Tech",
-              date: "2025",
-              read_time: "5 min",
-            },
-          ],
-        },
+        title: "Blog",
+        intro: "Blog ES",
+        view_more: "Ver más",
+        posts: [
+          {
+            id: "post-01",
+            title: "Titulo",
+            category: "Tech",
+            date: "2025",
+            read_time: "5 min",
+          },
+        ],
       },
       en: {
-        blog: {
-          intro: "Blog EN",
-          posts: [
-            {
-              id: "post-01",
-              title: "Title",
-              category: "Technology",
-              date: "2025",
-              read_time: "5 min",
-            },
-          ],
-        },
+        title: "Blog",
+        intro: "Blog EN",
+        view_more: "View more",
+        posts: [
+          {
+            id: "post-01",
+            title: "Title",
+            category: "Technology",
+            date: "2025",
+            read_time: "5 min",
+          },
+        ],
       },
     };
     const el = document.createElement("script");

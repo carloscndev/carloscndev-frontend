@@ -329,6 +329,30 @@
   - Avoids the `setTimeout(..., 50)` delay that caused stale states previously
 - **User verified:** menu closes reliably for both same-page anchors and cross-page links
 
+## Fix: Experience Section Not Switching Language
+- Root cause 1: `updateExperienceContent` only updated `title`, `role`, and `description`
+  - Ignored `intro`, `company`, `period`, and `technologies`
+- Root cause 2: `initExperienceLangSwitch` never called `updateExperienceContent` on initial load
+  - Like Home, it relied on `astro:page-load` which may have already fired
+- Fix: Updated `src/utils/experience.ts`
+  - Added updates for `intro`, `company` (with `@` prefix), `period`, and `technologies` (rebuilds tag HTML)
+  - Added immediate `updateExperienceContent(getCurrentLang())` in `initExperienceLangSwitch`
+- Updated `src/__tests__/utils/experience.test.ts` to cover all fields
+- **User verified:** Experience section now fully switches language
+
+## Fix: Blog Section Not Switching Language
+- Root cause 1: `updateBlogEntries` expected a nested `blog` property (`data.blog.intro`, `data.blog.posts`)
+  - But `Blog.astro` embeds `{ es, en }` where each is a flat `BlogData` with `title`, `intro`, `view_more`, `posts`
+  - Result: `blogData.blog` was `undefined`, so all updates silently failed
+- Root cause 2: `initBlogLangSwitch` never called `updateBlogEntries` on initial load
+- Fix: Updated `src/utils/blog.ts`
+  - Removed nested `blog` wrapper from `BlogData` interface
+  - Updated `updateBlogEntries` to read `blogData.intro`, `blogData.posts`, etc.
+  - Added update for `view_more` link text
+  - Added immediate `updateBlogEntries(getCurrentLang())` in `initBlogLangSwitch`
+- Updated `src/__tests__/utils/blog.test.ts` to match flat data shape
+- **User verified:** Blog section now fully switches language
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors

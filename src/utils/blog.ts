@@ -1,5 +1,6 @@
 import type { Lang } from "./lang";
 import {
+  getCurrentLang,
   initLangSwitch,
   cloneAndReplace,
   closeAllPanelsExcept,
@@ -18,12 +19,10 @@ interface BlogPost {
 }
 
 interface BlogData {
-  blog: {
-    title: string;
-    intro: string;
-    view_more: string;
-    posts: BlogPost[];
-  };
+  title: string;
+  intro: string;
+  view_more: string;
+  posts: BlogPost[];
 }
 
 export function updateBlogEntries(lang: Lang): void {
@@ -37,9 +36,15 @@ export function updateBlogEntries(lang: Lang): void {
   if (!blogData) return;
 
   const introEl = document.querySelector("[data-blog-intro]");
-  if (introEl) introEl.textContent = blogData.blog.intro;
+  if (introEl) introEl.textContent = blogData.intro;
 
-  blogData.blog.posts.forEach((post) => {
+  const viewMoreEl = document.querySelector("[data-blog-viewmore]");
+  if (viewMoreEl) {
+    const span = viewMoreEl.querySelector("span");
+    if (span) span.textContent = blogData.view_more;
+  }
+
+  blogData.posts.forEach((post) => {
     const cards = document.querySelectorAll(`[data-post-id="${post.id}"]`);
     cards.forEach((card) => {
       const titleEl = card.querySelector("[data-post-title]");
@@ -102,6 +107,10 @@ function bindBlogAccordion(): void {
 
 export function initBlogLangSwitch(): void {
   initLangSwitch(updateBlogEntries);
+
+  // Sync content immediately in case astro:page-load already fired.
+  if (typeof document === "undefined") return;
+  updateBlogEntries(getCurrentLang());
 }
 
 export function initBlogAccordion(): void {

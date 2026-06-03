@@ -1,5 +1,6 @@
 import type { Lang } from "./lang";
-import { cloneAndReplace, initLangSwitch } from "./common";
+import { getCurrentLang } from "./common";
+import { initLangSwitch } from "./common";
 
 export function updateExperienceContent(lang: Lang): void {
   if (typeof document === "undefined") return;
@@ -10,6 +11,9 @@ export function updateExperienceContent(lang: Lang): void {
   const title = document.querySelector("[data-experience-title]");
   if (title) title.textContent = data.title;
 
+  const intro = document.querySelector("[data-experience-intro]");
+  if (intro) intro.textContent = data.intro;
+
   data.jobs.forEach((job: any) => {
     const panels = document.querySelectorAll(
       `[data-panel="${job.id}"], [data-slide="${job.id}"]`,
@@ -17,9 +21,26 @@ export function updateExperienceContent(lang: Lang): void {
     panels.forEach((p) => {
       const role = p.querySelector("[data-job-role]");
       if (role) role.textContent = job.role;
+
+      const company = p.querySelector("[data-job-company]");
+      if (company) company.textContent = `@${job.company}`;
+
+      const period = p.querySelector("[data-job-period]");
+      if (period) period.textContent = job.period;
+
       const desc = p.querySelector("[data-job-description]");
       if (desc && typeof job.description === "string")
         desc.innerHTML = job.description;
+
+      const tags = p.querySelector("[data-job-tags]");
+      if (tags && Array.isArray(job.technologies)) {
+        tags.innerHTML = job.technologies
+          .map(
+            (tech: string) =>
+              `<span class="experience-tabs__tag">${tech}</span>`,
+          )
+          .join("");
+      }
     });
   });
 }
@@ -96,6 +117,10 @@ export function initExperienceCarousel(): void {
 
 export function initExperienceLangSwitch(): void {
   initLangSwitch(updateExperienceContent);
+
+  // Sync content immediately in case astro:page-load already fired.
+  if (typeof document === "undefined") return;
+  updateExperienceContent(getCurrentLang());
 }
 
 document.addEventListener("astro:page-load", () => {
