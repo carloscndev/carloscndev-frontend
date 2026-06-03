@@ -242,6 +242,17 @@
 - Verified: Build outputs truly global CSS `.post-hero__image{object-fit:cover;object-position:center}`
 - Hero image is now properly centered vertically in the 120px container
 
+## Fix: Home Hobbies Avatar Swap Broken
+- Root cause: Astro `<Image>` generates `<img>` with `srcset` and `sizes` for responsive images
+- When `bindHobbyListeners` changed `src` via JavaScript, the browser continued using the original `srcset`
+- Result: avatar image never visually changed on click despite `src` being updated
+- Fix: Added `avatarImg.removeAttribute("srcset")` and `avatarImg.removeAttribute("sizes")` before setting new `src`
+  - Applied in both the swap-to-hobby and swap-back-to-default paths
+  - File: `src/utils/home.ts` in `triggerSwap` function
+- Verified: clicking "correr", "leer", or "videojuegos" now correctly swaps the avatar image
+- 30 test files, 160 tests passing, 0 lint errors
+- Build: 6 pages generated + 12 optimized WebP images
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors

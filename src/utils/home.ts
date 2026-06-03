@@ -84,6 +84,9 @@ function bindHobbyListeners(avatarPaths: Record<string, string>): void {
 
       avatarImg.classList.add("home-section__avatar-img--swapping");
       setTimeout(() => {
+        // Clear srcset/sizes so the browser uses the new src directly
+        avatarImg.removeAttribute("srcset");
+        avatarImg.removeAttribute("sizes");
         avatarImg.src = avatarPaths[action];
         avatarImg.classList.remove("home-section__avatar-img--swapping");
       }, 200);
@@ -91,6 +94,8 @@ function bindHobbyListeners(avatarPaths: Record<string, string>): void {
       hobbyTimer = setTimeout(() => {
         avatarImg.classList.add("home-section__avatar-img--swapping");
         setTimeout(() => {
+          avatarImg.removeAttribute("srcset");
+          avatarImg.removeAttribute("sizes");
           avatarImg.src = defaultSrc;
           avatarImg.alt = defaultAlt;
           avatarImg.classList.remove("home-section__avatar-img--swapping");
