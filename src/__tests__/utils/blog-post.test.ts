@@ -27,8 +27,14 @@ describe("blog-post", () => {
       },
     };
     const dict = {
-      es: { "post.author_prefix": "Autor:" },
-      en: { "post.author_prefix": "Author:" },
+      es: {
+        "post.author_prefix": "Autor:",
+        "post.back_to_home": "Volver al inicio",
+      },
+      en: {
+        "post.author_prefix": "Author:",
+        "post.back_to_home": "Back to home",
+      },
     };
 
     const dataEl = document.createElement("script");
@@ -45,6 +51,7 @@ describe("blog-post", () => {
       <h1 data-post-hero-title></h1>
       <p data-post-hero-meta></p>
       <div data-post-content></div>
+      <a data-post-back-home href="/"><span>Volver al inicio</span></a>
     `;
 
     updateBlogPostContent("es");
@@ -57,5 +64,7 @@ describe("blog-post", () => {
     expect(meta.textContent).toContain("dev");
     const content = document.querySelector("[data-post-content]")!;
     expect(content.innerHTML).toBe("<p>Hello ES</p>");
+    const backHome = document.querySelector("[data-post-back-home] span")!;
+    expect(backHome.textContent).toBe("Volver al inicio");
   });
 });

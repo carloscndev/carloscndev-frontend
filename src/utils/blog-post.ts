@@ -39,12 +39,19 @@ export function updateBlogPostContent(lang: Lang): void {
   const heroTitle = document.querySelector("[data-post-hero-title]");
   const heroMeta = document.querySelector("[data-post-hero-meta]");
   const contentEl = document.querySelector("[data-post-content]");
+  const backHomeEl = document.querySelector("[data-post-back-home]");
 
   if (heroTitle) heroTitle.textContent = post.title;
   if (heroMeta)
     heroMeta.textContent = `${post.date} \u00A0${authorPrefix} ${post.author}`;
 
   if (contentEl) contentEl.innerHTML = post.content;
+
+  const backHomeText = dict[lang]?.["post.back_to_home"] || "Back to home";
+  if (backHomeEl) {
+    const span = backHomeEl.querySelector("span");
+    if (span) span.textContent = backHomeText;
+  }
 }
 
 export function initBlogPostLangSwitch(): void {

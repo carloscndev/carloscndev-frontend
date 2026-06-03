@@ -6,7 +6,8 @@
     "section.portfolio": "Portafolio",
     "section.blog": "Blog",
     "section.contact": "Contacto",
-    "post.author_prefix": "Autor:"
+    "post.author_prefix": "Autor:",
+    "post.back_to_home": "Volver al inicio"
   },
   "en": {
     "section.home": "Home",
@@ -15,6 +16,7 @@
     "section.portfolio": "Portfolio",
     "section.blog": "Blog",
     "section.contact": "Contact",
-    "post.author_prefix": "Author:"
+    "post.author_prefix": "Author:",
+    "post.back_to_home": "Back to home"
   }
 }

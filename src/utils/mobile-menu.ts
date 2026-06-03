@@ -108,11 +108,12 @@ function bindMobileMenuListeners(): void {
     closeBtn.addEventListener("click", closeMobileMenu);
   }
 
-  // Close on nav link click
+  // Close on nav link click (anchor links only — external nav is handled
+  // by astro:after-swap to avoid Safari cancelling the click)
   const navLinks = document.querySelectorAll("[data-mobile-menu-link]");
   navLinks.forEach((link) => {
-    link.removeEventListener("click", closeMobileMenu);
-    link.addEventListener("click", closeMobileMenu);
+    link.removeEventListener("click", closeMobileMenuOnAnchor);
+    link.addEventListener("click", closeMobileMenuOnAnchor);
   });
 
   // Trap focus inside menu
@@ -130,6 +131,16 @@ function bindMobileMenuListeners(): void {
   document.addEventListener("keydown", handleEscKey);
 }
 
+function closeMobileMenuOnAnchor(e: Event): void {
+  const target = e.currentTarget as HTMLElement;
+  const href = target.getAttribute("href") || "";
+  // Only close immediately for same-page anchors; for cross-page links
+  // we let astro:after-swap close the menu so Safari doesn't cancel navigation.
+  if (href.startsWith("#")) {
+    closeMobileMenu();
+  }
+}
+
 export function initMobileMenuListener(): void {
   // Initial binding
   bindMobileMenuListeners();
@@ -139,8 +150,9 @@ export function initMobileMenuListener(): void {
     bindMobileMenuListeners();
   });
 
-  // Clean up body lock after page swap
+  // Clean up menu state after page swap (covers cross-page nav from mobile menu)
   document.addEventListener("astro:after-swap", () => {
     document.body.classList.remove(BODY_LOCK_CLASS);
+    closeMobileMenu();
   });
 }

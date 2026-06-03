@@ -54,7 +54,7 @@ const inlineThemeScript = `
 ---
 
 <!doctype html>
-<html lang={lang} data-category-theme={categoryTheme}>
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,9 +64,25 @@ const inlineThemeScript = `
     <title>{title}</title>
     {noindex && <meta name="robots" content="noindex, follow" />}
     <BaseSEO title={title} description={description} image={image} />
+    <meta name="category-theme" content={categoryTheme || ""} />
     <ClientRouter />
 
     <script is:inline set:html={inlineThemeScript} />
+    <script is:inline>
+      // Sync category-theme meta tag to html[data-category-theme] after every swap
+      // because ClientRouter does not replace the <html> element.
+      function syncCategoryTheme() {
+        const meta = document.querySelector('meta[name="category-theme"]');
+        const theme = meta ? meta.getAttribute("content") : "";
+        if (theme) {
+          document.documentElement.dataset.categoryTheme = theme;
+        } else {
+          delete document.documentElement.dataset.categoryTheme;
+        }
+      }
+      syncCategoryTheme();
+      document.addEventListener("astro:after-swap", syncCategoryTheme);
+    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>

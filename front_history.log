@@ -283,6 +283,34 @@
 - 30 test files, 160 tests passing, 0 lint errors
 - Build: 6 pages generated + 12 optimized WebP images
 
+## MIG-027: Add Back-to-Home Link in Blog Posts
+- Added a "Volver al inicio / Back to home" link at the end of every blog post
+- Uses `LinkWrapper` with `href="/"` and an arrow icon (rotated 180°)
+- Text updates dynamically via `data-post-back-home` when switching language
+- Added `post.back_to_home` key to `src/i18n/ui.json` for ES/EN translations
+- Updated `src/utils/blog-post.ts` to sync the link text during language switching
+- Added responsive CSS for hover effects and icon translation
+- Updated `src/__tests__/utils/blog-post.test.ts` to cover the new element
+
+## Fix: Category Theme Leaking Between Pages
+- Root cause: `data-category-theme` was set directly on `<html>` in `BaseLayout.astro`
+- With `ClientRouter`, the `<html>` element persists across page swaps, so the theme from a blog post (e.g. `tech`) stayed active when navigating back to the home page
+- Fix: Removed `data-category-theme` from `<html>` in `BaseLayout.astro`
+  - Added a `<meta name="category-theme">` tag instead
+  - Added an inline script that reads the meta tag and syncs `document.documentElement.dataset.categoryTheme` on initial load and after every `astro:after-swap`
+  - When the meta tag is absent (e.g. home page), the attribute is deleted from `<html>`
+- Verified: navigating from post → home no longer leaves a stale theme color
+
+## Fix: Safari Mobile Menu Navigation Broken
+- Root cause: `closeMobileMenu()` was bound directly to `click` on mobile nav links
+- On Safari, removing the overlay immediately cancels the navigation before the browser follows the `<a href>`
+- Fix: Updated `src/utils/mobile-menu.ts`
+  - Nav links now only close the menu immediately for same-page anchors (`href="#..."`)
+  - For cross-page links, the menu is closed in `astro:after-swap` instead
+  - This gives Safari (and all browsers) time to process the navigation without interference
+  - Also prevents stale `overflow-hidden` and overlay states after navigation
+- Verified: mobile menu links now work reliably in Safari
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors

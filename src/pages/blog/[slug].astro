@@ -8,6 +8,8 @@ import type { GlobalConfigAttributes } from "../../types/global-config";
 import type { BlogPostAttributes } from "../../types/blog-post";
 import PostLayout from "../../layouts/PostLayout.astro";
 import StrapiImage from "../../components/ui/StrapiImage.astro";
+import LinkWrapper from "../../components/ui/LinkWrapper.astro";
+import ArrowNext from "../../components/icons/ArrowNext.astro";
 import { Marked } from "marked";
 import markedShiki from "marked-shiki";
 import { createHighlighter } from "shiki";
@@ -212,6 +214,18 @@ const uiDictJson = JSON.stringify(uiDict);
         data-post-content
         set:html={postContentHtml}
       />
+
+      <div class="post-body__back-home">
+        <LinkWrapper
+          href="/"
+          isExternal={false}
+          class="post-body__back-home-link"
+          data-post-back-home
+        >
+          <ArrowNext size="18" class="post-body__back-home-icon" />
+          <span>Volver al inicio</span>
+        </LinkWrapper>
+      </div>
     </div>
   </div>
 </PostLayout>
@@ -560,5 +574,33 @@ const uiDictJson = JSON.stringify(uiDict);
     border-radius: 0.25rem;
     font-size: 0.85em;
     font-family: "Fira Code", "Courier New", Courier, monospace;
+  }
+
+  .post-body__back-home {
+    margin-top: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .post-body__back-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-family: var(--font-titles);
+    font-size: 1rem;
+    color: var(--color-accent);
+    transition: color 300ms ease;
+  }
+
+  .post-body__back-home-link:hover {
+    color: var(--color-word);
+  }
+
+  .post-body__back-home-icon {
+    transform: rotate(180deg);
+    transition: transform 300ms ease;
+  }
+
+  .post-body__back-home-link:hover .post-body__back-home-icon {
+    transform: rotate(180deg) translateX(-4px);
   }
 </style>
