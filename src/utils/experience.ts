@@ -134,8 +134,3 @@ export function initExperienceLangSwitch(): void {
   if (typeof document === "undefined") return;
   updateExperienceContent(getCurrentLang());
 }
-
-document.addEventListener("astro:page-load", () => {
-  bindTabListeners();
-  bindCarouselLogic();
-});
