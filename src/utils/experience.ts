@@ -6,7 +6,9 @@ export function updateExperienceContent(lang: Lang): void {
   if (typeof document === "undefined") return;
   const dataEl = document.getElementById("experience-data");
   if (!dataEl?.textContent) return;
-  const data = JSON.parse(dataEl.textContent)[lang];
+  const allData = JSON.parse(dataEl.textContent);
+  const data = allData[lang];
+  if (!data || !Array.isArray(data.jobs)) return;
 
   const title = document.querySelector("[data-experience-title]");
   if (title) title.textContent = data.title;
@@ -14,34 +16,44 @@ export function updateExperienceContent(lang: Lang): void {
   const intro = document.querySelector("[data-experience-intro]");
   if (intro) intro.textContent = data.intro;
 
-  data.jobs.forEach((job: any) => {
-    const panels = document.querySelectorAll(
-      `[data-panel="${job.id}"], [data-slide="${job.id}"]`,
-    );
-    panels.forEach((p) => {
-      const role = p.querySelector("[data-job-role]");
-      if (role) role.textContent = job.role;
+  // Update tab labels (desktop) by index — Strapi id differs per locale
+  const tabs = document.querySelectorAll<HTMLElement>("[data-tab]");
+  tabs.forEach((tab, idx) => {
+    const job = data.jobs[idx];
+    if (!job) return;
+    const companySpan = tab.querySelector(".experience-tabs__tab-company");
+    if (companySpan) companySpan.textContent = job.company;
+  });
 
-      const company = p.querySelector("[data-job-company]");
-      if (company) company.textContent = `@${job.company}`;
+  // Update panels and slides by index
+  const panels = document.querySelectorAll<HTMLElement>(
+    "[data-panel], [data-slide]",
+  );
+  panels.forEach((panel, idx) => {
+    const job = data.jobs[idx];
+    if (!job) return;
 
-      const period = p.querySelector("[data-job-period]");
-      if (period) period.textContent = job.period;
+    const role = panel.querySelector("[data-job-role]");
+    if (role) role.textContent = job.role;
 
-      const desc = p.querySelector("[data-job-description]");
-      if (desc && typeof job.description === "string")
-        desc.innerHTML = job.description;
+    const company = panel.querySelector("[data-job-company]");
+    if (company) company.textContent = `@${job.company}`;
 
-      const tags = p.querySelector("[data-job-tags]");
-      if (tags && Array.isArray(job.technologies)) {
-        tags.innerHTML = job.technologies
-          .map(
-            (tech: string) =>
-              `<span class="experience-tabs__tag">${tech}</span>`,
-          )
-          .join("");
-      }
-    });
+    const period = panel.querySelector("[data-job-period]");
+    if (period) period.textContent = job.period;
+
+    const desc = panel.querySelector("[data-job-description]");
+    if (desc && typeof job.description === "string")
+      desc.innerHTML = job.description;
+
+    const tags = panel.querySelector("[data-job-tags]");
+    if (tags && Array.isArray(job.technologies)) {
+      tags.innerHTML = job.technologies
+        .map(
+          (tech: string) => `<span class="experience-tabs__tag">${tech}</span>`,
+        )
+        .join("");
+    }
   });
 }
 

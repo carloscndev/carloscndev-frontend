@@ -1,26 +1,54 @@
 import { describe, it, expect } from "vitest";
 
 describe("experience", () => {
-  it("should update experience content from embedded JSON", async () => {
+  it("should update experience content from embedded JSON by index", async () => {
     document.body.innerHTML = "";
     const data = {
       es: {
         title: "Experiencia",
+        intro: "Intro ES",
         jobs: [
           {
-            id: "c3ai",
-            role: "Engineer",
-            description: "<p>Paragraph 1</p><p>Paragraph 2</p>",
+            id: 1,
+            company: "Acme ES",
+            company_url: "https://acme.es",
+            role: "Engineer ES",
+            period: "2020–2021 ES",
+            description: "<p>Paragraph 1 ES</p>",
+            technologies: ["JS", "TS"],
+          },
+          {
+            id: 2,
+            company: "Globex ES",
+            company_url: "https://globex.es",
+            role: "Lead ES",
+            period: "2021–2022 ES",
+            description: "<p>Paragraph 2 ES</p>",
+            technologies: ["Astro"],
           },
         ],
       },
       en: {
         title: "Experience",
+        intro: "Intro EN",
         jobs: [
           {
-            id: "c3ai",
+            id: 3,
+            company: "Acme EN",
+            company_url: "https://acme.en",
             role: "Engineer EN",
-            description: "<p>Paragraph 1 EN</p><p>Paragraph 2 EN</p>",
+            period: "2020–2021 EN",
+            description: "<p>Paragraph 1 EN</p>",
+            technologies: ["JS", "TS"],
+          },
+          {
+            id: 4,
+            company: "Globex EN",
+            company_url: "https://globex.en",
+            role: "Lead EN",
+            period: "2021–2022 EN",
+            description: "<p>Paragraph 2 EN</p>",
+            technologies: ["Astro"],
           },
         ],
       },
@@ -32,21 +60,62 @@ describe("experience", () => {
 
     document.body.innerHTML += `
       <p data-experience-title></p>
-      <div data-panel="c3ai">
+      <p data-experience-intro></p>
+      <button data-tab><span class="experience-tabs__tab-company"></span></button>
+      <button data-tab><span class="experience-tabs__tab-company"></span></button>
+      <div data-panel>
         <span data-job-role></span>
+        <span data-job-company></span>
+        <span data-job-period></span>
         <div data-job-description></div>
+        <div data-job-tags></div>
+      </div>
+      <div data-panel>
+        <span data-job-role></span>
+        <span data-job-company></span>
+        <span data-job-period></span>
+        <div data-job-description></div>
+        <div data-job-tags></div>
       </div>
     `;
 
     const { updateExperienceContent } = await import("../../utils/experience");
-    updateExperienceContent("es");
+    updateExperienceContent("en");
 
     const title = document.querySelector("[data-experience-title]")!;
-    expect(title.textContent).toBe("Experiencia");
-    const role = document.querySelector("[data-job-role]")!;
-    expect(role.textContent).toBe("Engineer");
-    const desc = document.querySelector("[data-job-description]")!;
-    expect(desc.innerHTML).toContain("<p>Paragraph 1</p>");
-    expect(desc.innerHTML).toContain("<p>Paragraph 2</p>");
+    expect(title.textContent).toBe("Experience");
+
+    const intro = document.querySelector("[data-experience-intro]")!;
+    expect(intro.textContent).toBe("Intro EN");
+
+    const tabLabels = document.querySelectorAll(
+      ".experience-tabs__tab-company",
+    );
+    expect(tabLabels[0].textContent).toBe("Acme EN");
+    expect(tabLabels[1].textContent).toBe("Globex EN");
+
+    const panels = document.querySelectorAll("[data-panel]");
+    expect(panels[0].querySelector("[data-job-role]")!.textContent).toBe(
+      "Engineer EN",
+    );
+    expect(panels[0].querySelector("[data-job-company]")!.textContent).toBe(
+      "@Acme EN",
+    );
+    expect(panels[0].querySelector("[data-job-period]")!.textContent).toBe(
+      "2020–2021 EN",
+    );
+    expect(panels[0].querySelector("[data-job-description]")!.innerHTML).toBe(
+      "<p>Paragraph 1 EN</p>",
+    );
+    expect(panels[0].querySelector("[data-job-tags]")!.innerHTML).toContain(
+      '<span class="experience-tabs__tag">JS</span>',
+    );
+
+    expect(panels[1].querySelector("[data-job-role]")!.textContent).toBe(
+      "Lead EN",
+    );
+    expect(panels[1].querySelector("[data-job-description]")!.innerHTML).toBe(
+      "<p>Paragraph 2 EN</p>",
+    );
   });
 });

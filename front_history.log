@@ -353,6 +353,25 @@
 - Updated `src/__tests__/utils/blog.test.ts` to match flat data shape
 - **User verified:** Blog section now fully switches language
 
+## Fix: Experience Section Tabs Broken + Content Not Translating
+- Root cause 1: `updateExperienceContent` searched panels by `job.id`, but Strapi v5 assigns a different `id` to each localization (`es` job id ≠ `en` job id)
+  - Result: `[data-panel="2"]` (English) was never found because the HTML only had `[data-panel="1"]` (rendered in Spanish)
+  - All panel content remained in the initial language
+- Root cause 2: When `updateExperienceContent` threw a silent error (undefined panels), it sometimes blocked `initExperienceTabs()` from running
+  - Result: desktop tab buttons stopped responding to clicks
+- Root cause 3: `initExperienceLangSwitch` never called `updateExperienceContent` on initial load
+  - Like Home, it relied exclusively on `astro:page-load`, which may have already fired
+- Fix: Rewrote `src/utils/experience.ts`
+  - Replaced ID-based lookup with index-based lookup (`panels.forEach((panel, idx) => { const job = data.jobs[idx] })`)
+  - Added guard `if (!data || !Array.isArray(data.jobs)) return` to prevent errors when data is missing
+  - Now updates tab labels (`experience-tabs__tab-company`) by index as well
+  - Added immediate `updateExperienceContent(getCurrentLang())` in `initExperienceLangSwitch`
+  - Also updates `intro` and rebuilds `technologies` tags
+- Updated `src/__tests__/utils/experience.test.ts`
+  - Tests now use 2 jobs with different Strapi ids per locale
+  - Verifies tabs, panels, company names, periods, descriptions, and tags all switch correctly
+- **User verified:** Experience section now fully switches language; desktop tabs work correctly
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors
