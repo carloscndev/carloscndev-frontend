@@ -253,10 +253,26 @@
 - 30 test files, 160 tests passing, 0 lint errors
 - Build: 6 pages generated + 12 optimized WebP images
 
+## MIG-025: Render Markdown Content in Blog Posts
+- Root cause: Strapi stores blog post `content` as Markdown, but `blog/[slug].astro` rendered it raw via `set:html`
+- Result: Markdown syntax (`# Title`, `**bold**`, etc.) appeared as plain text instead of rendered HTML
+- Fix: Installed `marked` package and imported it in `src/pages/blog/[slug].astro`
+  - Parse `post.content` with `marked.parse()` server-side before rendering and embedding
+  - Parse `otherPost.content` for the embedded JSON used in client-side language switching
+  - Both initial render and embedded data now contain HTML instead of raw Markdown
+- Added comprehensive Markdown CSS styles in `blog/[slug].astro`
+  - Headings (h1–h6), lists (ul/ol), links, blockquotes, code blocks, inline code
+  - Tables, horizontal rules, strong/emphasis
+  - Responsive font sizes for desktop breakpoint
+- Verified: `/blog/test-post` now renders `<p>`, `<h1>`, etc. in dist HTML instead of raw Markdown
+- 30 test files, 160 tests passing, 0 lint errors
+- Build: 6 pages generated + 12 optimized WebP images
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors
 - 6 pages generated (including /blog/test-post for es + en) + 12 optimized WebP images
 - Blog images (cards + hero) use Strapi with native responsive formats
+- Blog post content renders Markdown to HTML via `marked`
 - Home/About/404 images use local Astro Image for correct sizing
 - 100% SSG confirmed (build fails when Strapi is down)

@@ -8,6 +8,7 @@ import type { GlobalConfigAttributes } from "../../types/global-config";
 import type { BlogPostAttributes } from "../../types/blog-post";
 import PostLayout from "../../layouts/PostLayout.astro";
 import StrapiImage from "../../components/ui/StrapiImage.astro";
+import { marked } from "marked";
 import uiDict from "../../i18n/ui.json";
 import type { Lang } from "../../utils/lang";
 
@@ -68,6 +69,9 @@ if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
+// Parse Markdown content to HTML for both locales
+const postContentHtml = marked.parse(post.content) as string;
+
 const categoryTheme = post.icon === "running-icon" ? "running" : "tech";
 const authorPrefix = uiDict[lang]["post.author_prefix"];
 
@@ -80,6 +84,10 @@ const otherPost = await fetchCollectionEntry<BlogPostAttributes>(
   { populate: { category: true, headerImage: true } },
 );
 
+const otherContentHtml = otherPost
+  ? (marked.parse(otherPost.content) as string)
+  : "";
+
 const embeddedData = {
   es:
     lang === "es"
@@ -89,7 +97,7 @@ const embeddedData = {
           author: post.author || "",
           category: post.category?.name || "",
           icon: post.icon,
-          content: post.content,
+          content: postContentHtml,
         }
       : otherPost
         ? {
@@ -98,7 +106,7 @@ const embeddedData = {
             author: otherPost.author || "",
             category: otherPost.category?.name || "",
             icon: otherPost.icon,
-            content: otherPost.content,
+            content: otherContentHtml,
           }
         : null,
   en:
@@ -109,7 +117,7 @@ const embeddedData = {
           author: post.author || "",
           category: post.category?.name || "",
           icon: post.icon,
-          content: post.content,
+          content: postContentHtml,
         }
       : otherPost
         ? {
@@ -118,7 +126,7 @@ const embeddedData = {
             author: otherPost.author || "",
             category: otherPost.category?.name || "",
             icon: otherPost.icon,
-            content: otherPost.content,
+            content: otherContentHtml,
           }
         : null,
 };
@@ -177,7 +185,7 @@ const uiDictJson = JSON.stringify(uiDict);
       <div
         class="post-body__content"
         data-post-content
-        set:html={post.content}
+        set:html={postContentHtml}
       />
     </div>
   </div>
@@ -356,11 +364,127 @@ const uiDictJson = JSON.stringify(uiDict);
     gap: var(--spacing-md-lg);
   }
 
+  /* Markdown rendered content styles */
   .post-body__content :global(p) {
     font-family: var(--font-body);
     font-size: var(--font-size-body-mobile);
     color: var(--text-base);
     line-height: 1.8;
+  }
+
+  .post-body__content :global(h1),
+  .post-body__content :global(h2),
+  .post-body__content :global(h3),
+  .post-body__content :global(h4),
+  .post-body__content :global(h5),
+  .post-body__content :global(h6) {
+    font-family: var(--font-titles);
+    color: var(--text-base);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .post-body__content :global(h1) {
+    font-size: 1.75rem;
+  }
+
+  .post-body__content :global(h2) {
+    font-size: 1.5rem;
+  }
+
+  .post-body__content :global(h3) {
+    font-size: 1.25rem;
+  }
+
+  .post-body__content :global(ul),
+  .post-body__content :global(ol) {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    line-height: 1.8;
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .post-body__content :global(li) {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .post-body__content :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    transition: opacity 200ms ease;
+  }
+
+  .post-body__content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .post-body__content :global(blockquote) {
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    font-style: italic;
+    color: var(--color-word);
+  }
+
+  .post-body__content :global(pre) {
+    background: var(--color-bg-code, #1e1e1e);
+    border-radius: 8px;
+    padding: var(--spacing-md);
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
+  }
+
+  .post-body__content :global(code) {
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 0.9em;
+    background: var(--color-bg-code-inline, rgba(140, 136, 247, 0.1));
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: var(--text-base);
+  }
+
+  .post-body__content :global(pre code) {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    color: var(--color-code, #d4d4d4);
+  }
+
+  .post-body__content :global(hr) {
+    border: none;
+    border-top: 1px solid var(--color-word);
+    opacity: 0.3;
+    margin: var(--spacing-xl) 0;
+  }
+
+  .post-body__content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+  }
+
+  .post-body__content :global(th),
+  .post-body__content :global(td) {
+    border: 1px solid var(--color-word);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    text-align: left;
+  }
+
+  .post-body__content :global(th) {
+    background: rgba(140, 136, 247, 0.1);
+    font-weight: var(--weight-space-semibold);
+  }
+
+  .post-body__content :global(strong) {
+    font-weight: var(--weight-space-semibold);
+  }
+
+  .post-body__content :global(em) {
+    font-style: italic;
   }
 
   @media (min-width: 768px) {
@@ -384,7 +508,10 @@ const uiDictJson = JSON.stringify(uiDict);
       gap: var(--spacing-lg);
     }
 
-    .post-body__content :global(p) {
+    .post-body__content :global(p),
+    .post-body__content :global(ul),
+    .post-body__content :global(ol),
+    .post-body__content :global(table) {
       font-size: var(--font-size-body-desktop);
     }
   }

@@ -23,6 +23,7 @@
     "@astrojs/vercel": "^9.0.5",
     "@vercel/analytics": "^2.0.1",
     "astro": "^5.16.11",
+    "marked": "^18.0.4",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
