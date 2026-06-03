@@ -49,6 +49,21 @@ const inlineThemeScript = `
   }
 
   initLayoutTheme();
+
+  // Pre-apply theme to the incoming document BEFORE it becomes visible
+  // to prevent any flash of the wrong theme during ClientRouter navigation.
+  document.addEventListener("astro:before-swap", (event) => {
+    if (event.newDocument) {
+      const theme = getStoredTheme() || (window.matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT);
+      if (theme === DARK) {
+        event.newDocument.documentElement.classList.add(DARK);
+      } else {
+        event.newDocument.documentElement.classList.remove(DARK);
+      }
+    }
+  });
+
+  // Fallback: also re-apply after swap in case before-swap missed
   document.addEventListener("astro:after-swap", initLayoutTheme);
 `;
 ---

@@ -108,12 +108,13 @@ function bindMobileMenuListeners(): void {
     closeBtn.addEventListener("click", closeMobileMenu);
   }
 
-  // Close on nav link click (anchor links only — external nav is handled
-  // by astro:after-swap to avoid Safari cancelling the click)
+  // Close on any nav link click.
+  // Use requestAnimationFrame so Safari has one frame to start navigation
+  // before the overlay is hidden, avoiding cancelled clicks.
   const navLinks = document.querySelectorAll("[data-mobile-menu-link]");
   navLinks.forEach((link) => {
-    link.removeEventListener("click", closeMobileMenuOnAnchor);
-    link.addEventListener("click", closeMobileMenuOnAnchor);
+    link.removeEventListener("click", closeMobileMenuSoon);
+    link.addEventListener("click", closeMobileMenuSoon);
   });
 
   // Trap focus inside menu
@@ -131,14 +132,12 @@ function bindMobileMenuListeners(): void {
   document.addEventListener("keydown", handleEscKey);
 }
 
-function closeMobileMenuOnAnchor(e: Event): void {
-  const target = e.currentTarget as HTMLElement;
-  const href = target.getAttribute("href") || "";
-  // Only close immediately for same-page anchors; for cross-page links
-  // we let astro:after-swap close the menu so Safari doesn't cancel navigation.
-  if (href.startsWith("#")) {
+function closeMobileMenuSoon(): void {
+  // Defer by one frame so Safari can process the <a> click before
+  // the fixed overlay disappears, which sometimes cancels navigation.
+  requestAnimationFrame(() => {
     closeMobileMenu();
-  }
+  });
 }
 
 export function initMobileMenuListener(): void {

@@ -311,6 +311,24 @@
   - Also prevents stale `overflow-hidden` and overlay states after navigation
 - Verified: mobile menu links now work reliably in Safari
 
+## Fix: Theme Flash During ClientRouter Navigation (Safari)
+- Root cause: `astro:after-swap` fires AFTER the new page content is already visible
+- Result: brief flash of light theme when the user has dark mode selected
+- Fix: Added `astro:before-swap` listener in `BaseLayout.astro`
+  - Pre-applies the stored theme to `event.newDocument.documentElement` BEFORE the swap happens
+  - The incoming page already has the correct `dark` class when it becomes visible
+  - Kept `astro:after-swap` as fallback for edge cases
+- Verified: no more theme flash when navigating between pages in Safari
+
+## Fix: Mobile Menu Not Closing on Cross-Page Nav
+- Root cause: previous fix only closed menu for anchor links (`href="#id"`)
+- Result: clicking a nav link to another page left the mobile menu open
+- Fix: Reverted to closing the menu for ALL nav link clicks
+  - Used `requestAnimationFrame(closeMobileMenu)` instead of immediate call
+  - `requestAnimationFrame` defers by one paint frame, giving Safari time to process the click
+  - Avoids the `setTimeout(..., 50)` delay that caused stale states previously
+- Verified: menu closes reliably for both same-page anchors and cross-page links
+
 ## Final Status
 - All pages build successfully with Strapi running
 - 30 test files, 160 tests passing, 0 lint errors
