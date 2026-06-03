@@ -68,14 +68,14 @@ describe("experience", () => {
         <span data-job-company></span>
         <span data-job-period></span>
         <div data-job-description></div>
-        <div data-job-tags></div>
+        <div data-job-tags><span class="tech-pill">JS</span><span class="tech-pill">TS</span></div>
       </div>
       <div data-panel>
         <span data-job-role></span>
         <span data-job-company></span>
         <span data-job-period></span>
         <div data-job-description></div>
-        <div data-job-tags></div>
+        <div data-job-tags><span class="tech-pill">Astro</span></div>
       </div>
     `;
 
@@ -107,9 +107,9 @@ describe("experience", () => {
     expect(panels[0].querySelector("[data-job-description]")!.innerHTML).toBe(
       "<p>Paragraph 1 EN</p>",
     );
-    expect(panels[0].querySelector("[data-job-tags]")!.innerHTML).toContain(
-      '<span class="experience-tabs__tag">JS</span>',
-    );
+    const pills0 = panels[0].querySelectorAll("[data-job-tags] .tech-pill");
+    expect(pills0[0].textContent).toBe("JS");
+    expect(pills0[1].textContent).toBe("TS");
 
     expect(panels[1].querySelector("[data-job-role]")!.textContent).toBe(
       "Lead EN",
@@ -117,5 +117,7 @@ describe("experience", () => {
     expect(panels[1].querySelector("[data-job-description]")!.innerHTML).toBe(
       "<p>Paragraph 2 EN</p>",
     );
+    const pills1 = panels[1].querySelectorAll("[data-job-tags] .tech-pill");
+    expect(pills1[0].textContent).toBe("Astro");
   });
 });

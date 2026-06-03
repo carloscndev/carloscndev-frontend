@@ -48,11 +48,11 @@ export function updateExperienceContent(lang: Lang): void {
 
     const tags = panel.querySelector("[data-job-tags]");
     if (tags && Array.isArray(job.technologies)) {
-      tags.innerHTML = job.technologies
-        .map(
-          (tech: string) => `<span class="experience-tabs__tag">${tech}</span>`,
-        )
-        .join("");
+      const pills = tags.querySelectorAll<HTMLElement>(".tech-pill");
+      pills.forEach((pill, pillIdx) => {
+        const tech = job.technologies[pillIdx];
+        if (tech !== undefined) pill.textContent = tech;
+      });
     }
   });
 }
