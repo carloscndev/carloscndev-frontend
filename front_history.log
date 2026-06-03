@@ -318,7 +318,7 @@
   - Pre-applies the stored theme to `event.newDocument.documentElement` BEFORE the swap happens
   - The incoming page already has the correct `dark` class when it becomes visible
   - Kept `astro:after-swap` as fallback for edge cases
-- Verified: no more theme flash when navigating between pages in Safari
+- **User verified:** no more theme flash when navigating between pages in Safari
 
 ## Fix: Mobile Menu Not Closing on Cross-Page Nav
 - Root cause: previous fix only closed menu for anchor links (`href="#id"`)
@@ -327,7 +327,7 @@
   - Used `requestAnimationFrame(closeMobileMenu)` instead of immediate call
   - `requestAnimationFrame` defers by one paint frame, giving Safari time to process the click
   - Avoids the `setTimeout(..., 50)` delay that caused stale states previously
-- Verified: menu closes reliably for both same-page anchors and cross-page links
+- **User verified:** menu closes reliably for both same-page anchors and cross-page links
 
 ## Final Status
 - All pages build successfully with Strapi running
