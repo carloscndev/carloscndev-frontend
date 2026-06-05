@@ -40,50 +40,91 @@ const marked = new Marked().use(
 );
 
 export async function getStaticPaths() {
-  const esPosts = await fetchCollection<BlogPostAttributes>(
-    "blog-posts",
-    "es",
-    { populate: { category: true, headerImage: true } },
-  );
-  const enPosts = await fetchCollection<BlogPostAttributes>(
-    "blog-posts",
-    "en",
-    { populate: { category: true, headerImage: true } },
-  );
+  let esPosts: BlogPostAttributes[] = [];
+  let enPosts: BlogPostAttributes[] = [];
+
+  try {
+    esPosts = await fetchCollection<BlogPostAttributes>("blog-posts", "es", {
+      populate: { category: true, headerImage: true },
+    });
+  } catch {
+    // No ES posts found, continue with empty array
+  }
+
+  try {
+    enPosts = await fetchCollection<BlogPostAttributes>("blog-posts", "en", {
+      populate: { category: true, headerImage: true },
+    });
+  } catch {
+    // No EN posts found, continue with empty array
+  }
+
+  if (esPosts.length === 0 && enPosts.length === 0) {
+    return [];
+  }
 
   const paths: Array<{
     params: { slug: string };
     props: { lang: Lang; documentId: string };
   }> = [];
 
-  esPosts.forEach((post) => {
-    paths.push({
-      params: { slug: post.slug },
-      props: { lang: "es", documentId: post.documentId },
-    });
-  });
+  for (const post of esPosts) {
+    try {
+      const exists = await fetchCollectionEntry<BlogPostAttributes>(
+        "blog-posts",
+        post.documentId,
+        "es",
+      );
+      if (exists) {
+        paths.push({
+          params: { slug: post.slug },
+          props: { lang: "es", documentId: post.documentId },
+        });
+      }
+    } catch {
+      // Post not accessible in this locale, skip
+    }
+  }
 
-  enPosts.forEach((post) => {
-    paths.push({
-      params: { slug: post.slug },
-      props: { lang: "en", documentId: post.documentId },
-    });
-  });
+  for (const post of enPosts) {
+    try {
+      const exists = await fetchCollectionEntry<BlogPostAttributes>(
+        "blog-posts",
+        post.documentId,
+        "en",
+      );
+      if (exists) {
+        paths.push({
+          params: { slug: post.slug },
+          props: { lang: "en", documentId: post.documentId },
+        });
+      }
+    } catch {
+      // Post not accessible in this locale, skip
+    }
+  }
 
   return paths;
 }
 
 const { lang, documentId } = Astro.props;
 
-const post = await fetchCollectionEntry<BlogPostAttributes>(
-  "blog-posts",
-  documentId,
-  lang,
-  { populate: { category: true, headerImage: true } },
-);
+let post: BlogPostAttributes | null = null;
+let fetchError: Error | null = null;
 
-if (!post) {
-  return Astro.redirect("/404");
+try {
+  post = await fetchCollectionEntry<BlogPostAttributes>(
+    "blog-posts",
+    documentId,
+    lang,
+    { populate: { category: true, headerImage: true } },
+  );
+} catch (e) {
+  fetchError = e instanceof Error ? e : new Error(String(e));
+}
+
+if (fetchError || !post) {
+  return Astro.redirect("/");
 }
 
 const globalConfig = await fetchSingleType<GlobalConfigAttributes>(

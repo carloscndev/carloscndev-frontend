@@ -93,15 +93,19 @@ export async function fetchCollection<T>(
   queryObj: Record<string, unknown> = {},
   config?: StrapiClientConfig,
 ): Promise<T[]> {
-  const response = await queryStrapi<StrapiCollectionResponse<T>>(
-    slug,
-    {
-      locale,
-      ...queryObj,
-    },
-    { config },
-  );
-  return response.data;
+  try {
+    const response = await queryStrapi<StrapiCollectionResponse<T>>(
+      slug,
+      {
+        locale,
+        ...queryObj,
+      },
+      { config },
+    );
+    return response.data;
+  } catch {
+    return [];
+  }
 }
 
 export function getStrapiMediaUrl(
@@ -124,13 +128,17 @@ export async function fetchCollectionEntry<T>(
   queryObj: Record<string, unknown> = {},
   config?: StrapiClientConfig,
 ): Promise<T | null> {
-  const response = await queryStrapi<StrapiSingleResponse<T>>(
-    `${slug}/${id}`,
-    {
-      locale,
-      ...queryObj,
-    },
-    { config },
-  );
-  return response.data;
+  try {
+    const response = await queryStrapi<StrapiSingleResponse<T>>(
+      `${slug}/${id}`,
+      {
+        locale,
+        ...queryObj,
+      },
+      { config },
+    );
+    return response.data;
+  } catch {
+    return null;
+  }
 }
