@@ -25,10 +25,8 @@ export function updateExperienceContent(lang: Lang): void {
     if (companySpan) companySpan.textContent = job.company;
   });
 
-  // Update panels and slides by index
-  const panels = document.querySelectorAll<HTMLElement>(
-    "[data-panel], [data-slide]",
-  );
+  // Update desktop panels by index
+  const panels = document.querySelectorAll<HTMLElement>("[data-panel]");
   panels.forEach((panel, idx) => {
     const job = data.jobs[idx];
     if (!job) return;
@@ -48,11 +46,36 @@ export function updateExperienceContent(lang: Lang): void {
 
     const tags = panel.querySelector("[data-job-tags]");
     if (tags && Array.isArray(job.technologies)) {
-      const pills = tags.querySelectorAll<HTMLElement>(".tech-pill");
-      pills.forEach((pill, pillIdx) => {
-        const tech = job.technologies[pillIdx];
-        if (tech !== undefined) pill.textContent = tech;
-      });
+      tags.innerHTML = job.technologies
+        .map((t) => `<span class="tech-pill">${t}</span>`)
+        .join("");
+    }
+  });
+
+  // Update mobile carousel slides by index
+  const slides = document.querySelectorAll<HTMLElement>("[data-slide]");
+  slides.forEach((slide, idx) => {
+    const job = data.jobs[idx];
+    if (!job) return;
+
+    const role = slide.querySelector("[data-job-role]");
+    if (role) role.textContent = job.role;
+
+    const company = slide.querySelector("[data-job-company]");
+    if (company) company.textContent = `@${job.company}`;
+
+    const period = slide.querySelector("[data-job-period]");
+    if (period) period.textContent = job.period;
+
+    const desc = slide.querySelector("[data-job-description]");
+    if (desc && typeof job.description === "string")
+      desc.innerHTML = job.description;
+
+    const tags = slide.querySelector("[data-job-tags]");
+    if (tags && Array.isArray(job.technologies)) {
+      tags.innerHTML = job.technologies
+        .map((t) => `<span class="tech-pill">${t}</span>`)
+        .join("");
     }
   });
 }
@@ -69,9 +92,7 @@ function bindCarouselLogic(): void {
   if (!track || !dots.length) return;
 
   dots.forEach((dot, i) => {
-    const cloned = cloneAndReplace(dot);
-
-    cloned.addEventListener("click", () => {
+    dot.addEventListener("click", () => {
       track.scrollTo({
         left: track.offsetWidth * i,
         behavior: "smooth",
@@ -79,15 +100,15 @@ function bindCarouselLogic(): void {
     });
   });
 
-  track.onscroll = null;
-  track.addEventListener("scroll", () => {
+  const scrollHandler = () => {
     const index = Math.round(track.scrollLeft / track.offsetWidth);
     document
       .querySelectorAll<HTMLElement>("[data-dot]")
       .forEach((d, i) =>
         d.classList.toggle("experience-carousel__dot--active", i === index),
       );
-  });
+  };
+  track.addEventListener("scroll", scrollHandler);
 }
 
 /* ------------------------------------------------------------------ */
@@ -99,17 +120,15 @@ function bindTabListeners(): void {
   const tabs = document.querySelectorAll<HTMLElement>("[data-tab]");
 
   tabs.forEach((tab) => {
-    const cloned = cloneAndReplace(tab);
-
-    cloned.addEventListener("click", () => {
-      const id = cloned.dataset.tab;
+    tab.addEventListener("click", () => {
+      const id = tab.dataset.tab;
       document
         .querySelectorAll<HTMLElement>("[data-tab]")
         .forEach((t) => t.classList.remove("experience-tabs__tab--active"));
       document
         .querySelectorAll<HTMLElement>("[data-panel]")
         .forEach((p) => p.classList.remove("experience-tabs__panel--active"));
-      cloned.classList.add("experience-tabs__tab--active");
+      tab.classList.add("experience-tabs__tab--active");
       document
         .querySelector(`[data-panel="${id}"]`)
         ?.classList.add("experience-tabs__panel--active");
@@ -120,17 +139,27 @@ function bindTabListeners(): void {
 export function initExperienceTabs(): void {
   if (typeof document === "undefined") return;
   bindTabListeners();
+
+  document.addEventListener("astro:page-load", () => {
+    bindTabListeners();
+  });
 }
 
 export function initExperienceCarousel(): void {
   if (typeof document === "undefined") return;
   bindCarouselLogic();
+
+  document.addEventListener("astro:page-load", () => {
+    bindCarouselLogic();
+  });
 }
 
 export function initExperienceLangSwitch(): void {
   initLangSwitch(updateExperienceContent);
 
-  // Sync content immediately in case astro:page-load already fired.
-  if (typeof document === "undefined") return;
+  document.addEventListener("astro:page-load", () => {
+    updateExperienceContent(getCurrentLang());
+  });
+
   updateExperienceContent(getCurrentLang());
 }

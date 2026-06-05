@@ -372,9 +372,18 @@
   - Verifies tabs, panels, company names, periods, descriptions, and tags all switch correctly
 - **User verified:** Experience section now fully switches language; desktop tabs work correctly
 
+## Fix: Experience Mobile Carousel Not Switching Language
+- Root cause: `updateExperienceContent` queried `[data-panel], [data-slide]` together in a single `querySelectorAll`
+- Both desktop panels and mobile slides share the same indices, so this worked for one pass
+- But the innerHTML rebuild for tags was applied to both simultaneously, causing the second pass to fail silently
+- Fix: Split into two separate loops — one for desktop panels (`[data-panel]`) and one for mobile slides (`[data-slide]`)
+- Each loop independently updates role, company, period, description, and technologies
+- Added new test case for mobile carousel language switching
+- 30 test files, 161 tests passing, 0 lint errors
+
 ## Final Status
 - All pages build successfully with Strapi running
-- 30 test files, 160 tests passing, 0 lint errors
+- 30 test files, 161 tests passing, 0 lint errors
 - 6 pages generated (including /blog/test-post for es + en) + 12 optimized WebP images
 - Blog images (cards + hero) use Strapi with native responsive formats
 - Blog post content renders Markdown to HTML via `marked` with Shiki syntax highlighting
