@@ -134,12 +134,12 @@ const expData = {
 const portfolioEs = await fetchSingleType<PortfolioPageAttributes>(
   "portfolio-page",
   "es",
-  { populate: "*" },
+  { populate: { projects: { populate: "*" } } },
 );
 const portfolioEn = await fetchSingleType<PortfolioPageAttributes>(
   "portfolio-page",
   "en",
-  { populate: "*" },
+  { populate: { projects: { populate: "*" } } },
 );
 
 if (!portfolioEs || !portfolioEn) {
@@ -151,33 +151,45 @@ const portfolioData = {
     title: portfolioEs.title,
     intro: portfolioEs.intro,
     view_more: portfolioEs.view_more,
-    projects: (portfolioEs.projects ?? []).map((p) => ({
-      id: p.id,
-      title: p.title,
-      description: p.description,
-      technologies: p.technologies,
-      links: {
-        repo: p.links?.repo,
-        demo: p.links?.demo,
-        article: p.links?.article,
-      },
-    })),
+    projects: (portfolioEs.projects ?? []).map((p) => {
+      const linksObj: { repo?: string; demo?: string; article?: string } = {};
+      if (Array.isArray(p.links)) {
+        for (const link of p.links) {
+          if (link.type === "repo") linksObj.repo = link.url;
+          if (link.type === "demo") linksObj.demo = link.url;
+          if (link.type === "article") linksObj.article = link.url;
+        }
+      }
+      return {
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        technologies: p.technologies,
+        links: linksObj,
+      };
+    }),
   },
   en: {
     title: portfolioEn.title,
     intro: portfolioEn.intro,
     view_more: portfolioEn.view_more,
-    projects: (portfolioEn.projects ?? []).map((p) => ({
-      id: p.id,
-      title: p.title,
-      description: p.description,
-      technologies: p.technologies,
-      links: {
-        repo: p.links?.repo,
-        demo: p.links?.demo,
-        article: p.links?.article,
-      },
-    })),
+    projects: (portfolioEn.projects ?? []).map((p) => {
+      const linksObj: { repo?: string; demo?: string; article?: string } = {};
+      if (Array.isArray(p.links)) {
+        for (const link of p.links) {
+          if (link.type === "repo") linksObj.repo = link.url;
+          if (link.type === "demo") linksObj.demo = link.url;
+          if (link.type === "article") linksObj.article = link.url;
+        }
+      }
+      return {
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        technologies: p.technologies,
+        links: linksObj,
+      };
+    }),
   },
 };
 
