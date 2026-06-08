@@ -49,8 +49,8 @@ describe("pages", () => {
       expect(content).toContain("PostLayout");
     });
 
-    it("should render blog cards", () => {
-      expect(content).toContain("blog-card");
+    it("should use BlogCard component", () => {
+      expect(content).toContain("BlogCard");
     });
   });
 
