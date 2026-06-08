@@ -86,7 +86,7 @@ export function updatePortfolioContent(lang: Lang): void {
       );
       tagsContainers.forEach((tc) => {
         tc.innerHTML = project.technologies
-          .map((t) => `<span>${t}</span>`)
+          .map((t) => `<span class="tech-pill tech-pill--card">${t}</span>`)
           .join("");
       });
 
