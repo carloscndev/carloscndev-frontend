@@ -51,7 +51,9 @@ export function updateBlogEntries(lang: Lang): void {
       if (titleEl) titleEl.textContent = post.title;
 
       const categoryEl = card.querySelector("[data-post-category]");
-      if (categoryEl) categoryEl.textContent = post.category;
+      if (categoryEl && categoryEl.firstChild) {
+        categoryEl.firstChild.textContent = post.category + " ";
+      }
 
       const dateEl = card.querySelector("[data-post-date]");
       if (dateEl) dateEl.textContent = post.date;
