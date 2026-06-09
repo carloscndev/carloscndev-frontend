@@ -12,7 +12,10 @@ describe("blog-post", () => {
       es: {
         title: "Test Title",
         date: "2025",
-        author: "dev",
+        readTime: "5 min de lectura",
+        authorName: "Carlos CN",
+        authorNickname: "carloscndev",
+        authorAvatar: "https://example.com/avatar.jpg",
         category: "tech",
         icon: "tech-icon",
         content: "<p>Hello ES</p>",
@@ -20,7 +23,10 @@ describe("blog-post", () => {
       en: {
         title: "Test EN",
         date: "2025",
-        author: "dev",
+        readTime: "5 min read",
+        authorName: "Carlos CN",
+        authorNickname: "carloscndev",
+        authorAvatar: "https://example.com/avatar.jpg",
         category: "tech",
         icon: "tech-icon",
         content: "<p>Hello EN</p>",
@@ -49,7 +55,19 @@ describe("blog-post", () => {
 
     document.body.innerHTML += `
       <h1 data-post-hero-title></h1>
-      <p data-post-hero-meta></p>
+      <div data-post-hero-meta>
+        <div data-post-meta-left>
+          <span data-post-date></span>
+          <span data-post-readtime></span>
+        </div>
+        <div data-post-meta-right>
+          <img data-post-author-avatar />
+          <div data-post-author-info>
+            <span data-post-author-name></span>
+            <span data-post-author-nickname></span>
+          </div>
+        </div>
+      </div>
       <div data-post-content></div>
       <a data-post-back-home href="/"><span>Volver al inicio</span></a>
     `;
@@ -58,10 +76,20 @@ describe("blog-post", () => {
 
     const title = document.querySelector("[data-post-hero-title]")!;
     expect(title.textContent).toBe("Test Title");
-    const meta = document.querySelector("[data-post-hero-meta]")!;
-    expect(meta.textContent).toContain("2025");
-    expect(meta.textContent).toContain("Autor:");
-    expect(meta.textContent).toContain("dev");
+    const dateEl = document.querySelector("[data-post-date]")!;
+    expect(dateEl.textContent).toBe("2025");
+    const readtimeEl = document.querySelector("[data-post-readtime]")!;
+    expect(readtimeEl.textContent).toBe("5 min de lectura");
+    const authorNameEl = document.querySelector("[data-post-author-name]")!;
+    expect(authorNameEl.textContent).toBe("Carlos CN");
+    const authorNicknameEl = document.querySelector(
+      "[data-post-author-nickname]",
+    )!;
+    expect(authorNicknameEl.textContent).toBe("@carloscndev");
+    const authorAvatarEl = document.querySelector(
+      "[data-post-author-avatar]",
+    ) as HTMLImageElement;
+    expect(authorAvatarEl.src).toBe("https://example.com/avatar.jpg");
     const content = document.querySelector("[data-post-content]")!;
     expect(content.innerHTML).toBe("<p>Hello ES</p>");
     const backHome = document.querySelector("[data-post-back-home] span")!;

@@ -3,6 +3,7 @@ import {
   fetchCollection,
   fetchCollectionEntry,
   fetchSingleType,
+  getStrapiMediaUrl,
 } from "../../services/strapi";
 import type { GlobalConfigAttributes } from "../../types/global-config";
 import type { BlogPostAttributes } from "../../types/blog-post";
@@ -16,6 +17,7 @@ import { createHighlighter } from "shiki";
 import uiDict from "../../i18n/ui.json";
 import type { Lang } from "../../utils/lang";
 import { getCategoryTheme } from "../../utils/category";
+import { calculateReadingTime } from "../../utils/reading-time";
 
 // 1. Initialize Shiki highlighter
 const highlighter = await createHighlighter({
@@ -118,7 +120,14 @@ try {
     "blog-posts",
     documentId,
     lang,
-    { populate: { category: true, coverImage: true, seo: true } },
+    {
+      populate: {
+        category: true,
+        coverImage: true,
+        seo: true,
+        author: { populate: { avatar: true } },
+      },
+    },
   );
 } catch (e) {
   fetchError = e instanceof Error ? e : new Error(String(e));
@@ -142,8 +151,12 @@ if (!globalConfig) {
 const postContentHtml = (await marked.parse(post.content)) as string;
 
 const categoryTheme = getCategoryTheme(post.category?.name || "");
-const authorName = post.author?.name || post.author?.nickname || "";
-const authorPrefix = uiDict[lang]["post.author_prefix"];
+const authorName = post.author?.name || "";
+const authorNickname = post.author?.nickname || "";
+const authorAvatar = post.author?.avatar?.url
+  ? getStrapiMediaUrl(post.author.avatar.url)
+  : "";
+const readTime = calculateReadingTime(post.content, lang);
 
 // Fetch other locale post for client-side language switching
 const otherLang = lang === "es" ? "en" : "es";
@@ -151,7 +164,13 @@ const otherPost = await fetchCollectionEntry<BlogPostAttributes>(
   "blog-posts",
   documentId,
   otherLang,
-  { populate: { category: true, coverImage: true } },
+  {
+    populate: {
+      category: true,
+      coverImage: true,
+      author: { populate: { avatar: true } },
+    },
+  },
 );
 
 const otherContentHtml = otherPost
@@ -164,7 +183,10 @@ const embeddedData = {
       ? {
           title: post.title,
           date: post.date,
-          author: post.author?.name || post.author?.nickname || "",
+          readTime: readTime,
+          authorName: authorName,
+          authorNickname: authorNickname,
+          authorAvatar: authorAvatar,
           category: post.category?.name || "",
           content: postContentHtml,
         }
@@ -172,7 +194,12 @@ const embeddedData = {
         ? {
             title: otherPost.title,
             date: otherPost.date,
-            author: otherPost.author?.name || otherPost.author?.nickname || "",
+            readTime: calculateReadingTime(otherPost.content, "es"),
+            authorName: otherPost.author?.name || "",
+            authorNickname: otherPost.author?.nickname || "",
+            authorAvatar: otherPost.author?.avatar?.url
+              ? getStrapiMediaUrl(otherPost.author.avatar.url)
+              : "",
             category: otherPost.category?.name || "",
             content: otherContentHtml,
           }
@@ -182,7 +209,10 @@ const embeddedData = {
       ? {
           title: post.title,
           date: post.date,
-          author: post.author?.name || post.author?.nickname || "",
+          readTime: readTime,
+          authorName: authorName,
+          authorNickname: authorNickname,
+          authorAvatar: authorAvatar,
           category: post.category?.name || "",
           content: postContentHtml,
         }
@@ -190,7 +220,12 @@ const embeddedData = {
         ? {
             title: otherPost.title,
             date: otherPost.date,
-            author: otherPost.author?.name || otherPost.author?.nickname || "",
+            readTime: calculateReadingTime(otherPost.content, "en"),
+            authorName: otherPost.author?.name || "",
+            authorNickname: otherPost.author?.nickname || "",
+            authorAvatar: otherPost.author?.avatar?.url
+              ? getStrapiMediaUrl(otherPost.author.avatar.url)
+              : "",
             category: otherPost.category?.name || "",
             content: otherContentHtml,
           }
@@ -245,10 +280,38 @@ const uiDictJson = JSON.stringify(uiDict);
 
   <div class="post-body">
     <div class="post-body__inner">
-      <p class="post-body__meta" data-post-hero-meta>
-        {post.date} &nbsp;{authorPrefix}
-        {authorName}
-      </p>
+      <div class="post-body__meta" data-post-hero-meta>
+        <div class="post-body__meta-left">
+          <span class="post-body__meta-date" data-post-date>{post.date}</span>
+          <span class="post-body__meta-readtime" data-post-readtime
+            >{readTime}</span
+          >
+        </div>
+        <div class="post-body__meta-right">
+          <img
+            src={authorAvatar}
+            alt={authorName}
+            class="post-body__meta-avatar"
+            data-post-author-avatar
+            style={authorAvatar ? "display: block" : "display: none"}
+          />
+          <div class="post-body__meta-author-info">
+            <span class="post-body__meta-author-name" data-post-author-name
+              >{authorName}</span
+            >
+            {
+              authorNickname && (
+                <span
+                  class="post-body__meta-author-nickname"
+                  data-post-author-nickname
+                >
+                  @{authorNickname}
+                </span>
+              )
+            }
+          </div>
+        </div>
+      </div>
 
       <div
         class="post-body__content"
@@ -356,59 +419,59 @@ const uiDictJson = JSON.stringify(uiDict);
     min-height: 50vh;
   }
 
-  :global(html[data-category-theme="tech"]) {
+  :global(html[data-category-theme="Tech"]) {
     --wi-p1: var(--color-tech-secondary-light);
     --wi-p2: var(--color-tech-secondary-light);
-    background: var(--color-tech-primary-light);
+    background-color: var(--color-tech-primary-light);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html[data-category-theme="Running"]) {
     --wi-p1: var(--color-running-secondary-light);
     --wi-p2: var(--color-running-secondary-light);
-    background: var(--color-running-primary-light);
+    background-color: var(--color-running-primary-light);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html[data-category-theme="Travel"]) {
     --wi-p1: var(--color-travel-secondary-light);
     --wi-p2: var(--color-travel-secondary-light);
-    background: var(--color-travel-primary-light);
+    background-color: var(--color-travel-primary-light);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html[data-category-theme="Books"]) {
     --wi-p1: var(--color-books-secondary-light);
     --wi-p2: var(--color-books-secondary-light);
-    background: var(--color-books-primary-light);
+    background-color: var(--color-books-primary-light);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html.dark[data-category-theme="Tech"]) {
     --wi-p1: var(--color-tech-secondary-dark);
     --wi-p2: var(--color-tech-secondary-dark);
-    background: var(--color-tech-primary-dark);
+    background-color: var(--color-tech-primary-dark);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html.dark[data-category-theme="Running"]) {
     --wi-p1: var(--color-running-secondary-dark);
     --wi-p2: var(--color-running-secondary-dark);
-    background: var(--color-running-primary-dark);
+    background-color: var(--color-running-primary-dark);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html.dark[data-category-theme="Travel"]) {
     --wi-p1: var(--color-travel-secondary-dark);
     --wi-p2: var(--color-travel-secondary-dark);
-    background: var(--color-travel-primary-dark);
+    background-color: var(--color-travel-primary-dark);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
   :global(html.dark[data-category-theme="Books"]) {
     --wi-p1: var(--color-books-secondary-dark);
     --wi-p2: var(--color-books-secondary-dark);
-    background: var(--color-books-primary-dark);
+    background-color: var(--color-books-primary-dark);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
@@ -457,35 +520,35 @@ const uiDictJson = JSON.stringify(uiDict);
   }
 
   :global(html[data-category-theme="Tech"]) body {
-    background: var(--color-tech-primary-light);
+    background-color: var(--color-tech-primary-light);
   }
 
   :global(html[data-category-theme="Running"]) body {
-    background: var(--color-running-primary-light);
+    background-color: var(--color-running-primary-light);
   }
 
   :global(html[data-category-theme="Travel"]) body {
-    background: var(--color-travel-primary-light);
+    background-color: var(--color-travel-primary-light);
   }
 
   :global(html[data-category-theme="Books"]) body {
-    background: var(--color-books-primary-light);
+    background-color: var(--color-books-primary-light);
   }
 
   :global(html.dark[data-category-theme="Tech"]) body {
-    background: var(--color-tech-primary-dark);
+    background-color: var(--color-tech-primary-dark);
   }
 
   :global(html.dark[data-category-theme="Running"]) body {
-    background: var(--color-running-primary-dark);
+    background-color: var(--color-running-primary-dark);
   }
 
   :global(html.dark[data-category-theme="Travel"]) body {
-    background: var(--color-travel-primary-dark);
+    background-color: var(--color-travel-primary-dark);
   }
 
   :global(html.dark[data-category-theme="Books"]) body {
-    background: var(--color-books-primary-dark);
+    background-color: var(--color-books-primary-dark);
   }
 
   .post-body__inner {
@@ -495,42 +558,95 @@ const uiDictJson = JSON.stringify(uiDict);
   }
 
   .post-body__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-md);
+  }
+
+  .post-body__meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .post-body__meta-date,
+  .post-body__meta-readtime {
     font-family: var(--font-body);
     font-size: 0.8rem;
     font-style: italic;
     color: var(--color-word);
-    margin-bottom: var(--spacing-xl);
   }
 
-  :global(html[data-category-theme="Tech"]) .post-body__meta {
+  .post-body__meta-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .post-body__meta-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .post-body__meta-author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-body__meta-author-name {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: var(--weight-space-semibold);
+    color: var(--text-base);
+  }
+
+  .post-body__meta-author-nickname {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--color-word);
+  }
+
+  :global(html[data-category-theme="Tech"]) .post-body__meta-date,
+  :global(html[data-category-theme="Tech"]) .post-body__meta-readtime {
     color: var(--color-tech-secondary-light);
   }
 
-  :global(html[data-category-theme="Running"]) .post-body__meta {
+  :global(html[data-category-theme="Running"]) .post-body__meta-date,
+  :global(html[data-category-theme="Running"]) .post-body__meta-readtime {
     color: var(--color-running-secondary-light);
   }
 
-  :global(html[data-category-theme="Travel"]) .post-body__meta {
+  :global(html[data-category-theme="Travel"]) .post-body__meta-date,
+  :global(html[data-category-theme="Travel"]) .post-body__meta-readtime {
     color: var(--color-travel-secondary-light);
   }
 
-  :global(html[data-category-theme="Books"]) .post-body__meta {
+  :global(html[data-category-theme="Books"]) .post-body__meta-date,
+  :global(html[data-category-theme="Books"]) .post-body__meta-readtime {
     color: var(--color-books-secondary-light);
   }
 
-  :global(html.dark[data-category-theme="Tech"]) .post-body__meta {
+  :global(html.dark[data-category-theme="Tech"]) .post-body__meta-date,
+  :global(html.dark[data-category-theme="Tech"]) .post-body__meta-readtime {
     color: var(--color-tech-secondary-dark);
   }
 
-  :global(html.dark[data-category-theme="Running"]) .post-body__meta {
+  :global(html.dark[data-category-theme="Running"]) .post-body__meta-date,
+  :global(html.dark[data-category-theme="Running"]) .post-body__meta-readtime {
     color: var(--color-running-secondary-dark);
   }
 
-  :global(html.dark[data-category-theme="Travel"]) .post-body__meta {
+  :global(html.dark[data-category-theme="Travel"]) .post-body__meta-date,
+  :global(html.dark[data-category-theme="Travel"]) .post-body__meta-readtime {
     color: var(--color-travel-secondary-dark);
   }
 
-  :global(html.dark[data-category-theme="Books"]) .post-body__meta {
+  :global(html.dark[data-category-theme="Books"]) .post-body__meta-date,
+  :global(html.dark[data-category-theme="Books"]) .post-body__meta-readtime {
     color: var(--color-books-secondary-dark);
   }
 
@@ -677,7 +793,25 @@ const uiDictJson = JSON.stringify(uiDict);
     }
 
     .post-body__meta {
+      padding: 0 var(--spacing-md);
+    }
+
+    .post-body__meta-date,
+    .post-body__meta-readtime {
       font-size: 0.875rem;
+    }
+
+    .post-body__meta-avatar {
+      width: 48px;
+      height: 48px;
+    }
+
+    .post-body__meta-author-name {
+      font-size: 0.875rem;
+    }
+
+    .post-body__meta-author-nickname {
+      font-size: 0.8rem;
     }
 
     .post-body__content {
@@ -689,6 +823,16 @@ const uiDictJson = JSON.stringify(uiDict);
     .post-body__content :global(ol),
     .post-body__content :global(table) {
       font-size: var(--font-size-body-desktop);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .post-body__meta {
+      padding: 0 var(--spacing-sm);
+    }
+
+    .post-body__meta-right {
+      margin-bottom: var(--spacing-xs);
     }
   }
 
