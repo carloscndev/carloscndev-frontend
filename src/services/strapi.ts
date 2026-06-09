@@ -114,10 +114,8 @@ export function getStrapiMediaUrl(
 ): string {
   const defaultConfig = getDefaultConfig();
   const baseUrl = config?.baseUrl ?? defaultConfig.baseUrl;
-  if (!baseUrl) {
-    throw new Error("Missing STRAPI_URL environment variable");
-  }
   if (mediaUrl.startsWith("http")) return mediaUrl;
+  if (!baseUrl) return mediaUrl;
   return `${baseUrl}${mediaUrl}`;
 }
 

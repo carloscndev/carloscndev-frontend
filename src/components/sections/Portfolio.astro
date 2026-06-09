@@ -318,10 +318,12 @@ const embeddedDataJson = JSON.stringify(embeddedData);
 
     if (modalImage) {
       if (projectData.coverImage) {
-        const strapiUrl = import.meta.env.STRAPI_URL || "http://localhost:1337";
+        const strapiUrl = import.meta.env.STRAPI_URL || "";
         const imageUrl = projectData.coverImage.startsWith("http")
           ? projectData.coverImage
-          : `${strapiUrl}${projectData.coverImage}`;
+          : strapiUrl
+            ? `${strapiUrl}${projectData.coverImage}`
+            : projectData.coverImage;
         modalImage.src = imageUrl;
         modalImage.alt = projectData.title;
         modalImage.style.display = "block";
