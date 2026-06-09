@@ -90,6 +90,16 @@ export function updatePortfolioContent(lang: Lang): void {
           .join("");
       });
 
+      const viewMoreBtns = container.querySelectorAll<HTMLElement>(
+        "[data-project-view-more]",
+      );
+      viewMoreBtns.forEach((btn) => {
+        const span = btn.querySelector("span");
+        if (span) {
+          span.textContent = data.view_more;
+        }
+      });
+
       const linkContainers = container.querySelectorAll<HTMLElement>(
         "[data-project-links]",
       );

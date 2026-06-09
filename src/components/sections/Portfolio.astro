@@ -116,6 +116,20 @@ const embeddedDataJson = JSON.stringify(embeddedData);
               <TechPill label={tech} variant="card" />
             ))}
           </div>
+          <button
+            class="portfolio-card__view-more"
+            data-project-view-more
+            data-project-title={project.title}
+            data-project-description={project.description}
+            data-project-technologies={project.technologies.join(",")}
+            data-project-links-repo={project.links.repo || ""}
+            data-project-links-demo={project.links.demo || ""}
+            data-project-links-article={project.links.article || ""}
+            data-project-cover-image={project.coverImage?.url || ""}
+            type="button"
+          >
+            <span data-i18n="portfolio.view_more">Ver más</span>
+          </button>
         </div>
       ))
     }
@@ -166,34 +180,50 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                 <TechPill label={tech} variant="card" />
               ))}
             </div>
-            <div class="portfolio-accordion__links" data-project-links>
-              {project.links.repo && (
-                <LinkWrapper
-                  href={project.links.repo}
-                  class="portfolio-accordion__link"
-                  aria-label="Repository"
-                >
-                  <GithubIcon size="16" />
-                </LinkWrapper>
-              )}
-              {project.links.demo && (
-                <LinkWrapper
-                  href={project.links.demo}
-                  class="portfolio-accordion__link"
-                  aria-label="Demo"
-                >
-                  <ExternalLink size="16" />
-                </LinkWrapper>
-              )}
-              {project.links.article && (
-                <LinkWrapper
-                  href={project.links.article}
-                  class="portfolio-accordion__link"
-                  aria-label="Article"
-                >
-                  <FileIcon size="16" />
-                </LinkWrapper>
-              )}
+            <div class="portfolio-accordion__footer">
+              <button
+                class="portfolio-accordion__view-more"
+                data-project-view-more
+                data-project-title={project.title}
+                data-project-description={project.description}
+                data-project-technologies={project.technologies.join(",")}
+                data-project-links-repo={project.links.repo || ""}
+                data-project-links-demo={project.links.demo || ""}
+                data-project-links-article={project.links.article || ""}
+                data-project-cover-image={project.coverImage?.url || ""}
+                type="button"
+              >
+                <span data-i18n="portfolio.view_more">Ver más</span>
+              </button>
+              <div class="portfolio-accordion__links" data-project-links>
+                {project.links.repo && (
+                  <LinkWrapper
+                    href={project.links.repo}
+                    class="portfolio-accordion__link"
+                    aria-label="Repository"
+                  >
+                    <GithubIcon size="16" />
+                  </LinkWrapper>
+                )}
+                {project.links.demo && (
+                  <LinkWrapper
+                    href={project.links.demo}
+                    class="portfolio-accordion__link"
+                    aria-label="Demo"
+                  >
+                    <ExternalLink size="16" />
+                  </LinkWrapper>
+                )}
+                {project.links.article && (
+                  <LinkWrapper
+                    href={project.links.article}
+                    class="portfolio-accordion__link"
+                    aria-label="Article"
+                  >
+                    <FileIcon size="16" />
+                  </LinkWrapper>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -216,6 +246,42 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       </div>
     )
   }
+
+  <!-- Project Detail Modal -->
+  <div
+    class="portfolio-modal"
+    id="portfolio-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+  >
+    <div class="portfolio-modal__overlay" data-modal-close></div>
+    <div class="portfolio-modal__content">
+      <button
+        class="portfolio-modal__close"
+        data-modal-close
+        aria-label="Close"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+      <h2 class="portfolio-modal__title" data-modal-title></h2>
+      <div class="portfolio-modal__image-container">
+        <img class="portfolio-modal__image" data-modal-image src="" alt="" />
+      </div>
+      <p class="portfolio-modal__description" data-modal-description></p>
+      <div class="portfolio-modal__tags" data-modal-tags></div>
+      <div class="portfolio-modal__links" data-modal-links></div>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -223,8 +289,110 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     initPortfolioLangSwitch,
     initPortfolioAccordion,
   } from "../../utils/portfolio.ts";
+  import { getStrapiMediaUrl } from "../../services/strapi.ts";
+
   initPortfolioLangSwitch();
   initPortfolioAccordion();
+
+  const modal = document.getElementById("portfolio-modal");
+  const modalTitle = document.querySelector("[data-modal-title]");
+  const modalImage = document.querySelector(
+    "[data-modal-image]",
+  ) as HTMLImageElement;
+  const modalDescription = document.querySelector("[data-modal-description]");
+  const modalTags = document.querySelector("[data-modal-tags]");
+  const modalLinks = document.querySelector("[data-modal-links]");
+
+  function openModal(projectData: {
+    title: string;
+    description: string;
+    technologies: string[];
+    coverImage: string;
+    links: { repo?: string; demo?: string; article?: string };
+  }) {
+    if (!modal) return;
+
+    if (modalTitle) modalTitle.textContent = projectData.title;
+    if (modalDescription)
+      modalDescription.textContent = projectData.description;
+
+    if (modalImage) {
+      if (projectData.coverImage) {
+        modalImage.src = getStrapiMediaUrl(projectData.coverImage);
+        modalImage.alt = projectData.title;
+        modalImage.style.display = "block";
+      } else {
+        modalImage.style.display = "none";
+      }
+    }
+
+    if (modalTags) {
+      modalTags.innerHTML = projectData.technologies
+        .map((t) => `<span class="tech-pill tech-pill--card">${t}</span>`)
+        .join("");
+    }
+
+    if (modalLinks) {
+      modalLinks.innerHTML = "";
+      if (projectData.links.repo) {
+        modalLinks.innerHTML += `<a href="${projectData.links.repo}" target="_blank" rel="noopener" class="portfolio-modal__link">Repository</a>`;
+      }
+      if (projectData.links.demo) {
+        modalLinks.innerHTML += `<a href="${projectData.links.demo}" target="_blank" rel="noopener" class="portfolio-modal__link">Demo</a>`;
+      }
+      if (projectData.links.article) {
+        modalLinks.innerHTML += `<a href="${projectData.links.article}" target="_blank" rel="noopener" class="portfolio-modal__link">Article</a>`;
+      }
+    }
+
+    modal.classList.add("portfolio-modal--open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("portfolio-modal--open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll("[data-project-view-more]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const projectData = {
+        title: target.dataset.projectTitle || "",
+        description: target.dataset.projectDescription || "",
+        technologies: (target.dataset.projectTechnologies || "")
+          .split(",")
+          .filter(Boolean),
+        coverImage: target.dataset.projectCoverImage || "",
+        links: {
+          repo: target.dataset.projectLinksRepo || undefined,
+          demo: target.dataset.projectLinksDemo || undefined,
+          article: target.dataset.projectLinksArticle || undefined,
+        },
+      };
+      openModal(projectData);
+    });
+  });
+
+  document.querySelectorAll("[data-modal-close]").forEach((closeBtn) => {
+    closeBtn.addEventListener("click", closeModal);
+  });
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.key === "Escape" &&
+      modal?.classList.contains("portfolio-modal--open")
+    ) {
+      closeModal();
+    }
+  });
 </script>
 
 <style>
@@ -385,6 +553,13 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     justify-content: flex-end;
   }
 
+  .portfolio-accordion__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--spacing-sm);
+  }
+
   :global(.portfolio-accordion__link) {
     color: var(--color-word);
     transition: color 300ms ease;
@@ -400,6 +575,25 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     outline: 2px solid var(--color-accent);
     outline-offset: 4px;
     border-radius: 4px;
+  }
+
+  .portfolio-accordion__view-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-family: var(--font-titles);
+    font-size: 0.8rem;
+    font-weight: var(--weight-space-medium);
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 300ms ease;
+  }
+
+  .portfolio-accordion__view-more:hover {
+    color: var(--color-word);
   }
 
   /* View More */
@@ -454,9 +648,11 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     border-radius: var(--border-radius);
     background: var(--color-tech-primary-light);
     padding: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) + 30px);
     transition:
       transform 300ms ease,
       box-shadow 300ms ease;
+    position: relative;
   }
 
   .portfolio-grid__card:hover {
@@ -512,6 +708,33 @@ const embeddedDataJson = JSON.stringify(embeddedData);
     flex-wrap: wrap;
     gap: var(--spacing-xs);
     margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-card__view-more {
+    position: absolute;
+    bottom: var(--spacing-md);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-family: var(--font-titles);
+    font-size: var(--font-size-body-mobile);
+    font-weight: var(--weight-space-medium);
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition:
+      color 300ms ease,
+      transform 200ms ease;
+    white-space: nowrap;
+  }
+
+  .portfolio-card__view-more:hover {
+    color: var(--color-word);
+    transform: translateX(-50%) translateY(-2px);
   }
 
   .portfolio-card__links {
@@ -577,9 +800,132 @@ const embeddedDataJson = JSON.stringify(embeddedData);
       font-size: var(--font-size-body-desktop);
     }
 
+    .portfolio-card__view-more {
+      font-size: var(--font-size-body-desktop);
+    }
+
     :global(.portfolio-section__view-more) {
       font-size: var(--font-size-body-desktop);
       flex-direction: column;
+    }
+  }
+
+  /* Project Modal Styles */
+  .portfolio-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg);
+  }
+
+  .portfolio-modal--open {
+    display: flex;
+  }
+
+  .portfolio-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .portfolio-modal__content {
+    position: relative;
+    background: var(--bg-primary);
+    border-radius: var(--spacing-md);
+    padding: var(--spacing-lg);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .portfolio-modal__close {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: none;
+    border: none;
+    color: var(--color-word);
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    transition: color 200ms ease;
+  }
+
+  .portfolio-modal__close:hover {
+    color: var(--color-accent);
+  }
+
+  .portfolio-modal__title {
+    font-family: var(--font-titles);
+    font-size: 1.5rem;
+    color: var(--text-base);
+    text-align: center;
+    margin: 0;
+  }
+
+  .portfolio-modal__image-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--spacing-sm);
+    overflow: hidden;
+  }
+
+  .portfolio-modal__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .portfolio-modal__description {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-mobile);
+    color: var(--text-base);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .portfolio-modal__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .portfolio-modal__links {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+  }
+
+  :global(.portfolio-modal__link) {
+    font-family: var(--font-titles);
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--spacing-xs);
+    transition: all 200ms ease;
+  }
+
+  :global(.portfolio-modal__link):hover {
+    color: var(--text-base);
+    background: var(--color-accent);
+  }
+
+  @media (min-width: 768px) {
+    .portfolio-modal__title {
+      font-size: 2rem;
+    }
+
+    .portfolio-modal__description {
+      font-size: var(--font-size-body-desktop);
     }
   }
 </style>

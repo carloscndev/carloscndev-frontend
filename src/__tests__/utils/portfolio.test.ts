@@ -49,6 +49,7 @@ describe("portfolio", () => {
       <div data-project-id="p1">
         <span data-project-title></span>
         <span data-project-description></span>
+        <button data-project-view-more><span>Ver mas</span></button>
       </div>
     `;
 
