@@ -147,12 +147,18 @@ if (!portfolioEs || !portfolioEn) {
   throw new Error("Failed to fetch portfolio-page from Strapi");
 }
 
+// Debug: check first project structure with full populate
+
 const portfolioData = {
   es: {
     title: portfolioEs.title,
     intro: portfolioEs.intro,
-    view_more: portfolioEs.view_more,
-    projects: (portfolioEs.projects ?? []).map((p) => {
+    view_more: portfolioEs.viewMore || portfolioEs.view_more,
+    projects: (
+      (portfolioEs.projects as any)?.data ??
+      portfolioEs.projects ??
+      []
+    ).map((p: any) => {
       const linksObj: { repo?: string; demo?: string; article?: string } = {};
       if (Array.isArray(p.links)) {
         for (const link of p.links) {
@@ -162,19 +168,24 @@ const portfolioData = {
         }
       }
       return {
-        id: p.id,
+        id: p.documentId || p.id,
         title: p.title,
         description: p.description,
-        technologies: p.technologies,
+        technologies: p.technologies || [],
         links: linksObj,
+        coverImage: p.coverImage,
       };
     }),
   },
   en: {
     title: portfolioEn.title,
     intro: portfolioEn.intro,
-    view_more: portfolioEn.view_more,
-    projects: (portfolioEn.projects ?? []).map((p) => {
+    view_more: portfolioEn.viewMore || portfolioEn.view_more,
+    projects: (
+      (portfolioEn.projects as any)?.data ??
+      portfolioEn.projects ??
+      []
+    ).map((p: any) => {
       const linksObj: { repo?: string; demo?: string; article?: string } = {};
       if (Array.isArray(p.links)) {
         for (const link of p.links) {
@@ -184,11 +195,12 @@ const portfolioData = {
         }
       }
       return {
-        id: p.id,
+        id: p.documentId || p.id,
         title: p.title,
         description: p.description,
-        technologies: p.technologies,
+        technologies: p.technologies || [],
         links: linksObj,
+        coverImage: p.coverImage,
       };
     }),
   },

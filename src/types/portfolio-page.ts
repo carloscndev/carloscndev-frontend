@@ -1,20 +1,24 @@
+import type { StrapiMedia } from "./strapi";
+
 export interface ProjectLink {
-  repo?: string;
-  demo?: string;
-  article?: string;
+  type: "repo" | "demo" | "article";
+  url: string;
 }
 
 export interface Project {
   id: string;
+  documentId: string;
   title: string;
   description: string;
   technologies: string[];
-  links: ProjectLink;
+  links: ProjectLink[];
+  coverImage?: StrapiMedia;
 }
 
 export interface PortfolioPageAttributes {
   title: string;
   intro: string;
-  view_more: string;
+  viewMore?: string;
+  view_more?: string;
   projects: Project[];
 }

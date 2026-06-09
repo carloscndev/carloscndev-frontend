@@ -19,6 +19,15 @@ interface Project {
   description: string;
   technologies: string[];
   links: ProjectLink;
+  coverImage?: {
+    url: string;
+    alternativeText?: string;
+    formats?: {
+      small?: { url: string };
+      medium?: { url: string };
+      large?: { url: string };
+    };
+  };
 }
 
 interface PortfolioData {
