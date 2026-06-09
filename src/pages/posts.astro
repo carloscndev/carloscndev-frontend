@@ -44,7 +44,6 @@ const posts = (blogPostsEs ?? []).map((p) => ({
   id: p.documentId,
   title: p.title,
   link: `/blog/${p.slug}`,
-  icon: p.icon,
   category: p.category?.name || "",
   date: p.date,
   read_time: p.readTime,
@@ -67,7 +66,6 @@ const embeddedData = {
       id: p.documentId,
       title: p.title,
       link: `/blog/${p.slug}`,
-      icon: p.icon,
       category: p.category?.name || "",
       date: p.date,
       read_time: p.readTime,
@@ -106,7 +104,6 @@ const blogDataJson = JSON.stringify(embeddedData);
             id={post.id}
             title={post.title}
             link={post.link}
-            icon={post.icon}
             category={post.category}
             date={post.date}
             readTime={post.read_time}
@@ -124,7 +121,7 @@ const blogDataJson = JSON.stringify(embeddedData);
             id={post.id}
             title={post.title}
             link={post.link}
-            icon={post.icon}
+            category={post.category}
             resume={post.resume}
           />
         ))

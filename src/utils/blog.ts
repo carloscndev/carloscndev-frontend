@@ -13,8 +13,6 @@ interface BlogPost {
   read_time: string;
   date: string;
   category: string;
-  icon: string;
-  image: string;
   link: string;
 }
 

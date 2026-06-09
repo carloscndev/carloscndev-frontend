@@ -35,9 +35,11 @@ describe("ui components", () => {
       expect(content).toContain("data-post-category");
     });
 
-    it("should support tech and running category themes", () => {
-      expect(content).toContain("data-category-theme={categoryTheme}");
-      expect(content).toContain("tech-icon");
+    it("should support multiple category themes via category.ts", () => {
+      expect(content).toContain("getCategoryTheme");
+      expect(content).toContain("getIconName");
+      expect(content).toContain("TravelIcon");
+      expect(content).toContain("BookIcon");
     });
 
     it("should use LinkWrapper for navigation", () => {
@@ -71,9 +73,11 @@ describe("ui components", () => {
       expect(content).toContain("data-post-resume");
     });
 
-    it("should support tech and running category themes", () => {
-      expect(content).toContain("data-category-theme={categoryTheme}");
-      expect(content).toContain("tech-icon");
+    it("should support multiple category themes via category.ts", () => {
+      expect(content).toContain("getCategoryTheme");
+      expect(content).toContain("getIconName");
+      expect(content).toContain("TravelIcon");
+      expect(content).toContain("BookIcon");
     });
 
     it("should have a link to open the article", () => {

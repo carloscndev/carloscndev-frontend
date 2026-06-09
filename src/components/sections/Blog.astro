@@ -9,7 +9,6 @@ interface BlogPost {
   id: string;
   title: string;
   link: string;
-  icon: string;
   category: string;
   date: string;
   read_time: string;
@@ -60,7 +59,6 @@ const blogDataJson = JSON.stringify(embeddedData);
             id={post.id}
             title={post.title}
             link={post.link}
-            icon={post.icon}
             category={post.category}
             date={post.date}
             readTime={post.read_time}
@@ -81,7 +79,7 @@ const blogDataJson = JSON.stringify(embeddedData);
             id={post.id}
             title={post.title}
             link={post.link}
-            icon={post.icon}
+            category={post.category}
             resume={post.resume}
           />
         ))
