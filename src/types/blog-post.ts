@@ -27,7 +27,6 @@ export interface BlogPostAttributes {
   slug: string;
   author: AuthorAttributes;
   excerpt: string;
-  readTime: string;
   date: string;
   content: string;
   category?: {

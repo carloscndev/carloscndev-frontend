@@ -8,6 +8,7 @@ import type { PortfolioPageAttributes } from "../types/portfolio-page";
 import type { BlogPageAttributes } from "../types/blog-page";
 import type { BlogPostAttributes } from "../types/blog-post";
 import type { ContactPageAttributes } from "../types/contact-page";
+import { calculateReadingTime } from "../utils/reading-time";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
 import About from "../components/sections/About.astro";
@@ -226,7 +227,7 @@ const blogData = {
       link: `/blog/${p.slug}`,
       category: p.category?.name || "",
       date: p.date,
-      read_time: p.readTime,
+      read_time: calculateReadingTime(p.content, "es"),
       resume: p.excerpt,
       featuredImage: p.coverImage || undefined,
     })),
@@ -241,7 +242,7 @@ const blogData = {
       link: `/blog/${p.slug}`,
       category: p.category?.name || "",
       date: p.date,
-      read_time: p.readTime,
+      read_time: calculateReadingTime(p.content, "en"),
       resume: p.excerpt,
       featuredImage: p.coverImage || undefined,
     })),

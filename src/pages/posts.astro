@@ -6,6 +6,7 @@ import type { BlogPostAttributes } from "../types/blog-post";
 import PostLayout from "../layouts/PostLayout.astro";
 import BlogCard from "../components/ui/BlogCard.astro";
 import BlogAccordionItem from "../components/ui/BlogAccordionItem.astro";
+import { calculateReadingTime } from "../utils/reading-time";
 
 const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
   "global-config",
@@ -46,9 +47,9 @@ const posts = (blogPostsEs ?? []).map((p) => ({
   link: `/blog/${p.slug}`,
   category: p.category?.name || "",
   date: p.date,
-  read_time: p.readTime,
-  resume: p.resume,
-  featuredImage: p.featuredImage || p.headerImage || undefined,
+  read_time: calculateReadingTime(p.content, lang),
+  resume: p.excerpt,
+  featuredImage: p.coverImage || undefined,
 }));
 
 const embeddedData = {
