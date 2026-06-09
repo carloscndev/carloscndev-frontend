@@ -207,12 +207,12 @@ if (!blogEs || !blogEn) {
 const blogPostsEs = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "es",
-  { populate: { category: true, featuredImage: true, headerImage: true } },
+  { populate: { category: true, coverImage: true } },
 );
 const blogPostsEn = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "en",
-  { populate: { category: true, featuredImage: true, headerImage: true } },
+  { populate: { category: true, coverImage: true } },
 );
 
 const blogData = {
@@ -227,8 +227,8 @@ const blogData = {
       category: p.category?.name || "",
       date: p.date,
       read_time: p.readTime,
-      resume: p.resume,
-      featuredImage: p.featuredImage || p.headerImage || undefined,
+      resume: p.excerpt,
+      featuredImage: p.coverImage || undefined,
     })),
   },
   en: {
@@ -242,8 +242,8 @@ const blogData = {
       category: p.category?.name || "",
       date: p.date,
       read_time: p.readTime,
-      resume: p.resume,
-      featuredImage: p.featuredImage || p.headerImage || undefined,
+      resume: p.excerpt,
+      featuredImage: p.coverImage || undefined,
     })),
   },
 };

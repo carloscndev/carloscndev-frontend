@@ -15,6 +15,7 @@ import markedShiki from "marked-shiki";
 import { createHighlighter } from "shiki";
 import uiDict from "../../i18n/ui.json";
 import type { Lang } from "../../utils/lang";
+import { getCategoryTheme } from "../../utils/category";
 
 // 1. Initialize Shiki highlighter
 const highlighter = await createHighlighter({
@@ -45,7 +46,7 @@ export async function getStaticPaths() {
 
   try {
     esPosts = await fetchCollection<BlogPostAttributes>("blog-posts", "es", {
-      populate: { category: true, headerImage: true },
+      populate: { category: true, coverImage: true },
     });
   } catch {
     // No ES posts found, continue with empty array
@@ -53,7 +54,7 @@ export async function getStaticPaths() {
 
   try {
     enPosts = await fetchCollection<BlogPostAttributes>("blog-posts", "en", {
-      populate: { category: true, headerImage: true },
+      populate: { category: true, coverImage: true },
     });
   } catch {
     // No EN posts found, continue with empty array
@@ -117,7 +118,7 @@ try {
     "blog-posts",
     documentId,
     lang,
-    { populate: { category: true, headerImage: true } },
+    { populate: { category: true, coverImage: true, seo: true } },
   );
 } catch (e) {
   fetchError = e instanceof Error ? e : new Error(String(e));
@@ -140,7 +141,8 @@ if (!globalConfig) {
 // Parse Markdown content to HTML for both locales (await because marked-shiki uses async highlight)
 const postContentHtml = (await marked.parse(post.content)) as string;
 
-const categoryTheme = post.icon === "running-icon" ? "running" : "tech";
+const categoryTheme = getCategoryTheme(post.category?.name || "");
+const authorName = post.author?.name || post.author?.nickname || "";
 const authorPrefix = uiDict[lang]["post.author_prefix"];
 
 // Fetch other locale post for client-side language switching
@@ -149,7 +151,7 @@ const otherPost = await fetchCollectionEntry<BlogPostAttributes>(
   "blog-posts",
   documentId,
   otherLang,
-  { populate: { category: true, headerImage: true } },
+  { populate: { category: true, coverImage: true } },
 );
 
 const otherContentHtml = otherPost
@@ -162,18 +164,16 @@ const embeddedData = {
       ? {
           title: post.title,
           date: post.date,
-          author: post.author || "",
+          author: post.author?.name || post.author?.nickname || "",
           category: post.category?.name || "",
-          icon: post.icon,
           content: postContentHtml,
         }
       : otherPost
         ? {
             title: otherPost.title,
             date: otherPost.date,
-            author: otherPost.author || "",
+            author: otherPost.author?.name || otherPost.author?.nickname || "",
             category: otherPost.category?.name || "",
-            icon: otherPost.icon,
             content: otherContentHtml,
           }
         : null,
@@ -182,18 +182,16 @@ const embeddedData = {
       ? {
           title: post.title,
           date: post.date,
-          author: post.author || "",
+          author: post.author?.name || post.author?.nickname || "",
           category: post.category?.name || "",
-          icon: post.icon,
           content: postContentHtml,
         }
       : otherPost
         ? {
             title: otherPost.title,
             date: otherPost.date,
-            author: otherPost.author || "",
+            author: otherPost.author?.name || otherPost.author?.nickname || "",
             category: otherPost.category?.name || "",
-            icon: otherPost.icon,
             content: otherContentHtml,
           }
         : null,
@@ -204,7 +202,9 @@ const uiDictJson = JSON.stringify(uiDict);
 ---
 
 <PostLayout
-  title={post.title}
+  title={post.seo?.metaTitle || post.title}
+  description={post.seo?.metaDescription}
+  image={post.seo?.metaImage?.url || post.coverImage?.url}
   lang={lang}
   categoryTheme={categoryTheme}
   navigation={globalConfig.navigation ?? []}
@@ -225,9 +225,9 @@ const uiDictJson = JSON.stringify(uiDict);
 
   <div class="post-hero">
     {
-      post.headerImage ? (
+      post.coverImage ? (
         <StrapiImage
-          image={post.headerImage}
+          image={post.coverImage}
           alt=""
           class="post-hero__image"
           loading="lazy"
@@ -247,7 +247,7 @@ const uiDictJson = JSON.stringify(uiDict);
     <div class="post-body__inner">
       <p class="post-body__meta" data-post-hero-meta>
         {post.date} &nbsp;{authorPrefix}
-        {post.author || ""}
+        {authorName}
       </p>
 
       <div
@@ -312,16 +312,32 @@ const uiDictJson = JSON.stringify(uiDict);
     padding: var(--spacing-lg);
   }
 
-  :global(html[data-category-theme="running"]) .post-hero__overlay {
+  :global(html[data-category-theme="Running"]) .post-hero__overlay {
     background: rgba(188, 219, 255, 0.85);
   }
 
-  :global(html.dark[data-category-theme="tech"]) .post-hero__overlay {
+  :global(html[data-category-theme="Travel"]) .post-hero__overlay {
+    background: rgba(247, 243, 233, 0.85);
+  }
+
+  :global(html[data-category-theme="Books"]) .post-hero__overlay {
+    background: rgba(247, 239, 241, 0.85);
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) .post-hero__overlay {
     background: rgba(7, 3, 65, 0.85);
   }
 
-  :global(html.dark[data-category-theme="running"]) .post-hero__overlay {
+  :global(html.dark[data-category-theme="Running"]) .post-hero__overlay {
     background: rgba(0, 18, 33, 0.85);
+  }
+
+  :global(html.dark[data-category-theme="Travel"]) .post-hero__overlay {
+    background: rgba(18, 16, 14, 0.85);
+  }
+
+  :global(html.dark[data-category-theme="Books"]) .post-hero__overlay {
+    background: rgba(28, 5, 10, 0.85);
   }
 
   .post-hero__title {
@@ -347,65 +363,129 @@ const uiDictJson = JSON.stringify(uiDict);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
-  :global(html[data-category-theme="running"]) {
+  :global(html[data-category-theme="Running"]) {
     --wi-p1: var(--color-running-secondary-light);
     --wi-p2: var(--color-running-secondary-light);
     background: var(--color-running-primary-light);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
-  :global(html.dark[data-category-theme="tech"]) {
+  :global(html[data-category-theme="Travel"]) {
+    --wi-p1: var(--color-travel-secondary-light);
+    --wi-p2: var(--color-travel-secondary-light);
+    background: var(--color-travel-primary-light);
+    scrollbar-color: var(--wi-p1) transparent;
+  }
+
+  :global(html[data-category-theme="Books"]) {
+    --wi-p1: var(--color-books-secondary-light);
+    --wi-p2: var(--color-books-secondary-light);
+    background: var(--color-books-primary-light);
+    scrollbar-color: var(--wi-p1) transparent;
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) {
     --wi-p1: var(--color-tech-secondary-dark);
     --wi-p2: var(--color-tech-secondary-dark);
     background: var(--color-tech-primary-dark);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
-  :global(html.dark[data-category-theme="running"]) {
+  :global(html.dark[data-category-theme="Running"]) {
     --wi-p1: var(--color-running-secondary-dark);
     --wi-p2: var(--color-running-secondary-dark);
     background: var(--color-running-primary-dark);
     scrollbar-color: var(--wi-p1) transparent;
   }
 
-  :global(html[data-category-theme="tech"]) ::-webkit-scrollbar-thumb {
+  :global(html.dark[data-category-theme="Travel"]) {
+    --wi-p1: var(--color-travel-secondary-dark);
+    --wi-p2: var(--color-travel-secondary-dark);
+    background: var(--color-travel-primary-dark);
+    scrollbar-color: var(--wi-p1) transparent;
+  }
+
+  :global(html.dark[data-category-theme="Books"]) {
+    --wi-p1: var(--color-books-secondary-dark);
+    --wi-p2: var(--color-books-secondary-dark);
+    background: var(--color-books-primary-dark);
+    scrollbar-color: var(--wi-p1) transparent;
+  }
+
+  :global(html[data-category-theme="Tech"]) ::-webkit-scrollbar-thumb {
     background-color: var(--color-tech-secondary-light);
     border-color: var(--color-tech-primary-light);
   }
 
-  :global(html[data-category-theme="running"]) ::-webkit-scrollbar-thumb {
+  :global(html[data-category-theme="Running"]) ::-webkit-scrollbar-thumb {
     background-color: var(--color-running-secondary-light);
     border-color: var(--color-running-primary-light);
   }
 
-  :global(html.dark[data-category-theme="tech"]) ::-webkit-scrollbar-thumb {
+  :global(html[data-category-theme="Travel"]) ::-webkit-scrollbar-thumb {
+    background-color: var(--color-travel-secondary-light);
+    border-color: var(--color-travel-primary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) ::-webkit-scrollbar-thumb {
+    background-color: var(--color-books-secondary-light);
+    border-color: var(--color-books-primary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) ::-webkit-scrollbar-thumb {
     background-color: var(--color-tech-secondary-dark);
     border-color: var(--color-tech-primary-dark);
   }
 
-  :global(html.dark[data-category-theme="running"]) ::-webkit-scrollbar-thumb {
+  :global(html.dark[data-category-theme="Running"]) ::-webkit-scrollbar-thumb {
     background-color: var(--color-running-secondary-dark);
     border-color: var(--color-running-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"]) ::-webkit-scrollbar-thumb {
+    background-color: var(--color-travel-secondary-dark);
+    border-color: var(--color-travel-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"]) ::-webkit-scrollbar-thumb {
+    background-color: var(--color-books-secondary-dark);
+    border-color: var(--color-books-primary-dark);
   }
 
   :global(html[data-category-theme]) ::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  :global(html[data-category-theme="tech"]) body {
+  :global(html[data-category-theme="Tech"]) body {
     background: var(--color-tech-primary-light);
   }
 
-  :global(html[data-category-theme="running"]) body {
+  :global(html[data-category-theme="Running"]) body {
     background: var(--color-running-primary-light);
   }
 
-  :global(html.dark[data-category-theme="tech"]) body {
+  :global(html[data-category-theme="Travel"]) body {
+    background: var(--color-travel-primary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) body {
+    background: var(--color-books-primary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) body {
     background: var(--color-tech-primary-dark);
   }
 
-  :global(html.dark[data-category-theme="running"]) body {
+  :global(html.dark[data-category-theme="Running"]) body {
     background: var(--color-running-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"]) body {
+    background: var(--color-travel-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"]) body {
+    background: var(--color-books-primary-dark);
   }
 
   .post-body__inner {
@@ -422,20 +502,36 @@ const uiDictJson = JSON.stringify(uiDict);
     margin-bottom: var(--spacing-xl);
   }
 
-  :global(html[data-category-theme="tech"]) .post-body__meta {
+  :global(html[data-category-theme="Tech"]) .post-body__meta {
     color: var(--color-tech-secondary-light);
   }
 
-  :global(html[data-category-theme="running"]) .post-body__meta {
+  :global(html[data-category-theme="Running"]) .post-body__meta {
     color: var(--color-running-secondary-light);
   }
 
-  :global(html.dark[data-category-theme="tech"]) .post-body__meta {
+  :global(html[data-category-theme="Travel"]) .post-body__meta {
+    color: var(--color-travel-secondary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) .post-body__meta {
+    color: var(--color-books-secondary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) .post-body__meta {
     color: var(--color-tech-secondary-dark);
   }
 
-  :global(html.dark[data-category-theme="running"]) .post-body__meta {
+  :global(html.dark[data-category-theme="Running"]) .post-body__meta {
     color: var(--color-running-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"]) .post-body__meta {
+    color: var(--color-travel-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"]) .post-body__meta {
+    color: var(--color-books-secondary-dark);
   }
 
   .post-body__content {
