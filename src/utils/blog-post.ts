@@ -4,7 +4,10 @@ import { initLangSwitch } from "./common";
 interface BlogPost {
   title: string;
   date: string;
-  author: string;
+  readTime: string;
+  authorName: string;
+  authorNickname: string;
+  authorAvatar: string;
   category: string;
   icon: string;
   content: string;
@@ -34,16 +37,36 @@ export function updateBlogPostContent(lang: Lang): void {
   const post = allData[lang];
   if (!post) return;
 
-  const authorPrefix = dict[lang]?.["post.author_prefix"] || "Autor:";
-
   const heroTitle = document.querySelector("[data-post-hero-title]");
-  const heroMeta = document.querySelector("[data-post-hero-meta]");
   const contentEl = document.querySelector("[data-post-content]");
   const backHomeEl = document.querySelector("[data-post-back-home]");
 
   if (heroTitle) heroTitle.textContent = post.title;
-  if (heroMeta)
-    heroMeta.textContent = `${post.date} \u00A0${authorPrefix} ${post.author}`;
+
+  const dateEl = document.querySelector("[data-post-date]");
+  const readtimeEl = document.querySelector("[data-post-readtime]");
+  const authorNameEl = document.querySelector("[data-post-author-name]");
+  const authorNicknameEl = document.querySelector(
+    "[data-post-author-nickname]",
+  );
+  const authorAvatarEl = document.querySelector("[data-post-author-avatar]");
+
+  if (dateEl) dateEl.textContent = post.date;
+  if (readtimeEl) readtimeEl.textContent = post.readTime;
+  if (authorNameEl) authorNameEl.textContent = post.authorName;
+  if (authorNicknameEl)
+    authorNicknameEl.textContent = `@${post.authorNickname}`;
+
+  if (authorAvatarEl) {
+    const imgEl = authorAvatarEl as HTMLImageElement;
+    if (post.authorAvatar) {
+      imgEl.src = post.authorAvatar;
+      imgEl.alt = post.authorName;
+      imgEl.style.display = "block";
+    } else {
+      imgEl.style.display = "none";
+    }
+  }
 
   if (contentEl) contentEl.innerHTML = post.content;
 

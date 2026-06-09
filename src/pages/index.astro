@@ -8,6 +8,7 @@ import type { PortfolioPageAttributes } from "../types/portfolio-page";
 import type { BlogPageAttributes } from "../types/blog-page";
 import type { BlogPostAttributes } from "../types/blog-post";
 import type { ContactPageAttributes } from "../types/contact-page";
+import { calculateReadingTime } from "../utils/reading-time";
 import MainLayout from "../layouts/MainLayout.astro";
 import Home from "../components/sections/Home.astro";
 import About from "../components/sections/About.astro";
@@ -146,12 +147,18 @@ if (!portfolioEs || !portfolioEn) {
   throw new Error("Failed to fetch portfolio-page from Strapi");
 }
 
+// Debug: check first project structure with full populate
+
 const portfolioData = {
   es: {
     title: portfolioEs.title,
     intro: portfolioEs.intro,
-    view_more: portfolioEs.view_more,
-    projects: (portfolioEs.projects ?? []).map((p) => {
+    view_more: portfolioEs.viewMore || portfolioEs.view_more,
+    projects: (
+      (portfolioEs.projects as any)?.data ??
+      portfolioEs.projects ??
+      []
+    ).map((p: any) => {
       const linksObj: { repo?: string; demo?: string; article?: string } = {};
       if (Array.isArray(p.links)) {
         for (const link of p.links) {
@@ -161,19 +168,24 @@ const portfolioData = {
         }
       }
       return {
-        id: p.id,
+        id: p.documentId || p.id,
         title: p.title,
         description: p.description,
-        technologies: p.technologies,
+        technologies: p.technologies || [],
         links: linksObj,
+        coverImage: p.coverImage,
       };
     }),
   },
   en: {
     title: portfolioEn.title,
     intro: portfolioEn.intro,
-    view_more: portfolioEn.view_more,
-    projects: (portfolioEn.projects ?? []).map((p) => {
+    view_more: portfolioEn.viewMore || portfolioEn.view_more,
+    projects: (
+      (portfolioEn.projects as any)?.data ??
+      portfolioEn.projects ??
+      []
+    ).map((p: any) => {
       const linksObj: { repo?: string; demo?: string; article?: string } = {};
       if (Array.isArray(p.links)) {
         for (const link of p.links) {
@@ -183,11 +195,12 @@ const portfolioData = {
         }
       }
       return {
-        id: p.id,
+        id: p.documentId || p.id,
         title: p.title,
         description: p.description,
-        technologies: p.technologies,
+        technologies: p.technologies || [],
         links: linksObj,
+        coverImage: p.coverImage,
       };
     }),
   },
@@ -207,12 +220,12 @@ if (!blogEs || !blogEn) {
 const blogPostsEs = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "es",
-  { populate: { category: true, featuredImage: true, headerImage: true } },
+  { populate: { category: true, coverImage: true } },
 );
 const blogPostsEn = await fetchCollection<BlogPostAttributes>(
   "blog-posts",
   "en",
-  { populate: { category: true, featuredImage: true, headerImage: true } },
+  { populate: { category: true, coverImage: true } },
 );
 
 const blogData = {
@@ -224,12 +237,11 @@ const blogData = {
       id: p.documentId,
       title: p.title,
       link: `/blog/${p.slug}`,
-      icon: p.icon,
       category: p.category?.name || "",
       date: p.date,
-      read_time: p.readTime,
-      resume: p.resume,
-      featuredImage: p.featuredImage || p.headerImage || undefined,
+      read_time: calculateReadingTime(p.content, "es"),
+      resume: p.excerpt,
+      featuredImage: p.coverImage || undefined,
     })),
   },
   en: {
@@ -240,12 +252,11 @@ const blogData = {
       id: p.documentId,
       title: p.title,
       link: `/blog/${p.slug}`,
-      icon: p.icon,
       category: p.category?.name || "",
       date: p.date,
-      read_time: p.readTime,
-      resume: p.resume,
-      featuredImage: p.featuredImage || p.headerImage || undefined,
+      read_time: calculateReadingTime(p.content, "en"),
+      resume: p.excerpt,
+      featuredImage: p.coverImage || undefined,
     })),
   },
 };

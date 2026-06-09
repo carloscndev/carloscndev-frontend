@@ -3,14 +3,16 @@ import type { StrapiMedia } from "../../types/strapi";
 import StrapiImage from "./StrapiImage.astro";
 import TechIcon from "../icons/TechIcon.astro";
 import RunningIcon from "../icons/RunningIcon.astro";
+import TravelIcon from "../icons/TravelIcon.astro";
+import BookIcon from "../icons/BookIcon.astro";
 import ExternalLink from "../icons/ExternalLink.astro";
 import LinkWrapper from "./LinkWrapper.astro";
+import { getCategoryTheme, getIconName } from "../../utils/category";
 
 export interface Props {
   id: string;
   title: string;
   link: string;
-  icon: string;
   category: string;
   date: string;
   readTime: string;
@@ -18,18 +20,10 @@ export interface Props {
   featuredImage?: StrapiMedia;
 }
 
-const {
-  id,
-  title,
-  link,
-  icon,
-  category,
-  date,
-  readTime,
-  resume,
-  featuredImage,
-} = Astro.props;
-const categoryTheme = icon === "tech-icon" ? "tech" : "running";
+const { id, title, link, category, date, readTime, resume, featuredImage } =
+  Astro.props;
+const categoryTheme = getCategoryTheme(category);
+const iconName = getIconName(category);
 ---
 
 <LinkWrapper
@@ -72,10 +66,14 @@ const categoryTheme = icon === "tech-icon" ? "tech" : "running";
       <span class="blog-card__category" data-post-category>
         {category}
         {
-          icon === "tech-icon" ? (
+          iconName === "TechIcon" ? (
             <TechIcon size="14" class="blog-card__category-icon" />
-          ) : (
+          ) : iconName === "RunningIcon" ? (
             <RunningIcon size="14" class="blog-card__category-icon" />
+          ) : iconName === "TravelIcon" ? (
+            <TravelIcon size="14" class="blog-card__category-icon" />
+          ) : (
+            <BookIcon size="14" class="blog-card__category-icon" />
           )
         }
       </span>
@@ -97,20 +95,36 @@ const categoryTheme = icon === "tech-icon" ? "tech" : "running";
     text-decoration: none;
   }
 
-  .blog-card[data-category-theme="tech"] {
+  .blog-card[data-category-theme="Tech"] {
     background: var(--color-tech-primary-light);
   }
 
-  .blog-card[data-category-theme="running"] {
+  .blog-card[data-category-theme="Running"] {
     background: var(--color-running-primary-light);
   }
 
-  :global(.dark) .blog-card[data-category-theme="tech"] {
+  .blog-card[data-category-theme="Travel"] {
+    background: var(--color-travel-primary-light);
+  }
+
+  .blog-card[data-category-theme="Books"] {
+    background: var(--color-books-primary-light);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="Tech"] {
     background: var(--color-tech-primary-dark);
   }
 
-  :global(.dark) .blog-card[data-category-theme="running"] {
+  :global(.dark) .blog-card[data-category-theme="Running"] {
     background: var(--color-running-primary-dark);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="Travel"] {
+    background: var(--color-travel-primary-dark);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="Books"] {
+    background: var(--color-books-primary-dark);
   }
 
   .blog-card:hover {
@@ -236,34 +250,48 @@ const categoryTheme = icon === "tech-icon" ? "tech" : "running";
   }
 
   /* Category-themed text colors */
-  .blog-card[data-category-theme="tech"] .blog-card__title,
-  .blog-card[data-category-theme="tech"] .blog-card__read-time,
-  .blog-card[data-category-theme="tech"] .blog-card__meta,
-  .blog-card[data-category-theme="tech"] .blog-card__category {
+  .blog-card[data-category-theme="Tech"] .blog-card__title,
+  .blog-card[data-category-theme="Tech"] .blog-card__read-time,
+  .blog-card[data-category-theme="Tech"] .blog-card__meta,
+  .blog-card[data-category-theme="Tech"] .blog-card__category {
     color: var(--color-tech-secondary-light);
   }
 
-  .blog-card[data-category-theme="running"] .blog-card__title,
-  .blog-card[data-category-theme="running"] .blog-card__read-time,
-  .blog-card[data-category-theme="running"] .blog-card__meta,
-  .blog-card[data-category-theme="running"] .blog-card__category {
+  .blog-card[data-category-theme="Running"] .blog-card__title,
+  .blog-card[data-category-theme="Running"] .blog-card__read-time,
+  .blog-card[data-category-theme="Running"] .blog-card__meta,
+  .blog-card[data-category-theme="Running"] .blog-card__category {
     color: var(--color-running-secondary-light);
   }
 
-  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__title,
-  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__read-time,
-  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__meta,
-  :global(.dark) .blog-card[data-category-theme="tech"] .blog-card__category {
+  .blog-card[data-category-theme="Travel"] .blog-card__title,
+  .blog-card[data-category-theme="Travel"] .blog-card__read-time,
+  .blog-card[data-category-theme="Travel"] .blog-card__meta,
+  .blog-card[data-category-theme="Travel"] .blog-card__category {
+    color: var(--color-travel-secondary-light);
+  }
+
+  .blog-card[data-category-theme="Books"] .blog-card__title,
+  .blog-card[data-category-theme="Books"] .blog-card__read-time,
+  .blog-card[data-category-theme="Books"] .blog-card__meta,
+  .blog-card[data-category-theme="Books"] .blog-card__category {
+    color: var(--color-books-secondary-light);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="Tech"] .blog-card__title,
+  :global(.dark) .blog-card[data-category-theme="Tech"] .blog-card__read-time,
+  :global(.dark) .blog-card[data-category-theme="Tech"] .blog-card__meta,
+  :global(.dark) .blog-card[data-category-theme="Tech"] .blog-card__category {
     color: var(--color-tech-secondary-dark);
   }
 
-  :global(.dark) .blog-card[data-category-theme="running"] .blog-card__title,
+  :global(.dark) .blog-card[data-category-theme="Running"] .blog-card__title,
   :global(.dark)
-    .blog-card[data-category-theme="running"]
+    .blog-card[data-category-theme="Running"]
     .blog-card__read-time,
-  :global(.dark) .blog-card[data-category-theme="running"] .blog-card__meta,
+  :global(.dark) .blog-card[data-category-theme="Running"] .blog-card__meta,
   :global(.dark)
-    .blog-card[data-category-theme="running"]
+    .blog-card[data-category-theme="Running"]
     .blog-card__category {
     color: var(--color-running-secondary-dark);
   }

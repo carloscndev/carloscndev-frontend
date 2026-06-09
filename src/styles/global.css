@@ -54,15 +54,29 @@
   --color-word: #2f42a0;
   --pill-bg: rgba(51, 31, 232, 0.2);
 
+  /* RUNNING */
   --color-running-primary-dark: #001221;
   --color-running-secondary-dark: #0092da;
   --color-running-primary-light: #bcdbff;
   --color-running-secondary-light: #001221;
 
+  /* TECH */
   --color-tech-primary-dark: #070341;
   --color-tech-secondary-dark: #8c88f7;
   --color-tech-primary-light: #aeb4ee;
   --color-tech-secondary-light: #070341;
+
+  /* TRAVEL */
+  --color-travel-primary-dark: #12100e;
+  --color-travel-secondary-dark: #d4af37;
+  --color-travel-primary-light: #f7f3e9;
+  --color-travel-secondary-light: #12100e;
+
+  /* BOOKS */
+  --color-books-primary-dark: #1c050a;
+  --color-books-secondary-dark: #801020;
+  --color-books-primary-light: #f7eff1;
+  --color-books-secondary-light: #1c050a;
 
   --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.12);
   --shadow-card-dark: 0 8px 30px rgba(0, 0, 0, 0.4);

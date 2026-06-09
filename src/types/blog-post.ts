@@ -1,21 +1,39 @@
 import type { StrapiMedia } from "./strapi";
 
+export interface AuthorAttributes {
+  id: number;
+  documentId: string;
+  name: string;
+  nickname: string;
+  slug: string;
+  avatar?: StrapiMedia;
+  bio?: string;
+  role?: string;
+  twitter?: string;
+  github?: string;
+}
+
+export interface SeoAttributes {
+  metaTitle?: string;
+  metaDescription?: string;
+  metaImage?: StrapiMedia;
+  keywords?: string;
+  metaRobots?: string;
+}
+
 export interface BlogPostAttributes {
   documentId: string;
   title: string;
   slug: string;
-  author: string;
-  resume: string;
-  readTime: string;
+  author: AuthorAttributes;
+  excerpt: string;
   date: string;
-  icon: string;
   content: string;
   category?: {
     id: number;
     name: string;
     slug: string;
-    icon: string;
   };
-  headerImage?: StrapiMedia;
-  featuredImage?: StrapiMedia;
+  coverImage?: StrapiMedia;
+  seo?: SeoAttributes;
 }
