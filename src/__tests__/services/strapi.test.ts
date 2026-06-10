@@ -4,6 +4,7 @@ import {
   fetchSingleType,
   fetchCollection,
   fetchCollectionEntry,
+  getStrapiMediaUrl,
   type StrapiSingleResponse,
 } from "../../services/strapi";
 
@@ -114,6 +115,18 @@ describe("strapi service", () => {
       expect(result.data).toEqual({ id: 1, title: "Hello" });
       expect(result.meta).toEqual({});
     });
+
+    it("should throw when baseUrl is missing", async () => {
+      await expect(
+        queryStrapi(
+          "articles",
+          {},
+          {
+            config: { baseUrl: "" },
+          },
+        ),
+      ).rejects.toThrow("Missing PUBLIC_STRAPI_URL environment variable");
+    });
   });
 
   describe("fetchSingleType", () => {
@@ -194,6 +207,19 @@ describe("strapi service", () => {
 
       expect(result).toEqual([]);
     });
+
+    it("should return empty array when fetch throws", async () => {
+      global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+
+      const result = await fetchCollection(
+        "articles",
+        "es",
+        {},
+        { baseUrl: "http://test.local" },
+      );
+
+      expect(result).toEqual([]);
+    });
   });
 
   describe("fetchCollectionEntry", () => {
@@ -233,6 +259,44 @@ describe("strapi service", () => {
       );
 
       expect(result).toBeNull();
+    });
+
+    it("should return null when fetch throws", async () => {
+      global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+
+      const result = await fetchCollectionEntry(
+        "posts",
+        "error-case",
+        "en",
+        {},
+        {
+          baseUrl: "http://test.local",
+        },
+      );
+
+      expect(result).toBeNull();
+    });
+  });
+
+  describe("getStrapiMediaUrl", () => {
+    it("should return absolute URL unchanged", () => {
+      const result = getStrapiMediaUrl("https://cdn.example.com/image.jpg", {
+        baseUrl: "http://test.local",
+      });
+      expect(result).toBe("https://cdn.example.com/image.jpg");
+    });
+
+    it("should prepend baseUrl for relative URL", () => {
+      const result = getStrapiMediaUrl("/uploads/image.jpg", {
+        baseUrl: "http://test.local",
+      });
+      expect(result).toBe("http://test.local/uploads/image.jpg");
+    });
+
+    it("should throw when baseUrl is missing", () => {
+      expect(() => getStrapiMediaUrl("/uploads/image.jpg")).toThrow(
+        "Missing PUBLIC_STRAPI_URL environment variable",
+      );
     });
   });
 });
