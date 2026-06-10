@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   cloneAndReplace,
   getCurrentLang,
   closeAllPanelsExcept,
+  initLangSwitch,
 } from "../../utils/common";
 
 describe("common", () => {
@@ -87,6 +88,37 @@ describe("common", () => {
       const triggers = document.querySelectorAll("[data-accordion-trigger]");
       expect(triggers[0].getAttribute("aria-expanded")).toBe("true");
       expect(triggers[1].getAttribute("aria-expanded")).toBe("false");
+    });
+  });
+
+  describe("initLangSwitch", () => {
+    it("should add langchange event listener", () => {
+      const updateFn = vi.fn();
+      initLangSwitch(updateFn);
+      window.dispatchEvent(
+        new CustomEvent("langchange", { detail: { lang: "en" } }),
+      );
+
+      expect(updateFn).toHaveBeenCalledWith("en");
+    });
+
+    it("should call updateFn on astro:page-load", () => {
+      const updateFn = vi.fn();
+      document.documentElement.lang = "es";
+      initLangSwitch(updateFn);
+
+      document.dispatchEvent(new Event("astro:page-load"));
+
+      expect(updateFn).toHaveBeenCalledWith("es");
+    });
+
+    it("should do nothing if document is undefined", () => {
+      const originalDoc = global.document;
+      // @ts-expect-error - testing undefined document
+      global.document = undefined;
+      const updateFn = vi.fn();
+      expect(() => initLangSwitch(updateFn)).not.toThrow();
+      global.document = originalDoc;
     });
   });
 });

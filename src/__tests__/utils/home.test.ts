@@ -192,7 +192,6 @@ describe("home", () => {
       jsonEl.textContent = JSON.stringify(data);
       document.body.appendChild(jsonEl);
 
-      // Only add some elements, not all
       document.body.innerHTML = `<p data-home-intro></p>`;
 
       expect(() => updateHomeContent("es")).not.toThrow();
@@ -392,7 +391,6 @@ describe("home", () => {
       jsonEl.textContent = JSON.stringify(data);
       document.body.appendChild(jsonEl);
 
-      // No avatar element
       document.body.innerHTML = `<div class="home-section__body"></div>`;
 
       expect(() => initHomeHobbies()).not.toThrow();
@@ -440,6 +438,54 @@ describe("home", () => {
       vi.advanceTimersByTime(300);
 
       expect(avatarImg.src).toContain("gaming.png");
+    });
+
+    it("should rebind listeners on astro:page-load", () => {
+      const data = {
+        es: {
+          intro: "Hola",
+          title: "Carlos",
+          subtitle: "Dev",
+          content: "<p>Test</p>",
+          avatarPaths: {
+            default: "default.png",
+            gaming: "gaming.png",
+          },
+        },
+      };
+      const jsonEl = document.createElement("script");
+      jsonEl.id = "home-data";
+      jsonEl.type = "application/json";
+      jsonEl.textContent = JSON.stringify(data);
+      document.body.appendChild(jsonEl);
+
+      const container = document.createElement("div");
+      container.innerHTML =
+        '<img id="home-avatar" src="default.png" alt="Avatar" /><div class="home-section__body"><strong data-action="gaming">Gaming</strong></div>';
+      document.body.appendChild(container);
+
+      initHomeHobbies();
+      document.dispatchEvent(new Event("astro:page-load"));
+
+      const gamingEl = document.querySelector(
+        "[data-action='gaming']",
+      ) as HTMLElement;
+      gamingEl.click();
+
+      vi.advanceTimersByTime(300);
+
+      const avatarImg = document.getElementById(
+        "home-avatar",
+      ) as HTMLImageElement;
+      expect(avatarImg.src).toContain("gaming.png");
+    });
+
+    it("should do nothing on astro:page-load if data element is missing", () => {
+      document.body.innerHTML = '<div class="home-section__body"></div>';
+      initHomeHobbies();
+      expect(() =>
+        document.dispatchEvent(new Event("astro:page-load")),
+      ).not.toThrow();
     });
   });
 });
