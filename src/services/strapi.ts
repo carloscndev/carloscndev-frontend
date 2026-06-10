@@ -22,7 +22,7 @@ export interface StrapiClientConfig {
 
 function getDefaultConfig(): Pick<StrapiClientConfig, "baseUrl" | "token"> {
   return {
-    baseUrl: import.meta.env?.STRAPI_URL,
+    baseUrl: import.meta.env?.PUBLIC_STRAPI_URL,
     token: import.meta.env?.STRAPI_TOKEN,
   };
 }
@@ -47,7 +47,7 @@ export async function queryStrapi<T>(
   const token = options.config?.token ?? defaultConfig.token;
 
   if (!baseUrl) {
-    throw new Error("Missing STRAPI_URL environment variable");
+    throw new Error("Missing PUBLIC_STRAPI_URL environment variable");
   }
 
   const queryString = qs.stringify(queryObj, { encodeValuesOnly: true });
@@ -115,7 +115,7 @@ export function getStrapiMediaUrl(
   const defaultConfig = getDefaultConfig();
   const baseUrl = config?.baseUrl ?? defaultConfig.baseUrl;
   if (!baseUrl) {
-    throw new Error("Missing STRAPI_URL environment variable");
+    throw new Error("Missing PUBLIC_STRAPI_URL environment variable");
   }
   if (mediaUrl.startsWith("http")) return mediaUrl;
   return `${baseUrl}${mediaUrl}`;
