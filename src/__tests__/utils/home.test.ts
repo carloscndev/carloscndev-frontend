@@ -488,4 +488,30 @@ describe("home", () => {
       ).not.toThrow();
     });
   });
+
+  describe("initHomeLangSwitch", () => {
+    it("should initialize lang switch listener", () => {
+      const data = {
+        es: {
+          intro: "Hola",
+          title: "Carlos",
+          subtitle: "Dev",
+          content: "<p>Test</p>",
+          avatarPaths: { default: "hello.png" },
+        },
+      };
+      const jsonEl = document.createElement("script");
+      jsonEl.id = "home-data";
+      jsonEl.type = "application/json";
+      jsonEl.textContent = JSON.stringify(data);
+      document.body.appendChild(jsonEl);
+
+      document.body.innerHTML = `
+        <p data-home-intro></p>
+        <p data-home-title></p>
+      `;
+
+      expect(() => initHomeLangSwitch()).not.toThrow();
+    });
+  });
 });
