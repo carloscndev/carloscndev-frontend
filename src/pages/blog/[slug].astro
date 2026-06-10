@@ -515,8 +515,36 @@ const uiDictJson = JSON.stringify(uiDict);
     border-color: var(--color-books-primary-dark);
   }
 
-  :global(html[data-category-theme]) ::-webkit-scrollbar-track {
-    background: transparent;
+  :global(html[data-category-theme="Tech"]) ::-webkit-scrollbar-track {
+    background: var(--color-tech-primary-light);
+  }
+
+  :global(html[data-category-theme="Running"]) ::-webkit-scrollbar-track {
+    background: var(--color-running-primary-light);
+  }
+
+  :global(html[data-category-theme="Travel"]) ::-webkit-scrollbar-track {
+    background: var(--color-travel-primary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) ::-webkit-scrollbar-track {
+    background: var(--color-books-primary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) ::-webkit-scrollbar-track {
+    background: var(--color-tech-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"]) ::-webkit-scrollbar-track {
+    background: var(--color-running-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"]) ::-webkit-scrollbar-track {
+    background: var(--color-travel-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"]) ::-webkit-scrollbar-track {
+    background: var(--color-books-primary-dark);
   }
 
   :global(html[data-category-theme="Tech"]) body {
@@ -608,6 +636,43 @@ const uiDictJson = JSON.stringify(uiDict);
     font-family: var(--font-body);
     font-size: 0.7rem;
     color: var(--color-word);
+  }
+
+  :global(html[data-category-theme="Tech"]) .post-body__meta-author-nickname {
+    color: var(--color-tech-secondary-light);
+  }
+
+  :global(html[data-category-theme="Running"])
+    .post-body__meta-author-nickname {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(html[data-category-theme="Travel"]) .post-body__meta-author-nickname {
+    color: var(--color-travel-secondary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) .post-body__meta-author-nickname {
+    color: var(--color-books-secondary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__meta-author-nickname {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__meta-author-nickname {
+    color: var(--color-running-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__meta-author-nickname {
+    color: var(--color-travel-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__meta-author-nickname {
+    color: var(--color-books-secondary-dark);
   }
 
   :global(html[data-category-theme="Tech"]) .post-body__meta-date,
@@ -773,6 +838,55 @@ const uiDictJson = JSON.stringify(uiDict);
 
   .post-body__content :global(strong) {
     font-weight: var(--weight-space-semibold);
+    color: var(--color-word);
+  }
+
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-tech-secondary-light);
+  }
+
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-travel-secondary-light);
+  }
+
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-books-secondary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-running-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-travel-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    :global(strong) {
+    color: var(--color-books-secondary-dark);
   }
 
   .post-body__content :global(em) {
@@ -872,8 +986,77 @@ const uiDictJson = JSON.stringify(uiDict);
     transition: color 300ms ease;
   }
 
+  :global(html[data-category-theme="Tech"]) .post-body__back-home-link {
+    color: var(--color-tech-secondary-light);
+  }
+
+  :global(html[data-category-theme="Running"]) .post-body__back-home-link {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(html[data-category-theme="Travel"]) .post-body__back-home-link {
+    color: var(--color-travel-secondary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) .post-body__back-home-link {
+    color: var(--color-books-secondary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"]) .post-body__back-home-link {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"]) .post-body__back-home-link {
+    color: var(--color-running-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"]) .post-body__back-home-link {
+    color: var(--color-travel-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"]) .post-body__back-home-link {
+    color: var(--color-books-secondary-dark);
+  }
+
   .post-body__back-home-link:hover {
     color: var(--color-word);
+  }
+
+  :global(html[data-category-theme="Tech"]) .post-body__back-home-link:hover {
+    color: var(--color-tech-secondary-light);
+  }
+
+  :global(html[data-category-theme="Running"])
+    .post-body__back-home-link:hover {
+    color: var(--color-running-secondary-light);
+  }
+
+  :global(html[data-category-theme="Travel"]) .post-body__back-home-link:hover {
+    color: var(--color-travel-secondary-light);
+  }
+
+  :global(html[data-category-theme="Books"]) .post-body__back-home-link:hover {
+    color: var(--color-books-secondary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__back-home-link:hover {
+    color: var(--color-tech-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__back-home-link:hover {
+    color: var(--color-running-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__back-home-link:hover {
+    color: var(--color-travel-secondary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__back-home-link:hover {
+    color: var(--color-books-secondary-dark);
   }
 
   .post-body__back-home-icon {
