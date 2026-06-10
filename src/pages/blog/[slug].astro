@@ -16,7 +16,6 @@ import markedShiki from "marked-shiki";
 import { createHighlighter } from "shiki";
 import uiDict from "../../i18n/ui.json";
 import type { Lang } from "../../utils/lang";
-import { getCategoryTheme } from "../../utils/category";
 import { calculateReadingTime } from "../../utils/reading-time";
 
 // 1. Initialize Shiki highlighter
@@ -150,7 +149,6 @@ if (!globalConfig) {
 // Parse Markdown content to HTML for both locales (await because marked-shiki uses async highlight)
 const postContentHtml = (await marked.parse(post.content)) as string;
 
-const categoryTheme = getCategoryTheme(post.category?.name || "");
 const authorName = post.author?.name || "";
 const authorNickname = post.author?.nickname || "";
 const authorAvatar = post.author?.avatar?.url
@@ -234,14 +232,22 @@ const embeddedData = {
 
 const blogPostDataJson = JSON.stringify(embeddedData);
 const uiDictJson = JSON.stringify(uiDict);
+
+const seoImage = post.seo?.metaImage?.url
+  ? getStrapiMediaUrl(post.seo.metaImage.url)
+  : post.coverImage?.url
+    ? getStrapiMediaUrl(post.coverImage.url)
+    : undefined;
 ---
 
 <PostLayout
   title={post.seo?.metaTitle || post.title}
   description={post.seo?.metaDescription}
-  image={post.seo?.metaImage?.url || post.coverImage?.url}
+  image={seoImage}
+  keywords={post.seo?.keywords}
+  metaRobots={post.seo?.metaRobots}
   lang={lang}
-  categoryTheme={categoryTheme}
+  category={post.category?.name}
   navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
 >
@@ -547,6 +553,248 @@ const uiDictJson = JSON.stringify(uiDict);
     background: var(--color-books-primary-dark);
   }
 
+  /* Table scrollbar styling for all category themes */
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-tech-secondary-light);
+    border-color: var(--color-tech-primary-light);
+  }
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-tech-primary-light);
+  }
+
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-running-secondary-light);
+    border-color: var(--color-running-primary-light);
+  }
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-running-primary-light);
+  }
+
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-travel-secondary-light);
+    border-color: var(--color-travel-primary-light);
+  }
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-travel-primary-light);
+  }
+
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-books-secondary-light);
+    border-color: var(--color-books-primary-light);
+  }
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-books-primary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-tech-secondary-dark);
+    border-color: var(--color-tech-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-tech-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-running-secondary-dark);
+    border-color: var(--color-running-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-running-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-travel-secondary-dark);
+    border-color: var(--color-travel-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-travel-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    table::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    table::-webkit-scrollbar {
+    background-color: var(--color-books-secondary-dark);
+    border-color: var(--color-books-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    table::-webkit-scrollbar-track {
+    background: var(--color-books-primary-dark);
+  }
+
+  /* Code block scrollbar styling for all category themes */
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-tech-secondary-light);
+    border-color: var(--color-tech-primary-light);
+  }
+  :global(html[data-category-theme="Tech"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-tech-primary-light);
+  }
+
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-running-secondary-light);
+    border-color: var(--color-running-primary-light);
+  }
+  :global(html[data-category-theme="Running"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-running-primary-light);
+  }
+
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-travel-secondary-light);
+    border-color: var(--color-travel-primary-light);
+  }
+  :global(html[data-category-theme="Travel"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-travel-primary-light);
+  }
+
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-books-secondary-light);
+    border-color: var(--color-books-primary-light);
+  }
+  :global(html[data-category-theme="Books"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-books-primary-light);
+  }
+
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-tech-secondary-dark);
+    border-color: var(--color-tech-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Tech"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-tech-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-running-secondary-dark);
+    border-color: var(--color-running-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Running"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-running-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-travel-secondary-dark);
+    border-color: var(--color-travel-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Travel"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-travel-primary-dark);
+  }
+
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    pre::-webkit-scrollbar-thumb,
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    pre::-webkit-scrollbar {
+    background-color: var(--color-books-secondary-dark);
+    border-color: var(--color-books-primary-dark);
+  }
+  :global(html.dark[data-category-theme="Books"])
+    .post-body__content
+    pre::-webkit-scrollbar-track {
+    background: var(--color-books-primary-dark);
+  }
+
   :global(html[data-category-theme="Tech"]) body {
     background-color: var(--color-tech-primary-light);
   }
@@ -826,9 +1074,10 @@ const uiDictJson = JSON.stringify(uiDict);
 
   .post-body__content :global(th),
   .post-body__content :global(td) {
-    border: 1px solid var(--color-word);
+    border: 1px solid var(--text-base);
     padding: var(--spacing-xs) var(--spacing-sm);
     text-align: left;
+    transition: none;
   }
 
   .post-body__content :global(th) {

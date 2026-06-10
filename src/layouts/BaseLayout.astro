@@ -9,18 +9,20 @@ interface Props {
   title: string;
   lang?: "es" | "en";
   description?: string;
-  categoryTheme?: string;
   image?: string;
-  noindex?: boolean;
+  keywords?: string;
+  metaRobots?: string;
+  category?: string;
 }
 
 const {
   title,
   lang = "es",
   description = "Carlos Castañeda — Software Engineer. Portfolio, blog, and projects.",
-  categoryTheme,
   image,
-  noindex,
+  keywords,
+  metaRobots,
+  category,
 } = Astro.props;
 
 const canonicalUrl = `${Astro.site?.origin ?? "https://carloscndev.com"}${Astro.url.pathname}`;
@@ -77,9 +79,15 @@ const inlineThemeScript = `
     <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    {noindex && <meta name="robots" content="noindex, follow" />}
-    <BaseSEO title={title} description={description} image={image} />
-    <meta name="category-theme" content={categoryTheme || ""} />
+
+    <BaseSEO
+      title={title}
+      description={description}
+      image={image}
+      keywords={keywords}
+      metaRobots={metaRobots}
+      category={category}
+    />
     <ClientRouter />
 
     <script is:inline set:html={inlineThemeScript} />

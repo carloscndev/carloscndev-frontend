@@ -6,9 +6,10 @@ import type { NavigationItem } from "../types/global-config";
 interface Props {
   title: string;
   lang?: "es" | "en";
-  categoryTheme?: string;
-  noindex?: boolean;
+  category?: string;
   description?: string;
+  keywords?: string;
+  metaRobots?: string;
   navigation: NavigationItem[];
   defaultLocale?: string;
 }
@@ -16,9 +17,10 @@ interface Props {
 const {
   title,
   lang = "es",
-  categoryTheme,
-  noindex,
+  category,
   description,
+  keywords,
+  metaRobots,
   navigation,
   defaultLocale,
 } = Astro.props;
@@ -27,9 +29,10 @@ const {
 <BaseLayout
   title={title}
   lang={lang}
-  categoryTheme={categoryTheme}
-  noindex={noindex}
+  category={category}
   description={description}
+  keywords={keywords}
+  metaRobots={metaRobots}
 >
   <Header lang={lang} navigation={navigation} defaultLocale={defaultLocale} />
   <div class="post-layout">
