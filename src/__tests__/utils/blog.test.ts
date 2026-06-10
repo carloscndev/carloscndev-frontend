@@ -394,6 +394,121 @@ describe("blog", () => {
       expect(trigger).toBeTruthy();
     });
 
+    it("should open panel on trigger click", () => {
+      document.body.innerHTML = `
+        <div data-blog-accordion>
+          <div data-accordion-item>
+            <button data-accordion-trigger>Click</button>
+            <div data-accordion-panel>Content</div>
+          </div>
+        </div>
+      `;
+
+      initBlogAccordion();
+
+      const trigger = document.querySelector(
+        "[data-accordion-trigger]",
+      ) as HTMLButtonElement;
+      trigger.click();
+
+      const panel = document.querySelector("[data-accordion-panel]")!;
+      expect(panel.classList.contains("blog-accordion__panel--open")).toBe(
+        true,
+      );
+      expect(trigger.getAttribute("aria-expanded")).toBe("true");
+    });
+
+    it("should close panel on second click", () => {
+      document.body.innerHTML = `
+        <div data-blog-accordion>
+          <div data-accordion-item>
+            <button data-accordion-trigger>Click</button>
+            <div data-accordion-panel>Content</div>
+          </div>
+        </div>
+      `;
+
+      initBlogAccordion();
+
+      const trigger = document.querySelector(
+        "[data-accordion-trigger]",
+      ) as HTMLButtonElement;
+      trigger.click();
+      trigger.click();
+
+      const panel = document.querySelector("[data-accordion-panel]")!;
+      expect(panel.classList.contains("blog-accordion__panel--open")).toBe(
+        false,
+      );
+      expect(trigger.getAttribute("aria-expanded")).toBe("false");
+    });
+
+    it("should close other panels when opening a panel", () => {
+      document.body.innerHTML = `
+        <div data-blog-accordion>
+          <div data-accordion-item>
+            <button data-accordion-trigger>Trigger 1</button>
+            <div data-accordion-panel>Panel 1</div>
+          </div>
+          <div data-accordion-item>
+            <button data-accordion-trigger>Trigger 2</button>
+            <div data-accordion-panel>Panel 2</div>
+          </div>
+        </div>
+      `;
+
+      initBlogAccordion();
+
+      const trigger1 = document.querySelectorAll(
+        "[data-accordion-trigger]",
+      )[0] as HTMLButtonElement;
+      const trigger2 = document.querySelectorAll(
+        "[data-accordion-trigger]",
+      )[1] as HTMLButtonElement;
+
+      trigger1.click();
+      trigger2.click();
+
+      const panel1 = document.querySelectorAll(
+        "[data-accordion-panel]",
+      )[0] as HTMLElement;
+      const panel2 = document.querySelectorAll(
+        "[data-accordion-panel]",
+      )[1] as HTMLElement;
+
+      expect(panel1.classList.contains("blog-accordion__panel--open")).toBe(
+        false,
+      );
+      expect(panel2.classList.contains("blog-accordion__panel--open")).toBe(
+        true,
+      );
+    });
+
+    it("should not toggle if click is on a link inside trigger", () => {
+      document.body.innerHTML = `
+        <div data-blog-accordion>
+          <div data-accordion-item>
+            <button data-accordion-trigger>
+              <a href="#" class="blog-accordion__trigger-link">Link</a>
+            </button>
+            <div data-accordion-panel>Content</div>
+          </div>
+        </div>
+      `;
+
+      initBlogAccordion();
+
+      const link = document.querySelector(
+        ".blog-accordion__trigger-link",
+      ) as HTMLAnchorElement;
+      link.click();
+
+      const panel = document.querySelector("[data-accordion-panel]")!;
+      expect(panel.classList.contains("blog-accordion__panel--open")).toBe(
+        false,
+      );
+    });
+
     it("should do nothing if document is undefined", () => {
       const globalDoc = global.document;
       // @ts-expect-error - testing undefined document
