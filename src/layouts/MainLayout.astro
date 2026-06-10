@@ -2,7 +2,11 @@
 import BaseLayout from "./BaseLayout.astro";
 import Header from "../components/ui/Header.astro";
 import SocialSidebar from "../components/ui/SocialSidebar.astro";
-import type { NavigationItem, SocialLink } from "../types/global-config";
+import type {
+  NavigationItem,
+  SocialLink,
+  GlobalConfigSeo,
+} from "../types/global-config";
 
 interface Props {
   title: string;
@@ -11,13 +15,14 @@ interface Props {
   navigation: NavigationItem[];
   social: SocialLink[];
   defaultLocale?: string;
+  seo?: GlobalConfigSeo;
 }
 
-const { title, lang, description, navigation, social, defaultLocale } =
+const { title, lang, description, navigation, social, defaultLocale, seo } =
   Astro.props;
 ---
 
-<BaseLayout title={title} lang={lang} description={description}>
+<BaseLayout title={title} lang={lang} description={description} seo={seo}>
   <Header lang={lang} navigation={navigation} defaultLocale={defaultLocale} />
   <main id="main" class="main-content">
     <SocialSidebar social={social} />

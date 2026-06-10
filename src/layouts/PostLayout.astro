@@ -1,39 +1,28 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Header from "../components/ui/Header.astro";
-import type { NavigationItem } from "../types/global-config";
+import type { NavigationItem, GlobalConfigSeo } from "../types/global-config";
 
 interface Props {
   title: string;
   lang?: "es" | "en";
   category?: string;
-  description?: string;
-  keywords?: string;
-  metaRobots?: string;
   navigation: NavigationItem[];
   defaultLocale?: string;
+  seo?: GlobalConfigSeo;
 }
 
 const {
   title,
   lang = "es",
   category,
-  description,
-  keywords,
-  metaRobots,
   navigation,
   defaultLocale,
+  seo,
 } = Astro.props;
 ---
 
-<BaseLayout
-  title={title}
-  lang={lang}
-  category={category}
-  description={description}
-  keywords={keywords}
-  metaRobots={metaRobots}
->
+<BaseLayout title={title} lang={lang} category={category} seo={seo}>
   <Header lang={lang} navigation={navigation} defaultLocale={defaultLocale} />
   <div class="post-layout">
     <article id="main" class="post-layout__article">

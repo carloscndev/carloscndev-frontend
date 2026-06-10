@@ -4,26 +4,22 @@ import { getPreferredTheme, applyTheme } from "@utils/theme";
 import Analytics from "@vercel/analytics/astro";
 import BaseSEO from "@components/BaseSEO.astro";
 import "../styles/global.css";
+import type { GlobalConfigSeo } from "../types/global-config";
 
 interface Props {
   title: string;
   lang?: "es" | "en";
-  description?: string;
-  image?: string;
-  keywords?: string;
-  metaRobots?: string;
   category?: string;
+  seo?: GlobalConfigSeo;
 }
 
-const {
-  title,
-  lang = "es",
-  description = "Carlos Castañeda — Software Engineer. Portfolio, blog, and projects.",
-  image,
-  keywords,
-  metaRobots,
-  category,
-} = Astro.props;
+const { title, lang = "es", category, seo } = Astro.props;
+
+const seoTitle = seo?.metaTitle || title;
+const seoDescription = seo?.metaDescription;
+const seoKeywords = seo?.keywords;
+const seoRobots = seo?.metaRobots;
+const seoImage = seo?.metaImage?.url;
 
 const canonicalUrl = `${Astro.site?.origin ?? "https://carloscndev.com"}${Astro.url.pathname}`;
 
@@ -81,11 +77,11 @@ const inlineThemeScript = `
     <title>{title}</title>
 
     <BaseSEO
-      title={title}
-      description={description}
-      image={image}
-      keywords={keywords}
-      metaRobots={metaRobots}
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      keywords={seoKeywords}
+      metaRobots={seoRobots}
       category={category}
     />
     <ClientRouter />

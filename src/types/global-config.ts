@@ -1,4 +1,4 @@
-import type { StrapiEntity } from "./strapi";
+import type { StrapiEntity, StrapiMedia } from "./strapi";
 
 export interface NavigationItem {
   id: number;
@@ -12,6 +12,14 @@ export interface SocialLink {
   url: string;
 }
 
+export interface GlobalConfigSeo {
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string;
+  metaImage?: StrapiMedia;
+  metaRobots?: string;
+}
+
 export interface GlobalConfigAttributes extends StrapiEntity {
   siteName: string;
   siteTitle: string;
@@ -20,4 +28,5 @@ export interface GlobalConfigAttributes extends StrapiEntity {
   defaultLocale: string;
   navigation?: NavigationItem[];
   social?: SocialLink[];
+  seo?: GlobalConfigSeo;
 }

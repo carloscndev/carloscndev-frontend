@@ -232,24 +232,15 @@ const embeddedData = {
 
 const blogPostDataJson = JSON.stringify(embeddedData);
 const uiDictJson = JSON.stringify(uiDict);
-
-const seoImage = post.seo?.metaImage?.url
-  ? getStrapiMediaUrl(post.seo.metaImage.url)
-  : post.coverImage?.url
-    ? getStrapiMediaUrl(post.coverImage.url)
-    : undefined;
 ---
 
 <PostLayout
-  title={post.seo?.metaTitle || post.title}
-  description={post.seo?.metaDescription}
-  image={seoImage}
-  keywords={post.seo?.keywords}
-  metaRobots={post.seo?.metaRobots}
+  title={post.title}
   lang={lang}
   category={post.category?.name}
   navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
+  seo={post.seo}
 >
   <script
     is:inline
