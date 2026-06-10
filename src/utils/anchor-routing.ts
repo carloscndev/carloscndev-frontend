@@ -107,11 +107,6 @@ function handleHashLinkClick(event: Event): void {
       const hash = href.substring(href.indexOf("#"));
       scrollToHash(hash);
     }
-
-    // Update browser URL without a full page reload
-    if (typeof window !== "undefined" && window.history) {
-      window.history.pushState(null, "", href);
-    }
   }
 }
 

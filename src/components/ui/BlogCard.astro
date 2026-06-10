@@ -296,6 +296,20 @@ const iconName = getIconName(category);
     color: var(--color-running-secondary-dark);
   }
 
+  :global(.dark) .blog-card[data-category-theme="Travel"] .blog-card__title,
+  :global(.dark) .blog-card[data-category-theme="Travel"] .blog-card__read-time,
+  :global(.dark) .blog-card[data-category-theme="Travel"] .blog-card__meta,
+  :global(.dark) .blog-card[data-category-theme="Travel"] .blog-card__category {
+    color: var(--color-travel-secondary-dark);
+  }
+
+  :global(.dark) .blog-card[data-category-theme="Books"] .blog-card__title,
+  :global(.dark) .blog-card[data-category-theme="Books"] .blog-card__read-time,
+  :global(.dark) .blog-card[data-category-theme="Books"] .blog-card__meta,
+  :global(.dark) .blog-card[data-category-theme="Books"] .blog-card__category {
+    color: var(--color-books-secondary-dark);
+  }
+
   @media (min-width: 768px) {
     .blog-card__title {
       font-size: var(--font-size-h3-desktop);
