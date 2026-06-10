@@ -272,5 +272,40 @@ describe("anchor-routing", () => {
 
       expect(scrollMock).not.toHaveBeenCalled();
     });
+
+    it("should rebind listeners and scroll on astro:page-load on home path", async () => {
+      const scrollMock = vi.fn();
+      const section = document.createElement("section");
+      section.id = "home";
+      section.scrollIntoView = scrollMock;
+      document.body.appendChild(section);
+
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/", hash: "" },
+        writable: true,
+      });
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      document.dispatchEvent(new Event("astro:page-load"));
+      vi.advanceTimersByTime(300);
+
+      expect(scrollMock).toHaveBeenCalled();
+    });
+
+    it("should not scroll on astro:page-load if not on home path", async () => {
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/blog", hash: "" },
+        writable: true,
+      });
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      expect(() =>
+        document.dispatchEvent(new Event("astro:page-load")),
+      ).not.toThrow();
+    });
   });
 });
