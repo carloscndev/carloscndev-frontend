@@ -183,10 +183,44 @@ describe("theme", () => {
     });
 
     it("should do nothing if document is undefined", () => {
-      // This test is complex because initThemeListener uses document at multiple points
-      // The function gracefully handles undefined document by checking typeof
-      // We can verify the function exists and is callable
       expect(typeof initThemeListener).toBe("function");
+    });
+
+    it("should apply theme on astro:after-swap event", () => {
+      localStorage.setItem("carloscndev-theme", "dark");
+      initThemeListener();
+
+      document.dispatchEvent(new Event("astro:after-swap"));
+
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+    });
+
+    it("should rebind toggle handlers on astro:page-load", () => {
+      localStorage.setItem("carloscndev-theme", "light");
+      document.body.innerHTML = `
+        <button id="theme-toggle-button">Theme</button>
+        <button id="theme-toggle-mobile">Theme Mobile</button>
+      `;
+
+      initThemeListener();
+
+      document.dispatchEvent(new Event("astro:page-load"));
+
+      const desktopBtn = document.getElementById(
+        "theme-toggle-button",
+      ) as HTMLElement;
+      desktopBtn.click();
+
+      expect(document.documentElement.classList.contains("dark")).toBe(true);
+    });
+
+    it("should handle astro:page-load with no toggle buttons", () => {
+      document.body.innerHTML = `<div>No buttons</div>`;
+      initThemeListener();
+
+      expect(() =>
+        document.dispatchEvent(new Event("astro:page-load")),
+      ).not.toThrow();
     });
   });
 });
