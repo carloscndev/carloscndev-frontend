@@ -6,6 +6,7 @@ import {
   getNavLabel,
   toggleLanguage,
   initLangListener,
+  updateContentLabels,
   type Lang,
 } from "../../utils/lang";
 
@@ -237,6 +238,54 @@ describe("lang", () => {
       document.dispatchEvent(new Event("astro:after-swap"));
 
       expect(document.documentElement.lang).toBe("en");
+    });
+
+    it("should handle astro:page-load with stored lang different from dom", () => {
+      localStorage.setItem("carloscndev-lang", "en");
+      document.documentElement.lang = "es";
+      initLangListener();
+
+      document.dispatchEvent(new Event("astro:page-load"));
+
+      expect(document.documentElement.lang).toBe("en");
+    });
+  });
+
+  describe("updateContentLabels", () => {
+    it("should update content labels for elements with valid key", () => {
+      document.body.innerHTML = `
+        <span data-i18n-content="nav.home">Original</span>
+      `;
+
+      updateContentLabels("es");
+
+      const el = document.querySelector("[data-i18n-content]")!;
+      expect(el.textContent).toBeTruthy();
+    });
+
+    it("should handle element with empty key attribute", () => {
+      document.body.innerHTML = `
+        <span data-i18n-content="">Original</span>
+      `;
+
+      expect(() => updateContentLabels("es")).not.toThrow();
+    });
+
+    it("should handle element without key attribute", () => {
+      document.body.innerHTML = `
+        <span data-i18n-content>Original</span>
+      `;
+      expect(() => updateContentLabels("es")).not.toThrow();
+    });
+
+    it("should do nothing if document is undefined", () => {
+      const globalDoc = global.document;
+      // @ts-expect-error - testing undefined document
+      global.document = undefined;
+
+      expect(() => updateContentLabels("es")).not.toThrow();
+
+      global.document = globalDoc;
     });
   });
 });

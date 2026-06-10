@@ -186,6 +186,11 @@ describe("mobile-menu", () => {
       initMobileMenuListener();
 
       const menu = document.getElementById("mobile-menu")!;
+      const closeBtn = document.querySelector(
+        "[data-mobile-menu-close]",
+      ) as HTMLElement;
+
+      (closeBtn as HTMLButtonElement).focus();
 
       const tabEvent = new KeyboardEvent("keydown", {
         key: "Tab",
