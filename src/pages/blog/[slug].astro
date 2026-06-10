@@ -232,6 +232,20 @@ const embeddedData = {
 
 const blogPostDataJson = JSON.stringify(embeddedData);
 const uiDictJson = JSON.stringify(uiDict);
+
+const postSeo = post.seo
+  ? {
+      ...post.seo,
+      metaImage: post.seo.metaImage?.url
+        ? {
+            ...post.seo.metaImage,
+            url: getStrapiMediaUrl(post.seo.metaImage.url),
+          }
+        : post.coverImage?.url
+          ? { ...post.coverImage, url: getStrapiMediaUrl(post.coverImage.url) }
+          : undefined,
+    }
+  : undefined;
 ---
 
 <PostLayout
@@ -240,7 +254,7 @@ const uiDictJson = JSON.stringify(uiDict);
   category={post.category?.name}
   navigation={globalConfig.navigation ?? []}
   defaultLocale={globalConfig.defaultLocale}
-  seo={post.seo}
+  seo={postSeo}
 >
   <script
     is:inline

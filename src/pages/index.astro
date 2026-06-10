@@ -1,5 +1,9 @@
 ---
-import { fetchSingleType, fetchCollection } from "../services/strapi";
+import {
+  fetchSingleType,
+  fetchCollection,
+  getStrapiMediaUrl,
+} from "../services/strapi";
 import type { GlobalConfigAttributes } from "../types/global-config";
 import type { HomePageAttributes } from "../types/home-page";
 import type { AboutPageAttributes } from "../types/about-page";
@@ -20,8 +24,24 @@ import Contact from "@components/sections/Contact.astro";
 const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
   "global-config",
   "es",
-  { populate: ["navigation", "social"] },
+  { populate: ["navigation", "social", "seo.metaImage"] },
 );
+
+if (!globalConfig) {
+  throw new Error("Failed to fetch global-config from Strapi");
+}
+
+const globalSeo = globalConfig.seo
+  ? {
+      ...globalConfig.seo,
+      metaImage: globalConfig.seo.metaImage?.url
+        ? {
+            ...globalConfig.seo.metaImage,
+            url: getStrapiMediaUrl(globalConfig.seo.metaImage.url),
+          }
+        : undefined,
+    }
+  : undefined;
 
 if (!globalConfig) {
   throw new Error("Failed to fetch global-config from Strapi");
@@ -307,7 +327,7 @@ const contactData = {
   navigation={globalConfig.navigation ?? []}
   social={globalConfig.social ?? []}
   defaultLocale={globalConfig.defaultLocale}
-  seo={globalConfig.seo}
+  seo={globalSeo}
 >
   <script
     is:inline
