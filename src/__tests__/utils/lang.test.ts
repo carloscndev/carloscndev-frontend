@@ -197,5 +197,46 @@ describe("lang", () => {
       const navLabel = document.querySelector("[data-i18n-nav='home']")!;
       expect(navLabel.textContent).toBeTruthy();
     });
+
+    it("should handle keyboard Enter key on toggle", () => {
+      initLangListener();
+
+      const btn = document.getElementById(
+        "language-toggle",
+      ) as HTMLButtonElement;
+      const enterEvent = new KeyboardEvent("keydown", { key: "Enter" });
+      btn.dispatchEvent(enterEvent);
+
+      expect(document.documentElement.lang).toBe("en");
+    });
+
+    it("should handle keyboard Space key on toggle", () => {
+      initLangListener();
+
+      const btn = document.getElementById(
+        "language-toggle",
+      ) as HTMLButtonElement;
+      const spaceEvent = new KeyboardEvent("keydown", { key: " " });
+      btn.dispatchEvent(spaceEvent);
+
+      expect(document.documentElement.lang).toBe("en");
+    });
+
+    it("should handle astro:after-swap event", () => {
+      initLangListener();
+
+      document.dispatchEvent(new Event("astro:after-swap"));
+
+      expect(document.documentElement.lang).toBe("es");
+    });
+
+    it("should handle astro:after-swap with stored lang", () => {
+      localStorage.setItem("carloscndev-lang", "en");
+      initLangListener();
+
+      document.dispatchEvent(new Event("astro:after-swap"));
+
+      expect(document.documentElement.lang).toBe("en");
+    });
   });
 });
