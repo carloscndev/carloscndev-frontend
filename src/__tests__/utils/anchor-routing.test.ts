@@ -6,6 +6,12 @@ describe("anchor-routing", () => {
     document.body.innerHTML = "";
     vi.useFakeTimers();
     Object.defineProperty(window, "innerWidth", { value: 1024 });
+    Object.defineProperty(window, "location", {
+      value: { pathname: "/", hash: "", origin: "http://localhost:4321" },
+      writable: true,
+    });
+    window.history.pushState = vi.fn();
+    window.history.replaceState = vi.fn();
   });
 
   afterEach(() => {
@@ -212,6 +218,96 @@ describe("anchor-routing", () => {
 
       expect(scrollMock).toHaveBeenCalled();
     });
+
+    it("should call history.pushState with / for home navigation", () => {
+      const section = document.createElement("section");
+      section.id = "home";
+      section.scrollIntoView = vi.fn();
+      document.body.appendChild(section);
+
+      scrollToHash("/");
+
+      expect(window.history.pushState).toHaveBeenCalledWith(null, "", "/");
+    });
+
+    it("should call history.pushState with /#section for section navigation", () => {
+      const container = document.createElement("div");
+      container.classList.add("main-content");
+      container.scrollTo = vi.fn();
+      container.scrollTop = 0;
+      Object.defineProperty(container, "clientHeight", { value: 800 });
+
+      const section = document.createElement("section");
+      section.id = "about";
+      Object.defineProperty(section, "getBoundingClientRect", {
+        value: () => ({ top: 100, height: 600 }),
+      });
+      Object.defineProperty(section, "clientHeight", { value: 600 });
+
+      container.getBoundingClientRect = vi.fn(() => ({
+        top: 0,
+        height: 800,
+      }));
+
+      container.appendChild(section);
+      document.body.appendChild(container);
+
+      scrollToHash("about");
+
+      expect(window.history.pushState).toHaveBeenCalledWith(
+        null,
+        "",
+        "/#about",
+      );
+    });
+
+    it("should use fallback to window.location.hash when pushState throws", () => {
+      const container = document.createElement("div");
+      container.classList.add("main-content");
+      container.scrollTo = vi.fn();
+      container.scrollTop = 0;
+      Object.defineProperty(container, "clientHeight", { value: 800 });
+
+      const section = document.createElement("section");
+      section.id = "about";
+      Object.defineProperty(section, "getBoundingClientRect", {
+        value: () => ({ top: 100, height: 600 }),
+      });
+      Object.defineProperty(section, "clientHeight", { value: 600 });
+
+      container.getBoundingClientRect = vi.fn(() => ({
+        top: 0,
+        height: 800,
+      }));
+
+      container.appendChild(section);
+      document.body.appendChild(container);
+
+      // Simulate pushState throwing an error
+      vi.spyOn(window.history, "pushState").mockImplementation(() => {
+        throw new Error("SecurityError");
+      });
+
+      // Mock location.hash setter
+      let hashValue = "";
+      Object.defineProperty(window, "location", {
+        value: {
+          pathname: "/",
+          origin: "http://localhost:4321",
+          set hash(val) {
+            hashValue = val;
+          },
+          get hash() {
+            return hashValue;
+          },
+        },
+        writable: true,
+      });
+
+      scrollToHash("about");
+
+      expect(hashValue).toBe("about");
+    });
   });
 
   describe("initAnchorRouting", () => {
@@ -238,7 +334,7 @@ describe("anchor-routing", () => {
 
     it("should not bind listeners if not on home path", async () => {
       Object.defineProperty(window, "location", {
-        value: { pathname: "/blog", hash: "" },
+        value: { pathname: "/blog", hash: "", origin: "http://localhost:4321" },
         writable: true,
       });
 
@@ -253,7 +349,12 @@ describe("anchor-routing", () => {
       expect(() => initAnchorRouting()).not.toThrow();
     });
 
-    it("should handle click on hash link", async () => {
+    it("should handle click on hash link when on home path", async () => {
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/", hash: "", origin: "http://localhost:4321" },
+        writable: true,
+      });
+
       const scrollMock = vi.fn();
       const section = document.createElement("section");
       section.id = "home";
@@ -270,6 +371,37 @@ describe("anchor-routing", () => {
       const link = document.querySelector("a") as HTMLAnchorElement;
       link.click();
 
+      vi.advanceTimersByTime(100);
+
+      // Link with /# should call scrollToHash
+      expect(scrollMock).not.toHaveBeenCalled();
+    });
+
+    it("should not intercept hash links when on non-home page", async () => {
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/blog", hash: "", origin: "http://localhost:4321" },
+        writable: true,
+      });
+
+      const scrollMock = vi.fn();
+      const section = document.createElement("section");
+      section.id = "home";
+      section.scrollIntoView = scrollMock;
+      document.body.appendChild(section);
+
+      document.body.innerHTML = `
+        <a href="/#about" class="header-nav-link">About</a>
+      `;
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      const link = document.querySelector("a") as HTMLAnchorElement;
+      link.click();
+
+      vi.advanceTimersByTime(100);
+
+      // On non-home path, hash links should not be intercepted
       expect(scrollMock).not.toHaveBeenCalled();
     });
 
@@ -281,7 +413,7 @@ describe("anchor-routing", () => {
       document.body.appendChild(section);
 
       Object.defineProperty(window, "location", {
-        value: { pathname: "/", hash: "" },
+        value: { pathname: "/", hash: "", origin: "http://localhost:4321" },
         writable: true,
       });
 
@@ -296,7 +428,7 @@ describe("anchor-routing", () => {
 
     it("should not scroll on astro:page-load if not on home path", async () => {
       Object.defineProperty(window, "location", {
-        value: { pathname: "/blog", hash: "" },
+        value: { pathname: "/blog", hash: "", origin: "http://localhost:4321" },
         writable: true,
       });
 
@@ -306,6 +438,173 @@ describe("anchor-routing", () => {
       expect(() =>
         document.dispatchEvent(new Event("astro:page-load")),
       ).not.toThrow();
+    });
+
+    it("should clear hash on astro:after-swap when navigating away from home", async () => {
+      Object.defineProperty(window, "location", {
+        value: {
+          pathname: "/blog",
+          hash: "#about",
+          origin: "http://localhost:4321",
+        },
+        writable: true,
+      });
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      document.dispatchEvent(new Event("astro:after-swap"));
+
+      expect(window.history.replaceState).toHaveBeenCalled();
+    });
+
+    it("should handle popstate event for back/forward navigation", async () => {
+      const scrollMock = vi.fn();
+      const container = document.createElement("div");
+      container.classList.add("main-content");
+      container.scrollTo = scrollMock;
+      container.scrollTop = 0;
+      Object.defineProperty(container, "clientHeight", { value: 800 });
+
+      const homeSection = document.createElement("section");
+      homeSection.id = "home";
+      homeSection.scrollIntoView = vi.fn();
+
+      const aboutSection = document.createElement("section");
+      aboutSection.id = "about";
+      Object.defineProperty(aboutSection, "getBoundingClientRect", {
+        value: () => ({ top: 100, height: 600 }),
+      });
+      Object.defineProperty(aboutSection, "clientHeight", { value: 600 });
+
+      container.getBoundingClientRect = vi.fn(() => ({
+        top: 0,
+        height: 800,
+      }));
+
+      container.appendChild(homeSection);
+      container.appendChild(aboutSection);
+      document.body.appendChild(container);
+
+      // Initial location with no hash
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/", hash: "", origin: "http://localhost:4321" },
+        writable: true,
+      });
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      // Simulate hash change via popstate
+      Object.defineProperty(window, "location", {
+        value: {
+          pathname: "/",
+          hash: "#about",
+          origin: "http://localhost:4321",
+        },
+        writable: true,
+      });
+
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      vi.advanceTimersByTime(200);
+
+      expect(scrollMock).toHaveBeenCalled();
+    });
+
+    it("should handle popstate event with empty hash for home navigation", async () => {
+      const scrollMock = vi.fn();
+      const section = document.createElement("section");
+      section.id = "home";
+      section.scrollIntoView = scrollMock;
+      document.body.appendChild(section);
+
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/", hash: "", origin: "http://localhost:4321" },
+        writable: true,
+      });
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      vi.advanceTimersByTime(200);
+
+      expect(scrollMock).toHaveBeenCalled();
+    });
+  });
+
+  describe("handleDocumentClick", () => {
+    it("should clear hash when clicking non-hash link on home page", async () => {
+      Object.defineProperty(window, "location", {
+        value: {
+          pathname: "/",
+          hash: "#about",
+          origin: "http://localhost:4321",
+        },
+        writable: true,
+      });
+
+      document.body.innerHTML = `
+        <a href="/blog/my-post" class="blog-card">Blog Post</a>
+      `;
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      const link = document.querySelector("a") as HTMLAnchorElement;
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      );
+
+      expect(window.history.replaceState).toHaveBeenCalled();
+    });
+
+    it("should not clear hash when clicking hash link on home page", async () => {
+      Object.defineProperty(window, "location", {
+        value: { pathname: "/", hash: "", origin: "http://localhost:4321" },
+        writable: true,
+      });
+
+      document.body.innerHTML = `
+        <a href="/#about" class="header-nav-link">About</a>
+      `;
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      const link = document.querySelector("a") as HTMLAnchorElement;
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      );
+
+      // Should not clear hash for hash links
+      expect(window.history.replaceState).not.toHaveBeenCalled();
+    });
+
+    it("should not clear hash when not on home page", async () => {
+      Object.defineProperty(window, "location", {
+        value: {
+          pathname: "/blog",
+          hash: "#about",
+          origin: "http://localhost:4321",
+        },
+        writable: true,
+      });
+
+      document.body.innerHTML = `
+        <a href="/blog/other-post" class="blog-card">Blog Post</a>
+      `;
+
+      const { initAnchorRouting } = await import("../../utils/anchor-routing");
+      initAnchorRouting();
+
+      const link = document.querySelector("a") as HTMLAnchorElement;
+      link.dispatchEvent(
+        new MouseEvent("click", { bubbles: true, cancelable: true }),
+      );
+
+      // Should not clear hash when not on home page
+      expect(window.history.replaceState).not.toHaveBeenCalled();
     });
   });
 });

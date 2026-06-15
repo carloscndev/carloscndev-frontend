@@ -21,7 +21,11 @@ export function scrollToHash(hash: string): void {
       homeSection.scrollIntoView({ block: "center" });
     }
     updateActiveNavLink("");
-    window.history.pushState(null, "", "/");
+    try {
+      window.history.pushState(null, "", "/");
+    } catch {
+      window.location.hash = "";
+    }
 
     setTimeout(() => {
       suppressObserver = false;
@@ -41,7 +45,11 @@ export function scrollToHash(hash: string): void {
       container.scrollTo({ top: targetY, behavior: "auto" });
     }
     updateActiveNavLink(cleanHash);
-    window.history.pushState(null, "", `/#${cleanHash}`);
+    try {
+      window.history.pushState(null, "", `/#${cleanHash}`);
+    } catch {
+      window.location.hash = cleanHash;
+    }
 
     if (window.innerWidth < 768) {
       setTimeout(() => {
@@ -97,17 +105,64 @@ function handleHashLinkClick(event: Event): void {
   const target = event.currentTarget as HTMLAnchorElement;
   if (!target) return;
 
+  // Don't intercept if event already handled
+  if (event.defaultPrevented) return;
+
   const href = target.getAttribute("href");
   if (!href) return;
 
-  // Only intercept internal hash links and the home link on the root path
-  if (href === "/" || href.startsWith("/#")) {
+  const pathname = window.location.pathname;
+
+  // Only handle "/" for home navigation when already on home page
+  if (href === "/" && (pathname === "/" || pathname === "/index.html")) {
     event.preventDefault();
-    if (href === "/") {
-      scrollToHash("/");
-    } else {
-      const hash = href.substring(href.indexOf("#"));
-      scrollToHash(hash);
+    window.location.hash = "";
+    scrollToHash("/");
+    return;
+  }
+
+  // Handle /#section links ONLY when on home page
+  if (
+    href.startsWith("/#") &&
+    (pathname === "/" || pathname === "/index.html")
+  ) {
+    event.preventDefault();
+    const hash = href.substring(href.indexOf("#"));
+    scrollToHash(hash);
+  }
+}
+
+/**
+ * Clear hash before any navigation to prevent Safari issues
+ * This runs in capture phase before ClientRouter
+ */
+function handleDocumentClick(event: Event): void {
+  const target = event.target as HTMLElement;
+  if (!target) return;
+
+  // Find the closest anchor element
+  const anchor = target.closest("a");
+  if (!anchor) return;
+
+  const href = anchor.getAttribute("href");
+  if (!href) return;
+
+  // If navigating away from home page and we have a hash, clear it
+  // This fixes Safari URL issues with ClientRouter
+  if (
+    href.startsWith("/") &&
+    !href.startsWith("/#") &&
+    window.location.hash &&
+    (window.location.pathname === "/" ||
+      window.location.pathname === "/index.html")
+  ) {
+    // Build clean URL without hash
+    const cleanUrl = window.location.origin + window.location.pathname;
+    try {
+      window.history.replaceState(null, "", cleanUrl);
+    } catch {
+      // Safari fallback: set href directly which forces navigation
+      window.location.href = cleanUrl;
     }
   }
 }
@@ -129,6 +184,14 @@ function bindHashLinkListeners(): void {
     link.removeEventListener("click", handleHashLinkClick);
     link.addEventListener("click", handleHashLinkClick);
   });
+}
+
+/**
+ * Resets anchor routing state - call on astro:after-swap to clean up
+ */
+function resetAnchorRoutingState(): void {
+  suppressObserver = false;
+  scrollHandlerAttached = false;
 }
 
 /**
@@ -196,7 +259,11 @@ function bindScrollObserver(): void {
           const sectionId = closestId === "home" ? "" : closestId;
           updateActiveNavLink(sectionId);
           const newUrl = closestId === "home" ? "/" : `/#${closestId}`;
-          window.history.replaceState(null, "", newUrl);
+          try {
+            window.history.replaceState(null, "", newUrl);
+          } catch {
+            window.location.hash = closestId;
+          }
         }
       });
     },
@@ -212,8 +279,30 @@ export function initAnchorRouting(): void {
   bindHashLinkListeners();
   bindScrollObserver();
 
+  // Use capture phase to clear hash before ClientRouter processes clicks
+  document.addEventListener("click", handleDocumentClick, { capture: true });
+
+  // On astro:after-swap, clear hash if navigating away from home page
+  // This fixes Safari URL update issues with ClientRouter
+  document.addEventListener("astro:after-swap", () => {
+    resetAnchorRoutingState();
+    // Clear hash when navigating away from home page
+    const pathname = window.location.pathname;
+    if (pathname !== "/" && pathname !== "/index.html") {
+      try {
+        window.history.replaceState(null, "", window.location.pathname);
+      } catch {
+        // Safari fallback - try to clear hash
+        if (window.location.hash) {
+          window.location.hash = "";
+        }
+      }
+    }
+  });
+
   document.addEventListener("astro:page-load", () => {
     scrollHandlerAttached = false;
+    suppressObserver = false;
     bindHashLinkListeners();
     bindScrollObserver();
 
@@ -222,6 +311,16 @@ export function initAnchorRouting(): void {
       if (pathname !== "/" && pathname !== "/index.html") return;
       const hash = window.location.hash;
       setTimeout(() => scrollToHash(hash || "/"), 200);
+    }
+  });
+
+  // Handle browser back/forward navigation
+  window.addEventListener("popstate", () => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => scrollToHash(hash), 100);
+    } else {
+      setTimeout(() => scrollToHash("/"), 100);
     }
   });
 }
