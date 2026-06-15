@@ -21,23 +21,43 @@ import Portfolio from "@components/sections/Portfolio.astro";
 import Blog from "@components/sections/Blog.astro";
 import Contact from "@components/sections/Contact.astro";
 
-const globalConfig = await fetchSingleType<GlobalConfigAttributes>(
+const globalConfigEs = await fetchSingleType<GlobalConfigAttributes>(
   "global-config",
   "es",
   { populate: ["navigation", "social", "seo.metaImage"] },
 );
 
-if (!globalConfig) {
+const globalConfigEn = await fetchSingleType<GlobalConfigAttributes>(
+  "global-config",
+  "en",
+  { populate: ["navigation", "social", "seo.metaImage"] },
+);
+
+if (!globalConfigEs || !globalConfigEn) {
   throw new Error("Failed to fetch global-config from Strapi");
 }
 
-const globalSeo = globalConfig.seo
+const globalConfig = globalConfigEs;
+
+const globalSeoEs = globalConfigEs.seo
   ? {
-      ...globalConfig.seo,
-      metaImage: globalConfig.seo.metaImage?.url
+      ...globalConfigEs.seo,
+      metaImage: globalConfigEs.seo.metaImage?.url
         ? {
-            ...globalConfig.seo.metaImage,
-            url: getStrapiMediaUrl(globalConfig.seo.metaImage.url),
+            ...globalConfigEs.seo.metaImage,
+            url: getStrapiMediaUrl(globalConfigEs.seo.metaImage.url),
+          }
+        : undefined,
+    }
+  : undefined;
+
+const globalSeoEn = globalConfigEn.seo
+  ? {
+      ...globalConfigEn.seo,
+      metaImage: globalConfigEn.seo.metaImage?.url
+        ? {
+            ...globalConfigEn.seo.metaImage,
+            url: getStrapiMediaUrl(globalConfigEn.seo.metaImage.url),
           }
         : undefined,
     }
@@ -327,7 +347,8 @@ const contactData = {
   navigation={globalConfig.navigation ?? []}
   social={globalConfig.social ?? []}
   defaultLocale={globalConfig.defaultLocale}
-  seo={globalSeo}
+  seo={globalSeoEs}
+  seoEn={globalSeoEn}
 >
   <script
     is:inline

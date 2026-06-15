@@ -11,15 +11,18 @@ interface Props {
   lang?: "es" | "en";
   category?: string;
   seo?: GlobalConfigSeo;
+  seoEn?: GlobalConfigSeo;
 }
 
-const { title, lang = "es", category, seo } = Astro.props;
+const { title, lang = "es", category, seo, seoEn } = Astro.props;
 
 const seoTitle = seo?.metaTitle || title;
 const seoDescription = seo?.metaDescription;
 const seoKeywords = seo?.keywords;
 const seoRobots = seo?.metaRobots;
 const seoImage = seo?.metaImage?.url;
+
+const SITE = Astro.site?.origin ?? "https://carloscndev.com";
 
 const canonicalUrl = `${Astro.site?.origin ?? "https://carloscndev.com"}${Astro.url.pathname}`;
 
@@ -87,7 +90,7 @@ const inlineThemeScript = `
     <ClientRouter />
 
     <script is:inline set:html={inlineThemeScript} />
-    <script is:inline>
+    <script is:inline define:vars={{ seoEn: seoEn, site: SITE }}>
       // Sync category-theme meta tag to html[data-category-theme] after every swap
       // because ClientRouter does not replace the <html> element.
       function syncCategoryTheme() {
@@ -101,6 +104,70 @@ const inlineThemeScript = `
       }
       syncCategoryTheme();
       document.addEventListener("astro:after-swap", syncCategoryTheme);
+
+      // Update SEO meta tags on language change
+      function updateSeoMeta(lang) {
+        if (lang !== "en" || !seoEn) return;
+
+        const title = seoEn.metaTitle || document.title;
+        const description =
+          seoEn.metaDescription ||
+          document.querySelector('meta[name="description"]')?.content ||
+          "";
+        const image =
+          seoEn.metaImage?.url ||
+          document.querySelector('meta[property="og:image"]')?.content ||
+          "";
+
+        document.title = title;
+
+        const descMeta = document.querySelector('meta[name="description"]');
+        if (descMeta) descMeta.setAttribute("content", description);
+
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute("content", title);
+
+        const ogDesc = document.querySelector(
+          'meta[property="og:description"]',
+        );
+        if (ogDesc) ogDesc.setAttribute("content", description);
+
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) ogUrl.setAttribute("content", window.location.href);
+
+        const ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage && image) {
+          ogImage.setAttribute(
+            "content",
+            image.startsWith("http") ? image : site + image,
+          );
+        }
+
+        const twitterTitle = document.querySelector(
+          'meta[name="twitter:title"]',
+        );
+        if (twitterTitle) twitterTitle.setAttribute("content", title);
+
+        const twitterDesc = document.querySelector(
+          'meta[name="twitter:description"]',
+        );
+        if (twitterDesc) twitterDesc.setAttribute("content", description);
+
+        const twitterImage = document.querySelector(
+          'meta[name="twitter:image"]',
+        );
+        if (twitterImage && image) {
+          twitterImage.setAttribute(
+            "content",
+            image.startsWith("http") ? image : site + image,
+          );
+        }
+      }
+
+      // Listen for langchange event dispatched by lang.ts
+      window.addEventListener("langchange", (e) => {
+        updateSeoMeta(e.detail.lang);
+      });
     </script>
   </head>
   <body>

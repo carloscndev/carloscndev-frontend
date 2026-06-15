@@ -16,13 +16,28 @@ interface Props {
   social: SocialLink[];
   defaultLocale?: string;
   seo?: GlobalConfigSeo;
+  seoEn?: GlobalConfigSeo;
 }
 
-const { title, lang, description, navigation, social, defaultLocale, seo } =
-  Astro.props;
+const {
+  title,
+  lang,
+  description,
+  navigation,
+  social,
+  defaultLocale,
+  seo,
+  seoEn,
+} = Astro.props;
 ---
 
-<BaseLayout title={title} lang={lang} description={description} seo={seo}>
+<BaseLayout
+  title={title}
+  lang={lang}
+  description={description}
+  seo={seo}
+  seoEn={seoEn}
+>
   <Header lang={lang} navigation={navigation} defaultLocale={defaultLocale} />
   <main id="main" class="main-content">
     <SocialSidebar social={social} />
