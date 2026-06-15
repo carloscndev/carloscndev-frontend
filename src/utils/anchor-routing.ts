@@ -21,6 +21,7 @@ export function scrollToHash(hash: string): void {
       homeSection.scrollIntoView({ block: "center" });
     }
     updateActiveNavLink("");
+    window.history.pushState(null, "", "/");
 
     setTimeout(() => {
       suppressObserver = false;
@@ -40,6 +41,7 @@ export function scrollToHash(hash: string): void {
       container.scrollTo({ top: targetY, behavior: "auto" });
     }
     updateActiveNavLink(cleanHash);
+    window.history.pushState(null, "", `/#${cleanHash}`);
 
     if (window.innerWidth < 768) {
       setTimeout(() => {
