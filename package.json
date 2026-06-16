@@ -23,6 +23,7 @@
     "@astrojs/vercel": "^9.0.5",
     "@vercel/analytics": "^2.0.1",
     "astro": "^5.16.11",
+    "astro-mermaid": "^2.0.2",
     "marked": "^18.0.4",
     "marked-shiki": "^1.2.1",
     "qs": "^6.15.2",
