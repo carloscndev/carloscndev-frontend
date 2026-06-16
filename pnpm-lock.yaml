@@ -35,6 +35,9 @@ importers:
       marked-shiki:
         specifier: ^1.2.1
         version: 1.2.1(marked@18.0.5)(shiki@4.2.0)
+      mermaid:
+        specifier: ^11.15.0
+        version: 11.15.0
       qs:
         specifier: ^6.15.2
         version: 6.15.2
