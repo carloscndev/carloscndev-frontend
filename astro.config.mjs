@@ -12,6 +12,9 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ['mermaid']
+    }
   },
   image: {
     service: {
