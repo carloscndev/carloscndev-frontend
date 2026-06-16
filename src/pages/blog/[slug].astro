@@ -439,56 +439,56 @@ const postSeo = post.seo
     --wi-p1: var(--color-tech-secondary-light);
     --wi-p2: var(--color-tech-secondary-light);
     background-color: var(--color-tech-primary-light);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html[data-category-theme="Running"]) {
     --wi-p1: var(--color-running-secondary-light);
     --wi-p2: var(--color-running-secondary-light);
     background-color: var(--color-running-primary-light);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html[data-category-theme="Travel"]) {
     --wi-p1: var(--color-travel-secondary-light);
     --wi-p2: var(--color-travel-secondary-light);
     background-color: var(--color-travel-primary-light);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html[data-category-theme="Books"]) {
     --wi-p1: var(--color-books-secondary-light);
     --wi-p2: var(--color-books-secondary-light);
     background-color: var(--color-books-primary-light);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html.dark[data-category-theme="Tech"]) {
     --wi-p1: var(--color-tech-secondary-dark);
     --wi-p2: var(--color-tech-secondary-dark);
     background-color: var(--color-tech-primary-dark);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html.dark[data-category-theme="Running"]) {
     --wi-p1: var(--color-running-secondary-dark);
     --wi-p2: var(--color-running-secondary-dark);
     background-color: var(--color-running-primary-dark);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html.dark[data-category-theme="Travel"]) {
     --wi-p1: var(--color-travel-secondary-dark);
     --wi-p2: var(--color-travel-secondary-dark);
     background-color: var(--color-travel-primary-dark);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html.dark[data-category-theme="Books"]) {
     --wi-p1: var(--color-books-secondary-dark);
     --wi-p2: var(--color-books-secondary-dark);
     background-color: var(--color-books-primary-dark);
-    scrollbar-color: var(--wi-p1) transparent;
+    scrollbar-color: var(--wi-p1) transparent !important;
   }
 
   :global(html[data-category-theme="Tech"]) ::-webkit-scrollbar-thumb {
@@ -1036,7 +1036,7 @@ const postSeo = post.seo
   }
 
   .post-body__content :global(blockquote) {
-    border-left: 3px solid var(--color-accent);
+    border-left: 3px solid var(--wi-p1);
     padding-left: var(--spacing-md);
     margin: var(--spacing-md) 0;
     font-style: italic;
