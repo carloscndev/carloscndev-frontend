@@ -228,6 +228,39 @@ html {
   scrollbar-width: thin;
 }
 
+/* Blog post category scrollbar colors */
+html[data-category-theme="Tech"] {
+  scrollbar-color: var(--color-tech-secondary-light) transparent;
+}
+
+html[data-category-theme="Running"] {
+  scrollbar-color: var(--color-running-secondary-light) transparent;
+}
+
+html[data-category-theme="Travel"] {
+  scrollbar-color: var(--color-travel-secondary-light) transparent;
+}
+
+html[data-category-theme="Books"] {
+  scrollbar-color: var(--color-books-secondary-light) transparent;
+}
+
+html.dark[data-category-theme="Tech"] {
+  scrollbar-color: var(--color-tech-secondary-dark) transparent;
+}
+
+html.dark[data-category-theme="Running"] {
+  scrollbar-color: var(--color-running-secondary-dark) transparent;
+}
+
+html.dark[data-category-theme="Travel"] {
+  scrollbar-color: var(--color-travel-secondary-dark) transparent;
+}
+
+html.dark[data-category-theme="Books"] {
+  scrollbar-color: var(--color-books-secondary-dark) transparent;
+}
+
 img,
 picture,
 video,
