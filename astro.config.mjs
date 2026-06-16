@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import remarkMermaid from "remark-mermaidjs";
+import remarkMermaid from "remark-mermaid-dataurl";
 
 export default defineConfig({
   site: "https://carloscndev.com",
