@@ -36,7 +36,12 @@ const highlighter = await createHighlighter({
 const marked = new Marked().use(
   markedShiki({
     highlight(code, lang) {
-      return highlighter.codeToHtml(code, { lang, theme: "github-dark" });
+      const safeLang = lang === "mermaid" ? "text" : lang;
+
+      return highlighter.codeToHtml(code, {
+        lang: safeLang,
+        theme: "github-dark",
+      });
     },
   }),
 );
