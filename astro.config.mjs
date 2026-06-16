@@ -1,20 +1,19 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import mermaid from 'astro-mermaid';
+import remarkMermaid from "remark-mermaidjs";
 
 export default defineConfig({
   site: "https://carloscndev.com",
   output: "static",
   integrations: [
-    sitemap(),
-    mermaid()
+    sitemap()
   ],
+  markdown: {
+    remarkPlugins: [remarkMermaid],
+  },
   vite: {
-    plugins: [tailwindcss()],
-    optimizeDeps: {
-      exclude: ['mermaid']
-    }
+    plugins: [tailwindcss()]
   },
   image: {
     service: {
