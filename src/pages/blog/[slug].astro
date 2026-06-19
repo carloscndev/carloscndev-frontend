@@ -36,10 +36,12 @@ const highlighter = await createHighlighter({
 const marked = new Marked().use(
   markedShiki({
     highlight(code, lang) {
-      const safeLang = lang === "mermaid" ? "text" : lang;
+      if (lang === "mermaid") {
+        return `<div class="mermaid">${code}</div>`;
+      }
 
       return highlighter.codeToHtml(code, {
-        lang: safeLang,
+        lang: lang || "text",
         theme: "github-dark",
       });
     },
@@ -389,6 +391,12 @@ const postSeo = post.seo
     align-items: center;
     justify-content: center;
     padding: var(--spacing-lg);
+  }
+
+  :global(.mermaid) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   :global(html[data-category-theme="Running"]) .post-hero__overlay {
