@@ -1,8 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import remarkMermaid from "remark-mermaid-dataurl";
-import rehypeExternalLinks from 'rehype-external-links';
 
 export default defineConfig({
   site: "https://carloscndev.com",
@@ -10,15 +8,6 @@ export default defineConfig({
   integrations: [
     sitemap()
   ],
-  markdown: {
-    remarkPlugins: [remarkMermaid],
-    rehypePlugins: [
-      [rehypeExternalLinks, { 
-        target: '_blank', 
-        rel: ['noopener', 'noreferrer'] 
-      }]
-    ],
-  },
   vite: {
     plugins: [tailwindcss()]
   },
