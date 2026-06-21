@@ -12,6 +12,7 @@ import StrapiImage from "../../components/ui/StrapiImage.astro";
 import LinkWrapper from "../../components/ui/LinkWrapper.astro";
 import ArrowNext from "../../components/icons/ArrowNext.astro";
 import { Marked } from "marked";
+import rehypeExternalLinks from "rehype-external-links";
 import markedShiki from "marked-shiki";
 import { createHighlighter } from "shiki";
 import uiDict from "../../i18n/ui.json";
@@ -46,6 +47,11 @@ const marked = new Marked().use(
       });
     },
   }),
+  {
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener"] }],
+    ],
+  },
 );
 
 export async function getStaticPaths() {
