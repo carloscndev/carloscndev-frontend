@@ -6,7 +6,7 @@ import LinkWrapper from "../ui/LinkWrapper.astro";
 interface Job {
   id: string;
   company: string;
-  company_url: string;
+  companyUrl: string;
   role: string;
   period: string;
   description: string;
@@ -84,7 +84,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                 {job.role}
               </h3>
               <LinkWrapper
-                href={job.company_url}
+                href={job.companyUrl}
                 class="experience-tabs__company"
                 data-job-company
               >
@@ -127,7 +127,7 @@ const embeddedDataJson = JSON.stringify(embeddedData);
                 {job.role}
               </h3>
               <LinkWrapper
-                href={job.company_url}
+                href={job.companyUrl}
                 class="experience-carousel__company"
                 data-job-company
               >
