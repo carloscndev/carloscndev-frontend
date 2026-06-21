@@ -12,7 +12,6 @@ import StrapiImage from "../../components/ui/StrapiImage.astro";
 import LinkWrapper from "../../components/ui/LinkWrapper.astro";
 import ArrowNext from "../../components/icons/ArrowNext.astro";
 import { Marked } from "marked";
-import rehypeExternalLinks from "rehype-external-links";
 import markedShiki from "marked-shiki";
 import { createHighlighter } from "shiki";
 import uiDict from "../../i18n/ui.json";
@@ -47,12 +46,15 @@ const marked = new Marked().use(
       });
     },
   }),
-  {
-    rehypePlugins: [
-      [rehypeExternalLinks, { target: "_blank", rel: ["noopener"] }],
-    ],
-  },
 );
+
+// Helper to add target="_blank" to external links
+function addExternalLinkAttributes(html) {
+  return html.replace(
+    /<a([^>]*href=["']https?:\/\/[^"'][^"']*["'][^>]*)>/g,
+    '<a$1 target="_blank" rel="noopener">',
+  );
+}
 
 export async function getStaticPaths() {
   let esPosts: BlogPostAttributes[] = [];
@@ -160,7 +162,9 @@ if (!globalConfig) {
 }
 
 // Parse Markdown content to HTML for both locales (await because marked-shiki uses async highlight)
-const postContentHtml = (await marked.parse(post.content)) as string;
+const postContentHtml = addExternalLinkAttributes(
+  (await marked.parse(post.content)) as string,
+);
 
 const authorName = post.author?.name || "";
 const authorNickname = post.author?.nickname || "";
@@ -185,7 +189,7 @@ const otherPost = await fetchCollectionEntry<BlogPostAttributes>(
 );
 
 const otherContentHtml = otherPost
-  ? ((await marked.parse(otherPost.content)) as string)
+  ? addExternalLinkAttributes((await marked.parse(otherPost.content)) as string)
   : "";
 
 const embeddedData = {
