@@ -94,10 +94,17 @@ const inlineThemeScript = `
         startOnLoad: true,
       });
 
+      function runMermaid() {
+        const mermaidElements = document.querySelectorAll(".mermaid");
+        if (mermaidElements.length > 0) {
+          mermaid.run({
+            nodes: Array.from(mermaidElements),
+          });
+        }
+      }
+
       document.addEventListener("astro:page-load", () => {
-        mermaid.run({
-          querySelector: ".mermaid",
-        });
+        requestAnimationFrame(runMermaid);
       });
     </script>
     <script is:inline set:html={inlineThemeScript} />
