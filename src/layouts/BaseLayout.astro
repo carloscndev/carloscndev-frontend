@@ -88,18 +88,104 @@ const inlineThemeScript = `
       category={category}
     />
     <ClientRouter />
-    <script type="module">
+    <script type="module" define:vars={{ category: category }}>
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-      mermaid.initialize({
-        startOnLoad: true,
-      });
+
+      const categoryThemes = {
+        Tech: {
+          light: {
+            primaryColor: "var(--color-tech-primary-light)",
+            primaryBorderColor: "var(--color-tech-secondary-light)",
+            primaryTextColor: "var(--color-tech-secondary-light)",
+            lineColor: "var(--color-tech-secondary-light)",
+            secondaryColor: "var(--color-tech-secondary-light)",
+            tertiaryColor: "var(--color-tech-primary-light)",
+          },
+          dark: {
+            primaryColor: "var(--color-tech-primary-dark)",
+            primaryBorderColor: "var(--color-tech-secondary-dark)",
+            primaryTextColor: "var(--color-tech-secondary-dark)",
+            lineColor: "var(--color-tech-secondary-dark)",
+            secondaryColor: "var(--color-tech-secondary-dark)",
+            tertiaryColor: "var(--color-tech-primary-dark)",
+          },
+        },
+        Running: {
+          light: {
+            primaryColor: "var(--color-running-primary-light)",
+            primaryBorderColor: "var(--color-running-secondary-light)",
+            primaryTextColor: "var(--color-running-secondary-light)",
+            lineColor: "var(--color-running-secondary-light)",
+            secondaryColor: "var(--color-running-secondary-light)",
+            tertiaryColor: "var(--color-running-primary-light)",
+          },
+          dark: {
+            primaryColor: "var(--color-running-primary-dark)",
+            primaryBorderColor: "var(--color-running-secondary-dark)",
+            primaryTextColor: "var(--color-running-secondary-dark)",
+            lineColor: "var(--color-running-secondary-dark)",
+            secondaryColor: "var(--color-running-secondary-dark)",
+            tertiaryColor: "var(--color-running-primary-dark)",
+          },
+        },
+        Travel: {
+          light: {
+            primaryColor: "var(--color-travel-primary-light)",
+            primaryBorderColor: "var(--color-travel-secondary-light)",
+            primaryTextColor: "var(--color-travel-secondary-light)",
+            lineColor: "var(--color-travel-secondary-light)",
+            secondaryColor: "var(--color-travel-secondary-light)",
+            tertiaryColor: "var(--color-travel-primary-light)",
+          },
+          dark: {
+            primaryColor: "var(--color-travel-primary-dark)",
+            primaryBorderColor: "var(--color-travel-secondary-dark)",
+            primaryTextColor: "var(--color-travel-secondary-dark)",
+            lineColor: "var(--color-travel-secondary-dark)",
+            secondaryColor: "var(--color-travel-secondary-dark)",
+            tertiaryColor: "var(--color-travel-primary-dark)",
+          },
+        },
+        Books: {
+          light: {
+            primaryColor: "var(--color-books-primary-light)",
+            primaryBorderColor: "var(--color-books-secondary-light)",
+            primaryTextColor: "var(--color-books-secondary-light)",
+            lineColor: "var(--color-books-secondary-light)",
+            secondaryColor: "var(--color-books-secondary-light)",
+            tertiaryColor: "var(--color-books-primary-light)",
+          },
+          dark: {
+            primaryColor: "var(--color-books-primary-dark)",
+            primaryBorderColor: "var(--color-books-secondary-dark)",
+            primaryTextColor: "var(--color-books-secondary-dark)",
+            lineColor: "var(--color-books-secondary-dark)",
+            secondaryColor: "var(--color-books-secondary-dark)",
+            tertiaryColor: "var(--color-books-primary-dark)",
+          },
+        },
+      };
+
+      function getTheme(isDark) {
+        const theme = isDark ? "dark" : "light";
+        const themeConfig = categoryThemes[category] || categoryThemes.Tech;
+        return { theme, themeVariables: themeConfig[theme] };
+      }
+
+      let initialized = false;
+
+      function initMermaid() {
+        const isDark = document.documentElement.classList.contains("dark");
+        const { theme, themeVariables } = getTheme(isDark);
+        mermaid.initialize({ theme, themeVariables, startOnLoad: false });
+        initialized = true;
+      }
 
       function runMermaid() {
+        if (!initialized) initMermaid();
         const mermaidElements = document.querySelectorAll(".mermaid");
         if (mermaidElements.length > 0) {
-          mermaid.run({
-            nodes: Array.from(mermaidElements),
-          });
+          mermaid.run({ nodes: Array.from(mermaidElements) });
         }
       }
 
