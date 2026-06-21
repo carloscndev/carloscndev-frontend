@@ -23,7 +23,7 @@ const useTargetBlank = isExternal && !isMail;
 ---
 
 <a
-  href={href}
+  href={safeHref}
   target={useTargetBlank ? "_blank" : undefined}
   rel={useTargetBlank ? "noopener" : undefined}
   title={title}

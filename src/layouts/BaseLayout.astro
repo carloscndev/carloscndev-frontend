@@ -77,7 +77,7 @@ const inlineThemeScript = `
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{seoTitle}</title>
 
     <BaseSEO
       title={seoTitle}
@@ -88,7 +88,6 @@ const inlineThemeScript = `
       category={category}
     />
     <ClientRouter />
-    //
     <script type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
       mermaid.initialize({
