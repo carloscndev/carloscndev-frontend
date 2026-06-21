@@ -93,6 +93,12 @@ const inlineThemeScript = `
       mermaid.initialize({
         startOnLoad: true,
       });
+
+      document.addEventListener("astro:after-swap", () => {
+        mermaid.run({
+          querySelector: ".mermaid",
+        });
+      });
     </script>
     <script is:inline set:html={inlineThemeScript} />
     <script is:inline define:vars={{ seoEn: seoEn, site: SITE }}>
