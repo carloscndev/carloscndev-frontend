@@ -94,7 +94,7 @@ const inlineThemeScript = `
         startOnLoad: true,
       });
 
-      document.addEventListener("astro:after-swap", () => {
+      document.addEventListener("astro:page-load", () => {
         mermaid.run({
           querySelector: ".mermaid",
         });
