@@ -98,19 +98,24 @@ const inlineThemeScript = `
         Books: { light: "#9d174d", dark: "#ec4899" },
       };
 
-      const isDark = document.documentElement.classList.contains("dark");
-      const color =
-        categoryColors[category]?.light || categoryColors.Tech.light;
+      function getMermaidConfig() {
+        const isDark = document.documentElement.classList.contains("dark");
+        const color =
+          categoryColors[category]?.light || categoryColors.Tech.light;
+        return {
+          theme: "base",
+          themeVariables: {
+            primaryColor: color,
+            primaryBorderColor: color,
+            primaryTextColor: isDark ? "#1f2937" : "#ffffff",
+            lineColor: color,
+            secondaryColor: color,
+          },
+        };
+      }
 
       mermaid.initialize({
-        theme: "base",
-        themeVariables: {
-          primaryColor: color,
-          primaryBorderColor: color,
-          primaryTextColor: isDark ? "#1f2937" : "#ffffff",
-          lineColor: color,
-          secondaryColor: color,
-        },
+        ...getMermaidConfig(),
         startOnLoad: false,
       });
 
@@ -122,6 +127,11 @@ const inlineThemeScript = `
       }
 
       document.addEventListener("astro:page-load", () => {
+        requestAnimationFrame(runMermaid);
+      });
+
+      document.addEventListener("langchange", () => {
+        mermaid.initialize(getMermaidConfig());
         requestAnimationFrame(runMermaid);
       });
     </script>
